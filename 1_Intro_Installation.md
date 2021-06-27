@@ -1,4 +1,4 @@
-Chapter one
+# Chapter 1 Introduction and Installation
 - [About Eigen](#about-eigen)
 - [Instillation](#instillation)
 - [Adding Eigen to Your Project](#adding-eigen-to-your-project)
@@ -52,6 +52,8 @@ MESSAGE("EIGEN3_VERSION_STRING: " ${EIGEN3_VERSION_STRING})
 
 add_executable (example example.cpp)
 target_link_libraries (example Eigen3::Eigen)
-
 ```
+
+[Home](README.md) [Next >>](2_Matrix_Array_Vector_Class.md)
+
 

@@ -1,4 +1,4 @@
-# Chapter 7
+# Chapter 7 Geometry Transformation
 
 - [Homogeneous Transformations](#homogeneous-transformations)
 - [Translation, Scaling, and Rotations Matrices](#translation--scaling--and-rotations-matrices)
@@ -23,3 +23,6 @@
 # Parametrized Lines And Hyperplanes
 
 # Least Square Transformation Fitting 
+
+
+[<< Previous ](6_Sparse_Matrices.md)  [Home](README.md)   [Next >>](8_Differentiation.md)

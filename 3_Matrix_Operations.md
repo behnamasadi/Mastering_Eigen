@@ -1,3 +1,4 @@
+#  Chapter 3 Matrix Operations
 - [Matrix Arithmetic](#matrix-arithmetic)
   * [Addition/Subtraction Matrices/ Scalar](#addition-subtraction-matrices--scalar)
   * [Scalar Multiplication/ Division](#scalar-multiplication--division)
@@ -199,3 +200,7 @@ the determinant of a square matrix
 Row echelon form: means that Gaussian elimination has operated on the rows
 Column echelon form
 # Broadcasting
+
+
+[<< Previous ](2_Matrix_Array_Vector_Class.md)  [Home](README.md)  [ Next >>](4_Advanced_Eigen_Operations.md)
+

@@ -1,3 +1,4 @@
+#  Chapter 5 Dense Linear Problems And Decompositions
 - [Introduction to Linear Equation](#introduction-to-linear-equation)
   * [Solution set](#solution-set)
   * [Underdetermined System](#underdetermined-system)
@@ -502,4 +503,4 @@ There are two non-zero rows in the final matrix and therefore the rank of matrix
 In practice, due to floating point error on computers,  Gaussian elimination (LU decomposition) can be unreliable, therefore rank-revealing decomposition such as RRQR factorization (rank-revealing QR which is QR decomposition with pivoting) should be used. The singular value decomposition (SVD) can be used, but it is not an efficient method to do so.
 
 
-
+[<< Previous ](4_Advanced_Eigen_Operations.md)  [Home](README.md)  [ Next >>](6_Sparse_Matrices.md)

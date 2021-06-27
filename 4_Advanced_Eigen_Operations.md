@@ -1,3 +1,4 @@
+#  Chapter 4 Advanced Eigen Operations
 - [Memory Alignment](#memory-alignment)
 - [Passing Eigen objects by value to functions](#passing-eigen-objects-by-value-to-functions)
 - [Aliasing](#aliasing)
@@ -24,3 +25,4 @@ One costly approach would be to iterate over your container and copy your data t
 # Unary Expression
 # Eigen Functor
 
+[<< Previous ](3_Matrix_Operations.md)  [Home](README.md)  [ Next >>](5_Dense_Linear_Problems_And_Decompositions.md)
