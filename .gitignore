@@ -1,0 +1,5 @@
+build/*
+sandbox/*
+*.user
+*.kdev4
+narration_scripts/*
