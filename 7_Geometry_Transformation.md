@@ -18,6 +18,9 @@
 
 # Quaternions
 
+Refs: [1](https://www.youtube.com/watch?v=d4EgbgTm0Bg),[2](https://www.youtube.com/watch?v=zjMuIxRvygQ), [3](https://quaternions.online/), [4](https://www.youtube.com/watch?v=zc8b2Jo7mno), [5](https://www.youtube.com/watch?v=syQnn_xuB8U),
+[6](https://www.youtube.com/watch?v=4mXL751ko0w)
+
 # Orthogonal Vector Generation
 
 # Parametrized Lines And Hyperplanes

@@ -143,6 +143,56 @@ Gram–Schmidt process is a method for orthonormalizing a set of vectors. In thi
 
 where <img src="https://latex.codecogs.com/svg.latex?\langle%20\mathbf{u},%20\mathbf{v}\rangle" alt="https://latex.codecogs.com/svg.latex?\langle \mathbf{u}, \mathbf{v}\rangle"> denotes the inner product.
 
+
+Explanation, Let's put 
+
+<img src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\mathrm%20{proj}%20_{\mathbf%20{u}%20}(\mathbf%20{v}%20)}=\vec%20{\mathbf%20{v\prime}}" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \mathrm {proj} _{\mathbf {u} }(\mathbf {v} )}=\vec {\mathbf {v\prime}} ">
+
+So we already know:
+
+
+<img src="https://latex.codecogs.com/svg.latex?cos(\theta)=\frac{%20|\vec{\mathbf%20{v\prime}}|%20}{|\vec{\mathbf%20{v}}|}" alt="https://latex.codecogs.com/svg.latex?cos(\theta)=\frac{ |\vec{\mathbf {v\prime}}| }{|\vec{\mathbf {v}}|}">
+
+
+
+
+which mean the magnitude of projection vector is:
+
+<img src="https://latex.codecogs.com/svg.latex?|\vec{\mathbf%20v}|cos(\theta)=%20|\vec%20{\mathbf%20{{v}\prime}}|" alt="https://latex.codecogs.com/svg.latex?|\vec{\mathbf v}|cos(\theta)= |\vec {\mathbf {{v}\prime}}|">
+
+
+
+
+and the direction is in the direction <img src="https://latex.codecogs.com/svg.latex?\mathbf%20{u}" alt="https://latex.codecogs.com/svg.latex?\mathbf {u}">, so you have to make a unit vector of <img src="https://latex.codecogs.com/svg.latex?\mathbf%20{u}" alt="https://latex.codecogs.com/svg.latex?\mathbf {u}"> (by dividing it by its size) and then multiply by the magnitude of the projection vector that we just calculated. 
+
+so putting everything together:
+
+
+
+<img src="https://latex.codecogs.com/svg.latex?|\vec{\mathbf%20v}|cos(\theta)=%20|\vec%20{\mathbf%20{{v}\prime}}|" alt="https://latex.codecogs.com/svg.latex?\vec{\mathbf v}.\vec{\mathbf u}= |\vec{\mathbf v}||\vec{\mathbf u}|cos(\theta)">
+
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.latex?\vec {\mathbf{v\prime}}=|\vec {\mathbf{v\prime}}|  \frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} | } " alt="https://latex.codecogs.com/svg.latex?\vec {\mathbf{v\prime}}=|\vec {\mathbf{v\prime}}|  \frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} | } ">
+
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.latex?\vec{\mathbf%20v}.\vec{\mathbf%20u}=%20|\vec{\mathbf%20v}||\vec{\mathbf%20u}|cos(\theta)" alt="https://latex.codecogs.com/svg.latex?\vec {\mathbf{v\prime}}=|\vec {\mathbf{v\prime}}|  \frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} | } ">
+
+will give us:
+
+
+<img src="https://latex.codecogs.com/svg.latex?\vec%20{\mathbf{v\prime}}=|\vec%20{\mathbf{v\prime}}|%20%20\frac{\vec%20{\mathbf{u}}%20%20}{|\vec%20{\mathbf{u}}%20|%20}%20=|\vec{\mathbf%20v}|cos(\theta)\frac{\vec%20{\mathbf{u}}%20%20}{|\vec%20{\mathbf{u}}%20|%20}=|\vec%20{\mathbf{u}}%20||\vec{\mathbf%20v}|cos(\theta)\frac{\vec%20{\mathbf{u}}%20%20}{|\vec%20{\mathbf{u}}%20||\vec%20{\mathbf{u}}%20|%20}" alt="https://latex.codecogs.com/svg.latex?\vec {\mathbf{v\prime}}=|\vec {\mathbf{v\prime}}|  \frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} | } =|\vec{\mathbf v}|cos(\theta)\frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} | }=|\vec {\mathbf{u}} ||\vec{\mathbf v}|cos(\theta)\frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} ||\vec {\mathbf{u}} | }">
+
+<br/>
+<br/>
+
+
+
+
+
 Now lets imagine we have the following vectors,  
 
 <img src="images/gram_schmidt1.png">
@@ -289,8 +339,7 @@ We can define <img src="https://latex.codecogs.com/svg.latex?QL" />, <img src="h
 
 Cholesky decomposition is a decomposition of a Hermitian, positive-definite matrix into the product of a lower triangular matrix and its conjugate transpose
 
-
-## LDU Decomposition
+## LU/LDU Decomposition
 ## SVD Decomposition
 ## Eigen Value Eigen Vector
 ## Basis of Null space and Kernel

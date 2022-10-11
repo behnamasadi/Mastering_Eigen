@@ -30,12 +30,13 @@ MESSAGE("EIGEN3_VERSION_STRING: " ${EIGEN3_VERSION_STRING})
 
 include_directories(${EIGEN3_INCLUDE_DIR})
 
-MESSAGE("orocos_kdl_INCLUDE_DIRS: " ${orocos_kdl_INCLUDE_DIRS})
-MESSAGE("orocos_kdl_LIBRARIES: " ${orocos_kdl_LIBRARIES})
-include_directories(${orocos_kdl_INCLUDE_DIRS})
+
 
 find_package(orocos_kdl)
 IF(${orocos_kdl_FOUND})
+    MESSAGE("orocos_kdl_INCLUDE_DIRS: " ${orocos_kdl_INCLUDE_DIRS})
+    MESSAGE("orocos_kdl_LIBRARIES: " ${orocos_kdl_LIBRARIES})
+    include_directories(${orocos_kdl_INCLUDE_DIRS})
     MESSAGE("orocos_kdl_LIBRARIES: " ${orocos_kdl_LIBRARIES})
     MESSAGE("orocos_kdl_INCLUDE_DIRS: " ${orocos_kdl_INCLUDE_DIRS})
     MESSAGE("orocos_kdl_LIBRARIES: " ${orocos_kdl_LIBRARIES})
