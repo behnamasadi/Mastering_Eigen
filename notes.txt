@@ -1,0 +1,76 @@
+Eigen is a robust C++ library for  
+linear algebra 
+Matrix, Array and vector operations
+Geometrical/space transformations
+Computing Derivatives/ Jacobians
+Solving numerical problems such as linear and non-linear regression and least square.
+
+
+Pure header library. Eigen is implemented using the expression templates metaprogramming technique
+meaning it builds expression trees at compile time and generates custom code to evaluate these
+
+
+
+
+In this video series I will show you how you can use it in your applications such that you can perfom numpy style 
+operations on your data while benefiting from efficent and speed of c++.
+
+The follwoing will be the outline of this video seroius
+
+At first, Installation and  and adding it to yoru project.
+
+
+In the second episode I will introduce Matrix Class Vactor Class Array Class, why we have three classes, where we need them 
+and how can convert them.  Whats the meaning of classes like 
+
+Then I will continue on  how to initilize matrices and access the Accessing Elements (Coefficient)
+What is the difference between row maje and column major, how can we access a block of data and so on
+The last part of the second episode will be about Reshaping/ Resizing/ slicing 
+
+
+
+In the third episode I will introduce you with Matrix Operations,  matrix and array manipulation
+basically Matrix Arithmetic and Coefficient-Wise Operations
+
+In the fourth episode you will get familiar with Advanced Operations with Eigen such 
+Memory Mapping
+Unary Expression
+Eigen Functor
+Align
+
+
+
+IN the fifth episode you will introduced to Dense Linear Problems And Decompositions
+How to solve linear system Ax=B
+QR
+Computing eigenvalues and eigenvectors
+Rank-revealing decompositions
+SVD JacobiSVD
+Cholesky
+Computing inverse and determinant
+
+IN the sixth episode Sparse linear algebra
+Sparse matrix manipulations
+Solving Sparse Linear Systems
+Matrix-free solvers
+
+
+IN the seventh episode Geometry
+Affine transformations
+AngleAxis
+Euler angles
+Quaternion
+
+Eighth will be about derivative
+Auto
+Numrical 
+Jacobinan
+
+In Ninth episode 
+numerical optimisation 
+non-linear optimization such as IK
+non-linear least square
+curve fitting 
+Levenberg–Marquardt
+Camera Clibration
+BA
