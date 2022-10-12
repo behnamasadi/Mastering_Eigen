@@ -24,7 +24,7 @@ void transformation()
 {
 /*
 Great Tutorial:
-http://planning.cs.uiuc.edu/node102.html
+http://lavalle.pl/planning/node102.html
 http://euclideanspace.com/maths/geometry/rotations/conversions/index.htm
 
 Tait–Bryan angles: Z1Y2X3 in the wiki page:
