@@ -1,19 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
-project(EigenDemo)
+project(Mastering_Eigen)
 
-# Check for c++11 support
-INCLUDE(CheckCXXCompilerFlag)
-CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
-CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
-IF(COMPILER_SUPPORTS_CXX11)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-ELSEIF(COMPILER_SUPPORTS_CXX0X)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
-ELSE()
-  MESSAGE(ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
-ENDIF()
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
 
 set(CMAKE_BUILD_TYPE Debug)
 
@@ -119,8 +110,8 @@ target_link_libraries (null_space_kernel_rank)
 add_executable(solving_system_of_linear_equations src/solving_system_of_linear_equations.cpp)
 target_link_libraries (solving_system_of_linear_equations)
 
-
-
+add_executable(random_number_generation src/random_number_generation.cpp)
+target_link_libraries (random_number_generation)
 
 #IF(IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/sandbox")
 #	ADD_SUBDIRECTORY(src/sandbox)

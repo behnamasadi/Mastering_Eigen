@@ -364,6 +364,12 @@ Let  <img  src="https://latex.codecogs.com/svg.latex?V"  alt="https://latex.code
 
 ### Null Space 
 
+
+If <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> is your matrix, the null-space is simply put, the set of all vectors <img  src="https://latex.codecogs.com/svg.latex?v"  alt="https://latex.codecogs.com/svg.latex?v" /> such that <img  src="https://latex.codecogs.com/svg.latex?A.v=0"  alt="https://latex.codecogs.com/svg.latex?A.v=0" />. It's good to think of the matrix as a linear transformation; if you let <img  src="https://latex.codecogs.com/svg.latex?h(v)=A.v"  alt="https://latex.codecogs.com/svg.latex?h(v)=A.v" />
+, then the null-space is again the set of all vectors that are sent to the zero vector by <img  src="https://latex.codecogs.com/svg.latex?h"  alt="https://latex.codecogs.com/svg.latex?h" />. Think of this as the set of vectors that lose their identity as h is applied to them.
+Note that the null-space is equivalently the set of solutions to the homogeneous equation <img  src="https://latex.codecogs.com/svg.latex?A.v=0"  alt="https://latex.codecogs.com/svg.latex?A.v=0" />
+
+
 The kernel (null space or nullspace) of a linear map, is the linear subspace of the domain of the map which is mapped to the zero vector. Lets assume <img  src="https://latex.codecogs.com/svg.latex?L"  alt="https://latex.codecogs.com/svg.latex?L" /> is a linear map between two vector spaces <img  src="https://latex.codecogs.com/svg.latex?V"  alt="https://latex.codecogs.com/svg.latex?V" />  and  <img  src="https://latex.codecogs.com/svg.latex?W"  alt="https://latex.codecogs.com/svg.latex?W" /> 
 <br/>
 
