@@ -82,10 +82,18 @@ target_link_libraries (gram_schmidt_orthogonalization)
 add_executable(check_matrixsimilarity src/check_matrixsimilarity.cpp)
 target_link_libraries (check_matrixsimilarity)
 
-add_executable(geometry_transformation src/geometry_transformation.cpp)
-target_link_libraries (geometry_transformation   ${orocos_kdl_LIBRARIES})
-target_compile_definitions(geometry_transformation PRIVATE KDL_FOUND=${orocos_kdl_FOUND})
+add_executable(quaternion src/geometry_transformation/quaternion.cpp)
+target_link_libraries (quaternion)
 
+add_executable(rotation_matrices src/geometry_transformation/rotation_matrices.cpp)
+target_link_libraries (rotation_matrices   ${orocos_kdl_LIBRARIES})
+target_compile_definitions(rotation_matrices PRIVATE KDL_FOUND=${orocos_kdl_FOUND})
+
+add_executable(create_transformation_matrices src/geometry_transformation/create_transformation_matrices.cpp)
+target_link_libraries (create_transformation_matrices)
+
+add_executable(angle_axis_rodrigues src/geometry_transformation/angle_axis_rodrigues.cpp)
+target_link_libraries (angle_axis_rodrigues)
 
 add_executable(eigen_value_eigen_vector src/eigen_value_eigen_vector.cpp)
 target_link_libraries (eigen_value_eigen_vector)
@@ -110,8 +118,8 @@ target_link_libraries (null_space_kernel_rank)
 add_executable(solving_system_of_linear_equations src/solving_system_of_linear_equations.cpp)
 target_link_libraries (solving_system_of_linear_equations)
 
-add_executable(random_number_generation src/random_number_generation.cpp)
-target_link_libraries (random_number_generation)
+#add_executable(random_number_generation src/random_number_generation.cpp)
+#target_link_libraries (random_number_generation)
 
 #IF(IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/sandbox")
 #	ADD_SUBDIRECTORY(src/sandbox)

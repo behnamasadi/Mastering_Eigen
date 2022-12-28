@@ -1,7 +1,5 @@
 # Chapter 7 Geometry Transformation
 
-- [Homogeneous Transformations](#homogeneous-transformations)
-- [Translation, Scaling, and Rotations Matrices](#translation--scaling--and-rotations-matrices)
 - [Euler Angles](#euler-angles)
 - [Quaternions](#quaternions)
 - [Orthogonal Vector Generation](#orthogonal-vector-generation)
@@ -9,19 +7,82 @@
 - [Least Square Transformation Fitting](#least-square-transformation-fitting)
 
 
+# Euler Angles
 
-# Homogeneous Transformations
+The Euler angles are three angles to describe the orientation of a rigid body with respect to a fixed coordinate system.
 
-# Translation, Scaling, and Rotations Matrices
+
+
+The rotations may about the axes `XYZ` of the original coordinate system, which is assumed to remain motionless (extrinsic), or rotations about the axes of the rotating coordinate system `XYZ` (intrinsic), solidary with the moving body, which changes its orientation with respect to the extrinsic frame after each elemental rotation.
+
+There exist twelve possible sequences of rotation axes, which can be divided into two categories: 
+1. **Proper Euler angles**, where one axis of rotation is repeated (x-z-x, x-y-x, y-x-y, y-z-y, z-y-z, z-x-z), 
+2. **Tait-Bryan angles**, which rotate around all axes (x-z-y, x-y-z, y-x-z, y-z-x, z-y-x, z-x-y).
+
+
+
+Sometimes, both kinds of sequences are called "Euler angles". In that case, the sequences of the first group are called **proper** or **classic Euler** angles.
+
+
+There are six possibilities of choosing the rotation axes for Tait–Bryan angles. The six possible sequences are:
+
+- x-y′-z″ (intrinsic rotations) or z-y-x (extrinsic rotations)
+- y-z′-x″ (intrinsic rotations) or x-z-y (extrinsic rotations)
+- z-x′-y″ (intrinsic rotations) or y-x-z (extrinsic rotations)
+- x-z′-y″ (intrinsic rotations) or y-z-x (extrinsic rotations)
+- z-y′-x″ (intrinsic rotations) or x-y-z (extrinsic rotations): the intrinsic rotations are known as: yaw, pitch and roll
+- y-x′-z″ (intrinsic rotations) or z-x-y (extrinsic rotations)
+
 
 ## Roll, Pitch and Yaw
 
+Euler angles are typically denoted as:
+- <img src="https://latex.codecogs.com/svg.image?&space;\gamma&space;\text{&space;or&space;}&space;\phi,&space;" title="https://latex.codecogs.com/svg.image? \gamma \text{ or } \phi, " /> represents a rotation around the x axis.
+- <img src="https://latex.codecogs.com/svg.image?\beta,&space;\text{&space;or&space;}&space;\theta" title="https://latex.codecogs.com/svg.image?\beta, \text{ or } \theta" /> represents a rotation around the y axis,
+- <img src="https://latex.codecogs.com/svg.image?\alpha&space;\text{&space;or&space;}&space;\psi" title="https://latex.codecogs.com/svg.image?\alpha \text{ or } \psi" /> represents a rotation around the z axis,
 
-
-<img src="images/roll_pitch_yaw.png" />
 
 <br/>
 <br/>
+
+
+
+
+
+
+
+There are several axes conventions in practice for choosing the mobile and fixed axes and these conventions determine the signs of the angles.
+
+
+Tait–Bryan angles are often used to describe a vehicle's attitude with respect to a chosen reference frame. The positive x-axis in vehicles points always in the direction of movement. For positive y- and z-axis, we have to face two different conventions:
+
+- East, North, Up (ENU), used in geography (z is up and x is in the direction of move, y is pointing left)
+- North, East, Down (NED), used specially in aerospace (z is down and x is in the direction of move, y is pointing right)
+
+
+
+In case of land vehicles like cars, tanks  ENU-system (East-North-Up) as external reference (World frame), the vehicle's (body's) positive y- or pitch axis always points to its left, and the positive z- or yaw axis always points up.
+
+<img src="images/RPY_angles_of_cars.png" />
+
+
+In case of air and sea vehicles like submarines, ships, airplanes etc., which use the NED-system (North-East-Down) as external reference (World frame), the vehicle's (body's) positive y- or pitch axis always points to its right, and its positive z- or yaw axis always points down. 
+
+
+<img src="images/RPY_angles_of_airplanes.png" />
+
+
+
+
+# Other orientation representations
+Euler angles are one way to represent orientations. There are others, and it is possible to change to and from other conventions. 
+
+The most used orientation representation are:
+- rotation matrices, 
+- the axis-angle 
+- quaternions, 
+
+## Rotation matrix
 
 <img src="https://latex.codecogs.com/svg.image?R_z(\alpha)=\bigl(\begin{smallmatrix}cos(\alpha)&space;&&space;-sin(\alpha)&space;&0&space;&space;\\&space;sin(\alpha)&space;&&space;&space;cos(\alpha)&space;&0&space;\\&space;&space;&space;&space;&space;&space;0&space;&space;&space;&space;&space;&space;&space;&space;&&space;&space;&space;&space;0&space;&space;&space;&&space;&space;1\\&space;\end{smallmatrix}\bigr)" title="https://latex.codecogs.com/svg.image?R_z(\b)=\bigl(\begin{smallmatrix}cos(\alpha) & -sin(\alpha) &0 \\ sin(\alpha) & cos(\alpha) &0 \\ 0 & 0 & 1\\ \end{smallmatrix}\bigr)" />
 
@@ -33,10 +94,7 @@
 <br/>
 <br/>
 
-<img src="https://latex.codecogs.com/svg.image?R_x(\gamma)=\bigl(\begin{smallmatrix}1&space;&&space;0&space;&&space;0&space;\\&space;0&space;&&space;&space;cos(\gamma)&space;&&space;-sin(\gamma)&space;\\&space;&space;&space;0&space;&space;&space;&space;&space;&&space;&space;&space;&space;sin(\gamma)&space;&space;&space;&&space;&space;cos(\gamma)\\&space;\end{smallmatrix}\bigr)" title="https://latex.codecogs.com/svg.image?R_x(\gamma)=\bigl(\begin{smallmatrix}1 & 0 & 0 \\ 0 & cos(\gamma) & -sin(\gamma) \\ 0 & sin(\gamma) & cos(\gamma)\\ \end{smallmatrix}\bigr)" />
 
-<br/>
-<br/>
 
 
 
@@ -44,10 +102,15 @@
 
 
 
-Multiple transformation matrices exist, and they can be applied in various orders. 
-The twelve rotation sequences can be divided into two categories: 
-1. Proper Euler angles, where one axis of rotation is repeated (x-z-x, x-y-x, y-x-y, y-z-y, z-y-z, z-x-z), 
-2. Tait-Bryan angles, which rotate around all axes (x-z-y, x-y-z, y-x-z, y-z-x, z-y-x, z-x-y).
+
+<br/>
+<br/>
+
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;{\begin{aligned}R=R_{z}(\alpha&space;)\,R_{y}(\beta&space;)\,R_{x}(\gamma&space;)&={\overset&space;{\text{yaw}}{\begin{bmatrix}\cos&space;\alpha&space;&-\sin&space;\alpha&space;&0\\\sin&space;\alpha&space;&\cos&space;\alpha&space;&0\\0&0&1\\\end{bmatrix}}}{\overset&space;{\text{pitch}}{\begin{bmatrix}\cos&space;\beta&space;&0&\sin&space;\beta&space;\\0&1&0\\-\sin&space;\beta&space;&0&\cos&space;\beta&space;\\\end{bmatrix}}}{\overset&space;{\text{roll}}{\begin{bmatrix}1&0&0\\0&\cos&space;\gamma&space;&-\sin&space;\gamma&space;\\0&\sin&space;\gamma&space;&\cos&space;\gamma&space;\\\end{bmatrix}}}\\&={\begin{bmatrix}\cos&space;\alpha&space;\cos&space;\beta&space;&\cos&space;\alpha&space;\sin&space;\beta&space;\sin&space;\gamma&space;-\sin&space;\alpha&space;\cos&space;\gamma&space;&\cos&space;\alpha&space;\sin&space;\beta&space;\cos&space;\gamma&space;&plus;\sin&space;\alpha&space;\sin&space;\gamma&space;\\\sin&space;\alpha&space;\cos&space;\beta&space;&\sin&space;\alpha&space;\sin&space;\beta&space;\sin&space;\gamma&space;&plus;\cos&space;\alpha&space;\cos&space;\gamma&space;&\sin&space;\alpha&space;\sin&space;\beta&space;\cos&space;\gamma&space;-\cos&space;\alpha&space;\sin&space;\gamma&space;\\-\sin&space;\beta&space;&\cos&space;\beta&space;\sin&space;\gamma&space;&\cos&space;\beta&space;\cos&space;\gamma&space;\\\end{bmatrix}}\end{aligned}}}" title="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{aligned}R=R_{z}(\alpha )\,R_{y}(\beta )\,R_{x}(\gamma )&={\overset {\text{yaw}}{\begin{bmatrix}\cos \alpha &-\sin \alpha &0\\\sin \alpha &\cos \alpha &0\\0&0&1\\\end{bmatrix}}}{\overset {\text{pitch}}{\begin{bmatrix}\cos \beta &0&\sin \beta \\0&1&0\\-\sin \beta &0&\cos \beta \\\end{bmatrix}}}{\overset {\text{roll}}{\begin{bmatrix}1&0&0\\0&\cos \gamma &-\sin \gamma \\0&\sin \gamma &\cos \gamma \\\end{bmatrix}}}\\&={\begin{bmatrix}\cos \alpha \cos \beta &\cos \alpha \sin \beta \sin \gamma -\sin \alpha \cos \gamma &\cos \alpha \sin \beta \cos \gamma +\sin \alpha \sin \gamma \\\sin \alpha \cos \beta &\sin \alpha \sin \beta \sin \gamma +\cos \alpha \cos \gamma &\sin \alpha \sin \beta \cos \gamma -\cos \alpha \sin \gamma \\-\sin \beta &\cos \beta \sin \gamma &\cos \beta \cos \gamma \\\end{bmatrix}}\end{aligned}}}" />
+
+
+
 
 <br/>
 <br/>
@@ -56,20 +119,6 @@ It is important to note that <img src="https://latex.codecogs.com/svg.image?&spa
 
 <br/>
 <br/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Determining yaw, pitch, and roll from a rotation matrix
 
@@ -106,7 +155,15 @@ can calculate this for us:
 Note that this method assumes <img src="https://latex.codecogs.com/svg.image?r_{11}\neq&space;0" title="https://latex.codecogs.com/svg.image?r_{11}\neq 0" /> and <img src="https://latex.codecogs.com/svg.image?r_{33}\neq&space;0" title="https://latex.codecogs.com/svg.image?r_{33}\neq 0" />.
 
 
-Now what if <img src="https://latex.codecogs.com/svg.image?cos(\beta)=0&space;\text{&space;or&space;}&space;\beta=\pm&space;\pi/2" title="https://latex.codecogs.com/svg.image?cos(\beta)=0 \text{ or } \beta=\pm \pi/2" />
+## Signs and ranges
+
+- for <img src="https://latex.codecogs.com/svg.image?\alpha&space;\text{&space;or&space;}&space;\psi" title="https://latex.codecogs.com/svg.image?\alpha \text{ or } \psi" /> and <img src="https://latex.codecogs.com/svg.image?&space;\gamma&space;\text{&space;or&space;}&space;\phi,&space;" title="https://latex.codecogs.com/svg.image? \gamma \text{ or } \phi, " />, the range is defined modulo <img src="https://latex.codecogs.com/svg.image?2\pi" title="https://latex.codecogs.com/svg.image?2\pi" />radians. For instance, a valid range could be <img src="https://latex.codecogs.com/svg.image?[-\pi,&space;\pi]" title="https://latex.codecogs.com/svg.image?[-\pi, \pi]" />.
+- for <img src="https://latex.codecogs.com/svg.image?\beta,&space;\text{&space;or&space;}&space;\theta" title="https://latex.codecogs.com/svg.image?\beta, \text{ or } \theta" />, the range covers <img src="https://latex.codecogs.com/svg.image?&space;\pi&space;" title="https://latex.codecogs.com/svg.image? \pi " /> radians (but can't be said to be modulo <img src="https://latex.codecogs.com/svg.image?&space;\pi&space;" title="https://latex.codecogs.com/svg.image? \pi " />). For example, it could be <img src="https://latex.codecogs.com/svg.image?[0,&space;\pi]" title="https://latex.codecogs.com/svg.image?[0, \pi]" /> or <img src="https://latex.codecogs.com/svg.image?[-\pi/2,&space;\pi/2]" title="https://latex.codecogs.com/svg.image?[-\pi/2, \pi/2]" />.
+
+
+
+# Gimbal lock 
+The angles <img src="https://latex.codecogs.com/svg.image?\alpha,&space;\beta,&space;\text{&space;and&space;}&space;\gamma" title="https://latex.codecogs.com/svg.image?\alpha, \beta, \text{ and } \gamma" /> are uniquely determined except for the singular case. If <img src="https://latex.codecogs.com/svg.image?cos(\beta)=0&space;\text{&space;or&space;}&space;\beta=\pm&space;\pi/2" title="https://latex.codecogs.com/svg.image?cos(\beta)=0 \text{ or } \beta=\pm \pi/2" />
 
 1. <img src="https://latex.codecogs.com/svg.image?\beta=\pi/2" title="https://latex.codecogs.com/svg.image?\beta=\pi/2" />
 <br/>
@@ -119,6 +176,30 @@ This will result in:
 - <img src="https://latex.codecogs.com/svg.image?\gamma-\alpha&space;=&space;atan2(r_{12},r_{22})" title="https://latex.codecogs.com/svg.image?\gamma-\alpha = atan2(r_{12},r_{22})" />
 
 - <img src="https://latex.codecogs.com/svg.image?\gamma-\alpha&space;=&space;atan2(-r_{23},r_{13})&space;" title="https://latex.codecogs.com/svg.image?\gamma-\alpha = atan2(-r_{23},r_{13}) " />
+
+
+
+
+
+
+
+<video width="640" height="480" controls>
+  <source src="vidoes/gimbal_locl_beta_pi_2.mp4" type="video/mp4">
+</video>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 2. <img src="https://latex.codecogs.com/svg.image?\beta=-\pi/2" title="https://latex.codecogs.com/svg.image?\beta=-\pi/2" />
@@ -137,7 +218,9 @@ This means that there are infinitely many sets of (roll,yaw) angles for a given 
 
 Visit the [link](https://compsci290-s2016.github.io/CoursePage/Materials/EulerAnglesViz/) for interactive Gimbal visualization.
 
-## Euler Angles
+
+
+
 
 ## Quaternions
 
@@ -160,7 +243,7 @@ The set of quaternions is made a 4-dimensional vector space over the real number
 
 <br/>
 <br/>
-<img src="images/Quaternion_2.svg" height=200 width=200 />
+
 
 <br/>
 <br/>
@@ -198,7 +281,26 @@ For two elements <img src="https://latex.codecogs.com/svg.image?a_1&space;&plus;
 ### Norm
 ### Reciprocal
 
+### Conversion between quaternions and Euler angles
 
+
+ A unit quaternion can be described as:
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;\mathbf&space;{q}&space;={\begin{bmatrix}q_{0}&q_{1}&q_{2}&q_{3}\end{bmatrix}}^{T}={\begin{bmatrix}q_{w}&q_{x}&q_{y}&q_{z}\end{bmatrix}}^{T}}" title="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {q} ={\begin{bmatrix}q_{0}&q_{1}&q_{2}&q_{3}\end{bmatrix}}^{T}={\begin{bmatrix}q_{w}&q_{x}&q_{y}&q_{z}\end{bmatrix}}^{T}}" />
+
+where 
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;|\mathbf&space;{q}&space;|^{2}=q_{0}^{2}&plus;q_{1}^{2}&plus;q_{2}^{2}&plus;q_{3}^{2}=q_{w}^{2}&plus;q_{x}^{2}&plus;q_{y}^{2}&plus;q_{z}^{2}=1}" title="https://latex.codecogs.com/svg.image?{\displaystyle |\mathbf {q} |^{2}=q_{0}^{2}+q_{1}^{2}+q_{2}^{2}+q_{3}^{2}=q_{w}^{2}+q_{x}^{2}+q_{y}^{2}+q_{z}^{2}=1}" />
+
+
+To get the rotation matrix:
+
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;R={\begin{bmatrix}1-2(q_{2}^{2}&plus;q_{3}^{2})&2(q_{1}q_{2}-q_{0}q_{3})&2(q_{0}q_{2}&plus;q_{1}q_{3})\\2(q_{1}q_{2}&plus;q_{0}q_{3})&1-2(q_{1}^{2}&plus;q_{3}^{2})&2(q_{2}q_{3}-q_{0}q_{1})\\2(q_{1}q_{3}-q_{0}q_{2})&2(q_{0}q_{1}&plus;q_{2}q_{3})&1-2(q_{1}^{2}&plus;q_{2}^{2})\end{bmatrix}}}" title="https://latex.codecogs.com/svg.image?{\displaystyle R={\begin{bmatrix}1-2(q_{2}^{2}+q_{3}^{2})&2(q_{1}q_{2}-q_{0}q_{3})&2(q_{0}q_{2}+q_{1}q_{3})\\2(q_{1}q_{2}+q_{0}q_{3})&1-2(q_{1}^{2}+q_{3}^{2})&2(q_{2}q_{3}-q_{0}q_{1})\\2(q_{1}q_{3}-q_{0}q_{2})&2(q_{0}q_{1}+q_{2}q_{3})&1-2(q_{1}^{2}+q_{2}^{2})\end{bmatrix}}}" />
+
+To get the roll pitch, yaw:
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;{\begin{bmatrix}\phi&space;\\\theta&space;\\\psi&space;\end{bmatrix}}={\begin{bmatrix}{\mbox{atan2}}\left(2(q_{0}q_{1}&plus;q_{2}q_{3}),1-2(q_{1}^{2}&plus;q_{2}^{2})\right)\\-\pi&space;/2&plus;2\,{\mbox{atan2}}\left({\sqrt&space;{1&plus;2(q_{0}q_{2}-q_{1}q_{3})}},{\sqrt&space;{1-2(q_{0}q_{2}-q_{1}q_{3})}}\right)\\{\mbox{atan2}}\left(2(q_{0}q_{3}&plus;q_{1}q_{2}),1-2(q_{2}^{2}&plus;q_{3}^{2})\right)\end{bmatrix}}}" title="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}\phi \\\theta \\\psi \end{bmatrix}}={\begin{bmatrix}{\mbox{atan2}}\left(2(q_{0}q_{1}+q_{2}q_{3}),1-2(q_{1}^{2}+q_{2}^{2})\right)\\-\pi /2+2\,{\mbox{atan2}}\left({\sqrt {1+2(q_{0}q_{2}-q_{1}q_{3})}},{\sqrt {1-2(q_{0}q_{2}-q_{1}q_{3})}}\right)\\{\mbox{atan2}}\left(2(q_{0}q_{3}+q_{1}q_{2}),1-2(q_{2}^{2}+q_{3}^{2})\right)\end{bmatrix}}}" />
 
 ### The advantages of Quaternions 
 
@@ -210,6 +312,37 @@ For two elements <img src="https://latex.codecogs.com/svg.image?a_1&space;&plus;
 
 Refs: [1](https://www.youtube.com/watch?v=d4EgbgTm0Bg),[2](https://www.youtube.com/watch?v=zjMuIxRvygQ), [3](https://quaternions.online/), [4](https://www.youtube.com/watch?v=zc8b2Jo7mno), [5](https://www.youtube.com/watch?v=syQnn_xuB8U),
 [6](https://www.youtube.com/watch?v=4mXL751ko0w)
+
+
+# Axis-angle Representation
+
+Axis-angle representation of a rotation in a three-dimensional Euclidean space by two quantities: 
+1. A unit vector <img src="https://latex.codecogs.com/svg.image?\bold{e}" title="https://latex.codecogs.com/svg.image?\bold{e}" /> indicating the direction of an axis of rotation, 
+2. An angle <img src="https://latex.codecogs.com/svg.image?\theta" title="https://latex.codecogs.com/svg.image?\theta" />
+
+<img src="images/Angle_axis_vector.svg" />
+
+<br/>
+<br/>
+
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;(\mathrm&space;{axis}&space;,\mathrm&space;{angle}&space;)=\left({\begin{bmatrix}e_{x}\\e_{y}\\e_{z}\end{bmatrix}},\theta&space;\right)=\left({\begin{bmatrix}0\\0\\1\end{bmatrix}},{\frac&space;{\pi&space;}{2}}\right).}" title="https://latex.codecogs.com/svg.image?{\displaystyle (\mathrm {axis} ,\mathrm {angle} )=\left({\begin{bmatrix}e_{x}\\e_{y}\\e_{z}\end{bmatrix}},\theta \right)=\left({\begin{bmatrix}0\\0\\1\end{bmatrix}},{\frac {\pi }{2}}\right).}" />
+
+The above example can be represented as:
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;{\begin{bmatrix}0\\0\\{\frac&space;{\pi&space;}{2}}\end{bmatrix}}.}" title="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}0\\0\\{\frac {\pi }{2}}\end{bmatrix}}.}" />
+
+## Rodrigues' Rotation Formula
+
+If <img src="https://latex.codecogs.com/svg.image?\mathbf{v}" title="https://latex.codecogs.com/svg.image?\mathbf{v}" /> is a vector in <img src="https://latex.codecogs.com/svg.image?\mathbb{R}^3" title="https://latex.codecogs.com/svg.image?\mathbb{R}^3" /> and <img src="https://latex.codecogs.com/svg.image?\mathbf{k}" title="https://latex.codecogs.com/svg.image?\mathbf{k}" /> is a unit vector describing an axis of rotation by an angle <img src="https://latex.codecogs.com/svg.image?\theta" title="https://latex.codecogs.com/svg.image?\theta" />
+
+
+
+
+
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;\mathbf&space;{v}&space;_{\mathrm&space;{rot}&space;}=\mathbf&space;{v}&space;\cos&space;\theta&space;&plus;(\mathbf&space;{k}&space;\times&space;\mathbf&space;{v}&space;)\sin&space;\theta&space;&plus;\mathbf&space;{k}&space;~(\mathbf&space;{k}&space;\cdot&space;\mathbf&space;{v}&space;)(1-\cos&space;\theta&space;)\,.}" title="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {v} _{\mathrm {rot} }=\mathbf {v} \cos \theta +(\mathbf {k} \times \mathbf {v} )\sin \theta +\mathbf {k} ~(\mathbf {k} \cdot \mathbf {v} )(1-\cos \theta )\,.}" />
+
 
 
 ## Exponential Coordinates
