@@ -2,11 +2,37 @@
 #include <Eigen/Dense>
 #include <iostream>
 
-#include "euler_angles_to_rotation_matrix.hpp"
+Eigen::Matrix3d eulerAnglesToRotationMatrix(double roll, double pitch,
+                                            double yaw) {
+  Eigen::AngleAxisd rollAngle(roll, Eigen::Vector3d::UnitX());
+  Eigen::AngleAxisd pitchAngle(pitch, Eigen::Vector3d::UnitY());
+  Eigen::AngleAxisd yawAngle(yaw, Eigen::Vector3d::UnitZ());
+  Eigen::Quaternion<double> q = yawAngle * pitchAngle * rollAngle;
+  Eigen::Matrix3d rotationMatrix = q.matrix();
+  return rotationMatrix;
+}
+
 
 int main()
 {
-    //////////////////////////////////////// Rodrigues ///////////////////////////////////////////
+    //////////////////////////////////////// create angle axis (rodrigues) ///////////////////////////////////////////
+
+
+    Eigen::Vector3d vector3d(2.3,3.1,1.7);
+    Eigen::Vector3d vector3dNormalized=vector3d.normalized();
+    double theta=M_PI/7;
+    Eigen::AngleAxisd angleAxisConversion(theta,vector3dNormalized);
+
+
+    //////////////////////////////////////// angle axis (rodrigues) to rotation matrix ///////////////////////////////////////////
+    Eigen::Matrix3d rotationMatrixConversion;
+    rotationMatrixConversion=angleAxisConversion.toRotationMatrix();
+
+
+
+    //////////////////////////////////////// rotation matrix to angle axis (rodrigues) ///////////////////////////////////////////
+
+
     Eigen::Matrix3d rotationMatrix;
 
     double roll, pitch, yaw;
@@ -16,7 +42,6 @@ int main()
 
     rotationMatrix= eulerAnglesToRotationMatrix(roll, pitch,yaw);
 
-    //Rotation Matrix to Rodrigues
     Eigen::AngleAxisd rodrigues(rotationMatrix );
     std::cout<<"Rodrigues Angle:\n"<<rodrigues.angle() <<std::endl;
 

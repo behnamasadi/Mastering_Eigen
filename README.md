@@ -100,10 +100,10 @@ This repository contains my tutorials on how to master Matrix operation and nume
 
 # [Chapter 6 Sparse Matrices](6_Sparse_Matrices.md)
 
-- [Sparse Matrix Manipulations](6_Sparse_Matrices.md)#sparse-matrix-manipulations)
-  * [Compressed Sparse Row](6_Sparse_Matrices.md)#compressed-sparse-row)
-- [Solving Sparse Linear Systems](6_Sparse_Matrices.md)#solving-sparse-linear-systems)
-- [Matrix Free Solvers](6_Sparse_Matrices.md)#matrix-free-solvers)
+- [Sparse Matrix Manipulations](6_Sparse_Matrices.md#sparse-matrix-manipulations)
+  * [Compressed Sparse Row](6_Sparse_Matrices.md#compressed-sparse-row)
+- [Solving Sparse Linear Systems](6_Sparse_Matrices.md#solving-sparse-linear-systems)
+- [Matrix Free Solvers](6_Sparse_Matrices.md#matrix-free-solvers)
 
 
 # [Chapter 7 Geometry Transformation](7_Geometry_Transformation.md)
