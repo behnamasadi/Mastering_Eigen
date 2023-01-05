@@ -232,6 +232,10 @@ Equivalent proper Euler angles:
 
 <img src="https://latex.codecogs.com/svg.image?{\begin{aligned}\alpha&space;&=\arctan&space;\left({\frac&space;{r_{23}}{r_{13}}}\right)\\\beta&space;&=\arctan&space;\left({\frac&space;{\sqrt&space;{1-r_{33}^{2}}}{r_{33}}}\right)\\\gamma&space;&=\arctan&space;\left({\frac&space;{r_{32}}{-r_{31}}}\right)\end{aligned}}" title="https://latex.codecogs.com/svg.image?{\begin{aligned}\alpha &=\arctan \left({\frac {r_{23}}{r_{13}}}\right)\\\beta &=\arctan \left({\frac {\sqrt {1-r_{33}^{2}}}{r_{33}}}\right)\\\gamma &=\arctan \left({\frac {r_{32}}{-r_{31}}}\right)\end{aligned}}" />
 
+## uniqueness of 3D rotation matrix
+
+Refs: [1](https://math.stackexchange.com/questions/105264/3d-rotation-matrix-uniqueness/105380#105380)
+
 
 # Quaternions
 
@@ -652,5 +656,10 @@ similarly for twist we have:
 # Conversion between different representations
 
 Full list of conversion [here](http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm) 
+
+
+
+
+
 
 [<< Previous ](6_Sparse_Matrices.md)  [Home](README.md)   [Next >>](8_Differentiation.md)
