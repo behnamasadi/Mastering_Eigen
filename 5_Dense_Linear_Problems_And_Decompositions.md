@@ -1,4 +1,4 @@
-#  Chapter 5 Dense Linear Problems And Decompositions
+- [Chapter 5 Dense Linear Problems And Decompositions](#chapter-5-dense-linear-problems-and-decompositions)
 - [Introduction to Linear Equation](#introduction-to-linear-equation)
   * [Solution set](#solution-set)
   * [Underdetermined System](#underdetermined-system)
@@ -7,29 +7,37 @@
   * [Homogeneous vs Non-homogeneous](#homogeneous-vs-non-homogeneous)
 - [Matrices Decompositions](#matrices-decompositions)
   * [QR Decomposition](#qr-decomposition)
-    + [Square Matrix](#square-matrix)
-    + [Rectangular Matrix](#rectangular-matrix)
-    + [Computing the QR Decomposition](#computing-the-qr-decomposition)
-      - [Gram Schmidt Orthogonalization](#gram-schmidt-orthogonalization)
-      - [Householder Transformations](#householder-transformations)
+  * [Square Matrix](#square-matrix)
+  * [Rectangular Matrix](#rectangular-matrix)
+  * [Computing the QR Decomposition](#computing-the-qr-decomposition)
+  * [Gram Schmidt Orthogonalization](#gram-schmidt-orthogonalization)
+  * [Householder Transformations](#householder-transformations)
   * [QL, RQ and LQ Decompositions](#ql--rq-and-lq-decompositions)
   * [Cholesky Decomposition](#cholesky-decomposition)
-  * [LDU Decomposition](#ldu-decomposition)
+  * [LU/LDU Decomposition](#lu-ldu-decomposition)
   * [SVD Decomposition](#svd-decomposition)
   * [Eigen Value Eigen Vector](#eigen-value-eigen-vector)
   * [Basis of Null space and Kernel](#basis-of-null-space-and-kernel)
-      - [Linear Map](#linear-map)
-    + [Vector space](#vector-space)
-    + [Null Space](#null-space)
+  * [Linear Map](#linear-map)
+  * [Vector space](#vector-space)
+  * [Null Space](#null-space)
+    + [Nullity](#nullity)
+    + [Rank-nullity Theorem](#rank-nullity-theorem)
 - [Solving Linear Equation](#solving-linear-equation)
   * [Gaussian Elimination](#gaussian-elimination)
-    + [Row echelon form](#row-echelon-form)
-    + [Trapezoidal Matrix](#trapezoidal-matrix)
-    + [Example of The Gaussian Elimination Algorithm](#example-of-the-gaussian-elimination-algorithm)
-    + [The Determinant of The Matrix](#the-determinant-of-the-matrix)
-    + [Finding The Inverse of The Matrix](#finding-the-inverse-of-the-matrix)
-    + [Computing Ranks and Bases](#computing-ranks-and-bases)
-  * [Conclusion on Computing Rank](#conclusion-on-computing-rank)
+  * [Example of The Gaussian Elimination Algorithm](#example-of-the-gaussian-elimination-algorithm)
+- [Row echelon form](#row-echelon-form)
+- [Reduced row echelon form](#reduced-row-echelon-form)
+- [Trapezoidal Matrix](#trapezoidal-matrix)
+- [Row and column spaces](#row-and-column-spaces)
+- [The Determinant of The Matrix](#the-determinant-of-the-matrix)
+- [Finding The Inverse of The Matrix](#finding-the-inverse-of-the-matrix)
+- [Computing Ranks and Bases](#computing-ranks-and-bases)
+- [Conclusion on Computing Rank](#conclusion-on-computing-rank)
+
+
+
+
 
 # Introduction to Linear Equation
 
@@ -105,7 +113,7 @@ A system of linear equations is homogeneous if all of the constant terms are zer
 Depending on what your matrices looks like, you can choose between various decompositions, and depending on whether you favor speed or accuracy.
 
 ##  QR Decomposition
-###  Square Matrix
+##  Square Matrix
 If <img src="https://latex.codecogs.com/svg.latex?A" />  is a real square matrix, then it may be decomposed as:
 
 <img src="https://latex.codecogs.com/svg.latex?A=QR" /> 
@@ -124,7 +132,7 @@ Furthermore, if <img src="https://latex.codecogs.com/svg.latex?A" /> is invertib
 For complex square matrices, <img src="https://latex.codecogs.com/svg.latex?Q" />  is a unitary matrix, meaning 
 <img src="https://latex.codecogs.com/svg.latex?Q^{*}=Q^{-1}" />
 
-### Rectangular Matrix
+## Rectangular Matrix
 If <img src="https://latex.codecogs.com/svg.latex?A_{m\times%20n}" alt="https://latex.codecogs.com/svg.latex?A_{m\times n}" /> where <img src="https://latex.codecogs.com/svg.latex?%20m%20\geq%20%20n" alt="https://latex.codecogs.com/svg.latex? m \geq  n" /> we can factor it into <img src="https://latex.codecogs.com/svg.latex?m\times%20m" alt="https://latex.codecogs.com/svg.latex?m\times m" /> unitary matrix <img src="https://latex.codecogs.com/svg.latex?Q" /> and  an <img src="https://latex.codecogs.com/svg.latex?m\times%20n" alt="https://latex.codecogs.com/svg.latex?m\times n" /> upper triangular matrix <img src="https://latex.codecogs.com/svg.latex?R" />. Since after <img src="https://latex.codecogs.com/svg.latex?\left%20(m-n%20\right%20)_{th}" alt="https://latex.codecogs.com/svg.latex?\left (m-n \right )_{th}" /> row, in <img src="https://latex.codecogs.com/svg.latex?R" /> all elements are entirely zeroes, we can rewrite our equation in the following form:
 
 <img src="https://latex.codecogs.com/svg.latex?{\displaystyle%20A_{m\times%20n}=Q%20_{m\times%20m}%20%20R_{m\times%20n}%20=Q{\begin{bmatrix}R_{1}\\0\end{bmatrix}}={\begin{bmatrix}Q_{1}&Q_{2}\end{bmatrix}}{\begin{bmatrix}R_{1}\\0\end{bmatrix}}=Q_{1}R_{1},}" alt="https://latex.codecogs.com/svg.latex?{\displaystyle A_{m\times n}=Q _{m\times m}  R_{m\times n} =Q{\begin{bmatrix}R_{1}\\0\end{bmatrix}}={\begin{bmatrix}Q_{1}&Q_{2}\end{bmatrix}}{\begin{bmatrix}R_{1}\\0\end{bmatrix}}=Q_{1}R_{1},}" />
@@ -135,8 +143,8 @@ where
 
 
 
-### Computing the QR Decomposition
-#### Gram Schmidt Orthogonalization 
+## Computing the QR Decomposition
+## Gram Schmidt Orthogonalization 
 Gram–Schmidt process is a method for orthonormalizing a set of vectors. In this process you make every column perpendicular to it's previous columns. Lets first define the **projection operator** by
 
 <img src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\mathrm%20{proj}%20_{\mathbf%20{u}%20}(\mathbf%20{v}%20)={\frac%20{\langle%20\mathbf%20{u}%20,\mathbf%20{v}%20\rangle%20}{\langle%20\mathbf%20{u}%20,\mathbf%20{u}%20\rangle%20}}{\mathbf%20{u}%20}}" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \mathrm {proj} _{\mathbf {u} }(\mathbf {v} )={\frac {\langle \mathbf {u} ,\mathbf {v} \rangle }{\langle \mathbf {u} ,\mathbf {u} \rangle }}{\mathbf {u} }}" />
@@ -331,7 +339,7 @@ This can be written in matrix form:
 
 
 
-#### Householder Transformations
+## Householder Transformations
 ## QL, RQ and LQ Decompositions
 We can define <img src="https://latex.codecogs.com/svg.latex?QL" />, <img src="https://latex.codecogs.com/svg.latex?RQ" />, and <img src="https://latex.codecogs.com/svg.latex?LQ" /> decompositions, with <img src="https://latex.codecogs.com/svg.latex?L" /> being a lower triangular matrix.
 
@@ -346,7 +354,7 @@ Cholesky decomposition is a decomposition of a Hermitian, positive-definite matr
 
 
 First let review some definitions:
-#### Linear Map
+## Linear Map
 Let  <img  src="https://latex.codecogs.com/svg.latex?V"  alt="https://latex.codecogs.com/svg.latex?V" /> and  <img  src="https://latex.codecogs.com/svg.latex?W"  alt="https://latex.codecogs.com/svg.latex?W" /> be vector spaces over the same field  <img  src="https://latex.codecogs.com/svg.latex?K"  alt="https://latex.codecogs.com/svg.latex?K" />. A function <img  src="https://latex.codecogs.com/svg.latex?f:V\to%20W"  alt="https://latex.codecogs.com/svg.latex?f:V\to W" />  is said to be a linear map if for any two vectors
  <img  src="https://latex.codecogs.com/svg.latex?{\textstyle%20\mathbf%20{u}%20,\mathbf%20{v}%20\in%20V}"  alt="https://latex.codecogs.com/svg.latex?{\textstyle \mathbf {u} ,\mathbf {v} \in V}" />  and any scalar 
   <img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20c\in%20K}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle c\in K}" />  the following two conditions are satisfied:
@@ -360,9 +368,9 @@ Let  <img  src="https://latex.codecogs.com/svg.latex?V"  alt="https://latex.code
 
 <img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20f(c\mathbf%20{u}%20)=cf(\mathbf%20{u}%20)}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle f(c\mathbf {u} )=cf(\mathbf {u} )}" />
 
-### Vector space
+## Vector space
 
-### Null Space 
+## Null Space 
 
 
 If <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> is your matrix, the null-space is simply put, the set of all vectors <img  src="https://latex.codecogs.com/svg.latex?v"  alt="https://latex.codecogs.com/svg.latex?v" /> such that <img  src="https://latex.codecogs.com/svg.latex?A.v=0"  alt="https://latex.codecogs.com/svg.latex?A.v=0" />. It's good to think of the matrix as a linear transformation; if you let <img  src="https://latex.codecogs.com/svg.latex?h(v)=A.v"  alt="https://latex.codecogs.com/svg.latex?h(v)=A.v" />
@@ -427,39 +435,7 @@ This method can also be used to compute
 - The determinant of a square matrix.
 - Inverse of an invertible matrix.
 
-
-### Row echelon form
-A matrix is in row echelon form if:
-
-- All rows consisting of only zeroes are at the bottom.
-- 2 The leading coefficient (also called the pivot) of a nonzero row is always strictly to the right of the leading coefficient of the row above it.
-
-This matrix is in reduced row echelon form, which shows that the left part of the matrix is not always an identity matrix:
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{ccccc}1&0&a_{1}&0&b_{1}\\0&1&a_{2}&0&b_{2}\\0&0&0&1&b_{3}\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{ccccc}1&0&a_{1}&0&b_{1}\\0&1&a_{2}&0&b_{2}\\0&0&0&1&b_{3}\end{array}}\right]}" />
-
-
-
-
-
-
-The matrix:
-
-<img  src="https://latex.codecogs.com/svg.latex?\begin{pmatrix}1&4&7\\0&2&3\end{pmatrix}"  alt="https://latex.codecogs.com/svg.latex?\begin{pmatrix}1&2&3\\0&4&5\end{pmatrix}" />
-
-is echelon, but not triangular (because not square). 
-
-The matrix:
-
-<img  src="https://latex.codecogs.com/svg.latex?\begin{pmatrix}1&4&7\\0&0&2\\0&0&4\end{pmatrix}"  alt="https://latex.codecogs.com/svg.latex?\begin{pmatrix}1&2&3\\0&0&4\\0&0&5\end{pmatrix}" />
-
-is triangular, but not echelon (because the leading entry 4 is not to the right of the leading entry 2).
-For non-singular square matrices, "row echelon" and "upper triangular" are equivalent.
-
-### Trapezoidal Matrix  
-A non-square  matrix with zeros above (below) the diagonal is called a lower (upper) trapezoidal matrix.
-
-### Example of The Gaussian Elimination Algorithm
+## Example of The Gaussian Elimination Algorithm
 
 Suppose the following system of linear equations:
 
@@ -528,18 +504,76 @@ Augmented matrix:
 <br/>
 <br/>
 
-### The Determinant of The Matrix
+# Row echelon form
+
+A matrix is in echelon form after a Gaussian elimination process and:
+
+- All rows consisting of only zeroes are at the bottom.
+- The left-most nonzero entry (leading entry also called the pivot) of every nonzero row is to the right of the leading entry of every row above. 
+
+
+The following matrix is in row echelon form, but not in reduced row echelon 
+
+<img src="images/row_echelon_form.svg" alt="{\displaystyle \left[{\begin{array}{ccccc}1&a_{0}&a_{1}&a_{2}&a_{3}\\0&0&2&a_{4}&a_{5}\\0&0&0&1&a_{6}\\0&0&0&0&0\end{array}}\right]}"  >
+
+
+
+The matrix: 
+
+<img  src="https://latex.codecogs.com/svg.latex?\begin{bmatrix}1&4&7\\0&2&3\end{bmatrix}"  alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix}1&2&3\\0&4&5\end{bpmatrix}" />
+
+is echelon, but not triangular (because not square). 
+
+The matrix: 
+
+<img  src="https://latex.codecogs.com/svg.latex?\begin{bmatrix}1&4&7\\0&0&2\\0&0&4\end{bmatrix}"  alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix}1&2&3\\0&0&4\\0&0&5\end{bmatrix}" />
+
+is triangular, but not echelon because the leading entry 4 is not to the right of the leading entry 2.
+For non-singular square matrices, "row echelon" and "upper triangular" are equivalent.
+
+# Reduced row echelon form
+A matrix is reduced row echelon form if it is in row echelon form and:
+- The leading entry in each nonzero row is a 1 (called a leading 1).
+- Each column containing a leading 1 has zeros in all its other entries.
+
+
+This matrix is in reduced row echelon form, which shows that the left part of the matrix is not always an identity matrix:
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{ccccc}1&0&a_{1}&0&b_{1}\\0&1&a_{2}&0&b_{2}\\0&0&0&1&b_{3}\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{ccccc}1&0&a_{1}&0&b_{1}\\0&1&a_{2}&0&b_{2}\\0&0&0&1&b_{3}\end{array}}\right]}" />
+
+
+echelon form is not **unique**, but every matrix has a unique **reduced row echelon form**.
+
+
+## Example
+<img  src="images/ref0.svg" alt="\begin{bmatrix}
+1 & 4 & 2 & 3\\ 
+2 & 8 & 2 & 5\\ 
+0 & 0 & 1 & 1
+\end{bmatrix}" />
+
+
+# Trapezoidal Matrix  
+A non-square  matrix with zeros above (below) the diagonal is called a lower (upper) trapezoidal matrix.
+
+
+
+
+# Row and column spaces
+
+
+# The Determinant of The Matrix
 Then the determinant of A is the product of the elements of the diagonal of B:
 
 <img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\det(A)={\frac%20{\prod%20\operatorname%20{diag}%20(B)}{d}}.}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \det(A)={\frac {\prod \operatorname {diag} (B)}{d}}.}" />
 
-### Finding The Inverse of The Matrix
+# Finding The Inverse of The Matrix
 First, add the n × n identity matrix is augmented to the right of A such that we get the following
 
 <img  src="https://latex.codecogs.com/svg.latex?[A%20|%20I]_{n\times%202n}"  alt="https://latex.codecogs.com/svg.latex?[A | I]_{n\times 2n}" /> Now during the elementary row operations, apply the same operations on the identity matrix on the right hand side. At the end teh matrix n the right hand side is the inverse of A.
 
 
-### Computing Ranks and Bases
+# Computing Ranks and Bases
 A common approach to find the rank of a matrix is to reduce it row echelon form, and count the number of non-zero elements in main diagonal.
 
 For example, the matrix A given by
@@ -554,7 +588,7 @@ following elementary row operations:
 
 There are two non-zero rows in the final matrix and therefore the rank of matrix is 2.
 
-## Conclusion on Computing Rank
+# Conclusion on Computing Rank
 In practice, due to floating point error on computers,  Gaussian elimination (LU decomposition) can be unreliable, therefore rank-revealing decomposition such as RRQR factorization (rank-revealing QR which is QR decomposition with pivoting) should be used. The singular value decomposition (SVD) can be used, but it is not an efficient method to do so.
 
 
