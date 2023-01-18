@@ -370,6 +370,39 @@ Let  <img  src="https://latex.codecogs.com/svg.latex?V"  alt="https://latex.code
 
 ## Vector space
 
+A vector space is a set <img src="https://latex.codecogs.com/svg.image?V" /> vectors together with two binary operations (vector addition and scalar multiplication) that satisfy the eight axioms listed below. In this context, the , and the .
+
+
+## Examples of Vector Spaces
+
+1. Trivial or zero vector space
+The simplest example of a vector space is the trivial one: <img src="https://latex.codecogs.com/svg.image?\{0\}" />, which contains only the zero vector (third axiom in the Vector space)
+
+2. Coordinate space
+
+
+## Span
+
+The linear span of a set <img  src="https://latex.codecogs.com/svg.latex?S"  alt="https://latex.codecogs.com/svg.latex?S" /> of 
+vectors for a vector space is as the set of all finite linear combinations of the vectors in <img  src="https://latex.codecogs.com/svg.latex?S"  alt="https://latex.codecogs.com/svg.latex?S" /> 
+
+Example: 
+1. The span of 
+
+
+<img src="https://latex.codecogs.com/svg.image?\left%20(%20%20%20\begin{bmatrix}1\\-2%20\\0\end{bmatrix}%20,%20\begin{bmatrix}3\\1%20\\0\end{bmatrix}\right%20)" alt="\left (   \begin{bmatrix} 1\\-2 \\ 0 \end{bmatrix} ,  \begin{bmatrix} 3\\ 1 \\ 0 \end{bmatrix}" />
+
+is:
+
+<img src="https://latex.codecogs.com/svg.image?v=c_1%20%20%20\begin{bmatrix}1\\-2%20\\0\end{bmatrix}%20+c_2%20\begin{bmatrix}3\\1%20\\0\end{bmatrix}" alt="v=c_1 \begin{bmatrix} 1\\ -2 \\ 0 \end{bmatrix} + c_2  \begin{bmatrix} 3\\ 1 \\ 0 \end{bmatrix}" />
+
+2. The real vector space <img src="https://latex.codecogs.com/svg.image?\mathbb%20{R}%20^{3}" alt="https://latex.codecogs.com/svg.image?\mathbb {R} ^{3}" />  has {(−1, 0, 0), (0, 1, 0), (0, 0, 1)} as a spanning set as a spanning set.
+
+
+The set {(1, 0, 0), (0, 1, 0), (1, 1, 0)} is **not** a spanning set of 
+<img src="https://latex.codecogs.com/svg.image?\mathbb%20{R}%20^{3}" alt="https://latex.codecogs.com/svg.image?\mathbb {R} ^{3}" />, since its span is the space of all vectors in <img src="https://latex.codecogs.com/svg.image?\mathbb%20{R}%20^{3}" alt="https://latex.codecogs.com/svg.image?\mathbb {R} ^{3}" />  whose last component is zero.
+
+
 ## Null Space 
 
 
@@ -418,7 +451,8 @@ Nullity is the complement to the rank of a matrix.
 
 
 # Solving Linear Equation
-## Gaussian Elimination
+
+## Gaussian Elimination (row reduction)
 Gaussian Elimination (row reduction) can be used to solve the systems of linear equations. 
 It consists of a sequence of elementary row operations to modify the matrix until the lower left-hand corner of the matrix is filled with zeros and turn into row echelon form . 
 
@@ -434,6 +468,21 @@ This method can also be used to compute
 - The rank of a matrix.
 - The determinant of a square matrix.
 - Inverse of an invertible matrix.
+
+
+## Numerical stability in Gaussian Elimination
+In Gaussian elimination it is generally desirable to choose a pivot element with large absolute value. For instance in the following matrix:
+
+<img src="https://latex.codecogs.com/svg.image?\left[{\begin{array}{cc|c}0.00300&59.14&59.17\\5.291&-6.130&46.78\\\end{array}}\right]"
+alt="\left[{\begin{array}{cc|c}0.00300&59.14&59.17\\5.291&-6.130&46.78\\\end{array}}\right]" />
+
+
+The solution is `x1 = 10.00` and `x2 = 1.000`, but when the elimination algorithm   performed with four-digit arithmetic, the small value of <img src="https://latex.codecogs.com/svg.image?a_{11}" />  yields the approximation of `x1 ≈ 9873.3` and `x2 ≈ 4`.
+
+In this case we should interchange the two rows so that <img src="https://latex.codecogs.com/svg.image?a_{21}" /> is in the pivot position 
+
+<img src="https://latex.codecogs.com/svg.image?\left[{\begin{array}{cc|c}5.291&-6.130&46.78\\0.00300&59.14&59.17\\\end{array}}\right]." alt="\left[{\begin{array}{cc|c}5.291&-6.130&46.78\\0.00300&59.14&59.17\\\end{array}}\right]." />
+
 
 ## Example of The Gaussian Elimination Algorithm
 
@@ -509,7 +558,7 @@ Augmented matrix:
 A matrix is in echelon form after a Gaussian elimination process and:
 
 - All rows consisting of only zeroes are at the bottom.
-- The left-most nonzero entry (leading entry also called the pivot) of every nonzero row is to the right of the leading entry of every row above. 
+- The left-most nonzero entry (leading entry also called the **pivot**) of every nonzero row is to the right of the leading entry of every row above. 
 
 
 The following matrix is in row echelon form, but not in reduced row echelon 
@@ -551,6 +600,10 @@ echelon form is not **unique**, but every matrix has a unique **reduced row eche
 2 & 8 & 2 & 5\\ 
 0 & 0 & 1 & 1
 \end{bmatrix}" />
+
+
+## Pivot Column
+If a matrix is in row-echelon form, then the first nonzero entry of each row is called a pivot, and the columns in which pivots appear are called pivot columns.
 
 
 # Trapezoidal Matrix  
