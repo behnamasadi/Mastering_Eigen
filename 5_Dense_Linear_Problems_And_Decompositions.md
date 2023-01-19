@@ -17,27 +17,31 @@
   * [LU/LDU Decomposition](#lu-ldu-decomposition)
   * [SVD Decomposition](#svd-decomposition)
   * [Eigen Value Eigen Vector](#eigen-value-eigen-vector)
-  * [Basis of Null space and Kernel](#basis-of-null-space-and-kernel)
-  * [Linear Map](#linear-map)
-  * [Vector space](#vector-space)
-  * [Null Space](#null-space)
-    + [Nullity](#nullity)
-    + [Rank-nullity Theorem](#rank-nullity-theorem)
+- [Linear Map](#linear-map)
+- [Vector space](#vector-space)
+  * [Examples of Vector Spaces](#examples-of-vector-spaces)
+- [Span](#span)
+- [Subspace](#subspace)
+- [Basis](#basis)
+  * [Example of Computing Ranks and Basis](#example-of-computing-ranks-and-basis)
+  * [Conclusion on Computing Rank](#conclusion-on-computing-rank)
+- [Row and Column Spaces](#row-and-column-spaces)
+  * [Example of row spaces](#example-of-row-spaces)
+- [Null Space](#null-space)
+- [Nullity](#nullity)
+- [Rank-nullity Theorem](#rank-nullity-theorem)
 - [Solving Linear Equation](#solving-linear-equation)
-  * [Gaussian Elimination](#gaussian-elimination)
+  * [Gaussian Elimination (row reduction)](#gaussian-elimination--row-reduction-)
+  * [Numerical stability in Gaussian Elimination](#numerical-stability-in-gaussian-elimination)
   * [Example of The Gaussian Elimination Algorithm](#example-of-the-gaussian-elimination-algorithm)
 - [Row echelon form](#row-echelon-form)
 - [Reduced row echelon form](#reduced-row-echelon-form)
+  * [Example](#example)
+  * [Pivot Column](#pivot-column)
 - [Trapezoidal Matrix](#trapezoidal-matrix)
 - [Row and column spaces](#row-and-column-spaces)
 - [The Determinant of The Matrix](#the-determinant-of-the-matrix)
 - [Finding The Inverse of The Matrix](#finding-the-inverse-of-the-matrix)
-- [Computing Ranks and Bases](#computing-ranks-and-bases)
-- [Conclusion on Computing Rank](#conclusion-on-computing-rank)
-
-
-
-
 
 # Introduction to Linear Equation
 
@@ -350,11 +354,8 @@ Cholesky decomposition is a decomposition of a Hermitian, positive-definite matr
 ## LU/LDU Decomposition
 ## SVD Decomposition
 ## Eigen Value Eigen Vector
-## Basis of Null space and Kernel
 
-
-First let review some definitions:
-## Linear Map
+# Linear Map
 Let  <img  src="https://latex.codecogs.com/svg.latex?V"  alt="https://latex.codecogs.com/svg.latex?V" /> and  <img  src="https://latex.codecogs.com/svg.latex?W"  alt="https://latex.codecogs.com/svg.latex?W" /> be vector spaces over the same field  <img  src="https://latex.codecogs.com/svg.latex?K"  alt="https://latex.codecogs.com/svg.latex?K" />. A function <img  src="https://latex.codecogs.com/svg.latex?f:V\to%20W"  alt="https://latex.codecogs.com/svg.latex?f:V\to W" />  is said to be a linear map if for any two vectors
  <img  src="https://latex.codecogs.com/svg.latex?{\textstyle%20\mathbf%20{u}%20,\mathbf%20{v}%20\in%20V}"  alt="https://latex.codecogs.com/svg.latex?{\textstyle \mathbf {u} ,\mathbf {v} \in V}" />  and any scalar 
   <img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20c\in%20K}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle c\in K}" />  the following two conditions are satisfied:
@@ -368,7 +369,7 @@ Let  <img  src="https://latex.codecogs.com/svg.latex?V"  alt="https://latex.code
 
 <img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20f(c\mathbf%20{u}%20)=cf(\mathbf%20{u}%20)}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle f(c\mathbf {u} )=cf(\mathbf {u} )}" />
 
-## Vector space
+# Vector space
 
 A vector space is a set <img src="https://latex.codecogs.com/svg.image?V" /> vectors together with two binary operations (vector addition and scalar multiplication) that satisfy the eight axioms listed below. In this context, the , and the .
 
@@ -381,7 +382,7 @@ The simplest example of a vector space is the trivial one: <img src="https://lat
 2. Coordinate space
 
 
-## Span
+# Span
 
 The linear span of a set <img  src="https://latex.codecogs.com/svg.latex?S"  alt="https://latex.codecogs.com/svg.latex?S" /> of 
 vectors for a vector space is as the set of all finite linear combinations of the vectors in <img  src="https://latex.codecogs.com/svg.latex?S"  alt="https://latex.codecogs.com/svg.latex?S" /> 
@@ -402,8 +403,82 @@ is:
 The set {(1, 0, 0), (0, 1, 0), (1, 1, 0)} is **not** a spanning set of 
 <img src="https://latex.codecogs.com/svg.image?\mathbb%20{R}%20^{3}" alt="https://latex.codecogs.com/svg.image?\mathbb {R} ^{3}" />, since its span is the space of all vectors in <img src="https://latex.codecogs.com/svg.image?\mathbb%20{R}%20^{3}" alt="https://latex.codecogs.com/svg.image?\mathbb {R} ^{3}" />  whose last component is zero.
 
+# Subspace
+A vector subspace is a subset of a vector space that satisfies certain properties, such that:
+1. The set includes the zero vector.
 
-## Null Space 
+2. The set is closed under scalar multiplication.
+
+3. The set is closed under addition.
+
+
+In other words, if two vectors are in the subspace, their sum and scalar multiples must also be in the subspace. It is also non-empty and closed under linear combinations.
+
+
+Examples of subspace:
+
+# Basis
+
+In linear algebra, a basis is a set of linearly independent vectors that can be used to span a vector (sub)space.  The dimension of a vector space is the number of vectors in a basis for the space.
+To find the column basis in matrix you have to find the pivot column as they are linearly independent, so first write the matrix in the row echelon form and then pick the pivot columns.
+
+Number of basis for a space is the dimension of that space. The dimension of the column space is the rank of the matrix.
+
+
+## Example of Computing Ranks and Basis
+A common approach to find the rank of a matrix is to reduce it row echelon form, and count the number of non-zero elements in main diagonal.
+
+For example, the matrix A given by
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20A={\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle A={\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}}" />
+
+
+following elementary row operations:
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}{\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}&\xrightarrow%20{2R_{1}+R_{2}\to%20R_{2}}%20{\begin{bmatrix}1&2&1\\0&1&3\\3&5&0\end{bmatrix}}\xrightarrow%20{-3R_{1}+R_{3}\to%20R_{3}}%20{\begin{bmatrix}1&2&1\\0&1&3\\0&-1&-3\end{bmatrix}}\\&\xrightarrow%20{R_{2}+R_{3}\to%20R_{3}}%20\,\,{\begin{bmatrix}1&2&1\\0&1&3\\0&0&0\end{bmatrix}}\xrightarrow%20{-2R_{2}+R_{1}\to%20R_{1}}%20{\begin{bmatrix}1&0&-5\\0&1&3\\0&0&0\end{bmatrix}}~.\end{aligned}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}{\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}&\xrightarrow {2R_{1}+R_{2}\to R_{2}} {\begin{bmatrix}1&2&1\\0&1&3\\3&5&0\end{bmatrix}}\xrightarrow {-3R_{1}+R_{3}\to R_{3}} {\begin{bmatrix}1&2&1\\0&1&3\\0&-1&-3\end{bmatrix}}\\&\xrightarrow {R_{2}+R_{3}\to R_{3}} \,\,{\begin{bmatrix}1&2&1\\0&1&3\\0&0&0\end{bmatrix}}\xrightarrow {-2R_{2}+R_{1}\to R_{1}} {\begin{bmatrix}1&0&-5\\0&1&3\\0&0&0\end{bmatrix}}~.\end{aligned}}}" />
+
+
+There are two non-zero rows in the final matrix and therefore the rank of matrix is 2.
+
+## Conclusion on Computing Rank
+In practice, due to floating point error on computers,  Gaussian elimination (LU decomposition) can be unreliable, therefore rank-revealing decomposition such as RRQR factorization (rank-revealing QR which is QR decomposition with pivoting) should be used. The singular value decomposition (SVD) can be used, but it is not an efficient method to do so.
+
+# Row and Column Spaces
+
+The column space of a matrix <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> is the span (set of all possible linear combinations) of its column vectors.
+
+Let <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> be an m-by-n matrix. Then
+
+- <img src="https://latex.codecogs.com/svg.image?rank(A)%20=%20dim(rowsp(A))%20=%20dim(colsp(A))"  alt="https://latex.codecogs.com/svg.image?rank(A) = dim(rowsp(A)) = dim(colsp(A))" />
+
+- <img src="https://latex.codecogs.com/svg.image?rank(A)"  alt="https://latex.codecogs.com/svg.image?rank(A)" /> = number of pivots in any echelon form of <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" />,
+- <img src="https://latex.codecogs.com/svg.image?rank(A)"  alt="https://latex.codecogs.com/svg.image?rank(A)" /> = the maximum number of linearly independent rows or columns of <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" />
+
+## Example of row spaces
+
+<img src="https://latex.codecogs.com/svg.image?M={\begin{bmatrix}2&4&1&3&2\\-1&-2&1&0&5\\1&6&2&2&2\\3&6&2&5&1\end{bmatrix}}" alt="https://latex.codecogs.com/svg.image?M={\begin{bmatrix}2&4&1&3&2\\-1&-2&1&0&5\\1&6&2&2&2\\3&6&2&5&1\end{bmatrix}}"/>
+
+The rows are:
+
+- <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbf%20{r}%20_{1}={\begin{bmatrix}2&4&1&3&2\end{bmatrix}}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {r} _{1}={\begin{bmatrix}2&4&1&3&2\end{bmatrix}}}" />
+
+- <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbf%20{r}%20_{2}={\begin{bmatrix}-1&-2&1&0&5\end{bmatrix}}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {r} _{2}={\begin{bmatrix}-1&-2&1&0&5\end{bmatrix}}}" />
+
+- <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbf%20{r}%20_{3}={\begin{bmatrix}1&6&2&2&2\end{bmatrix}}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {r} _{3}={\begin{bmatrix}1&6&2&2&2\end{bmatrix}}}" />
+
+- <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbf%20{r}%20_{4}={\begin{bmatrix}3&6&2&5&1\end{bmatrix}}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {r} _{4}={\begin{bmatrix}3&6&2&5&1\end{bmatrix}}}" />
+
+Consequently, the row space of <img src="https://latex.codecogs.com/svg.image?M" alt="https://latex.codecogs.com/svg.image?M" /> is the subspace of 
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbb%20{R}%20^{5}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbb {R} ^{5}} "  /> 
+spanned by <img src="https://latex.codecogs.com/svg.image?{%20r1,%20r2,%20r3,%20r4%20}"  alt="https://latex.codecogs.com/svg.image?{ r1, r2, r3, r4 }" /> . Since these four row vectors are linearly independent, the row space is 4-dimensional.
+
+
+
+
+
+
+# Null Space 
 
 
 If <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> is your matrix, the null-space is simply put, the set of all vectors <img  src="https://latex.codecogs.com/svg.latex?v"  alt="https://latex.codecogs.com/svg.latex?v" /> such that <img  src="https://latex.codecogs.com/svg.latex?A.v=0"  alt="https://latex.codecogs.com/svg.latex?A.v=0" />. It's good to think of the matrix as a linear transformation; if you let <img  src="https://latex.codecogs.com/svg.latex?h(v)=A.v"  alt="https://latex.codecogs.com/svg.latex?h(v)=A.v" />
@@ -437,11 +512,11 @@ Writing  <img  src="https://latex.codecogs.com/svg.latex?h(v)%20=%20A%20\cdot%20
 then the null-space is again the set of all vectors that are sent to the zero vector by ℎ. Think of this as the set of vectors that lose their identity as ℎ is applied to them.
 
 
-### Nullity
+# Nullity
 The dimension of the kernel of A is called the **nullity** of A
 
 
-### Rank-nullity Theorem
+# Rank-nullity Theorem
 
 Let <img  src="https://latex.codecogs.com/svg.latex?T\colon%20V\to%20W"  alt="https://latex.codecogs.com/svg.latex?T\colon V\to W" />  be a linear transformation. Then
 
@@ -626,23 +701,7 @@ First, add the n × n identity matrix is augmented to the right of A such that w
 <img  src="https://latex.codecogs.com/svg.latex?[A%20|%20I]_{n\times%202n}"  alt="https://latex.codecogs.com/svg.latex?[A | I]_{n\times 2n}" /> Now during the elementary row operations, apply the same operations on the identity matrix on the right hand side. At the end teh matrix n the right hand side is the inverse of A.
 
 
-# Computing Ranks and Bases
-A common approach to find the rank of a matrix is to reduce it row echelon form, and count the number of non-zero elements in main diagonal.
 
-For example, the matrix A given by
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20A={\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle A={\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}}" />
-
-
-following elementary row operations:
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}{\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}&\xrightarrow%20{2R_{1}+R_{2}\to%20R_{2}}%20{\begin{bmatrix}1&2&1\\0&1&3\\3&5&0\end{bmatrix}}\xrightarrow%20{-3R_{1}+R_{3}\to%20R_{3}}%20{\begin{bmatrix}1&2&1\\0&1&3\\0&-1&-3\end{bmatrix}}\\&\xrightarrow%20{R_{2}+R_{3}\to%20R_{3}}%20\,\,{\begin{bmatrix}1&2&1\\0&1&3\\0&0&0\end{bmatrix}}\xrightarrow%20{-2R_{2}+R_{1}\to%20R_{1}}%20{\begin{bmatrix}1&0&-5\\0&1&3\\0&0&0\end{bmatrix}}~.\end{aligned}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}{\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}&\xrightarrow {2R_{1}+R_{2}\to R_{2}} {\begin{bmatrix}1&2&1\\0&1&3\\3&5&0\end{bmatrix}}\xrightarrow {-3R_{1}+R_{3}\to R_{3}} {\begin{bmatrix}1&2&1\\0&1&3\\0&-1&-3\end{bmatrix}}\\&\xrightarrow {R_{2}+R_{3}\to R_{3}} \,\,{\begin{bmatrix}1&2&1\\0&1&3\\0&0&0\end{bmatrix}}\xrightarrow {-2R_{2}+R_{1}\to R_{1}} {\begin{bmatrix}1&0&-5\\0&1&3\\0&0&0\end{bmatrix}}~.\end{aligned}}}" />
-
-
-There are two non-zero rows in the final matrix and therefore the rank of matrix is 2.
-
-# Conclusion on Computing Rank
-In practice, due to floating point error on computers,  Gaussian elimination (LU decomposition) can be unreliable, therefore rank-revealing decomposition such as RRQR factorization (rank-revealing QR which is QR decomposition with pivoting) should be used. The singular value decomposition (SVD) can be used, but it is not an efficient method to do so.
 
 
 [<< Previous ](4_Advanced_Eigen_Operations.md)  [Home](README.md)  [ Next >>](6_Sparse_Matrices.md)
