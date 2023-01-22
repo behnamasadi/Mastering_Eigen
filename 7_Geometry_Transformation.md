@@ -317,6 +317,13 @@ To get the roll pitch, yaw:
 
 A very good article to read about [quaternions](https://danceswithcode.net/engineeringnotes/quaternions/quaternions.html)
 
+## Rotating a Vector by a Unit Quaternion
+
+## Quaternion Representing the Rotation From One Vector to Another
+
+
+Refs: [1](https://stackoverflow.com/questions/1171849/finding-quaternion-representing-the-rotation-from-one-vector-to-another)
+
 ## The advantages of Quaternions 
 
 - Avoiding gimbal lock, a problem with systems such as Euler angles.

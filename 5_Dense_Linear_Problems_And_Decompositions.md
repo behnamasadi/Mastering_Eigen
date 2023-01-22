@@ -1,10 +1,21 @@
 - [Chapter 5 Dense Linear Problems And Decompositions](#chapter-5-dense-linear-problems-and-decompositions)
+- [Vector space](#vector-space)
+  * [Examples of Vector Spaces](#examples-of-vector-spaces)
 - [Introduction to Linear Equation](#introduction-to-linear-equation)
   * [Solution set](#solution-set)
   * [Underdetermined System](#underdetermined-system)
   * [Overdetermined System](#overdetermined-system)
   * [Determined](#determined)
   * [Homogeneous vs Non-homogeneous](#homogeneous-vs-non-homogeneous)
+- [Solving Linear Equation](#solving-linear-equation)
+  * [Gaussian Elimination (row reduction)](#gaussian-elimination--row-reduction-)
+  * [Numerical stability in Gaussian Elimination](#numerical-stability-in-gaussian-elimination)
+  * [Example of The Gaussian Elimination Algorithm](#example-of-the-gaussian-elimination-algorithm)
+- [Row echelon form](#row-echelon-form)
+- [Reduced row echelon form](#reduced-row-echelon-form)
+  * [Example](#example)
+  * [Pivot Column](#pivot-column)
+- [Trapezoidal Matrix](#trapezoidal-matrix)
 - [Matrices Decompositions](#matrices-decompositions)
   * [QR Decomposition](#qr-decomposition)
   * [Square Matrix](#square-matrix)
@@ -16,32 +27,38 @@
   * [Cholesky Decomposition](#cholesky-decomposition)
   * [LU/LDU Decomposition](#lu-ldu-decomposition)
   * [SVD Decomposition](#svd-decomposition)
-  * [Eigen Value Eigen Vector](#eigen-value-eigen-vector)
+  * [Eigen Value and Eigen Vector](#eigen-value-and-eigen-vector)
+  * [Calculation of Eigen Value and Eigen Vector](#calculation-of-eigen-value-and-eigen-vector)
+  * [Example of Calculating Eigen Value and Eigen Vector](#example-of-calculating-eigen-value-and-eigen-vector)
 - [Linear Map](#linear-map)
-- [Vector space](#vector-space)
-  * [Examples of Vector Spaces](#examples-of-vector-spaces)
 - [Span](#span)
 - [Subspace](#subspace)
+- [Row Spaces and Column Spaces](#row-spaces-and-column-spaces)
+  * [Example of Row Spaces](#example-of-row-spaces)
 - [Basis](#basis)
-  * [Example of Computing Ranks and Basis](#example-of-computing-ranks-and-basis)
+  * [Example of Computing Basis for Column Space](#example-of-computing-basis-for-column-space)
+  * [Example of Computing Basis for Row Space](#example-of-computing-basis-for-row-space)
+- [Rank of Matrix](#rank-of-matrix)
   * [Conclusion on Computing Rank](#conclusion-on-computing-rank)
-- [Row and Column Spaces](#row-and-column-spaces)
-  * [Example of row spaces](#example-of-row-spaces)
-- [Null Space](#null-space)
+- [Dimension of the Column Space](#dimension-of-the-column-space)
+- [Null Space (Kernel)](#null-space--kernel-)
+  * [Example of Calculating Null Space](#example-of-calculating-null-space)
 - [Nullity](#nullity)
 - [Rank-nullity Theorem](#rank-nullity-theorem)
-- [Solving Linear Equation](#solving-linear-equation)
-  * [Gaussian Elimination (row reduction)](#gaussian-elimination--row-reduction-)
-  * [Numerical stability in Gaussian Elimination](#numerical-stability-in-gaussian-elimination)
-  * [Example of The Gaussian Elimination Algorithm](#example-of-the-gaussian-elimination-algorithm)
-- [Row echelon form](#row-echelon-form)
-- [Reduced row echelon form](#reduced-row-echelon-form)
-  * [Example](#example)
-  * [Pivot Column](#pivot-column)
-- [Trapezoidal Matrix](#trapezoidal-matrix)
-- [Row and column spaces](#row-and-column-spaces)
 - [The Determinant of The Matrix](#the-determinant-of-the-matrix)
 - [Finding The Inverse of The Matrix](#finding-the-inverse-of-the-matrix)
+
+# Vector space
+
+A vector space is a set <img src="https://latex.codecogs.com/svg.image?V" /> vectors together with two binary operations (vector addition and scalar multiplication) that satisfy the eight axioms listed below. In this context, the , and the .
+
+
+## Examples of Vector Spaces
+
+1. Trivial or zero vector space
+The simplest example of a vector space is the trivial one: <img src="https://latex.codecogs.com/svg.image?\{0\}" />, which contains only the zero vector (third axiom in the Vector space)
+
+2. Coordinate space
 
 # Introduction to Linear Equation
 
@@ -110,14 +127,239 @@ Depending on what your matrices looks like, you can choose between various decom
 ## Homogeneous vs Non-homogeneous 
 A system of linear equations is homogeneous if all of the constant terms are zero.
 
+
+### Using the SVD
 <img src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}a_{11}x_{1}+a_{12}x_{2}+\cdots%20+a_{1n}x_{n}&=0\\a_{21}x_{1}+a_{22}x_{2}+\cdots%20+a_{2n}x_{n}&=0\\&\%20\%20\vdots%20\\a_{m1}x_{1}+a_{m2}x_{2}+\cdots%20+a_{mn}x_{n}&=0\end{aligned}}}" alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}a_{11}x_{1}+a_{12}x_{2}+\cdots +a_{1n}x_{n}&=0\\a_{21}x_{1}+a_{22}x_{2}+\cdots +a_{2n}x_{n}&=0\\&\ \ \vdots \\a_{m1}x_{1}+a_{m2}x_{2}+\cdots +a_{mn}x_{n}&=0\end{aligned}}}" /> 
+
+
+# Solving Linear Equation
+
+### Using the SVD
+
+If need to solve the least squares problem,(but are not interested in the SVD), a **faster** alternative method is **CompleteOrthogonalDecomposition**. 
+
+
+```cpp
+#include <iostream>
+#include <Eigen/Dense>
+
+Eigen::MatrixXf A = Eigen::MatrixXf::Random(3, 2);
+std::cout << "Here is the matrix A:\n" << A << std::endl;
+Eigen::VectorXf b = Eigen::VectorXf::Random(3);
+std::cout << "Here is the right hand side b:\n" << b << std::endl;
+std::cout << "The least-squares solution is:\n"
+ << A.bdcSvd(Eigen::ComputeThinU | Eigen::ComputeThinV).solve(b) << std::endl;
+```
+
+
+### Complete Orthogonal Decomposition
+
+
+This class performs a rank-revealing complete orthogonal decomposition of a matrix `A` into matrices `P, Q, T`, and `Z` such that
+
+<img src="https://latex.codecogs.com/svg.image?\mathbf{A}%20\,%20\mathbf{P}%20=%20\mathbf{Q}%20\,%20\begin{bmatrix}%20\mathbf{T}%20&%20\mathbf{0}%20\\%20\mathbf{0}%20&%20\mathbf{0}%20\end{bmatrix}%20\,%20\mathbf{Z}" alt="https://latex.codecogs.com/svg.image?\mathbf{A} \, \mathbf{P} = \mathbf{Q} \, \begin{bmatrix} \mathbf{T} & \mathbf{0} \\ \mathbf{0} & \mathbf{0} \end{bmatrix} \, \mathbf{Z}" />
+
+
+- `P` is a permutation matrix.
+- `Q` and `Z` are unitary matrices and `T` an upper triangular matrix of size rank-by-rank. 
+- `A` may be rank deficient.
+
+
+
+### Using the QR
+The `solve()` method in QR decomposition classes also computes the least squares solution. There are three QR decomposition classes: 
+1. `HouseholderQR` (no pivoting, **fast** but **unstable** if your matrix is not rull rank), 
+2. `ColPivHouseholderQR` (column pivoting, thus a bit **slower** but **more stable**) 
+3. `FullPivHouseholderQR` (full pivoting, so **slowest** and slightly **more stable** than `ColPivHouseholderQR`).
+
+```cpp
+Eigen::MatrixXf A = Eigen::MatrixXf::Random(3, 2);
+Eigen::VectorXf b = Eigen::VectorXf::Random(3);
+cout << "The solution using the QR decomposition is:\n"
+     << A.colPivHouseholderQr().solve(b) << endl;
+```
+
+###  Using Cholesky Decomposition
+
+solution of <img src="https://latex.codecogs.com/svg.image?Ax=b" alt="https://latex.codecogs.com/svg.image?Ax=b" /> is equivalent to solving the normal equation <img src="https://latex.codecogs.com/svg.image?A^TAx=A^Tb" alt="https://latex.codecogs.com/svg.image?A^TAx=A^Tb"  />
+
+This method is usually the fastest, especially when A is **tall and skinny**. However, if the matrix A is even mildly ill-conditioned, this is not a good method, because the condition number of <img src="https://latex.codecogs.com/svg.image?A^TA" alt="https://latex.codecogs.com/svg.image?A^TA" /> is the square of the condition number of A. This means that you lose roughly twice as many digits of accuracy using the normal equation, compared to the more stable methods mentioned above.
+
+<img src="https://latex.codecogs.com/svg.image?A%20=%20P^TLDL^*P"  alt="https://latex.codecogs.com/svg.image?A=P^TLDL^*P" />
+
+```cpp
+Eigen::MatrixXf A = Eigen::MatrixXf::Random(3, 2);
+Eigen::VectorXf b = Eigen::VectorXf::Random(3);
+std::cout << "The solution using normal equations is:\n" << (A.transpose() * A).ldlt().solve(A.transpose() * b) << std::endl;
+```
+
+Refs: [1](https://eigen.tuxfamily.org/dox-devel/group__LeastSquares.html)
+
+## Gaussian Elimination (row reduction)
+Gaussian Elimination (row reduction) can be used to solve the systems of linear equations. 
+It consists of a sequence of elementary row operations to modify the matrix until the lower left-hand corner of the matrix is filled with zeros and turn into row echelon form . 
+
+
+There are three types of elementary row operations:
+
+1. Swapping two rows,
+2. Multiplying a row by a nonzero number,
+3. Adding a multiple of one row to another row.
+
+
+This method can also be used to compute 
+- The rank of a matrix.
+- The determinant of a square matrix.
+- Inverse of an invertible matrix.
+
+
+## Numerical stability in Gaussian Elimination
+In Gaussian elimination it is generally desirable to choose a pivot element with large absolute value. For instance in the following matrix:
+
+<img src="https://latex.codecogs.com/svg.image?\left[{\begin{array}{cc|c}0.00300&59.14&59.17\\5.291&-6.130&46.78\\\end{array}}\right]"
+alt="\left[{\begin{array}{cc|c}0.00300&59.14&59.17\\5.291&-6.130&46.78\\\end{array}}\right]" />
+
+
+The solution is `x1 = 10.00` and `x2 = 1.000`, but when the elimination algorithm   performed with four-digit arithmetic, the small value of <img src="https://latex.codecogs.com/svg.image?a_{11}" />  yields the approximation of `x1 ≈ 9873.3` and `x2 ≈ 4`.
+
+In this case we should interchange the two rows so that <img src="https://latex.codecogs.com/svg.image?a_{21}" /> is in the pivot position 
+
+<img src="https://latex.codecogs.com/svg.image?\left[{\begin{array}{cc|c}5.291&-6.130&46.78\\0.00300&59.14&59.17\\\end{array}}\right]." alt="\left[{\begin{array}{cc|c}5.291&-6.130&46.78\\0.00300&59.14&59.17\\\end{array}}\right]." />
+
+
+## Example of The Gaussian Elimination Algorithm
+
+Suppose the following system of linear equations:
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{alignedat}2x&{}+{}&y&{}-{}&z&{}={}&8&\qquad%20(L_{1})\\-3x&{}-{}&y&{}+{}&2z&{}={}&-11&\qquad%20(L_{2})\\-2x&{}+{}&y&{}+{}&2z&{}={}&-3&\qquad%20(L_{3})\end{alignedat}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{alignedat}2x&{}+{}&y&{}-{}&z&{}={}&8&\qquad (L_{1})\\-3x&{}-{}&y&{}+{}&2z&{}={}&-11&\qquad (L_{2})\\-2x&{}+{}&y&{}+{}&2z&{}={}&-3&\qquad (L_{3})\end{alignedat}}}" />
+
+Augmented matrix:
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{rrr|r}2&1&-1&8\\-3&-1&2&-11\\-2&1&2&-3\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{rrr|r}2&1&-1&8\\-3&-1&2&-11\\-2&1&2&-3\end{array}}\right]}" />
+
+
+<br/>
+<br/>
+
+
+
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}L_{2}+{\tfrac%20{3}{2}}L_{1}&\to%20L_{2}\\L_{3}+L_{1}&\to%20L_{3}\end{aligned}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}L_{2}+{\tfrac {3}{2}}L_{1}&\to L_{2}\\L_{3}+L_{1}&\to L_{3}\end{aligned}}}" />
+
+<br/>
+<br/>
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{rrr|r}2&1&-1&8\\0&{\frac%20{1}{2}}&{\frac%20{1}{2}}&1\\0&2&1&5\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{rrr|r}2&1&-1&8\\0&{\frac {1}{2}}&{\frac {1}{2}}&1\\0&2&1&5\end{array}}\right]}" />
+
+<br/>
+<br/>
+
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20L_{3}+-4L_{2}\to%20L_{3}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle L_{3}+-4L_{2}\to L_{3}}" />
+
+<br/>
+<br/>
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{rrr|r}2&1&-1&8\\0&{\frac%20{1}{2}}&{\frac%20{1}{2}}&1\\0&0&-1&1\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{rrr|r}2&1&-1&8\\0&{\frac {1}{2}}&{\frac {1}{2}}&1\\0&0&-1&1\end{array}}\right]}" />
+
+<br/>
+<br/>
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}L_{2}+{\tfrac%20{1}{2}}L_{3}&\to%20L_{2}\\L_{1}-L_{3}&\to%20L_{1}\end{aligned}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}L_{2}+{\tfrac {1}{2}}L_{3}&\to L_{2}\\L_{1}-L_{3}&\to L_{1}\end{aligned}}}" />
+
+<br/>
+<br/>
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{rrr|r}2&1&0&7\\0&{\frac%20{1}{2}}&0&{\frac%20{3}{2}}\\0&0&-1&1\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{rrr|r}2&1&0&7\\0&{\frac {1}{2}}&0&{\frac {3}{2}}\\0&0&-1&1\end{array}}\right]}" />
+
+<br/>
+<br/>
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}2L_{2}&\to%20L_{2}\\-L_{3}&\to%20L_{3}\end{aligned}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}2L_{2}&\to L_{2}\\-L_{3}&\to L_{3}\end{aligned}}}" />
+
+<br/>
+<br/>
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{rrr|r}2&1&0&7\\0&1&0&3\\0&0&1&-1\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{rrr|r}2&1&0&7\\0&1&0&3\\0&0&1&-1\end{array}}\right]}" />
+
+<br/>
+<br/>
+
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}L_{1}-L_{2}&\to%20L_{1}\\{\tfrac%20{1}{2}}L_{1}&\to%20L_{1}\end{aligned}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}L_{1}-L_{2}&\to L_{1}\\{\tfrac {1}{2}}L_{1}&\to L_{1}\end{aligned}}}" />
+
+
+<br/>
+<br/>
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{rrr|r}1&0&0&2\\0&1&0&3\\0&0&1&-1\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{rrr|r}1&0&0&2\\0&1&0&3\\0&0&1&-1\end{array}}\right]}" />
+<br/>
+<br/>
+
+# Row echelon form
+
+A matrix is in echelon form after a Gaussian elimination process and:
+
+- All rows consisting of only zeroes are at the bottom.
+- The left-most nonzero entry (leading entry also called the **pivot**) of every nonzero row is to the right of the leading entry of every row above. 
+
+
+The following matrix is in row echelon form, but not in reduced row echelon 
+
+<img src="images/row_echelon_form.svg" alt="{\displaystyle \left[{\begin{array}{ccccc}1&a_{0}&a_{1}&a_{2}&a_{3}\\0&0&2&a_{4}&a_{5}\\0&0&0&1&a_{6}\\0&0&0&0&0\end{array}}\right]}"  >
+
+
+
+The matrix: 
+
+<img  src="https://latex.codecogs.com/svg.latex?\begin{bmatrix}1&4&7\\0&2&3\end{bmatrix}"  alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix}1&2&3\\0&4&5\end{bpmatrix}" />
+
+is echelon, but not triangular (because not square). 
+
+The matrix: 
+
+<img  src="https://latex.codecogs.com/svg.latex?\begin{bmatrix}1&4&7\\0&0&2\\0&0&4\end{bmatrix}"  alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix}1&2&3\\0&0&4\\0&0&5\end{bmatrix}" />
+
+is triangular, but not echelon because the leading entry 4 is not to the right of the leading entry 2.
+For non-singular square matrices, "row echelon" and "upper triangular" are equivalent.
+
+# Reduced row echelon form
+A matrix is reduced row echelon form if it is in row echelon form and:
+- The leading entry in each nonzero row is a 1 (called a leading 1).
+- Each column containing a leading 1 has zeros in all its other entries.
+
+
+This matrix is in reduced row echelon form, which shows that the left part of the matrix is not always an identity matrix:
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{ccccc}1&0&a_{1}&0&b_{1}\\0&1&a_{2}&0&b_{2}\\0&0&0&1&b_{3}\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{ccccc}1&0&a_{1}&0&b_{1}\\0&1&a_{2}&0&b_{2}\\0&0&0&1&b_{3}\end{array}}\right]}" />
+
+
+echelon form is not **unique**, but every matrix has a unique **reduced row echelon form**.
+
+
+## Example
+<img  src="images/ref0.svg" alt="\begin{bmatrix}
+1 & 4 & 2 & 3\\ 
+2 & 8 & 2 & 5\\ 
+0 & 0 & 1 & 1
+\end{bmatrix}" />
+
+
+## Pivot Column
+If a matrix is in row-echelon form, then the first nonzero entry of each row is called a pivot, and the columns in which pivots appear are called pivot columns.
+
+
+# Trapezoidal Matrix  
+A non-square  matrix with zeros above (below) the diagonal is called a lower (upper) trapezoidal matrix.
+
+
 
 
 # Matrices Decompositions
 Depending on what your matrices looks like, you can choose between various decompositions, and depending on whether you favor speed or accuracy.
 
 ##  QR Decomposition
-##  Square Matrix
+###  Square Matrix QR Decomposition
 If <img src="https://latex.codecogs.com/svg.latex?A" />  is a real square matrix, then it may be decomposed as:
 
 <img src="https://latex.codecogs.com/svg.latex?A=QR" /> 
@@ -136,7 +378,7 @@ Furthermore, if <img src="https://latex.codecogs.com/svg.latex?A" /> is invertib
 For complex square matrices, <img src="https://latex.codecogs.com/svg.latex?Q" />  is a unitary matrix, meaning 
 <img src="https://latex.codecogs.com/svg.latex?Q^{*}=Q^{-1}" />
 
-## Rectangular Matrix
+### Rectangular Matrix QR Decomposition
 If <img src="https://latex.codecogs.com/svg.latex?A_{m\times%20n}" alt="https://latex.codecogs.com/svg.latex?A_{m\times n}" /> where <img src="https://latex.codecogs.com/svg.latex?%20m%20\geq%20%20n" alt="https://latex.codecogs.com/svg.latex? m \geq  n" /> we can factor it into <img src="https://latex.codecogs.com/svg.latex?m\times%20m" alt="https://latex.codecogs.com/svg.latex?m\times m" /> unitary matrix <img src="https://latex.codecogs.com/svg.latex?Q" /> and  an <img src="https://latex.codecogs.com/svg.latex?m\times%20n" alt="https://latex.codecogs.com/svg.latex?m\times n" /> upper triangular matrix <img src="https://latex.codecogs.com/svg.latex?R" />. Since after <img src="https://latex.codecogs.com/svg.latex?\left%20(m-n%20\right%20)_{th}" alt="https://latex.codecogs.com/svg.latex?\left (m-n \right )_{th}" /> row, in <img src="https://latex.codecogs.com/svg.latex?R" /> all elements are entirely zeroes, we can rewrite our equation in the following form:
 
 <img src="https://latex.codecogs.com/svg.latex?{\displaystyle%20A_{m\times%20n}=Q%20_{m\times%20m}%20%20R_{m\times%20n}%20=Q{\begin{bmatrix}R_{1}\\0\end{bmatrix}}={\begin{bmatrix}Q_{1}&Q_{2}\end{bmatrix}}{\begin{bmatrix}R_{1}\\0\end{bmatrix}}=Q_{1}R_{1},}" alt="https://latex.codecogs.com/svg.latex?{\displaystyle A_{m\times n}=Q _{m\times m}  R_{m\times n} =Q{\begin{bmatrix}R_{1}\\0\end{bmatrix}}={\begin{bmatrix}Q_{1}&Q_{2}\end{bmatrix}}{\begin{bmatrix}R_{1}\\0\end{bmatrix}}=Q_{1}R_{1},}" />
@@ -353,33 +595,72 @@ Cholesky decomposition is a decomposition of a Hermitian, positive-definite matr
 
 ## LU/LDU Decomposition
 ## SVD Decomposition
-## Eigen Value Eigen Vector
+
+## SVD and Null Space
+
+Refs: [1](https://math.stackexchange.com/questions/1771013/how-is-the-null-space-related-to-singular-value-decomposition)
+## Eigen Value and Eigen Vector
+
+
+An eigenvalue and eigenvector are a scalar value and a non-zero vector that, when a linear transformation is applied to it, changes only by a scalar factor. 
+More formally, if <img src="https://latex.codecogs.com/svg.image?T" alt="https://latex.codecogs.com/svg.image?T" /> is a linear transformation and <img src="https://latex.codecogs.com/svg.image?v" alt="https://latex.codecogs.com/svg.image?v" /> is a vector, then
+
+<img src="https://latex.codecogs.com/svg.image?T(v)%20=%20\lambda%20v"  alt="https://latex.codecogs.com/svg.image?T(v)=\lambda v" />
+
+## Calculation of Eigen Value and Eigen Vector
+
+where <img src="https://latex.codecogs.com/svg.image?\lambda" alt="https://latex.codecogs.com/svg.image?\lambda" /> is a scalar (the eigenvalue) and <img src="https://latex.codecogs.com/svg.image?v" alt="https://latex.codecogs.com/svg.image?v" /> is the eigenvector. 
+
+<img src="https://latex.codecogs.com/svg.image?Av=\lambda%20v" alt="https://latex.codecogs.com/svg.image?Av=\lambda v" />
+
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?(A-\lambda%20I)v=0" alt="https://latex.codecogs.com/svg.image?(A-\lambda I)v=0" />
+
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?det(A-\lambda%20I)=0" alt="https://latex.codecogs.com/svg.image?det(A-\lambda I)=0" />
+
+
+## Example of Calculating Eigen Value and Eigen Vector
+
+<img src="https://latex.codecogs.com/svg.image?A=\begin{bmatrix}2%20&%200%20&%200%20\\0%20&%204%20&%205%20\\0%20&%204%20&%203%20\\\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?A=\begin{bmatrix} 2 & 0 & 0 \\ 0 & 4 & 5 \\ 0 & 4 & 3 \\ \end{bmatrix}"  />
+
+<br/>
+<br/>
+<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}2%20&%200%20&%200%20\\0%20&%204%20&%205%20\\0%20&%204%20&%203%20\\\end{bmatrix}-\lambda\begin{bmatrix}1%20&%200%20&%200%20\\0%20&%201%20&%200%20\\0%20&%200%20&%201%20\\\end{bmatrix}%20=\begin{bmatrix}2-\lambda%20&%200%20&%200%20\\0%20&%204-\lambda%20&%205%20\\0%20&%204%20&%203-\lambda%20\\\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix} 2 & 0 & 0 \\ 0 & 4 & 5 \\ 0 & 4 & 3 \\ \end{bmatrix} - \lambda \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ \end{bmatrix} = \begin{bmatrix} 2-\lambda & 0 & 0 \\ 0 & 4-\lambda & 5 \\ 0 & 4 & 3-\lambda \\ \end{bmatrix}"  />
+
+<br/>
+<br/>
+
+
+<img src="https://latex.codecogs.com/svg.image?\begin{vmatrix}2-\lambda%20&%200%20&%200%20\\0%20&%204-\lambda%20&%205%20\\0%20&%204%20&%203-\lambda%20\\\end{vmatrix}%20=0%20\to%20(2-\lambda)[(4-\lambda)(3-\lambda)%20-5\times%204]" alt="https://latex.codecogs.com/svg.image?\begin{vmatrix} 2-\lambda & 0 & 0 \\ 0 & 4-\lambda & 5 \\ 0 & 4 & 3-\lambda \\ \end{vmatrix} =0 \to  (2-\lambda)[(4-\lambda)(3-\lambda) -5\times 4]"  />
+
+<br/>
+<br/>
+
+Eigenvalues are −1, 2 and 8.
+
+<img src="" alt=""  />
+
+<img src="" alt=""  />
+
 
 # Linear Map
 Let  <img  src="https://latex.codecogs.com/svg.latex?V"  alt="https://latex.codecogs.com/svg.latex?V" /> and  <img  src="https://latex.codecogs.com/svg.latex?W"  alt="https://latex.codecogs.com/svg.latex?W" /> be vector spaces over the same field  <img  src="https://latex.codecogs.com/svg.latex?K"  alt="https://latex.codecogs.com/svg.latex?K" />. A function <img  src="https://latex.codecogs.com/svg.latex?f:V\to%20W"  alt="https://latex.codecogs.com/svg.latex?f:V\to W" />  is said to be a linear map if for any two vectors
  <img  src="https://latex.codecogs.com/svg.latex?{\textstyle%20\mathbf%20{u}%20,\mathbf%20{v}%20\in%20V}"  alt="https://latex.codecogs.com/svg.latex?{\textstyle \mathbf {u} ,\mathbf {v} \in V}" />  and any scalar 
   <img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20c\in%20K}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle c\in K}" />  the following two conditions are satisfied:
 
-- 1. Additivity
+1. Additivity
 
 <img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20f(\mathbf%20{u}%20+\mathbf%20{v}%20)=f(\mathbf%20{u}%20)+f(\mathbf%20{v}%20)}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle f(\mathbf {u} +\mathbf {v} )=f(\mathbf {u} )+f(\mathbf {v} )}" />
 
 
-- 2. Operation of scalar multiplication
+2. Operation of scalar multiplication
 
 <img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20f(c\mathbf%20{u}%20)=cf(\mathbf%20{u}%20)}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle f(c\mathbf {u} )=cf(\mathbf {u} )}" />
 
-# Vector space
 
-A vector space is a set <img src="https://latex.codecogs.com/svg.image?V" /> vectors together with two binary operations (vector addition and scalar multiplication) that satisfy the eight axioms listed below. In this context, the , and the .
-
-
-## Examples of Vector Spaces
-
-1. Trivial or zero vector space
-The simplest example of a vector space is the trivial one: <img src="https://latex.codecogs.com/svg.image?\{0\}" />, which contains only the zero vector (third axiom in the Vector space)
-
-2. Coordinate space
 
 
 # Span
@@ -404,6 +685,7 @@ The set {(1, 0, 0), (0, 1, 0), (1, 1, 0)} is **not** a spanning set of
 <img src="https://latex.codecogs.com/svg.image?\mathbb%20{R}%20^{3}" alt="https://latex.codecogs.com/svg.image?\mathbb {R} ^{3}" />, since its span is the space of all vectors in <img src="https://latex.codecogs.com/svg.image?\mathbb%20{R}%20^{3}" alt="https://latex.codecogs.com/svg.image?\mathbb {R} ^{3}" />  whose last component is zero.
 
 # Subspace
+
 A vector subspace is a subset of a vector space that satisfies certain properties, such that:
 1. The set includes the zero vector.
 
@@ -417,44 +699,17 @@ In other words, if two vectors are in the subspace, their sum and scalar multipl
 
 Examples of subspace:
 
-# Basis
-
-In linear algebra, a basis is a set of linearly independent vectors that can be used to span a vector (sub)space.  The dimension of a vector space is the number of vectors in a basis for the space.
-To find the column basis in matrix you have to find the pivot column as they are linearly independent, so first write the matrix in the row echelon form and then pick the pivot columns.
-
-Number of basis for a space is the dimension of that space. The dimension of the column space is the rank of the matrix.
 
 
-## Example of Computing Ranks and Basis
-A common approach to find the rank of a matrix is to reduce it row echelon form, and count the number of non-zero elements in main diagonal.
-
-For example, the matrix A given by
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20A={\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle A={\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}}" />
-
-
-following elementary row operations:
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}{\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}&\xrightarrow%20{2R_{1}+R_{2}\to%20R_{2}}%20{\begin{bmatrix}1&2&1\\0&1&3\\3&5&0\end{bmatrix}}\xrightarrow%20{-3R_{1}+R_{3}\to%20R_{3}}%20{\begin{bmatrix}1&2&1\\0&1&3\\0&-1&-3\end{bmatrix}}\\&\xrightarrow%20{R_{2}+R_{3}\to%20R_{3}}%20\,\,{\begin{bmatrix}1&2&1\\0&1&3\\0&0&0\end{bmatrix}}\xrightarrow%20{-2R_{2}+R_{1}\to%20R_{1}}%20{\begin{bmatrix}1&0&-5\\0&1&3\\0&0&0\end{bmatrix}}~.\end{aligned}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}{\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}&\xrightarrow {2R_{1}+R_{2}\to R_{2}} {\begin{bmatrix}1&2&1\\0&1&3\\3&5&0\end{bmatrix}}\xrightarrow {-3R_{1}+R_{3}\to R_{3}} {\begin{bmatrix}1&2&1\\0&1&3\\0&-1&-3\end{bmatrix}}\\&\xrightarrow {R_{2}+R_{3}\to R_{3}} \,\,{\begin{bmatrix}1&2&1\\0&1&3\\0&0&0\end{bmatrix}}\xrightarrow {-2R_{2}+R_{1}\to R_{1}} {\begin{bmatrix}1&0&-5\\0&1&3\\0&0&0\end{bmatrix}}~.\end{aligned}}}" />
-
-
-There are two non-zero rows in the final matrix and therefore the rank of matrix is 2.
-
-## Conclusion on Computing Rank
-In practice, due to floating point error on computers,  Gaussian elimination (LU decomposition) can be unreliable, therefore rank-revealing decomposition such as RRQR factorization (rank-revealing QR which is QR decomposition with pivoting) should be used. The singular value decomposition (SVD) can be used, but it is not an efficient method to do so.
-
-# Row and Column Spaces
+# Row Spaces and Column Spaces
 
 The column space of a matrix <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> is the span (set of all possible linear combinations) of its column vectors.
 
-Let <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> be an m-by-n matrix. Then
+# Range of a Matrix
 
-- <img src="https://latex.codecogs.com/svg.image?rank(A)%20=%20dim(rowsp(A))%20=%20dim(colsp(A))"  alt="https://latex.codecogs.com/svg.image?rank(A) = dim(rowsp(A)) = dim(colsp(A))" />
+Refs: [1](https://math.stackexchange.com/questions/2037602/what-is-range-of-a-matrix)
 
-- <img src="https://latex.codecogs.com/svg.image?rank(A)"  alt="https://latex.codecogs.com/svg.image?rank(A)" /> = number of pivots in any echelon form of <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" />,
-- <img src="https://latex.codecogs.com/svg.image?rank(A)"  alt="https://latex.codecogs.com/svg.image?rank(A)" /> = the maximum number of linearly independent rows or columns of <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" />
-
-## Example of row spaces
+## Example of Row Spaces
 
 <img src="https://latex.codecogs.com/svg.image?M={\begin{bmatrix}2&4&1&3&2\\-1&-2&1&0&5\\1&6&2&2&2\\3&6&2&5&1\end{bmatrix}}" alt="https://latex.codecogs.com/svg.image?M={\begin{bmatrix}2&4&1&3&2\\-1&-2&1&0&5\\1&6&2&2&2\\3&6&2&5&1\end{bmatrix}}"/>
 
@@ -471,28 +726,152 @@ The rows are:
 Consequently, the row space of <img src="https://latex.codecogs.com/svg.image?M" alt="https://latex.codecogs.com/svg.image?M" /> is the subspace of 
 
 <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbb%20{R}%20^{5}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbb {R} ^{5}} "  /> 
-spanned by <img src="https://latex.codecogs.com/svg.image?{%20r1,%20r2,%20r3,%20r4%20}"  alt="https://latex.codecogs.com/svg.image?{ r1, r2, r3, r4 }" /> . Since these four row vectors are linearly independent, the row space is 4-dimensional.
+spanned by <img src="https://latex.codecogs.com/svg.image?{%20r1,%20r2,%20r3,%20r4%20}"  alt="https://latex.codecogs.com/svg.image?{ r1, r2, r3, r4 }" /> . Since these four row vectors are linearly independent, the row space is 4-dimensional.  
 
 
 
+# Basis
+
+
+In linear algebra, a basis is a set of linearly independent vectors that can be used to span a vector (sub)space.  The dimension of a vector space is the number of vectors in a basis for the space.
+To find the column basis in matrix you have to find the pivot column as they are linearly independent, so first write the matrix in the row echelon form and then pick the pivot columns.
+
+Number of basis for a space is the dimension of that space. The dimension of the column space is the rank of the matrix.
+
+## Example of Computing Basis for Column Space
+
+We write the matrix in the row echelon form, and then pick the pivot columns. For example, the matrix A given by
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20A={\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle A={\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}}" />
+
+
+following elementary row operations:
+
+<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}{\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}&\xrightarrow%20{2R_{1}+R_{2}\to%20R_{2}}%20{\begin{bmatrix}1&2&1\\0&1&3\\3&5&0\end{bmatrix}}\xrightarrow%20{-3R_{1}+R_{3}\to%20R_{3}}%20{\begin{bmatrix}1&2&1\\0&1&3\\0&-1&-3\end{bmatrix}}\\&\xrightarrow%20{R_{2}+R_{3}\to%20R_{3}}%20\,\,{\begin{bmatrix}1&2&1\\0&1&3\\0&0&0\end{bmatrix}}\xrightarrow%20{-2R_{2}+R_{1}\to%20R_{1}}%20{\begin{bmatrix}1&0&-5\\0&1&3\\0&0&0\end{bmatrix}}~.\end{aligned}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}{\begin{bmatrix}1&2&1\\-2&-3&1\\3&5&0\end{bmatrix}}&\xrightarrow {2R_{1}+R_{2}\to R_{2}} {\begin{bmatrix}1&2&1\\0&1&3\\3&5&0\end{bmatrix}}\xrightarrow {-3R_{1}+R_{3}\to R_{3}} {\begin{bmatrix}1&2&1\\0&1&3\\0&-1&-3\end{bmatrix}}\\&\xrightarrow {R_{2}+R_{3}\to R_{3}} \,\,{\begin{bmatrix}1&2&1\\0&1&3\\0&0&0\end{bmatrix}}\xrightarrow {-2R_{2}+R_{1}\to R_{1}} {\begin{bmatrix}1&0&-5\\0&1&3\\0&0&0\end{bmatrix}}~.\end{aligned}}}" />
+
+
+There are two non-zero rows in the final matrix and therefore the rank of matrix is 2 and column 1 and 2 are basis for the column space:
 
 
 
-# Null Space 
+<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}1%20\\%20-2\\3\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix}1 \\-2\\3\end{bmatrix}" /> , <img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}2%20\\%20-3\\5\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix}2 \\-3\\5\end{bmatrix}" />
 
 
-If <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> is your matrix, the null-space is simply put, the set of all vectors <img  src="https://latex.codecogs.com/svg.latex?v"  alt="https://latex.codecogs.com/svg.latex?v" /> such that <img  src="https://latex.codecogs.com/svg.latex?A.v=0"  alt="https://latex.codecogs.com/svg.latex?A.v=0" />. It's good to think of the matrix as a linear transformation; if you let <img  src="https://latex.codecogs.com/svg.latex?h(v)=A.v"  alt="https://latex.codecogs.com/svg.latex?h(v)=A.v" />
+
+## Example of Computing Basis for Row Space
+Let say we have the following matrix:
+
+<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}-2%20&&%202%20%20&&%20%206%20&&%20%200\\0%20&&%206%20&&%207%20&&%205\\1%20&&%205%20&&%204%20&&%205\\\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix} -2 && 2  &&  6 &&  0\\ 0 && 6 && 7 && 5\\ 1 && 5 && 4 && 5\\ \end{bmatrix}" />
+
+By writing it into row echelon form:
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle%20{\begin{aligned}{\begin{bmatrix}-2&2&6&0\\0&6&7&5%20%20\\1&5&4&5\end{aligned}}&\xrightarrow%20{1/2R_{1}%20+R_{3}%20\to%20R_{3}}%20{\begin{bmatrix}-2&2&6&0\\0&6&7&5%20%20\\0&6&7&5\end{aligned}}\xrightarrow%20{-R_{2}+R_{3}\to%20R_{3}}%20{\begin{bmatrix}-2&2&6&0\\0&6&7&5%20%20\\0&0&0&0\end{bmatrix}}\end{aligned}}}"  alt="{\displaystyle {\begin{aligned}{\begin{bmatrix}-2&2&6&0\\0&6&7&5  \\1&5&4&5\end{aligned}}&\xrightarrow {1/2R_{1} +R_{3} \to R_{3}} {\begin{bmatrix}-2&2&6&0\\0&6&7&5  \\0&6&7&5\end{aligned}}\xrightarrow {-R_{2}+R_{3}\to R_{3}} {\begin{bmatrix}-2&2&6&0\\0&6&7&5  \\0&0&0&0\end{bmatrix}}\end{aligned}}}"  />
+
+Now we pick the non-zero rows, so the basis for row space of our matrix is:
+
+
+<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}-2%20\\%202\\4%20\\0\end{bmatrix},\begin{bmatrix}0%20\\6%20\\7%20\\5\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix} -2 \\  2\\ 4 \\ 0\end{bmatrix},\begin{bmatrix} 0 \\ 6 \\ 7 \\ 5 \end{bmatrix} ">
+
+
+# Rank of Matrix
+
+Let <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> be an m-by-n matrix. Then
+
+- <img src="https://latex.codecogs.com/svg.image?rank(A)"  alt="https://latex.codecogs.com/svg.image?rank(A)" /> = number of pivots in any echelon form of <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" />
+
+- <img src="https://latex.codecogs.com/svg.image?rank(A)"  alt="https://latex.codecogs.com/svg.image?rank(A)" /> = the maximum number of linearly independent **rows** or **columns** of <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" />
+
+- <img src="https://latex.codecogs.com/svg.image?rank(A)%20=%20dim(rowsp(A))%20=%20dim(colsp(A))"  alt="https://latex.codecogs.com/svg.image?rank(A) = dim(rowsp(A)) = dim(colsp(A))" />
+
+## Conclusion on Computing Rank
+In practice, due to floating point error on computers,  Gaussian elimination (LU decomposition) can be unreliable, therefore rank-revealing decomposition such as RRQR factorization (rank-revealing QR which is QR decomposition with pivoting) should be used. The singular value decomposition (SVD) can be used, but it is not an efficient method to do so.
+
+
+
+# Dimension of the Column Space
+
+The dimension of the column space or row space is called the rank of the matrix, and is the maximum number of linearly independent columns
+
+
+# Null Space (Kernel)
+
+
+If <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> is a matrix, the null-space (The kernel of <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> ) is, the set of all vectors <img  src="https://latex.codecogs.com/svg.latex?v"  alt="https://latex.codecogs.com/svg.latex?v" /> such that <img  src="https://latex.codecogs.com/svg.latex?A.v=0"  alt="https://latex.codecogs.com/svg.latex?A.v=0" />. It's good to think of the matrix as a linear transformation; if you let <img  src="https://latex.codecogs.com/svg.latex?h(v)=A.v"  alt="https://latex.codecogs.com/svg.latex?h(v)=A.v" />
 , then the null-space is again the set of all vectors that are sent to the zero vector by <img  src="https://latex.codecogs.com/svg.latex?h"  alt="https://latex.codecogs.com/svg.latex?h" />. Think of this as the set of vectors that lose their identity as h is applied to them.
 Note that the null-space is equivalently the set of solutions to the homogeneous equation <img  src="https://latex.codecogs.com/svg.latex?A.v=0"  alt="https://latex.codecogs.com/svg.latex?A.v=0" />
 
 
-The kernel (null space or nullspace) of a linear map, is the linear subspace of the domain of the map which is mapped to the zero vector. Lets assume <img  src="https://latex.codecogs.com/svg.latex?L"  alt="https://latex.codecogs.com/svg.latex?L" /> is a linear map between two vector spaces <img  src="https://latex.codecogs.com/svg.latex?V"  alt="https://latex.codecogs.com/svg.latex?V" />  and  <img  src="https://latex.codecogs.com/svg.latex?W"  alt="https://latex.codecogs.com/svg.latex?W" /> 
+Writing  <img  src="https://latex.codecogs.com/svg.latex?h(v)%20=%20A%20\cdot%20v"  alt="https://latex.codecogs.com/svg.latex?h(v) = A \cdot v" /> , then the null-space is the set of all vectors that are sent to the zero (lose their identity) as <img  src="https://latex.codecogs.com/svg.latex?h"  alt="https://latex.codecogs.com/svg.latex?h" /> is applied to them.
+
+## Example of Calculating Null Space
+Lets say we have the following matrix:
+
+<img src="https://latex.codecogs.com/svg.image?A=\begin{bmatrix}1%20&%201%20&%202%20&%201%20\\3%20&%201%20&%20%204&%20%204\\4%20&%20-4%20&%200%20&%20%208\\\end{bmatrix}%20\in%20\mathbb{R}^4" alt="https://latex.codecogs.com/svg.image?A=\begin{bmatrix} 1 & 1 & 2 & 1 \\3 & 1 &  4&  4\\ 4 & -4 & 0 &  8\\ \end{bmatrix} \in \mathbb{R}^4">
+
+
+
+
+<img src="https://latex.codecogs.com/svg.image?Ker(A)=\left\{%20x\in%20\mathbb{R}^4%20|%20Ax=0%20\right\}"  alt="https://latex.codecogs.com/svg.image?Ker(A)=\left\{ x\in \mathbb{R}^4 | Ax=0 \right\}" />
+
+By performing row operations we will get the row echelon form:
+
+<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}%201%20&%201%20&%202%20&%201%20\\0%20&%20-2%20&%20%20-2&%20%201\\%200%20&%200%20&%200%20&%20%200\\%20\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix} 1 & 1 & 2 & 1 \\0 & -2 &  -2&  1\\ 0 & 0 & 0 &  0\\ \end{bmatrix}" />
+
+<br/>
 <br/>
 
+<img src="https://latex.codecogs.com/svg.image?\begin{cases}-2x_2%20-2x_3+x_4=0\\x_2=-\alpha+%20\frac{1}{2}\beta\end{cases}" alt="https://latex.codecogs.com/svg.image?\begin{cases} -2x_2 -2x_3+x_4=0\\ x_2=-\alpha+ \frac{1}{2}\beta \end{cases}" />
 
- <img  src="https://latex.codecogs.com/svg.latex?L%20:%20V%20\to%20W"  alt="https://latex.codecogs.com/svg.latex?L : V \to W" /> 
-<br/> 
- 
+
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?\begin{cases}x_1%20-\alpha%20+\frac{1}{2}\beta%20+2\alpha%20+\beta=0%20\\x_1=-\alpha%20-%20\frac{3}{2}\beta%20\\x_2=-\alpha%20+%20\frac{1}{2}\beta\end{cases}" alt="https://latex.codecogs.com/svg.image?\begin{cases}x_1 -\alpha +\frac{1}{2}\beta +2\alpha +\beta=0 \\x_1=-\alpha - \frac{3}{2}\beta \\x_2=-\alpha + \frac{1}{2}\beta\end{cases}" />
+
+
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?\begin{pmatrix}-\alpha%20-%20\frac{3}{2}\beta%20%20\\-\alpha%20+%20\frac{1}{2}\beta%20%20\\\alpha%20\\\beta%20\\\end{pmatrix}=\alpha\begin{pmatrix}-1%20%20\\-1%20%20\\1%20\\0%20\\\end{pmatrix}+\beta\begin{pmatrix}-\frac{3}{2}%20%20\\\frac{1}{2}\\0%20\\1%20\\\end{pmatrix}\alpha,%20\beta%20\in%20\mathbb{R}" alt="https://latex.codecogs.com/svg.image?\begin{pmatrix} -\alpha - \frac{3}{2}\beta  \\ -\alpha + \frac{1}{2}\beta  \\ \alpha \\ \beta \\ \end{pmatrix}=\alpha\begin{pmatrix} -1  \\-1  \\1 \\0 \\\end{pmatrix}+\beta\begin{pmatrix}-\frac{3}{2}  \\\frac{1}{2}\\0 \\1 \\\end{pmatrix}\alpha, \beta \in \mathbb{R}" />
+
+These two column are basis of our kernel.
+
+With Eigen, you can get a basis of the null space using `Eigen::FullPivLU::kernel()` method:
+
+```cpp
+Eigen::MatrixXd A(3,4);
+A<<1 ,1 ,2, 1 ,
+    3,1,4,4,
+    4,-4,0,8;
+
+
+Eigen::FullPivLU<Eigen::MatrixXd> lu(A);
+Eigen::MatrixXd A_null_space = lu.kernel();
+```
+Since `FullPivLU` is [expensive](http://eigen.tuxfamily.org/dox/group__DenseDecompositionBenchmark.html), a better alternate is 
+to use `CompleteOrthogonalDecomposition.`
+
+```cpp
+CompleteOrthogonalDecomposition<Matrix<double, Dynamic, Dynamic> > cod;
+cod.compute(A);
+std::cout << "rank : " << cod.rank() << "\n";
+// Find URV^T
+MatrixXd V = cod.matrixZ().transpose();
+MatrixXd Null_space = V.block(0, cod.rank(),V.rows(), V.cols() - cod.rank());
+MatrixXd P = cod.colsPermutation();
+Null_space = P * Null_space; // Unpermute the columns
+// The Null space:
+std::cout << "The null space: \n" << Null_space << "\n" ;
+// Check that it is the null-space:
+std::cout << "A * Null_space = \n" << A * Null_space  << '\n';
+```
+
+
+# Nullity
+The dimension of the kernel of A is called the **nullity** of A
+
+
+
 The kernel of L is the vector space of all elements v of V such that 
 <img  src="https://latex.codecogs.com/svg.latex?L(v)%20=%200"  alt="https://latex.codecogs.com/svg.latex?L(v) = 0" /> , where 0 denotes the zero vector in W.
 
@@ -505,16 +884,7 @@ We can represent the linear map as matrix multiplication <img  src="https://late
 This means to find the kernel of A is we need to solve the above homogeneous equations.
 
 
-Writing  <img  src="https://latex.codecogs.com/svg.latex?h(v)%20=%20A%20\cdot%20v"  alt="https://latex.codecogs.com/svg.latex?h(v) = A \cdot v" /> , then the null-space is the set of all vectors that are sent to the zero (lose their identity) as <img  src="https://latex.codecogs.com/svg.latex?h"  alt="https://latex.codecogs.com/svg.latex?h" /> is applied to them.
-
-
-
-then the null-space is again the set of all vectors that are sent to the zero vector by ℎ. Think of this as the set of vectors that lose their identity as ℎ is applied to them.
-
-
-# Nullity
-The dimension of the kernel of A is called the **nullity** of A
-
+Refs: [1](https://math.unm.edu/~loring/links/linear_s06/nullity.pdf)
 
 # Rank-nullity Theorem
 
@@ -525,169 +895,6 @@ Nullity is the complement to the rank of a matrix.
 
 
 
-# Solving Linear Equation
-
-## Gaussian Elimination (row reduction)
-Gaussian Elimination (row reduction) can be used to solve the systems of linear equations. 
-It consists of a sequence of elementary row operations to modify the matrix until the lower left-hand corner of the matrix is filled with zeros and turn into row echelon form . 
-
-
-There are three types of elementary row operations:
-
-1. Swapping two rows,
-2. Multiplying a row by a nonzero number,
-3. Adding a multiple of one row to another row.
-
-
-This method can also be used to compute 
-- The rank of a matrix.
-- The determinant of a square matrix.
-- Inverse of an invertible matrix.
-
-
-## Numerical stability in Gaussian Elimination
-In Gaussian elimination it is generally desirable to choose a pivot element with large absolute value. For instance in the following matrix:
-
-<img src="https://latex.codecogs.com/svg.image?\left[{\begin{array}{cc|c}0.00300&59.14&59.17\\5.291&-6.130&46.78\\\end{array}}\right]"
-alt="\left[{\begin{array}{cc|c}0.00300&59.14&59.17\\5.291&-6.130&46.78\\\end{array}}\right]" />
-
-
-The solution is `x1 = 10.00` and `x2 = 1.000`, but when the elimination algorithm   performed with four-digit arithmetic, the small value of <img src="https://latex.codecogs.com/svg.image?a_{11}" />  yields the approximation of `x1 ≈ 9873.3` and `x2 ≈ 4`.
-
-In this case we should interchange the two rows so that <img src="https://latex.codecogs.com/svg.image?a_{21}" /> is in the pivot position 
-
-<img src="https://latex.codecogs.com/svg.image?\left[{\begin{array}{cc|c}5.291&-6.130&46.78\\0.00300&59.14&59.17\\\end{array}}\right]." alt="\left[{\begin{array}{cc|c}5.291&-6.130&46.78\\0.00300&59.14&59.17\\\end{array}}\right]." />
-
-
-## Example of The Gaussian Elimination Algorithm
-
-Suppose the following system of linear equations:
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{alignedat}2x&{}+{}&y&{}-{}&z&{}={}&8&\qquad%20(L_{1})\\-3x&{}-{}&y&{}+{}&2z&{}={}&-11&\qquad%20(L_{2})\\-2x&{}+{}&y&{}+{}&2z&{}={}&-3&\qquad%20(L_{3})\end{alignedat}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{alignedat}2x&{}+{}&y&{}-{}&z&{}={}&8&\qquad (L_{1})\\-3x&{}-{}&y&{}+{}&2z&{}={}&-11&\qquad (L_{2})\\-2x&{}+{}&y&{}+{}&2z&{}={}&-3&\qquad (L_{3})\end{alignedat}}}" />
-
-Augmented matrix:
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{rrr|r}2&1&-1&8\\-3&-1&2&-11\\-2&1&2&-3\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{rrr|r}2&1&-1&8\\-3&-1&2&-11\\-2&1&2&-3\end{array}}\right]}" />
-
-
-<br/>
-<br/>
-
-
-
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}L_{2}+{\tfrac%20{3}{2}}L_{1}&\to%20L_{2}\\L_{3}+L_{1}&\to%20L_{3}\end{aligned}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}L_{2}+{\tfrac {3}{2}}L_{1}&\to L_{2}\\L_{3}+L_{1}&\to L_{3}\end{aligned}}}" />
-
-<br/>
-<br/>
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{rrr|r}2&1&-1&8\\0&{\frac%20{1}{2}}&{\frac%20{1}{2}}&1\\0&2&1&5\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{rrr|r}2&1&-1&8\\0&{\frac {1}{2}}&{\frac {1}{2}}&1\\0&2&1&5\end{array}}\right]}" />
-
-<br/>
-<br/>
-
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20L_{3}+-4L_{2}\to%20L_{3}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle L_{3}+-4L_{2}\to L_{3}}" />
-
-<br/>
-<br/>
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{rrr|r}2&1&-1&8\\0&{\frac%20{1}{2}}&{\frac%20{1}{2}}&1\\0&0&-1&1\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{rrr|r}2&1&-1&8\\0&{\frac {1}{2}}&{\frac {1}{2}}&1\\0&0&-1&1\end{array}}\right]}" />
-
-<br/>
-<br/>
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}L_{2}+{\tfrac%20{1}{2}}L_{3}&\to%20L_{2}\\L_{1}-L_{3}&\to%20L_{1}\end{aligned}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}L_{2}+{\tfrac {1}{2}}L_{3}&\to L_{2}\\L_{1}-L_{3}&\to L_{1}\end{aligned}}}" />
-
-<br/>
-<br/>
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{rrr|r}2&1&0&7\\0&{\frac%20{1}{2}}&0&{\frac%20{3}{2}}\\0&0&-1&1\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{rrr|r}2&1&0&7\\0&{\frac {1}{2}}&0&{\frac {3}{2}}\\0&0&-1&1\end{array}}\right]}" />
-
-<br/>
-<br/>
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}2L_{2}&\to%20L_{2}\\-L_{3}&\to%20L_{3}\end{aligned}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}2L_{2}&\to L_{2}\\-L_{3}&\to L_{3}\end{aligned}}}" />
-
-<br/>
-<br/>
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{rrr|r}2&1&0&7\\0&1&0&3\\0&0&1&-1\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{rrr|r}2&1&0&7\\0&1&0&3\\0&0&1&-1\end{array}}\right]}" />
-
-<br/>
-<br/>
-
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}L_{1}-L_{2}&\to%20L_{1}\\{\tfrac%20{1}{2}}L_{1}&\to%20L_{1}\end{aligned}}}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}L_{1}-L_{2}&\to L_{1}\\{\tfrac {1}{2}}L_{1}&\to L_{1}\end{aligned}}}" />
-
-
-<br/>
-<br/>
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{rrr|r}1&0&0&2\\0&1&0&3\\0&0&1&-1\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{rrr|r}1&0&0&2\\0&1&0&3\\0&0&1&-1\end{array}}\right]}" />
-<br/>
-<br/>
-
-# Row echelon form
-
-A matrix is in echelon form after a Gaussian elimination process and:
-
-- All rows consisting of only zeroes are at the bottom.
-- The left-most nonzero entry (leading entry also called the **pivot**) of every nonzero row is to the right of the leading entry of every row above. 
-
-
-The following matrix is in row echelon form, but not in reduced row echelon 
-
-<img src="images/row_echelon_form.svg" alt="{\displaystyle \left[{\begin{array}{ccccc}1&a_{0}&a_{1}&a_{2}&a_{3}\\0&0&2&a_{4}&a_{5}\\0&0&0&1&a_{6}\\0&0&0&0&0\end{array}}\right]}"  >
-
-
-
-The matrix: 
-
-<img  src="https://latex.codecogs.com/svg.latex?\begin{bmatrix}1&4&7\\0&2&3\end{bmatrix}"  alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix}1&2&3\\0&4&5\end{bpmatrix}" />
-
-is echelon, but not triangular (because not square). 
-
-The matrix: 
-
-<img  src="https://latex.codecogs.com/svg.latex?\begin{bmatrix}1&4&7\\0&0&2\\0&0&4\end{bmatrix}"  alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix}1&2&3\\0&0&4\\0&0&5\end{bmatrix}" />
-
-is triangular, but not echelon because the leading entry 4 is not to the right of the leading entry 2.
-For non-singular square matrices, "row echelon" and "upper triangular" are equivalent.
-
-# Reduced row echelon form
-A matrix is reduced row echelon form if it is in row echelon form and:
-- The leading entry in each nonzero row is a 1 (called a leading 1).
-- Each column containing a leading 1 has zeros in all its other entries.
-
-
-This matrix is in reduced row echelon form, which shows that the left part of the matrix is not always an identity matrix:
-
-<img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\left[{\begin{array}{ccccc}1&0&a_{1}&0&b_{1}\\0&1&a_{2}&0&b_{2}\\0&0&0&1&b_{3}\end{array}}\right]}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \left[{\begin{array}{ccccc}1&0&a_{1}&0&b_{1}\\0&1&a_{2}&0&b_{2}\\0&0&0&1&b_{3}\end{array}}\right]}" />
-
-
-echelon form is not **unique**, but every matrix has a unique **reduced row echelon form**.
-
-
-## Example
-<img  src="images/ref0.svg" alt="\begin{bmatrix}
-1 & 4 & 2 & 3\\ 
-2 & 8 & 2 & 5\\ 
-0 & 0 & 1 & 1
-\end{bmatrix}" />
-
-
-## Pivot Column
-If a matrix is in row-echelon form, then the first nonzero entry of each row is called a pivot, and the columns in which pivots appear are called pivot columns.
-
-
-# Trapezoidal Matrix  
-A non-square  matrix with zeros above (below) the diagonal is called a lower (upper) trapezoidal matrix.
-
-
-
-
-# Row and column spaces
 
 
 # The Determinant of The Matrix
@@ -701,7 +908,18 @@ First, add the n × n identity matrix is augmented to the right of A such that w
 <img  src="https://latex.codecogs.com/svg.latex?[A%20|%20I]_{n\times%202n}"  alt="https://latex.codecogs.com/svg.latex?[A | I]_{n\times 2n}" /> Now during the elementary row operations, apply the same operations on the identity matrix on the right hand side. At the end teh matrix n the right hand side is the inverse of A.
 
 
+# The Fundamental Theorem of Linear Algebra
 
+
+
+# Permutation Matrix
+
+A permutation matrix is a square binary matrix that has exactly one entry of `1` in each row and each column and `0`s elsewhere.
+
+<img src="https://latex.codecogs.com/svg.image?{\begin{bmatrix}1&0&0&0&0\\0&0&0&1&0\\0&1&0&0&0\\0&0&0&0&1\\0&0&1&0&0\end{bmatrix}}." 
+alt="{\begin{bmatrix}1&0&0&0&0\\0&0&0&1&0\\0&1&0&0&0\\0&0&0&0&1\\0&0&1&0&0\end{bmatrix}}" />
+
+# Augmented Matrix
 
 
 [<< Previous ](4_Advanced_Eigen_Operations.md)  [Home](README.md)  [ Next >>](6_Sparse_Matrices.md)

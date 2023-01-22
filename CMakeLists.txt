@@ -34,9 +34,6 @@ IF(${orocos_kdl_FOUND})
     include_directories(${orocos_kdl_INCLUDE_DIRS})
 ENDIF()
 
-#add_executable(main src/main.cpp)
-#target_link_libraries (main)
-
 add_executable (main src/main.cpp)
 target_link_libraries (main Eigen3::Eigen)
 
@@ -81,17 +78,17 @@ target_link_libraries (gram_schmidt_orthogonalization)
 add_executable(check_matrixsimilarity src/check_matrixsimilarity.cpp)
 target_link_libraries (check_matrixsimilarity)
 
-add_executable(quaternion src/geometry_transformation/quaternion.cpp)
+add_executable(quaternion src/quaternion.cpp)
 target_link_libraries (quaternion)
 
-add_executable(rotation_matrices src/geometry_transformation/rotation_matrices.cpp)
+add_executable(rotation_matrices src/rotation_matrices.cpp)
 target_link_libraries (rotation_matrices   ${orocos_kdl_LIBRARIES})
 target_compile_definitions(rotation_matrices PRIVATE KDL_FOUND=${orocos_kdl_FOUND})
 
-add_executable(angle_axis_rodrigues src/geometry_transformation/angle_axis_rodrigues.cpp)
+add_executable(angle_axis_rodrigues src/angle_axis_rodrigues.cpp)
 target_link_libraries (angle_axis_rodrigues)
 
-add_executable(euler_angle.cpp src/geometry_transformation/euler_angle.cpp)
+add_executable(euler_angle.cpp src/euler_angle.cpp)
 target_link_libraries (euler_angle.cpp)
 
 add_executable(eigen_value_eigen_vector src/eigen_value_eigen_vector.cpp)
@@ -105,10 +102,6 @@ target_link_libraries (singular_value_decomposition)
 
 add_executable(sparse_matrices src/sparse_matrices.cpp)
 target_link_libraries (sparse_matrices)
-
-
-add_executable(3_link_planner_robot src/3_link_planner_robot.cpp)
-target_link_libraries (3_link_planner_robot)
 
 add_executable(null_space_kernel_rank src/null_space_kernel_rank.cpp)
 target_link_libraries (null_space_kernel_rank)

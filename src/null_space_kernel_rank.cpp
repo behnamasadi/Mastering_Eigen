@@ -3,6 +3,7 @@ https://stackoverflow.com/questions/34662940/how-to-compute-basis-of-nullspace-w
 */
 #include <Eigen/Dense>
 #include <iostream>
+using namespace Eigen;
 
 void fullPivLU()
 {
@@ -37,29 +38,42 @@ void fullPivLU()
 
 }
 
-void completeOrthogonalDecompositionNullSpace()
+void computeBasisOfNullSpace()
 {
-    Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> mat37(3,7);
-    mat37 = Eigen::MatrixXd::Random(3, 7);
 
-    Eigen::CompleteOrthogonalDecomposition<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> > cod;
-    cod.compute(mat37);
+    Eigen::MatrixXd A(3,4);
+    A<<1 ,1 ,2, 1 ,
+            3,1,4,4,
+            4,-4,0,8;
+
+
+    Eigen::FullPivLU<Eigen::MatrixXd> lu(A);
+    Eigen::MatrixXd A_null_space = lu.kernel();
+
+    std::cout<<A_null_space  <<std::endl;
+
+
+
+
+    CompleteOrthogonalDecomposition<Matrix<double, Dynamic, Dynamic> > cod;
+    cod.compute(A);
     std::cout << "rank : " << cod.rank() << "\n";
     // Find URV^T
-    Eigen::MatrixXd V = cod.matrixZ().transpose();
-    Eigen::MatrixXd Null_space = V.block(0, cod.rank(),V.rows(), V.cols() - cod.rank());
-    Eigen::MatrixXd P = cod.colsPermutation();
+    MatrixXd V = cod.matrixZ().transpose();
+    MatrixXd Null_space = V.block(0, cod.rank(),V.rows(), V.cols() - cod.rank());
+    MatrixXd P = cod.colsPermutation();
     Null_space = P * Null_space; // Unpermute the columns
     // The Null space:
     std::cout << "The null space: \n" << Null_space << "\n" ;
     // Check that it is the null-space:
-    std::cout << "mat37 * Null_space = \n" << mat37 * Null_space  << '\n';
+    std::cout << "A * Null_space = \n" << A * Null_space  << '\n';
+
+
+
 }
 
 int main()
 {
-    completeOrthogonalDecompositionNullSpace();
-
-
-
+    computeBasisOfNullSpace();
+    //completeOrthogonalDecompositionNullSpace();
 }

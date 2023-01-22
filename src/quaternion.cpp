@@ -151,6 +151,18 @@ void ConvertQuaterniontoAxisAngle() {}
 
 void rotatingAPointUsingQuaternions() { Quaternion q1, q2; }
 
+void QuaternionRepresentingRotationFromOneVectortoAnother()
+{
+    Quaternion q;
+    Eigen::Vector3d v1, v2;
+    Eigen::Vector3d  a = v1.cross(v2);
+    q.x() = a(0);
+    q.y() = a(1);
+    q.z() = a(2);
+
+    q.w() = sqrt(( pow(v1.norm() , 2) ) * (pow(v1.norm() , 2))) + v1.dot( v2);
+}
+
 int main() {
 
   double roll, pitch, yaw;
