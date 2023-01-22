@@ -324,6 +324,81 @@ A very good article to read about [quaternions](https://danceswithcode.net/engin
 
 Refs: [1](https://stackoverflow.com/questions/1171849/finding-quaternion-representing-the-rotation-from-one-vector-to-another)
 
+## Quaternions and  Axis-Angle Representation 
+Quaternions can encode axis-angle representation in four numbers, and can be used to apply the corresponding rotation to a position vector <img src="https://latex.codecogs.com/svg.image?(x,y,z)" alt="https://latex.codecogs.com/svg.image?(x,y,z)" />, representing a point relative to the origin in <img src="https://latex.codecogs.com/svg.image?\mathbb{R}^3" alt="https://latex.codecogs.com/svg.image?\mathbb{R}^3"/>.
+
+
+Euclidean vectors such as <img src="https://latex.codecogs.com/svg.image?(2,3,4)" alt="https://latex.codecogs.com/svg.image?(2,3,4)" /> or <img src="https://latex.codecogs.com/svg.image?(a_x,a_y,a_z)" alt="https://latex.codecogs.com/svg.image?(a_x,a_y,a_z)" /> can be rewritten as <img src="https://latex.codecogs.com/svg.image?2i+3j+4k" alt="https://latex.codecogs.com/svg.image?2i+3j+4k" /> or  <img src="https://latex.codecogs.com/svg.image?(a_xi,a_yj,a_zk)"  alt="https://latex.codecogs.com/svg.image?(a_xi,a_yj,a_zk)" /> , where i, j, k are unit vectors representing the three Cartesian axes (traditionally x, y, z), and also obey the multiplication rules of the fundamental quaternion units.
+
+
+Therefore, a rotation of angle <img src="https://latex.codecogs.com/svg.image?\theta" alt="https://latex.codecogs.com/svg.image?\theta" />  around the axis defined by the unit vector <img src="https://latex.codecogs.com/svg.image?{\vec%20{u}}=(u_{x},u_{y},u_{z})=u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}" alt="https://latex.codecogs.com/svg.image?{\vec {u}}=(u_{x},u_{y},u_{z})=u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k}" />
+
+
+can be represented by a quaternion using an extension of Euler's formula:
+
+<img src="https://latex.codecogs.com/svg.image?\mathbf%20{q}%20=e^{{\frac%20{\theta%20}{2}}{(u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}%20)}}=\cos%20{\frac%20{\theta%20}{2}}+(u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}%20)\sin%20{\frac%20{\theta%20}{2}}" alt="https://latex.codecogs.com/svg.image?\mathbf {q} =e^{{\frac {\theta }{2}}{(u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k} )}}=\cos {\frac {\theta }{2}}+(u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k} )\sin {\frac {\theta }{2}}" />
+
+
+
+The desired rotation can be applied to an ordinary vector 
+
+<img src="https://latex.codecogs.com/svg.image?\mathbf%20{p}%20=(p_{x},p_{y},p_{z})=p_{x}\mathbf%20{i}%20+p_{y}\mathbf%20{j}%20+p_{z}\mathbf%20{k}" alt="https://latex.codecogs.com/svg.image?\mathbf {p} =(p_{x},p_{y},p_{z})=p_{x}\mathbf {i} +p_{y}\mathbf {j} +p_{z}\mathbf {k}" />  in 3-dimensional space, considered as a quaternion with a real coordinate equal to zero, by the followings:
+
+
+
+
+<img src="https://latex.codecogs.com/svg.image?\mathbf%20{p%27}%20=\mathbf%20{q}%20\mathbf%20{p}%20\mathbf%20{q}%20^{-1}" alt="https://latex.codecogs.com/svg.image?\mathbf {p'} =\mathbf {q} \mathbf {p} \mathbf {q} ^{-1}" />
+
+
+In this instance, q is a unit quaternion and
+
+<img src="https://latex.codecogs.com/svg.image?\mathbf%20{q}%20^{-1}=e^{-{\frac%20{\theta%20}{2}}{(u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}%20)}}=\cos%20{\frac%20{\theta%20}{2}}-(u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}%20)\sin%20{\frac%20{\theta%20}{2}}" alt="https://latex.codecogs.com/svg.image?\mathbf {q} ^{-1}=e^{-{\frac {\theta }{2}}{(u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k} )}}=\cos {\frac {\theta }{2}}-(u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k} )\sin {\frac {\theta }{2}}." />
+
+Example: rotate the point vector (1,0,0) around y axis (0,1,0)  90 degrees.
+
+```cpp
+// P  = [0, p1, p2, p3]  <-- point vector
+// alpha = angle to rotate
+//[x, y, z] = axis to rotate around (unit vector)
+// R = [cos(alpha/2), sin(alpha/2)*x, sin(alpha/2)*y, sin(alpha/2)*z] <-- rotation
+// R' = [w, -x, -y, -z]
+// P' = RPR'
+// P' = H(H(R, P), R')
+
+Eigen::Vector3d p(1, 0, 0);
+
+Quaternion P;
+P.w = 0;
+P.x = p(0);
+P.y = p(1);
+P.z = p(2);
+
+// rotation of 90 degrees about the y-axis
+double alpha = M_PI / 2;
+Quaternion R;
+Eigen::Vector3d r(0, 1, 0);
+r = r.normalized();
+
+
+R.w = cos(alpha / 2);
+R.x = sin(alpha / 2) * r(0);
+R.y = sin(alpha / 2) * r(1);
+R.z = sin(alpha / 2) * r(2);
+
+std::cout << R.w << "," << R.x << "," << R.y << "," << R.z << std::endl;
+
+Quaternion R_prime = quaternionInversion(R);
+Quaternion P_prime = quaternionMultiplication(quaternionMultiplication(R, P), R_prime);
+
+/*rotation of 90 degrees about the y-axis for the point (1, 0, 0). The result
+is (0, 0, -1). (Note that the first element of P' will always be 0 and can
+therefore be discarded.)
+*/
+
+```
+
+Refs: [1](https://math.stackexchange.com/questions/40164/how-do-you-rotate-a-vector-by-a-unit-quaternion)  
+
 ## The advantages of Quaternions 
 
 - Avoiding gimbal lock, a problem with systems such as Euler angles.

@@ -7,8 +7,16 @@
   * [Overdetermined System](#overdetermined-system)
   * [Determined](#determined)
   * [Homogeneous vs Non-homogeneous](#homogeneous-vs-non-homogeneous)
+    + [Using the SVD](#using-the-svd)
 - [Solving Linear Equation](#solving-linear-equation)
+    + [Using the SVD](#using-the-svd-1)
+    + [Complete Orthogonal Decomposition](#complete-orthogonal-decomposition)
+    + [Using the QR](#using-the-qr)
+    + [Using Cholesky Decomposition](#using-cholesky-decomposition)
   * [Gaussian Elimination (row reduction)](#gaussian-elimination--row-reduction-)
+    + [Forward Elimination](#forward-elimination)
+    + [Back Substitution](#back-substitution)
+    + [Partial Pivoting and Full Pivoting](#partial-pivoting-and-full-pivoting)
   * [Numerical stability in Gaussian Elimination](#numerical-stability-in-gaussian-elimination)
   * [Example of The Gaussian Elimination Algorithm](#example-of-the-gaussian-elimination-algorithm)
 - [Row echelon form](#row-echelon-form)
@@ -18,15 +26,20 @@
 - [Trapezoidal Matrix](#trapezoidal-matrix)
 - [Matrices Decompositions](#matrices-decompositions)
   * [QR Decomposition](#qr-decomposition)
-  * [Square Matrix](#square-matrix)
-  * [Rectangular Matrix](#rectangular-matrix)
+    + [Square Matrix QR Decomposition](#square-matrix-qr-decomposition)
+    + [Rectangular Matrix QR Decomposition](#rectangular-matrix-qr-decomposition)
   * [Computing the QR Decomposition](#computing-the-qr-decomposition)
   * [Gram Schmidt Orthogonalization](#gram-schmidt-orthogonalization)
   * [Householder Transformations](#householder-transformations)
   * [QL, RQ and LQ Decompositions](#ql--rq-and-lq-decompositions)
-  * [Cholesky Decomposition](#cholesky-decomposition)
-  * [LU/LDU Decomposition](#lu-ldu-decomposition)
+  * [Cholesky Decomposition LL*](#cholesky-decomposition-ll-)
+    + [Hermitian Matrix](#hermitian-matrix)
+    + [Positive (Semidefinite) Definite Matrix:](#positive--semidefinite--definite-matrix-)
+  * [LDL Decomposition](#ldl-decomposition)
+  * [Lower Upper (LU) Decomposition](#lower-upper--lu--decomposition)
+  * [Lower Diagonal Upper (LDU) decomposition](#lower-diagonal-upper--ldu--decomposition)
   * [SVD Decomposition](#svd-decomposition)
+  * [SVD and Null Space](#svd-and-null-space)
   * [Eigen Value and Eigen Vector](#eigen-value-and-eigen-vector)
   * [Calculation of Eigen Value and Eigen Vector](#calculation-of-eigen-value-and-eigen-vector)
   * [Example of Calculating Eigen Value and Eigen Vector](#example-of-calculating-eigen-value-and-eigen-vector)
@@ -34,6 +47,7 @@
 - [Span](#span)
 - [Subspace](#subspace)
 - [Row Spaces and Column Spaces](#row-spaces-and-column-spaces)
+- [Range of a Matrix](#range-of-a-matrix)
   * [Example of Row Spaces](#example-of-row-spaces)
 - [Basis](#basis)
   * [Example of Computing Basis for Column Space](#example-of-computing-basis-for-column-space)
@@ -47,6 +61,11 @@
 - [Rank-nullity Theorem](#rank-nullity-theorem)
 - [The Determinant of The Matrix](#the-determinant-of-the-matrix)
 - [Finding The Inverse of The Matrix](#finding-the-inverse-of-the-matrix)
+- [The Fundamental Theorem of Linear Algebra](#the-fundamental-theorem-of-linear-algebra)
+- [Permutation Matrix](#permutation-matrix)
+- [Augmented Matrix](#augmented-matrix)
+
+
 
 # Vector space
 
@@ -211,6 +230,12 @@ This method can also be used to compute
 - The rank of a matrix.
 - The determinant of a square matrix.
 - Inverse of an invertible matrix.
+
+### Forward Elimination
+### Back Substitution
+### Partial Pivoting and Full Pivoting
+- Partial pivoting is about changing the rows of the matrix, effectively changing the order of the equations. 
+- Full pivoting also changes the variables order. 
 
 
 ## Numerical stability in Gaussian Elimination
@@ -589,11 +614,103 @@ This can be written in matrix form:
 ## QL, RQ and LQ Decompositions
 We can define <img src="https://latex.codecogs.com/svg.latex?QL" />, <img src="https://latex.codecogs.com/svg.latex?RQ" />, and <img src="https://latex.codecogs.com/svg.latex?LQ" /> decompositions, with <img src="https://latex.codecogs.com/svg.latex?L" /> being a lower triangular matrix.
 
-## Cholesky Decomposition
+## Cholesky Decomposition LL*
 
 Cholesky decomposition is a decomposition of a Hermitian, positive-definite matrix into the product of a lower triangular matrix and its conjugate transpose
 
-## LU/LDU Decomposition
+
+### Hermitian Matrix
+means its transpose is its conjugate
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}0&a-ib&c-id\\a+ib&1&m-in\\c+id&m+in&2\end{bmatrix}}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}0&a-ib&c-id\\a+ib&1&m-in\\c+id&m+in&2\end{bmatrix}}}" />
+
+
+
+### Positive (Semidefinite) Definite Matrix:
+Matrix <img src="https://latex.codecogs.com/svg.image?M_{n\times%20n}" alt="https://latex.codecogs.com/svg.image?M_{n\times n}"  /> is said to be positive definite if for every the nonzero real column vector <img src="https://latex.codecogs.com/svg.image?z_{n\times%201}" alt="https://latex.codecogs.com/svg.image?z_{n\times 1}" /> the scalar 
+<img src="https://latex.codecogs.com/svg.image?z^T%20M%20z" alt="https://latex.codecogs.com/svg.image?z^TMz" />
+is positive.
+
+
+<img src="https://latex.codecogs.com/svg.image?\text{A%20Positive%20Semidefinite}%20\Leftrightarrow%20\text{All%20eigenvalues%20}%20\lambda%20\geq%200" alt="https://latex.codecogs.com/svg.image?\text{A Positive Semidefinite} \Leftrightarrow \text{All eigenvalues } \lambda \geq 0" />
+
+
+
+
+
+Example:
+
+<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}2%20&%20-1%20&%200%20\\-1%20&%202%20&%20-1%20\\0%20&%20-1%20&%202%20\\\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix} 2 & -1 & 0 \\ -1 & 2 & -1 \\ 0 & -1 & 2 \\ \end{bmatrix}"   />
+
+
+<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}a\\b\\c\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix}a\\b\\c\end{bmatrix}" />
+
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?z^TMz=a^2%20+c^2%20+%20(a-b)^2%20+(b-c)^2" alt="https://latex.codecogs.com/svg.image?z^TMz=a^2 +c^2 + (a-b)^2 +(b-c)^2" />
+
+Cholesky decomposition of a **Hermitian positive-definite** matrix A is:
+  
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbf%20{A}%20=\mathbf%20{LL}%20^{*},}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {A} =\mathbf {LL} ^{*},}" />  
+
+
+  
+- <img src="https://latex.codecogs.com/svg.image?L" alt="https://latex.codecogs.com/svg.image?L" />  is a lower triangular matrix with real and positive diagonal entries.
+- <img src="https://latex.codecogs.com/svg.image?L^*" alt="https://latex.codecogs.com/svg.image?L^*" /> is the conjugate transpose of  <img src="https://latex.codecogs.com/svg.image?L" alt="https://latex.codecogs.com/svg.image?L" /> 
+
+
+## LDL Decomposition
+A closely related variant of the classical Cholesky decomposition is the LDL decomposition:
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbf%20{A}%20=\mathbf%20{LDL}%20^{*}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {A} =\mathbf {LDL} ^{*}}" />
+
+where <img src="https://latex.codecogs.com/svg.image?L" alt="https://latex.codecogs.com/svg.image?L" /> is a lower unit triangular (unitriangular) matrix, and <img src="https://latex.codecogs.com/svg.image?D" alt="https://latex.codecogs.com/svg.image?D" /> is a diagonal matrix
+
+
+Example:
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbf%20{A}%20=\mathbf%20{LL}%20^{*}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {A} =\mathbf {LL} ^{*}}" />
+
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle%20{\begin{aligned}\left({\begin{array}{*{3}{r}}4&12&-16\\12&37&-43\\-16&-43&98\\\end{array}}\right)=\left({\begin{array}{*{3}{r}}2&0&0\\6&1&0\\-8&5&3\\\end{array}}\right)\left({\begin{array}{*{3}{r}}2&6&-8\\0&1&5\\0&0&3\\\end{array}}\right).\end{aligned}}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle%20{\begin{aligned}\left({\begin{array}{*{3}{r}}4&12&-16\\12&37&-43\\-16&-43&98\\\end{array}}\right)=\left({\begin{array}{*{3}{r}}2&0&0\\6&1&0\\-8&5&3\\\end{array}}\right)\left({\begin{array}{*{3}{r}}2&6&-8\\0&1&5\\0&0&3\\\end{array}}\right).\end{aligned}}}" />
+
+<br/>
+<br/>
+
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbf%20{A}%20=\mathbf%20{LDL}%20^{*}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {A} =\mathbf {LDL} ^{*}}" />
+
+<br/>
+<br/>
+
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle%20{\begin{aligned}\left({\begin{array}{*{3}{r}}4&12&-16\\12&37&-43\\-16&-43&98\\\end{array}}\right)&=\left({\begin{array}{*{3}{r}}1&0&0\\3&1&0\\-4&5&1\\\end{array}}\right)\left({\begin{array}{*{3}{r}}4&0&0\\0&1&0\\0&0&9\\\end{array}}\right)\left({\begin{array}{*{3}{r}}1&3&-4\\0&1&5\\0&0&1\\\end{array}}\right).\end{aligned}}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle%20{\begin{aligned}\left({\begin{array}{*{3}{r}}4&12&-16\\12&37&-43\\-16&-43&98\\\end{array}}\right)&=\left({\begin{array}{*{3}{r}}1&0&0\\3&1&0\\-4&5&1\\\end{array}}\right)\left({\begin{array}{*{3}{r}}4&0&0\\0&1&0\\0&0&9\\\end{array}}\right)\left({\begin{array}{*{3}{r}}1&3&-4\\0&1&5\\0&0&1\\\end{array}}\right).\end{aligned}}}" />
+
+Refs: [1](https://www.youtube.com/watch?v=2uKoKKLgZ4c)
+
+## Lower Upper (LU) Decomposition
+
+Lower-upper (LU) decomposition factors a matrix as the product of a lower triangular matrix and an upper triangular matrix
+LU decomposition can be viewed as the matrix form of Gaussian elimination.
+
+In the lower triangular matrix all elements above the diagonal are zero, in the upper triangular matrix, all the elements below the diagonal are zero.
+
+
+
+<img src="{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" alt="{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" />
+
+
+## Lower Diagonal Upper (LDU) decomposition
+A Lower-diagonal-upper (LDU) decomposition is a decomposition of the form
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle%20A=LDU}" alt="https://latex.codecogs.com/svg.image?{\displaystyle%20A=LDU}" />
+
+where <img src="https://latex.codecogs.com/svg.image?D" alt="https://latex.codecogs.com/svg.image?D" /> is a diagonal matrix, and <img src="https://latex.codecogs.com/svg.image?L" alt="https://latex.codecogs.com/svg.image?L" />  and <img src="https://latex.codecogs.com/svg.image?U" alt="https://latex.codecogs.com/svg.image?U" />  are unitriangular matrices, meaning that all the entries on the diagonals of <img src="https://latex.codecogs.com/svg.image?L" alt="https://latex.codecogs.com/svg.image?L" />  and <img src="https://latex.codecogs.com/svg.image?U" alt="https://latex.codecogs.com/svg.image?U" />  are one.
+
+
 ## SVD Decomposition
 
 ## SVD and Null Space

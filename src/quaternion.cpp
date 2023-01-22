@@ -64,22 +64,36 @@ struct Point {
   double x, y, z;
 };
 
-Quaternion quaternionMultiplication(Quaternion r, Quaternion s) {
-  //(t0, t1, t2, t3) = (r0, r1, r2, r3) ✕ (s0, s1, s2, s3)
+Quaternion quaternionMultiplication(Quaternion p, Quaternion q) {
+  //(t0, t1, t2, t3) = (a1, b1, c1, d1) ✕ (a2, b2, c2, d2)
+
+  // p=(a1 + b1*i, c1*j, d1*k)=(w,x,y,z)
+  // q=(a2 + b2*i, c2*j, d2*k)=(w,x,y,z)
+  double a1, b1, c1, d1, a2, b2, c2, d2;
+
+  a1 = p.w;
+  b1 = p.x;
+  c1 = p.y;
+  d1 = p.z;
+
+  a2 = q.w;
+  b2 = q.x;
+  c2 = q.y;
+  d2 = q.z;
 
   Quaternion t;
 
-  // t0 = (r0s0 − r1s1 − r2s2 − r3s3)
-  t.w = r.w * s.w - r.x * s.x - r.y * s.y - r.z * s.z;
+  // t0 = (a1a2 − b1b2 − c1c2 − d1d2)
+  t.w = a1 * a2 - b1 * b2 - c1 * c2 - d1 * d2;
 
-  // t1 = (r0s1 + r1s0 − r2s3 + r3s2)
-  t.x = r.w * s.x + r.y * s.x - r.y * s.z + r.z * s.y;
+  // t1 = (a1b2+b1a2+c1d2 -d1c2 )
+  t.x = a1 * b2 + b1 * a2 + c1 * d2 - d1 * c2;
 
-  // t2 = (r0s2 + r1s3 + r2s0 − r3s1)
-  t.y = r.w * s.y + r.x * s.z + r.y * s.w - r.z * s.x;
+  // t2 = (a1c2 -b1d2 +c1a2+ d1b2 )
+  t.y = a1 * c2 - b1 * d2 + c1 * a2 + d1 * b2;
 
-  // t3 = (r0s3 − r1s2 + r2s1 + r3s0)
-  t.z = r.w * s.z - r.x * s.y + r.y * s.x + r.z * s.w;
+  // t3 = (a1d2+ b1c2 -c1b2+ d1a2 )
+  t.z = a1 * d2 + b1 * c2 - c1 * b2 + d1 * a2;
 
   return t;
 }
@@ -151,52 +165,95 @@ void ConvertQuaterniontoAxisAngle() {}
 
 void rotatingAPointUsingQuaternions() { Quaternion q1, q2; }
 
-void QuaternionRepresentingRotationFromOneVectortoAnother()
-{
-    Quaternion q;
-    Eigen::Vector3d v1, v2;
-    Eigen::Vector3d  a = v1.cross(v2);
-    q.x() = a(0);
-    q.y() = a(1);
-    q.z() = a(2);
+void QuaternionRepresentingRotationFromOneVectortoAnother() {
+  Quaternion q;
+  Eigen::Vector3d v1, v2;
+  Eigen::Vector3d a = v1.cross(v2);
+  q.x = a(0);
+  q.y = a(1);
+  q.z = a(2);
 
-    q.w() = sqrt(( pow(v1.norm() , 2) ) * (pow(v1.norm() , 2))) + v1.dot( v2);
+  q.w = sqrt((pow(v1.norm(), 2)) * (pow(v1.norm(), 2))) + v1.dot(v2);
+}
+
+void rotatePointByQuaternion() {
+
+  Eigen::IOFormat HeavyFmt(Eigen::StreamPrecision, 2, ", ", ";\n", "[", "]",
+                           "[", "]");
+
+  // P  = [0, p1, p2, p3]  <-- point vector
+  // alpha = angle to rotate
+  //[x, y, z] = axis to rotate around (unit vector)
+  // R = [cos(alpha/2), sin(alpha/2)*x, sin(alpha/2)*y, sin(alpha/2)*z] <-- rotation
+  // R' = [w, -x, -y, -z]
+  // P' = RPR'
+  // P' = H(H(R, P), R')
+
+  Eigen::Vector3d p(1, 0, 0);
+
+  Quaternion P;
+  P.w = 0;
+  P.x = p(0);
+  P.y = p(1);
+  P.z = p(2);
+
+  // rotation of 90 degrees about the y-axis
+  double alpha = M_PI / 2;
+  Quaternion R;
+  Eigen::Vector3d r(0, 1, 0);
+  r = r.normalized();
+
+  R.w = cos(alpha / 2);
+  R.x = sin(alpha / 2) * r(0);
+  R.y = sin(alpha / 2) * r(1);
+  R.z = sin(alpha / 2) * r(2);
+
+  std::cout << R.w << "," << R.x << "," << R.y << "," << R.z << std::endl;
+
+  Quaternion R_prime = quaternionInversion(R);
+  Quaternion P_prime =
+      quaternionMultiplication(quaternionMultiplication(R, P), R_prime);
+
+  /*rotation of 90 degrees about the y-axis for the point (1, 0, 0). The result
+  is (0, 0, -1). (Note that the first element of P' will always be 0 and can
+  therefore be discarded.)
+  */
+  std::cout << P_prime.x << "," << P_prime.y << "," << P_prime.z << std::endl;
 }
 
 int main() {
 
-  double roll, pitch, yaw;
+  //  double roll, pitch, yaw;
 
-  roll = M_PI / 4;
-  pitch = M_PI / 3;
-  yaw = M_PI / 6;
+  //  roll = M_PI / 4;
+  //  pitch = M_PI / 3;
+  //  yaw = M_PI / 6;
 
-  Eigen::Matrix3d rotationMatrix =
-      eulerAnglesToRotationMatrix(roll, pitch, yaw);
+  //  Eigen::Matrix3d rotationMatrix =
+  //      eulerAnglesToRotationMatrix(roll, pitch, yaw);
 
-  Eigen::Quaterniond quaternionFromRotationMatrix(rotationMatrix);
+  ////  Eigen::Quaterniond quaternionFromRotationMatrix(rotationMatrix);
 
-  Eigen::Matrix3d R_b_c, R_s_b;
+  //  Eigen::Matrix3d R_b_c, R_s_b;
 
-  R_b_c << 0, 0, -1, 0, 1, 0, 1, 0, 0;
+  //  R_b_c << 0, 0, -1, 0, 1, 0, 1, 0, 0;
 
-  std::cout << "R_b_c\n" << R_b_c << std::endl;
+  //  std::cout << "R_b_c\n" << R_b_c << std::endl;
 
-  R_s_b << 0, -1, 0, 1, 0, 0, 0, 0, 1;
+  //  R_s_b << 0, -1, 0, 1, 0, 0, 0, 0, 1;
 
-  std::cout << "R_s_b\n" << R_s_b << std::endl;
+  //  std::cout << "R_s_b\n" << R_s_b << std::endl;
 
-  Eigen::Matrix3d R_s_c = R_s_b * R_b_c;
+  //  Eigen::Matrix3d R_s_c = R_s_b * R_b_c;
 
-  std::cout << "R_s_c\n" << R_s_c << std::endl;
+  //  std::cout << "R_s_c\n" << R_s_c << std::endl;
 
-  Eigen::Vector3d p_b;
-  p_b << -1, 0, 0;
+  //  Eigen::Vector3d p_b;
+  //  p_b << -1, 0, 0;
 
-  Eigen::Vector3d p_s = R_s_b * p_b;
+  //  Eigen::Vector3d p_s = R_s_b * p_b;
 
-  std::cout << p_s << std::endl;
+  //  std::cout << p_s << std::endl;
 
-
-
+  rotatePointByQuaternion();
 }
