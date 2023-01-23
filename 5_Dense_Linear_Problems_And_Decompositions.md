@@ -15,7 +15,7 @@
     + [Using Cholesky Decomposition](#using-cholesky-decomposition)
   * [Gaussian Elimination (row reduction)](#gaussian-elimination--row-reduction-)
     + [Forward Elimination](#forward-elimination)
-    + [Back Substitution](#back-substitution)
+    + [Forward and Back Substitution](#forward-and-back-substitution)
     + [Partial Pivoting and Full Pivoting](#partial-pivoting-and-full-pivoting)
   * [Numerical stability in Gaussian Elimination](#numerical-stability-in-gaussian-elimination)
   * [Example of The Gaussian Elimination Algorithm](#example-of-the-gaussian-elimination-algorithm)
@@ -64,6 +64,7 @@
 - [The Fundamental Theorem of Linear Algebra](#the-fundamental-theorem-of-linear-algebra)
 - [Permutation Matrix](#permutation-matrix)
 - [Augmented Matrix](#augmented-matrix)
+
 
 
 
@@ -232,12 +233,26 @@ This method can also be used to compute
 - Inverse of an invertible matrix.
 
 ### Forward Elimination
-### Back Substitution
+### Forward and Back Substitution
+
+A matrix equation in the form <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20L\mathbf%20{x}%20=\mathbf%20{b}%20}" alt="https://latex.codecogs.com/svg.image?{\displaystyle L\mathbf {x} =\mathbf {b} }" /> or <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20U\mathbf%20{x}%20=\mathbf%20{b}%20}" alt="https://latex.codecogs.com/svg.image?{\displaystyle U\mathbf {x} =\mathbf {b} }" /> is very easy to solve.
+
+
+In lower triangular you first compute <img src="https://latex.codecogs.com/svg.image?x_{1}" alt="https://latex.codecogs.com/svg.image?x_{1}" /> then substitutes that forward into the next equation to solve for <img src="https://latex.codecogs.com/svg.image?x_{2}" alt="https://latex.codecogs.com/svg.image?x_{2}" /> and repeats through to 
+<img src="https://latex.codecogs.com/svg.image?x_{n}" alt="https://latex.codecogs.com/svg.image?x_{n}" />
+This is called **Forward Substitution**
+
+In an upper triangular matrix, one works backwards, first computing 
+<img src="https://latex.codecogs.com/svg.image?x_{n}" alt="https://latex.codecogs.com/svg.image?x_{n}" /> then substituting that back into the previous equation to solve for <img src="https://latex.codecogs.com/svg.image?x_{n-1}" alt="https://latex.codecogs.com/svg.image?x_{n-1}" /> and repeating through <img src="https://latex.codecogs.com/svg.image?x_{1}" alt="https://latex.codecogs.com/svg.image?x_{1}" />. This is called **Back Substitution**.
+
+
+
 ### Partial Pivoting and Full Pivoting
-- Partial pivoting is about changing the rows of the matrix, effectively changing the order of the equations. 
-- Full pivoting also changes the variables order. 
+- Partial pivoting is about changing the rows of the matrix, effectively changing the order of the equations, for the case when  the pivot is zero and and also for the case when the pivot is a very small number so might lose accuracy due to the round off error.
+ 
+- Full pivoting means both row and column interchanges, for instance we find the biggest element in the matrix and we swap rows and columns untill it becomes the most left-top element for pivoting. This is usually doen for more numerical stability. 
 
-
+Refs: [1](https://www.youtube.com/watch?v=S5dL9xOj0lU&list=PLkZjai-2Jcxn35XnijUtqqEg0Wi5Sn8ab&index=25)
 ## Numerical stability in Gaussian Elimination
 In Gaussian elimination it is generally desirable to choose a pivot element with large absolute value. For instance in the following matrix:
 
@@ -611,6 +626,10 @@ This can be written in matrix form:
 
 
 ## Householder Transformations
+
+
+Refs: [1](https://www.youtube.com/watch?v=pOiOH3yESPM)
+
 ## QL, RQ and LQ Decompositions
 We can define <img src="https://latex.codecogs.com/svg.latex?QL" />, <img src="https://latex.codecogs.com/svg.latex?RQ" />, and <img src="https://latex.codecogs.com/svg.latex?LQ" /> decompositions, with <img src="https://latex.codecogs.com/svg.latex?L" /> being a lower triangular matrix.
 
@@ -700,7 +719,7 @@ In the lower triangular matrix all elements above the diagonal are zero, in the 
 
 
 
-<img src="{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" alt="{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" />
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" alt="{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" />
 
 
 ## Lower Diagonal Upper (LDU) decomposition
@@ -840,12 +859,9 @@ The rows are:
 
 - <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbf%20{r}%20_{4}={\begin{bmatrix}3&6&2&5&1\end{bmatrix}}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {r} _{4}={\begin{bmatrix}3&6&2&5&1\end{bmatrix}}}" />
 
-Consequently, the row space of <img src="https://latex.codecogs.com/svg.image?M" alt="https://latex.codecogs.com/svg.image?M" /> is the subspace of 
+Consequently, the row space of <img src="https://latex.codecogs.com/svg.image?M" alt="https://latex.codecogs.com/svg.image?M" /> is the subspace of <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbb%20{R}%20^{5}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbb {R} ^{5}} "  /> spanned by <img src="https://latex.codecogs.com/svg.image?{%20r1,%20r2,%20r3,%20r4%20}"  alt="https://latex.codecogs.com/svg.image?{ r1, r2, r3, r4 }" /> . Since these four row vectors are linearly independent, the row space is 4-dimensional.
 
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbb%20{R}%20^{5}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbb {R} ^{5}} "  /> 
-spanned by <img src="https://latex.codecogs.com/svg.image?{%20r1,%20r2,%20r3,%20r4%20}"  alt="https://latex.codecogs.com/svg.image?{ r1, r2, r3, r4 }" /> . Since these four row vectors are linearly independent, the row space is 4-dimensional.  
-
-
+<br/>
 
 # Basis
 
