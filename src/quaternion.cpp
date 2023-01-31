@@ -138,6 +138,14 @@ Point QuaternionRotation(Quaternion q, Point p) {
   return rotate_d_p;
 }
 
+  
+//rotate a vector3d with a quaternion
+Eigen::Vector3d QuaternionRotation(Eigen::Quaterniond q, Eigen::Vector3d p)
+{
+    return   q *  p;    
+}  
+
+
 Quaternion rollPitchYawToQuaternion(double roll, double pitch,
                                     double yaw) // roll (x), pitch (Y), yaw (z)
 {
