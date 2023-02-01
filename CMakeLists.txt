@@ -109,6 +109,10 @@ target_link_libraries (null_space_kernel_rank)
 add_executable(solving_system_of_linear_equations src/solving_system_of_linear_equations.cpp)
 target_link_libraries (solving_system_of_linear_equations)
 
+add_executable(numerical_methods src/numerical_methods.cpp)
+target_link_libraries (numerical_methods)
+
+
 #add_executable(random_number_generation src/random_number_generation.cpp)
 #target_link_libraries (random_number_generation)
 

@@ -70,7 +70,30 @@
 
 # Vector space
 
-A vector space is a set <img src="https://latex.codecogs.com/svg.image?V" /> vectors together with two binary operations (vector addition and scalar multiplication) that satisfy the eight axioms listed below. In this context, the , and the .
+A vector space is a set <img src="https://latex.codecogs.com/svg.image?V" /> vectors together with two binary operations (vector addition and scalar multiplication) that satisfy the **eight axioms** listed below. In this context, the , and the .
+
+
+1. Associativity of vector addition: <img src="https://latex.codecogs.com/svg.image?u+%20\left(%20v%20+%20w%20%20\right)%20%20%20=%20\left(%20u%20+%20%20v%20\right)%20+%20w" alt="https://latex.codecogs.com/svg.image?u+ \left( v + w  \right)   = \left( u +  v \right) + w " />
+2. Commutativity of vector addition: <img src="https://latex.codecogs.com/svg.image?u%20+%20v%20=%20v%20+%20u" alt="https://latex.codecogs.com/svg.image?u + v = v + u " />
+
+3. Identity element of vector addition: There exists an element <img src="https://latex.codecogs.com/svg.image?0%20%20\in%20V" alt="https://latex.codecogs.com/svg.image?0 \in V" />, called the zero vector, such that<img src="https://latex.codecogs.com/svg.image?0%20%20+%20\mathbf{v}=\mathbf{v}" alt="https://latex.codecogs.com/svg.image?0  + \mathbf{v}=\mathbf{v} " /> for all <img src="https://latex.codecogs.com/svg.image?\mathbf{v}%20%20\in%20V" alt="https://latex.codecogs.com/svg.image?\mathbf{v}  \in V " />.
+
+4. Inverse elements of vector addition: For every <img src="https://latex.codecogs.com/svg.image?\mathbf{v}%20%20\in%20V" alt="https://latex.codecogs.com/svg.image?\mathbf{v}  \in V " />, there exists an element<img src="https://latex.codecogs.com/svg.image?\mathbf{-v}%20%20\in%20V" alt="https://latex.codecogs.com/svg.image?\mathbf{-v}  \in V " />, called the additive inverse of <img src="https://latex.codecogs.com/svg.image?\mathbf{v}" alt="https://latex.codecogs.com/svg.image?\mathbf{v}" />, such that <img src="https://latex.codecogs.com/svg.image?%20\mathbf{v}+%20\left%20(%20\mathbf{-v}%20%20%20\right%20)%20=0" alt="https://latex.codecogs.com/svg.image? \mathbf{v}+ \left ( \mathbf{-v}   \right ) =0" />. 
+
+5. Compatibility of scalar multiplication with field multiplication: <img src="https://latex.codecogs.com/svg.image?%20a(b%20\mathbf{v})%20=%20(ab)\mathbf{v}" alt="https://latex.codecogs.com/svg.image? a(b \mathbf{v}) = (ab)\mathbf{v}" />
+
+6. Identity element of scalar multiplication: <img src="https://latex.codecogs.com/svg.image?%201%20\mathbf{v}%20=%20\mathbf{v}" alt="https://latex.codecogs.com/svg.image? 1 \mathbf{v} = \mathbf{v}" />, where 1 denotes the multiplicative identity in <img src="https://latex.codecogs.com/svg.image?F" alt="https://latex.codecogs.com/svg.image?F" />.
+
+7. Distributivity of scalar multiplication with respect to vector addition: <img src="https://latex.codecogs.com/svg.image?a%20\left%20(%20\mathbf{u}%20+%20\mathbf{v}%20%20\right%20)=a\mathbf{u}+a\mathbf{v}" alt="https://latex.codecogs.com/svg.image?a%20\left%20(%20\mathbf{u}%20+%20\mathbf{v}%20%20\right%20)=a\mathbf{u}+a\mathbf{v}" />  
+
+8. Distributivity of scalar multiplication with respect to field addition: <img src="https://latex.codecogs.com/svg.image?\left%20(%20a+b%20\right%20)%20\mathbf{v}%20=a\mathbf{v}+b\mathbf{v}" alt="https://latex.codecogs.com/svg.image?\left ( a+b \right ) \mathbf{v} =a\mathbf{v}+b\mathbf{v}" />
+
+
+
+
+
+
+
 
 
 ## Examples of Vector Spaces
@@ -79,6 +102,10 @@ A vector space is a set <img src="https://latex.codecogs.com/svg.image?V" /> vec
 The simplest example of a vector space is the trivial one: <img src="https://latex.codecogs.com/svg.image?\{0\}" />, which contains only the zero vector (third axiom in the Vector space)
 
 2. Coordinate space
+
+
+
+
 
 # Introduction to Linear Equation
 
@@ -119,6 +146,29 @@ Or:
 <img src="https://latex.codecogs.com/svg.latex?A_{m\times%20n}x_{n\times%201}=b_{m%20\times%201}" alt="https://latex.codecogs.com/svg.latex?A_{m\times n}x_{n\times 1}=b_{m \times 1}" /> 
 <br>
 <br>
+
+## Intuition behind Matrix Multiplication:
+We can interpret matrix multiplication as the linear combination of columns:
+
+<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}a%20&%20%20b\\c%20&%20%20d\\\end{bmatrix}\begin{bmatrix}x%20\\y\end{bmatrix}=x\begin{bmatrix}a%20\\c\end{bmatrix}+y\begin{bmatrix}%20b\\d\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix} a &  b\\c &  d\\\end{bmatrix}\begin{bmatrix} x \\y\end{bmatrix}=x\begin{bmatrix}a \\c\end{bmatrix}+y\begin{bmatrix} b\\d\end{bmatrix}" />
+
+For instance:
+
+<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}3%20&%20%200\\0%20&%20%202\\\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix}3 &  0\\ 0 &  2\\ \end{bmatrix}" />
+
+
+will transform the <img src="https://latex.codecogs.com/svg.image?\hat{i}" alt="https://latex.codecogs.com/svg.image?\hat{i}"  /> into 
+
+<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}3%20\\0\\\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix}3%20\\0\\\end{bmatrix}" /> 
+
+and will transform <img src="https://latex.codecogs.com/svg.image?\hat{j}" alt="https://latex.codecogs.com/svg.image?\hat{j}" /> into 
+
+
+<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}0%20\\2\\\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix}0%20\\2\\\end{bmatrix}" />
+
+
+
+
 
 ## Solution set 
 
@@ -468,7 +518,7 @@ so putting everything together:
 <br/>
 <br/>
 
-<img src="https://latex.codecogs.com/svg.latex?\vec {\mathbf{v\prime}}=|\vec {\mathbf{v\prime}}|  \frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} | } " alt="https://latex.codecogs.com/svg.latex?\vec {\mathbf{v\prime}}=|\vec {\mathbf{v\prime}}|  \frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} | } ">
+<img src="https://latex.codecogs.com/svg.latex?\vec {\mathbf{v\prime}}=|\vec {\mathbf{v\prime}}|  \frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} | } " alt="https://latex.codecogs.com/svg.latex?\vec {\mathbf{v\prime}}=|\vec {\mathbf{v\prime}}|  \frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} | } " />
 
 <br/>
 <br/>
@@ -639,9 +689,9 @@ Cholesky decomposition is a decomposition of a Hermitian, positive-definite matr
 
 
 ### Hermitian Matrix
-means its transpose is its conjugate
+Hermitian Matrix means a matrix that its transpose is its conjugate:
 
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}0&a-ib&c-id\\a+ib&1&m-in\\c+id&m+in&2\end{bmatrix}}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}0&a-ib&c-id\\a+ib&1&m-in\\c+id&m+in&2\end{bmatrix}}}" />
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}0&a-ib&c-id\\a+ib&1&m-in\\c+id&m+in&2\end{bmatrix}}}"  alt="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}0&a-ib&c-id\\a+ib&1&m-in\\c+id&m+in&2\end{bmatrix}}}" />
 
 
 
@@ -719,7 +769,7 @@ In the lower triangular matrix all elements above the diagonal are zero, in the 
 
 
 
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" alt="{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" />
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" alt="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" />
 
 
 ## Lower Diagonal Upper (LDU) decomposition
