@@ -512,13 +512,14 @@ and the direction is in the direction <img src="https://latex.codecogs.com/svg.l
 so putting everything together:
 
 
-
-<img src="https://latex.codecogs.com/svg.latex?|\vec{\mathbf%20v}|cos(\theta)=%20|\vec%20{\mathbf%20{{v}\prime}}|" alt="https://latex.codecogs.com/svg.latex?\vec{\mathbf v}.\vec{\mathbf u}= |\vec{\mathbf v}||\vec{\mathbf u}|cos(\theta)">
+<img src="https://latex.codecogs.com/svg.latex?|\vec{\mathbf%20v}|cos(\theta)=%20|\vec%20{\mathbf%20{{v}\prime}}|"  alt="https://latex.codecogs.com/svg.latex?\vec{\mathbf v}.\vec{\mathbf u}= |\vec{\mathbf v}||\vec{\mathbf u}|cos(\theta)" />
 
 <br/>
 <br/>
 
-<img src="https://latex.codecogs.com/svg.latex?\vec {\mathbf{v\prime}}=|\vec {\mathbf{v\prime}}|  \frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} | } " alt="https://latex.codecogs.com/svg.latex?\vec {\mathbf{v\prime}}=|\vec {\mathbf{v\prime}}|  \frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} | } " />
+
+
+<img src="https://latex.codecogs.com/svg.latex?\vec%20{\mathbf{v\prime}}=|\vec%20{\mathbf{v\prime}}|%20%20\frac{\vec%20{\mathbf{u}}%20%20}{|\vec%20{\mathbf{u}}%20|%20}" alt="https://latex.codecogs.com/svg.latex?\vec {\mathbf{v\prime}}=|\vec {\mathbf{v\prime}}|  \frac{\vec {\mathbf{u}}  }{|\vec {\mathbf{u}} | }" />
 
 <br/>
 <br/>
@@ -691,7 +692,10 @@ Cholesky decomposition is a decomposition of a Hermitian, positive-definite matr
 ### Hermitian Matrix
 Hermitian Matrix means a matrix that its transpose is its conjugate:
 
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}0&a-ib&c-id\\a+ib&1&m-in\\c+id&m+in&2\end{bmatrix}}}"  alt="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}0&a-ib&c-id\\a+ib&1&m-in\\c+id&m+in&2\end{bmatrix}}}" />
+
+
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle%20{\begin{bmatrix}0&a-ib&c-id\\a+ib&1&m-in\\c+id&m+in&2\end{bmatrix}}}"  alt="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}0&a-ib&c-id\\a+ib&1&m-in\\c+id&m+in&2\end{bmatrix}}}" />
 
 
 
@@ -767,9 +771,7 @@ LU decomposition can be viewed as the matrix form of Gaussian elimination.
 
 In the lower triangular matrix all elements above the diagonal are zero, in the upper triangular matrix, all the elements below the diagonal are zero.
 
-
-
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" alt="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" />
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle%20{\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell%20_{11}&0&0\\\ell%20_{21}&\ell%20_{22}&0\\\ell%20_{31}&\ell%20_{32}&\ell%20_{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" alt="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" />
 
 
 ## Lower Diagonal Upper (LDU) decomposition
