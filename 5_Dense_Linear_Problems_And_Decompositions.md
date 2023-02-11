@@ -1,7 +1,12 @@
 - [Chapter 5 Dense Linear Problems And Decompositions](#chapter-5-dense-linear-problems-and-decompositions)
 - [Vector space](#vector-space)
   * [Examples of Vector Spaces](#examples-of-vector-spaces)
+  * [Vector Products](#vector-products)
+    + [Dot Procuct](#dot-procuct)
+    + [The Hadamard product (Schur product)](#the-hadamard-product--schur-product-)
+    + [Kronecker product](#kronecker-product)
 - [Introduction to Linear Equation](#introduction-to-linear-equation)
+  * [Intuition behind Matrix Multiplication:](#intuition-behind-matrix-multiplication-)
   * [Solution set](#solution-set)
   * [Underdetermined System](#underdetermined-system)
   * [Overdetermined System](#overdetermined-system)
@@ -52,6 +57,15 @@
 - [Basis](#basis)
   * [Example of Computing Basis for Column Space](#example-of-computing-basis-for-column-space)
   * [Example of Computing Basis for Row Space](#example-of-computing-basis-for-row-space)
+  * [Changes of basis vectors](#changes-of-basis-vectors)
+  * [Covariance and Contravariance of Vectors](#covariance-and-contravariance-of-vectors)
+  * [Creating a Basis Set](#creating-a-basis-set)
+  * [Change of Basis](#change-of-basis)
+  * [Vector Fields](#vector-fields)
+  * [Coordinate System](#coordinate-system)
+    + [Cartesian, Polar, Curvilinear coordinates ,Cylindrical and Spherical Coordinates](#cartesian--polar--curvilinear-coordinates--cylindrical-and-spherical-coordinates)
+  * [Coordinate transformations](#coordinate-transformations)
+  * [Affine & Curvilinear Transformations](#affine---curvilinear-transformations)
 - [Rank of Matrix](#rank-of-matrix)
   * [Conclusion on Computing Rank](#conclusion-on-computing-rank)
 - [Dimension of the Column Space](#dimension-of-the-column-space)
@@ -65,10 +79,7 @@
 - [Permutation Matrix](#permutation-matrix)
 - [Augmented Matrix](#augmented-matrix)
 
-
-
-
-# Vector space
+# Vector Space
 
 A vector space is a set <img src="https://latex.codecogs.com/svg.image?V" /> vectors together with two binary operations (vector addition and scalar multiplication) that satisfy the **eight axioms** listed below. In this context, the , and the .
 
@@ -102,6 +113,29 @@ A vector space is a set <img src="https://latex.codecogs.com/svg.image?V" /> vec
 The simplest example of a vector space is the trivial one: <img src="https://latex.codecogs.com/svg.image?\{0\}" />, which contains only the zero vector (third axiom in the Vector space)
 
 2. Coordinate space
+
+
+## Vector Products
+### Dot Procuct
+
+### The Hadamard product (Schur product)
+we use <img  src="https://latex.codecogs.com/svg.latex?s%20%5Codot%20t" alt="https://latex.codecogs.com/svg.latex?s \odot t" /> to denote the element wise product of the two vectors.
+
+<img  src="https://latex.codecogs.com/svg.latex?%28s%20%5Codot%20t%29_j%20%3D%20s_j%20t_j" alt="https://latex.codecogs.com/svg.latex?https://latex.codecogs.com/svg.latex?%28s%20%5Codot%20t%29_j%20%3D%20s_j%20t_j" />
+
+
+<img  src="https://latex.codecogs.com/svg.latex?%5Cleft%5B%5Cbegin%7Barray%7D%7Bc%7D%201%20%5C%5C%202%20%5Cend%7Barray%7D%5Cright%5D%20%5Codot%20%5Cleft%5B%5Cbegin%7Barray%7D%7Bc%7D%203%20%5C%5C%204%5Cend%7Barray%7D%20%5Cright%5D%20%3D%20%5Cleft%5B%20%5Cbegin%7Barray%7D%7Bc%7D%201%20*%203%20%5C%5C%202%20*%204%20%5Cend%7Barray%7D%20%5Cright%5D%20%3D%20%5Cleft%5B%20%5Cbegin%7Barray%7D%7Bc%7D%203%20%5C%5C%208%20%5Cend%7Barray%7D%20%5Cright%5D." alt="https://latex.codecogs.com/svg.latex?\left[\begin{array}{c} 1 \\ 2 \end{array}\right]   \odot \left[\begin{array}{c} 3 \\ 4\end{array} \right] = \left[ \begin{array}{c} 1 * 3 \\ 2 * 4 \end{array} \right] = \left[ \begin{array}{c} 3 \\ 8 \end{array}\right]." />
+
+
+
+
+
+
+### Kronecker product
+If <img  src="https://latex.codecogs.com/svg.latex?A" alt="https://latex.codecogs.com/svg.latex?A" /> is an <img  src="https://latex.codecogs.com/svg.latex?m%20%5Ctimes%20n" alt="https://latex.codecogs.com/svg.latex?m \times n" /> matrix and <img  src="https://latex.codecogs.com/svg.latex?B" alt="https://latex.codecogs.com/svg.latex?B" /> is a <img  src="https://latex.codecogs.com/svg.latex?p%20%5Ctimes%20q" alt="https://latex.codecogs.com/svg.latex?p \times q" /> matrix, then the Kronecker product <img  src="https://latex.codecogs.com/svg.latex?A%20%5Cbigotimes%20B" alt="https://latex.codecogs.com/svg.latex?A \bigotimes B " /> is the <img  src="https://latex.codecogs.com/svg.latex?pm%20%5Ctimes%20qn" alt="https://latex.codecogs.com/svg.latex?pm \times qn" /> block matrix:
+
+<img  src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%7B%5Cbegin%7Bbmatrix%7D1%262%5C%5C3%264%5C%5C%5Cend%7Bbmatrix%7D%7D%5Cotimes%20%7B%5Cbegin%7Bbmatrix%7D0%265%5C%5C6%267%5C%5C%5Cend%7Bbmatrix%7D%7D%3D%7B%5Cbegin%7Bbmatrix%7D1%7B%5Cbegin%7Bbmatrix%7D0%265%5C%5C6%267%5C%5C%5Cend%7Bbmatrix%7D%7D%262%7B%5Cbegin%7Bbmatrix%7D0%265%5C%5C6%267%5C%5C%5Cend%7Bbmatrix%7D%7D%5C%5C3%7B%5Cbegin%7Bbmatrix%7D0%265%5C%5C6%267%5C%5C%5Cend%7Bbmatrix%7D%7D%264%7B%5Cbegin%7Bbmatrix%7D0%265%5C%5C6%267%5C%5C%5Cend%7Bbmatrix%7D%7D%5C%5C%5Cend%7Bbmatrix%7D%7D%3D%7B%5Cbegin%7Bbmatrix%7D1%5Ctimes%200%261%5Ctimes%205%262%5Ctimes%200%262%5Ctimes%205%5C%5C1%5Ctimes%206%261%5Ctimes%207%262%5Ctimes%206%262%5Ctimes%207%5C%5C3%5Ctimes%200%263%5Ctimes%205%264%5Ctimes%200%264%5Ctimes%205%5C%5C3%5Ctimes%206%263%5Ctimes%207%264%5Ctimes%206%264%5Ctimes%207%5C%5C%5Cend%7Bbmatrix%7D%7D%3D%7B%5Cbegin%7Bbmatrix%7D0%265%260%2610%5C%5C6%267%2612%2614%5C%5C0%2615%260%2620%5C%5C18%2621%2624%2628%5Cend%7Bbmatrix%7D%7D.%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{bmatrix}1&2\\3&4\\\end{bmatrix}}\otimes {\begin{bmatrix}0&5\\6&7\\\end{bmatrix}}={\begin{bmatrix}1{\begin{bmatrix}0&5\\6&7\\\end{bmatrix}}&2{\begin{bmatrix}0&5\\6&7\\\end{bmatrix}}\\3{\begin{bmatrix}0&5\\6&7\\\end{bmatrix}}&4{\begin{bmatrix}0&5\\6&7\\\end{bmatrix}}\\\end{bmatrix}}={\begin{bmatrix}1\times 0&1\times 5&2\times 0&2\times 5\\1\times 6&1\times 7&2\times 6&2\times 7\\3\times 0&3\times 5&4\times 0&4\times 5\\3\times 6&3\times 7&4\times 6&4\times 7\\\end{bmatrix}}={\begin{bmatrix}0&5&0&10\\6&7&12&14\\0&15&0&20\\18&21&24&28\end{bmatrix}}.}" />
+
 
 
 
@@ -956,6 +990,84 @@ Now we pick the non-zero rows, so the basis for row space of our matrix is:
 
 
 <img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}-2%20\\%202\\4%20\\0\end{bmatrix},\begin{bmatrix}0%20\\6%20\\7%20\\5\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix} -2 \\  2\\ 4 \\ 0\end{bmatrix},\begin{bmatrix} 0 \\ 6 \\ 7 \\ 5 \end{bmatrix} ">
+
+## Changes of basis vectors
+Let say our first basis vector set is:
+
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%200%5C%5C%201%5Cend%7Bbmatrix%7D," alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix} 0\\ 1\end{bmatrix}," /> <img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%201%5C%5C%200%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix} 1\\ 0\end{bmatrix}" />
+
+and our second basis vector set is:
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%202%5C%5C%201%5Cend%7Bbmatrix%7D%2C%20%5Cbegin%7Bbmatrix%7D%20-1%5C%5C%201%5Cend%7Bbmatrix%7D." alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix} 2\\ 1\end{bmatrix}, \begin{bmatrix} -1\\ 1\end{bmatrix}." />
+
+In fact these are the position of the second basis vectors in our first basis set.
+If a vector is described as 
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%20-1%5C%5C%202%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix} -1\\ 2\end{bmatrix}" />
+
+in our second basis we can find it in the first basis as:
+
+<img src="https://latex.codecogs.com/svg.latex?-1%5Ctimes%5Cbegin%7Bbmatrix%7D%202%5C%5C%201%5Cend%7Bbmatrix%7D%20&plus;%202%5Ctimes%5Cbegin%7Bbmatrix%7D%20-1%5C%5C%201%5Cend%7Bbmatrix%7D%3D%5Cbegin%7Bbmatrix%7D%20-4%5C%5C%201%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?-1\times\begin{bmatrix} 2\\ 1\end{bmatrix} + 2\times\begin{bmatrix} -1\\ 1\end{bmatrix}=\begin{bmatrix} -4\\ 1\end{bmatrix}" /> 
+
+or matrix multiplication where the columns of the matrix are second basis vectors:
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%202%26%20-1%5C%5C%201%26%201%20%5Cend%7Bbmatrix%7D%20%5Ctimes%20%5Cbegin%7Bbmatrix%7D%20-1%5C%5C%202%5Cend%7Bbmatrix%7D%20%3D%5Cbegin%7Bbmatrix%7D%20-4%5C%5C%201%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix}  2& -1\\  1& 1 \end{bmatrix} \times \begin{bmatrix} -1\\ 2\end{bmatrix} =\begin{bmatrix} -4\\ 1\end{bmatrix} " />
+
+
+## Covariance and Contravariance of Vectors
+
+
+Two ways to describe a vector in basis vectors:
+
+1) Parallel Projection Counting how many unit vectors we should add to get our vector. In our example:
+
+<img src="https://latex.codecogs.com/svg.latex?-1%5Ctimes%20%5Cbegin%7Bbmatrix%7D%202%5C%5C%201%5Cend%7Bbmatrix%7D%20&plus;%202%5Ctimes%5Cbegin%7Bbmatrix%7D%20-1%5C%5C%201%5Cend%7Bbmatrix%7D%3D0" alt="https://latex.codecogs.com/svg.latex?-1\times \begin{bmatrix} 2\\ 1\end{bmatrix} + 2\times\begin{bmatrix} -1\\ 1\end{bmatrix}=0" />
+
+2)perpendicular projection Dot product our vector with basis vector:
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%20-1%2C%202%5Cend%7Bbmatrix%7D%20%5Ccdot%20%5Cbegin%7Bbmatrix%7D%202%5C%5C1%5Cend%7Bbmatrix%7D%3D0" alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix} -1, 2\end{bmatrix} \cdot \begin{bmatrix} 2\\1\end{bmatrix}=0" />
+
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%20-1%2C%202%5Cend%7Bbmatrix%7D%20%5Ccdot%20%5Cbegin%7Bbmatrix%7D%20-1%5C%5C1%5Cend%7Bbmatrix%7D%3D4" alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix} -1, 2\end{bmatrix} \cdot \begin{bmatrix} -1\\1\end{bmatrix}=4" />
+
+
+If we double the size of the basis vectors, our new basis is:
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%204%5C%5C%202%5Cend%7Bbmatrix%7D%24%2C%20%24%5Cbegin%7Bbmatrix%7D%20-2%5C%5C2%5Cend%7Bbmatrix%7D." alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix} 4\\ 2\end{bmatrix}$, $\begin{bmatrix} -2\\2\end{bmatrix}." />
+
+
+This will turn our old vector:
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%20-1%5C%5C%202%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix} -1\\ 2\end{bmatrix}" />
+
+into:
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%20-0.5%5C%5C%201%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix} -0.5\\ 1\end{bmatrix}" />
+
+
+Because these two quantities change "contrary" to one other, they are are refereed as "contra-variant" component of the vector.
+
+If we use the second approach to represent our vector, the associated dot product will also double. 
+
+
+Ref: [1](https://mathinsight.org/taylors_theorem_multivariable_introduction), [2](http://www.math.toronto.edu/courses/mat237y1/20199/notes/Chapter2/S2.6.html), [3](https://www.youtube.com/watch?v=vvE5w3iOtGs), [4](http://jccc-mpg.wikidot.com/vector-projection), [5](https://www.youtube.com/watch?v=P2LTAUO1TdA&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&index=13)
+
+## Creating a Basis Set
+## Change of Basis
+## Vector Fields
+Ref: [1](https://tutorial.math.lamar.edu/classes/calciii/VectorFields.aspx)
+
+## Coordinate System
+### Cartesian, Polar, Curvilinear coordinates ,Cylindrical and Spherical Coordinates
+
+Ref: [1](https://www.skillsyouneed.com/num/polar-cylindrical-spherical-coordinates.html)
+
+## Coordinate transformations
+Refs [1](https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations)
+
+## Affine & Curvilinear Transformations
+
 
 
 # Rank of Matrix
