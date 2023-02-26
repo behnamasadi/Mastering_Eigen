@@ -928,6 +928,22 @@ Examples of subspace:
 The column space of a matrix <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> is the span (set of all possible linear combinations) of its column vectors.
 
 # Range of a Matrix
+The range of a matrix, also known as the column space of a matrix, is the span of the columns of the matrix. In other words, it is the set of all possible linear combinations of the columns of the matrix.
+
+```cpp
+template <typename T>
+Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>
+CompleteOrthogonalDecomposition(const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> &M) {
+  Eigen::CompleteOrthogonalDecomposition<
+      Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>>
+      cod(M);
+  const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> Q =
+      cod.householderQ();
+  return Q.leftCols(cod.rank());
+}
+```
+
+
 
 Refs: [1](https://math.stackexchange.com/questions/2037602/what-is-range-of-a-matrix)
 
@@ -1101,6 +1117,7 @@ Note that the null-space is equivalently the set of solutions to the homogeneous
 Writing  <img  src="https://latex.codecogs.com/svg.latex?h(v)%20=%20A%20\cdot%20v"  alt="https://latex.codecogs.com/svg.latex?h(v) = A \cdot v" /> , then the null-space is the set of all vectors that are sent to the zero (lose their identity) as <img  src="https://latex.codecogs.com/svg.latex?h"  alt="https://latex.codecogs.com/svg.latex?h" /> is applied to them.
 
 ## Example of Calculating Null Space
+### Example 1
 Lets say we have the following matrix:
 
 <img src="https://latex.codecogs.com/svg.image?A=\begin{bmatrix}1%20&%201%20&%202%20&%201%20\\3%20&%201%20&%20%204&%20%204\\4%20&%20-4%20&%200%20&%20%208\\\end{bmatrix}%20\in%20\mathbb{R}^4" alt="https://latex.codecogs.com/svg.image?A=\begin{bmatrix} 1 & 1 & 2 & 1 \\3 & 1 &  4&  4\\ 4 & -4 & 0 &  8\\ \end{bmatrix} \in \mathbb{R}^4">
@@ -1162,7 +1179,9 @@ std::cout << "The null space: \n" << Null_space << "\n" ;
 // Check that it is the null-space:
 std::cout << "A * Null_space = \n" << A * Null_space  << '\n';
 ```
+### Example 2
 
+Refs: [1](http://immersivemath.com/ila/ch08_rank/ch08.html#sec_rank_null_space)
 
 # Nullity
 The dimension of the kernel of A is called the **nullity** of A

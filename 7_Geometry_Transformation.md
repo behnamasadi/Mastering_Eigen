@@ -475,6 +475,8 @@ The answer to this vector differential equation is matrix exponential which can 
 <br/> 
  
  
+
+ 
  
 <img src="https://latex.codecogs.com/svg.image?x(t)=e^{at}x(0)" title="https://latex.codecogs.com/svg.image?x(t)=e^{at}x(0)" />
  
@@ -483,6 +485,33 @@ The answer to this vector differential equation is matrix exponential which can 
  
  
 <img src="https://latex.codecogs.com/svg.image?\dot{x(t)}&space;=&space;ax(t)" title="https://latex.codecogs.com/svg.image?\dot{x(t)} = ax(t)" />
+
+<br/>
+<br/>
+
+## Taylor Series 
+
+
+
+<img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20f%28a%29&plus;%7B%5Cfrac%20%7Bf%27%28a%29%7D%7B1%21%7D%7D%28x-a%29&plus;%7B%5Cfrac%20%7Bf%27%27%28a%29%7D%7B2%21%7D%7D%28x-a%29%5E%7B2%7D&plus;%7B%5Cfrac%20%7Bf%27%27%27%28a%29%7D%7B3%21%7D%7D%28x-a%29%5E%7B3%7D&plus;%5Ccdots%20%2C%7D" alt="{\displaystyle f(a)+{\frac {f'(a)}{1!}}(x-a)+{\frac {f''(a)}{2!}}(x-a)^{2}+{\frac {f'''(a)}{3!}}(x-a)^{3}+\cdots ,}" />
+
+if we write it for <img src="https://latex.codecogs.com/svg.image?x(t)=e^{at}x(0)" title="https://latex.codecogs.com/svg.image?x(t)=e^{at}x(0)" /> around point zero:
+
+<br/>
+<br/>
+
+
+
+<img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20f%280%29&plus;%7B%5Cfrac%20%7Bf%27%280%29%7D%7B1%21%7D%7D%28x-0%29&plus;%7B%5Cfrac%20%7Bf%27%27%280%29%7D%7B2%21%7D%7D%28x-0%29%5E%7B2%7D&plus;%7B%5Cfrac%20%7Bf%27%27%27%280%29%7D%7B3%21%7D%7D%28x-0%29%5E%7B3%7D&plus;%5Ccdots%20%2C%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle f(0)+{\frac {f'(0)}{1!}}(x-0)+{\frac {f''(0)}{2!}}(x-0)^{2}+{\frac {f'''(0)}{3!}}(x-0)^{3}+\cdots ,}" />
+
+<br/>
+<br/>
+<img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%201&plus;%7B%5Cfrac%20a%7B1%21%7D%7Dx&plus;%7B%5Cfrac%20%7Ba%5E2%7D%7B2%21%7D%7Dx%5E%7B2%7D&plus;%7B%5Cfrac%20%7Ba%5E3%7D%7B3%21%7D%7Dx%5E%7B3%7D&plus;%5Ccdots%20%2C%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle 1+{\frac a{1!}}x+{\frac {a^2}{2!}}x^{2}+{\frac {a^3}{3!}}x^{3}+\cdots ,}" />
+
+
+
+
+
 <br/>
 <br/>
 if <img src="https://latex.codecogs.com/svg.image?x\in&space;\mathbb{R}" title="https://latex.codecogs.com/svg.image?x\in \mathbb{R}" />

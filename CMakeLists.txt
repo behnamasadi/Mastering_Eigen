@@ -121,6 +121,11 @@ target_link_libraries (solving_system_of_linear_equations)
 add_executable(numerical_methods src/numerical_methods.cpp)
 target_link_libraries (numerical_methods)
 
+add_executable(calculate_range_of_matrix_column_space src/calculate_range_of_matrix_column_space.cpp)
+target_link_libraries (calculate_range_of_matrix_column_space)
+
+add_executable(compute_basis_of_nullspace src/compute_basis_of_nullspace.cpp)
+target_link_libraries (compute_basis_of_nullspace)
 
 #add_executable(random_number_generation src/random_number_generation.cpp)
 #target_link_libraries (random_number_generation)
