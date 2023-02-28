@@ -71,7 +71,7 @@ In case of air and sea vehicles like submarines, ships, airplanes etc., which us
 
 # Rotation matrix
 
-<img src="https://latex.codecogs.com/svg.image?R_z(\alpha)=\bigl(\begin{smallmatrix}cos(\alpha)&space;&&space;-sin(\alpha)&space;&0&space;&space;\\&space;sin(\alpha)&space;&&space;&space;cos(\alpha)&space;&0&space;\\&space;&space;&space;&space;&space;&space;0&space;&space;&space;&space;&space;&space;&space;&space;&&space;&space;&space;&space;0&space;&space;&space;&&space;&space;1\\&space;\end{smallmatrix}\bigr)" title="https://latex.codecogs.com/svg.image?R_z(\b)=\bigl(\begin{smallmatrix}cos(\alpha) & -sin(\alpha) &0 \\ sin(\alpha) & cos(\alpha) &0 \\ 0 & 0 & 1\\ \end{smallmatrix}\bigr)" />
+<img src="https://latex.codecogs.com/svg.latex?R_z%28%5Calpha%29%3D%5Cbegin%7Bpmatrix%7D%20cos%28%5Calpha%29%20%26%20-sin%28%5Calpha%29%20%260%20%5C%5C%20sin%28%5Calpha%29%20%26%20cos%28%5Calpha%29%20%260%20%5C%5C%200%20%26%200%20%26%201%5C%5C%20%5Cend%7Bpmatrix%7D" title="https://latex.codecogs.com/svg.image?R_z(\alpha)=\begin{pmatrix} cos(\alpha) & -sin(\alpha) &0 \\  sin(\alpha) & cos(\alpha) &0 \\ 0 & 0 & 1\\ \end{pmatrix}" />
 
 <br/>
 <br/>
