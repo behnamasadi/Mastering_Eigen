@@ -201,7 +201,7 @@ This will result in:
 
 - <img src="https://latex.codecogs.com/svg.image?\gamma&plus;\alpha&space;=&space;atan2(-r_{23},-r_{13})" title="https://latex.codecogs.com/svg.image?\gamma+\alpha = atan2(-r_{23},-r_{13})" />
 
-This means that there are infinitely many sets of (roll,yaw) angles for a given rotation matrix at with <img src="https://latex.codecogs.com/svg.image?\beta=\pm&space;\pi/2" title="https://latex.codecogs.com/svg.image?\beta=\pm \pi/2" />
+This means that there are infinitely many sets of (roll,yaw) angles for a given rotation matrix at with <img src="https://latex.codecogs.com/svg.image?\beta=\pm&space;\pi/2" alt="https://latex.codecogs.com/svg.image?\beta=\pm \pi/2" />
 
 
 Visit the [link](https://compsci290-s2016.github.io/CoursePage/Materials/EulerAnglesViz/) for interactive Gimbal visualization.
