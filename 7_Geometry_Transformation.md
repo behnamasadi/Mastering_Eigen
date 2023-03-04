@@ -2,13 +2,30 @@
 
 
 
-# Euler Angles
-
+# 1. Euler Angles
+## 1.1. Introduction
 The Euler angles are three angles to describe the orientation of a rigid body with respect to a fixed coordinate system.
 
 
 
 The rotations may about the axes `XYZ` of the original coordinate system, which is assumed to remain motionless (extrinsic), or rotations about the axes of the rotating coordinate system `XYZ` (intrinsic), solidary with the moving body, which changes its orientation with respect to the extrinsic frame after each elemental rotation.
+
+
+## 1.2. Roll, Pitch and Yaw
+
+Euler angles are typically denoted as:
+- <img src="https://latex.codecogs.com/svg.image?&space;\gamma&space;\text{&space;or&space;}&space;\phi,&space;" title="https://latex.codecogs.com/svg.image? \gamma \text{ or } \phi, " /> represents a rotation around the x axis.
+- <img src="https://latex.codecogs.com/svg.image?\beta,&space;\text{&space;or&space;}&space;\theta" title="https://latex.codecogs.com/svg.image?\beta, \text{ or } \theta" /> represents a rotation around the y axis,
+- <img src="https://latex.codecogs.com/svg.image?\alpha&space;\text{&space;or&space;}&space;\psi" title="https://latex.codecogs.com/svg.image?\alpha \text{ or } \psi" /> represents a rotation around the z axis,
+
+
+
+
+
+
+
+
+## 1.3. Proper Euler angles and Tait-Bryan angles
 
 There exist twelve possible sequences of rotation axes, which can be divided into two categories: 
 1. **Proper Euler angles**, where one axis of rotation is repeated (x-z-x, x-y-x, y-x-y, y-z-y, z-y-z, z-x-z), 
@@ -28,48 +45,7 @@ There are six possibilities of choosing the rotation axes for Tait–Bryan angle
 - z-y′-x″ (intrinsic rotations) or x-y-z (extrinsic rotations): the intrinsic rotations are known as: yaw, pitch and roll
 - y-x′-z″ (intrinsic rotations) or z-x-y (extrinsic rotations)
 
-
-## Roll, Pitch and Yaw
-
-Euler angles are typically denoted as:
-- <img src="https://latex.codecogs.com/svg.image?&space;\gamma&space;\text{&space;or&space;}&space;\phi,&space;" title="https://latex.codecogs.com/svg.image? \gamma \text{ or } \phi, " /> represents a rotation around the x axis.
-- <img src="https://latex.codecogs.com/svg.image?\beta,&space;\text{&space;or&space;}&space;\theta" title="https://latex.codecogs.com/svg.image?\beta, \text{ or } \theta" /> represents a rotation around the y axis,
-- <img src="https://latex.codecogs.com/svg.image?\alpha&space;\text{&space;or&space;}&space;\psi" title="https://latex.codecogs.com/svg.image?\alpha \text{ or } \psi" /> represents a rotation around the z axis,
-
-
-<br/>
-<br/>
-
-
-
-
-
-
-
-There are several axes conventions in practice for choosing the mobile and fixed axes and these conventions determine the signs of the angles.
-
-
-Tait–Bryan angles are often used to describe a vehicle's attitude with respect to a chosen reference frame. The positive x-axis in vehicles points always in the direction of movement. For positive y- and z-axis, we have to face two different conventions:
-
-- East, North, Up (ENU), used in geography (z is up and x is in the direction of move, y is pointing left)
-- North, East, Down (NED), used specially in aerospace (z is down and x is in the direction of move, y is pointing right)
-
-
-
-In case of land vehicles like cars, tanks  ENU-system (East-North-Up) as external reference (World frame), the vehicle's (body's) positive y- or pitch axis always points to its left, and the positive z- or yaw axis always points up.
-
-<img src="images/RPY_angles_of_cars.png" width="250" height="150" />
-
-
-In case of air and sea vehicles like submarines, ships, airplanes etc., which use the NED-system (North-East-Down) as external reference (World frame), the vehicle's (body's) positive y- or pitch axis always points to its right, and its positive z- or yaw axis always points down. 
-
-
-<img src="images/RPY_angles_of_airplanes.png" width="250" height="150" />
-
-
-
-
-# Rotation matrix
+## 1.4. Rotation matrix
 
 <img src="https://latex.codecogs.com/svg.latex?R_z%28%5Calpha%29%3D%5Cbegin%7Bpmatrix%7D%20cos%28%5Calpha%29%20%26%20-sin%28%5Calpha%29%20%260%20%5C%5C%20sin%28%5Calpha%29%20%26%20cos%28%5Calpha%29%20%260%20%5C%5C%200%20%26%200%20%26%201%5C%5C%20%5Cend%7Bpmatrix%7D" title="https://latex.codecogs.com/svg.image?R_z(\alpha)=\begin{pmatrix} cos(\alpha) & -sin(\alpha) &0 \\  sin(\alpha) & cos(\alpha) &0 \\ 0 & 0 & 1\\ \end{pmatrix}" />
 
@@ -107,7 +83,9 @@ It is important to note that <img src="https://latex.codecogs.com/svg.image?&spa
 <br/>
 <br/>
 
-## Determining yaw, pitch, and roll from a rotation matrix
+## 1.5. Determining Yaw, Pitch, And Roll From a Rotation Matrix
+<br/>
+<br/>
 
 <img src="https://latex.codecogs.com/svg.image?\begin{pmatrix}r_{11}&space;&&space;r_{12}&space;&r_{13}&space;&space;\\r_{21}&space;&&space;r_{22}&space;&&space;r_{23}&space;\\r_{31}&space;&&space;r_{32}&space;&&space;r_{33}&space;\\\end{pmatrix}" title="https://latex.codecogs.com/svg.image?\begin{pmatrix}r_{11} & r_{12} &r_{13} \\r_{21} & r_{22} & r_{23} \\r_{31} & r_{32} & r_{33} \\\end{pmatrix}" />
 
@@ -142,14 +120,43 @@ can calculate this for us:
 Note that this method assumes <img src="https://latex.codecogs.com/svg.image?r_{11}\neq&space;0" title="https://latex.codecogs.com/svg.image?r_{11}\neq 0" /> and <img src="https://latex.codecogs.com/svg.image?r_{33}\neq&space;0" title="https://latex.codecogs.com/svg.image?r_{33}\neq 0" />.
 
 
-## Signs and ranges
+## 1.6. Signs and ranges
 
 - for <img src="https://latex.codecogs.com/svg.image?\alpha&space;\text{&space;or&space;}&space;\psi" title="https://latex.codecogs.com/svg.image?\alpha \text{ or } \psi" /> and <img src="https://latex.codecogs.com/svg.image?&space;\gamma&space;\text{&space;or&space;}&space;\phi,&space;" title="https://latex.codecogs.com/svg.image? \gamma \text{ or } \phi, " />, the range is defined modulo <img src="https://latex.codecogs.com/svg.image?2\pi" title="https://latex.codecogs.com/svg.image?2\pi" />radians. For instance, a valid range could be <img src="https://latex.codecogs.com/svg.image?[-\pi,&space;\pi]" title="https://latex.codecogs.com/svg.image?[-\pi, \pi]" />.
 - for <img src="https://latex.codecogs.com/svg.image?\beta,&space;\text{&space;or&space;}&space;\theta" title="https://latex.codecogs.com/svg.image?\beta, \text{ or } \theta" />, the range covers <img src="https://latex.codecogs.com/svg.image?&space;\pi&space;" title="https://latex.codecogs.com/svg.image? \pi " /> radians (but can't be said to be modulo <img src="https://latex.codecogs.com/svg.image?&space;\pi&space;" title="https://latex.codecogs.com/svg.image? \pi " />). For example, it could be <img src="https://latex.codecogs.com/svg.image?[0,&space;\pi]" title="https://latex.codecogs.com/svg.image?[0, \pi]" /> or <img src="https://latex.codecogs.com/svg.image?[-\pi/2,&space;\pi/2]" title="https://latex.codecogs.com/svg.image?[-\pi/2, \pi/2]" />.
 
 
 
-## Gimbal lock 
+
+## 1.7. Tait–Bryan Angles
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;Z_{1}Y_{2}X_{3}}" title="https://latex.codecogs.com/svg.image?{\displaystyle Z_{1}Y_{2}X_{3}}" />
+
+
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?{\begin{aligned}\alpha&space;&=\arctan&space;\left({\frac&space;{r_{21}}{r_{11}}}\right)\\\beta&space;&=\arctan&space;\left({\frac&space;{-r_{31}}{\sqrt&space;{1-r_{31}^{2}}}}\right)\\\gamma&space;&=\arctan&space;\left({\frac&space;{r_{32}}{r_{33}}}\right)\end{aligned}}" title="https://latex.codecogs.com/svg.image?{\begin{aligned}\alpha &=\arctan \left({\frac {r_{21}}{r_{11}}}\right)\\\beta &=\arctan \left({\frac {-r_{31}}{\sqrt {1-r_{31}^{2}}}}\right)\\\gamma &=\arctan \left({\frac {r_{32}}{r_{33}}}\right)\end{aligned}}" />
+<br/>
+<br/>
+## 1.8. Equivalent Proper Euler Angles
+
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;Z_{1}Y_{2}Z_{3}}" title="https://latex.codecogs.com/svg.image?{\displaystyle Z_{1}Y_{2}Z_{3}}" />
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?{\begin{aligned}\alpha&space;&=\arctan&space;\left({\frac&space;{r_{23}}{r_{13}}}\right)\\\beta&space;&=\arctan&space;\left({\frac&space;{\sqrt&space;{1-r_{33}^{2}}}{r_{33}}}\right)\\\gamma&space;&=\arctan&space;\left({\frac&space;{r_{32}}{-r_{31}}}\right)\end{aligned}}" title="https://latex.codecogs.com/svg.image?{\begin{aligned}\alpha &=\arctan \left({\frac {r_{23}}{r_{13}}}\right)\\\beta &=\arctan \left({\frac {\sqrt {1-r_{33}^{2}}}{r_{33}}}\right)\\\gamma &=\arctan \left({\frac {r_{32}}{-r_{31}}}\right)\end{aligned}}" />
+
+
+
+
+
+# 1.9. Gimbal Lock 
 The angles <img src="https://latex.codecogs.com/svg.image?\alpha,&space;\beta,&space;\text{&space;and&space;}&space;\gamma" title="https://latex.codecogs.com/svg.image?\alpha, \beta, \text{ and } \gamma" /> are uniquely determined except for the singular case. If <img src="https://latex.codecogs.com/svg.image?cos(\beta)=0&space;\text{&space;or&space;}&space;\beta=\pm&space;\pi/2" title="https://latex.codecogs.com/svg.image?cos(\beta)=0 \text{ or } \beta=\pm \pi/2" />
 
 1. <img src="https://latex.codecogs.com/svg.image?\beta=\pi/2" title="https://latex.codecogs.com/svg.image?\beta=\pi/2" />
@@ -206,212 +213,42 @@ This means that there are infinitely many sets of (roll,yaw) angles for a given 
 
 Visit the [link](https://compsci290-s2016.github.io/CoursePage/Materials/EulerAnglesViz/) for interactive Gimbal visualization.
 
-## Proper Euler angles and Tait-Bryan angles
 
-Tait–Bryan angles:
-<br/>
-<br/>
-
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;Z_{1}Y_{2}X_{3}}" title="https://latex.codecogs.com/svg.image?{\displaystyle Z_{1}Y_{2}X_{3}}" />
-
-
-<br/>
-<br/>
-
-<img src="https://latex.codecogs.com/svg.image?{\begin{aligned}\alpha&space;&=\arctan&space;\left({\frac&space;{r_{21}}{r_{11}}}\right)\\\beta&space;&=\arctan&space;\left({\frac&space;{-r_{31}}{\sqrt&space;{1-r_{31}^{2}}}}\right)\\\gamma&space;&=\arctan&space;\left({\frac&space;{r_{32}}{r_{33}}}\right)\end{aligned}}" title="https://latex.codecogs.com/svg.image?{\begin{aligned}\alpha &=\arctan \left({\frac {r_{21}}{r_{11}}}\right)\\\beta &=\arctan \left({\frac {-r_{31}}{\sqrt {1-r_{31}^{2}}}}\right)\\\gamma &=\arctan \left({\frac {r_{32}}{r_{33}}}\right)\end{aligned}}" />
-<br/>
-<br/>
-Equivalent proper Euler angles:
-
-<br/>
-<br/>
-
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;Z_{1}Y_{2}Z_{3}}" title="https://latex.codecogs.com/svg.image?{\displaystyle Z_{1}Y_{2}Z_{3}}" />
-<br/>
-<br/>
-
-<img src="https://latex.codecogs.com/svg.image?{\begin{aligned}\alpha&space;&=\arctan&space;\left({\frac&space;{r_{23}}{r_{13}}}\right)\\\beta&space;&=\arctan&space;\left({\frac&space;{\sqrt&space;{1-r_{33}^{2}}}{r_{33}}}\right)\\\gamma&space;&=\arctan&space;\left({\frac&space;{r_{32}}{-r_{31}}}\right)\end{aligned}}" title="https://latex.codecogs.com/svg.image?{\begin{aligned}\alpha &=\arctan \left({\frac {r_{23}}{r_{13}}}\right)\\\beta &=\arctan \left({\frac {\sqrt {1-r_{33}^{2}}}{r_{33}}}\right)\\\gamma &=\arctan \left({\frac {r_{32}}{-r_{31}}}\right)\end{aligned}}" />
-
-## uniqueness of 3D rotation matrix
+## 1.10. Uniqueness of 3D Rotation Matrix
 
 Refs: [1](https://math.stackexchange.com/questions/105264/3d-rotation-matrix-uniqueness/105380#105380)
 
+# 2. Local tangent plane coordinates
 
-# Quaternions
 
-quaternion number system extends the complex numbers which introduced by William Rowan Hamilton. Hamilton defined a quaternion as the <b>quotient</b> of two vectors (two lines in a three-dimensional space). Quaternions are generally represented in the form:
+There are several axes conventions in practice for choosing the mobile and fixed axes and these conventions determine the signs of the angles.
 
 
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;a&plus;b\&space;\mathbf&space;{i}&space;&plus;c\&space;\mathbf&space;{j}&space;&plus;d\&space;\mathbf&space;{k}&space;}" title="https://latex.codecogs.com/svg.image?{\displaystyle a+b\ \mathbf {i} +c\ \mathbf {j} +d\ \mathbf {k} }" />
+Tait–Bryan angles are often used to describe a vehicle's attitude with respect to a chosen reference frame. The positive x-axis in vehicles points always in the direction of movement. For positive y- and z-axis, we have to face two different conventions:
+## 2.1. East, North, Up (ENU)
+East, North, Up (ENU), used in geography (z is up and x is in the direction of move, y is pointing left)
 
-where a, b, c, and d are real numbers; and i, j, and k are the basic quaternions ( symbols that can be interpreted as unit-vectors pointing along the three spatial axes).
+## 2.2 North, East, Down (NED) 
+- North, East, Down (NED), used specially in aerospace (z is down and x is in the direction of move, y is pointing right)
 
 
-a quaternion <img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;q=a&plus;b\,\mathbf&space;{i}&space;&plus;c\,\mathbf&space;{j}&space;&plus;d\,\mathbf&space;{k}&space;}" title="https://latex.codecogs.com/svg.image?{\displaystyle q=a+b\,\mathbf {i} +c\,\mathbf {j} +d\,\mathbf {k} }" />, as consisting of a scalar part and a vector part. 
-The quaternion <img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;b\,\mathbf&space;{i}&space;&plus;c\,\mathbf&space;{j}&space;&plus;d\,\mathbf&space;{k}&space;}" title="https://latex.codecogs.com/svg.image?{\displaystyle b\,\mathbf {i} +c\,\mathbf {j} +d\,\mathbf {k} }" />  is called the vector part (sometimes imaginary part) of q, and <img src="https://latex.codecogs.com/svg.image?a" title="https://latex.codecogs.com/svg.image?a" /> is the scalar part (sometimes real part) of q.
 
-## Basis
-The set of quaternions is made a 4-dimensional vector space over the real numbers, with <img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;\left\{1,\mathbf&space;{i}&space;,\mathbf&space;{j}&space;,\mathbf&space;{k}&space;\right\}}" title="https://latex.codecogs.com/svg.image?{\displaystyle \left\{1,\mathbf {i} ,\mathbf {j} ,\mathbf {k} \right\}}" /> as a basis, by the componentwise addition
+In case of land vehicles like cars, tanks  ENU-system (East-North-Up) as external reference (World frame), the vehicle's (body's) positive y- or pitch axis always points to its left, and the positive z- or yaw axis always points up.
 
+<img src="images/RPY_angles_of_cars.png" width="250" height="150" />
 
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;{\begin{aligned}\mathbf&space;{j\,k}&space;&=\mathbf&space;{i}&space;\,,\quad&space;&\mathbf&space;{k\,j}&space;&=-\mathbf&space;{i}&space;\,,\\\mathbf&space;{k\,i}&space;&=\mathbf&space;{j}&space;\,,\quad&space;&\mathbf&space;{i\,k}&space;&=-\mathbf&space;{j}&space;\,,\\\mathbf&space;{i\,j\,k}&space;&=-1\,,\quad&space;&\mathbf&space;{k}&space;^{2}&=-1\,\\\end{aligned}}}" title="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{aligned}\mathbf {j\,k} &=\mathbf {i} \,,\quad &\mathbf {k\,j} &=-\mathbf {i} \,,\\\mathbf {k\,i} &=\mathbf {j} \,,\quad &\mathbf {i\,k} &=-\mathbf {j} \,,\\\mathbf {i\,j\,k} &=-1\,,\quad &\mathbf {k} ^{2}&=-1\,\\\end{aligned}}}" />
 
-<br/>
-<br/>
+In case of air and sea vehicles like submarines, ships, airplanes etc., which use the NED-system (North-East-Down) as external reference (World frame), the vehicle's (body's) positive y- or pitch axis always points to its right, and its positive z- or yaw axis always points down. 
 
 
-<br/>
-<br/>
+<img src="images/RPY_angles_of_airplanes.png" width="250" height="150" />
 
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;\mathbf&space;{i}&space;^{2}=\mathbf&space;{j}&space;^{2}=\mathbf&space;{k}&space;^{2}=\mathbf&space;{i\,j\,k}&space;=-1}" title="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {i} ^{2}=\mathbf {j} ^{2}=\mathbf {k} ^{2}=\mathbf {i\,j\,k} =-1}" />
 
 
 
-## Quaternions Multiplication (Hamilton product)
 
-For two elements <img src="https://latex.codecogs.com/svg.image?a_1&space;&plus;&space;b_1i&space;&plus;c_1j&plus;d_1k" title="https://latex.codecogs.com/svg.image?a_1 + b_1i +c_1j+d_1k" /> and <img src="https://latex.codecogs.com/svg.image?a_2&space;&plus;&space;b_2i&space;&plus;c_2j&plus;d_2k" title="https://latex.codecogs.com/svg.image?a_2 + b_2i +c_2j+d_2k" />, their product, called the Hamilton product and is determined by distributive law:
 
-<br/>
-<br/>
-<img src="https://latex.codecogs.com/svg.image?(a_1&space;&plus;&space;b_1i&space;&plus;c_1j&plus;d_1k)(a_2&space;&plus;&space;b_2i&space;&plus;c_2j&plus;d_2k)" title="https://latex.codecogs.com/svg.image?(a_1 + b_1i +c_1j+d_1k)(a_2 + b_2i +c_2j+d_2k)" />
-<br/>
-<br/>
-
-<img src="https://latex.codecogs.com/svg.image?=&space;{\begin{alignedat}{}&a_{1}a_{2}&&&plus;a_{1}b_{2}\mathbf&space;{i}&space;&&&plus;a_{1}c_{2}\mathbf&space;{j}&space;&&&plus;a_{1}d_{2}\mathbf&space;{k}&space;\\{}&plus;{}&b_{1}a_{2}\mathbf&space;{i}&space;&&&plus;b_{1}b_{2}\mathbf&space;{i}&space;^{2}&&&plus;b_{1}c_{2}\mathbf&space;{ij}&space;&&&plus;b_{1}d_{2}\mathbf&space;{ik}&space;\\{}&plus;{}&c_{1}a_{2}\mathbf&space;{j}&space;&&&plus;c_{1}b_{2}\mathbf&space;{ji}&space;&&&plus;c_{1}c_{2}\mathbf&space;{j}&space;^{2}&&&plus;c_{1}d_{2}\mathbf&space;{jk}&space;\\{}&plus;{}&d_{1}a_{2}\mathbf&space;{k}&space;&&&plus;d_{1}b_{2}\mathbf&space;{ki}&space;&&&plus;d_{1}c_{2}\mathbf&space;{kj}&space;&&&plus;d_{1}d_{2}\mathbf&space;{k}&space;^{2}\end{alignedat}}" title="https://latex.codecogs.com/svg.image?= {\begin{alignedat}{}&a_{1}a_{2}&&+a_{1}b_{2}\mathbf {i} &&+a_{1}c_{2}\mathbf {j} &&+a_{1}d_{2}\mathbf {k} \\{}+{}&b_{1}a_{2}\mathbf {i} &&+b_{1}b_{2}\mathbf {i} ^{2}&&+b_{1}c_{2}\mathbf {ij} &&+b_{1}d_{2}\mathbf {ik} \\{}+{}&c_{1}a_{2}\mathbf {j} &&+c_{1}b_{2}\mathbf {ji} &&+c_{1}c_{2}\mathbf {j} ^{2}&&+c_{1}d_{2}\mathbf {jk} \\{}+{}&d_{1}a_{2}\mathbf {k} &&+d_{1}b_{2}\mathbf {ki} &&+d_{1}c_{2}\mathbf {kj} &&+d_{1}d_{2}\mathbf {k} ^{2}\end{alignedat}}" />
-
-<br/>
-<br/>
-
-<img src="https://latex.codecogs.com/svg.image?={\displaystyle&space;{\begin{alignedat}{}&a_{1}a_{2}&&-b_{1}b_{2}&&-c_{1}c_{2}&&-d_{1}d_{2}\\{}&plus;{}(&a_{1}b_{2}&&&plus;b_{1}a_{2}&&&plus;c_{1}d_{2}&&-d_{1}c_{2})\mathbf&space;{i}&space;\\{}&plus;{}(&a_{1}c_{2}&&-b_{1}d_{2}&&&plus;c_{1}a_{2}&&&plus;d_{1}b_{2})\mathbf&space;{j}&space;\\{}&plus;{}(&a_{1}d_{2}&&&plus;b_{1}c_{2}&&-c_{1}b_{2}&&&plus;d_{1}a_{2})\mathbf&space;{k}&space;\end{alignedat}}}" title="https://latex.codecogs.com/svg.image?={\displaystyle {\begin{alignedat}{}&a_{1}a_{2}&&-b_{1}b_{2}&&-c_{1}c_{2}&&-d_{1}d_{2}\\{}+{}(&a_{1}b_{2}&&+b_{1}a_{2}&&+c_{1}d_{2}&&-d_{1}c_{2})\mathbf {i} \\{}+{}(&a_{1}c_{2}&&-b_{1}d_{2}&&+c_{1}a_{2}&&+d_{1}b_{2})\mathbf {j} \\{}+{}(&a_{1}d_{2}&&+b_{1}c_{2}&&-c_{1}b_{2}&&+d_{1}a_{2})\mathbf {k} \end{alignedat}}}" />
-
-## Inverse of Quaternions
-
-<br/>
-<br/>
-
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;(a&plus;b\,\mathbf&space;{i}&space;&plus;c\,\mathbf&space;{j}&space;&plus;d\,\mathbf&space;{k}&space;)^{-1}={\frac&space;{1}{a^{2}&plus;b^{2}&plus;c^{2}&plus;d^{2}}}\,(a-b\,\mathbf&space;{i}&space;-c\,\mathbf&space;{j}&space;-d\,\mathbf&space;{k}&space;).}" title="https://latex.codecogs.com/svg.image?{\displaystyle (a+b\,\mathbf {i} +c\,\mathbf {j} +d\,\mathbf {k} )^{-1}={\frac {1}{a^{2}+b^{2}+c^{2}+d^{2}}}\,(a-b\,\mathbf {i} -c\,\mathbf {j} -d\,\mathbf {k} ).}" />
-
-
-
-## Conversion between quaternions and Euler angles
-
-
- A unit quaternion can be described as:
-
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;\mathbf&space;{q}&space;={\begin{bmatrix}q_{0}&q_{1}&q_{2}&q_{3}\end{bmatrix}}^{T}={\begin{bmatrix}q_{w}&q_{x}&q_{y}&q_{z}\end{bmatrix}}^{T}}" title="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {q} ={\begin{bmatrix}q_{0}&q_{1}&q_{2}&q_{3}\end{bmatrix}}^{T}={\begin{bmatrix}q_{w}&q_{x}&q_{y}&q_{z}\end{bmatrix}}^{T}}" />
-
-where 
-
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;|\mathbf&space;{q}&space;|^{2}=q_{0}^{2}&plus;q_{1}^{2}&plus;q_{2}^{2}&plus;q_{3}^{2}=q_{w}^{2}&plus;q_{x}^{2}&plus;q_{y}^{2}&plus;q_{z}^{2}=1}" title="https://latex.codecogs.com/svg.image?{\displaystyle |\mathbf {q} |^{2}=q_{0}^{2}+q_{1}^{2}+q_{2}^{2}+q_{3}^{2}=q_{w}^{2}+q_{x}^{2}+q_{y}^{2}+q_{z}^{2}=1}" />
-
-
-To get the rotation matrix:
-
-
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;R={\begin{bmatrix}1-2(q_{2}^{2}&plus;q_{3}^{2})&2(q_{1}q_{2}-q_{0}q_{3})&2(q_{0}q_{2}&plus;q_{1}q_{3})\\2(q_{1}q_{2}&plus;q_{0}q_{3})&1-2(q_{1}^{2}&plus;q_{3}^{2})&2(q_{2}q_{3}-q_{0}q_{1})\\2(q_{1}q_{3}-q_{0}q_{2})&2(q_{0}q_{1}&plus;q_{2}q_{3})&1-2(q_{1}^{2}&plus;q_{2}^{2})\end{bmatrix}}}" title="https://latex.codecogs.com/svg.image?{\displaystyle R={\begin{bmatrix}1-2(q_{2}^{2}+q_{3}^{2})&2(q_{1}q_{2}-q_{0}q_{3})&2(q_{0}q_{2}+q_{1}q_{3})\\2(q_{1}q_{2}+q_{0}q_{3})&1-2(q_{1}^{2}+q_{3}^{2})&2(q_{2}q_{3}-q_{0}q_{1})\\2(q_{1}q_{3}-q_{0}q_{2})&2(q_{0}q_{1}+q_{2}q_{3})&1-2(q_{1}^{2}+q_{2}^{2})\end{bmatrix}}}" />
-
-To get the roll pitch, yaw:
-
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;{\begin{bmatrix}\phi&space;\\\theta&space;\\\psi&space;\end{bmatrix}}={\begin{bmatrix}{\mbox{atan2}}\left(2(q_{0}q_{1}&plus;q_{2}q_{3}),1-2(q_{1}^{2}&plus;q_{2}^{2})\right)\\-\pi&space;/2&plus;2\,{\mbox{atan2}}\left({\sqrt&space;{1&plus;2(q_{0}q_{2}-q_{1}q_{3})}},{\sqrt&space;{1-2(q_{0}q_{2}-q_{1}q_{3})}}\right)\\{\mbox{atan2}}\left(2(q_{0}q_{3}&plus;q_{1}q_{2}),1-2(q_{2}^{2}&plus;q_{3}^{2})\right)\end{bmatrix}}}" title="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}\phi \\\theta \\\psi \end{bmatrix}}={\begin{bmatrix}{\mbox{atan2}}\left(2(q_{0}q_{1}+q_{2}q_{3}),1-2(q_{1}^{2}+q_{2}^{2})\right)\\-\pi /2+2\,{\mbox{atan2}}\left({\sqrt {1+2(q_{0}q_{2}-q_{1}q_{3})}},{\sqrt {1-2(q_{0}q_{2}-q_{1}q_{3})}}\right)\\{\mbox{atan2}}\left(2(q_{0}q_{3}+q_{1}q_{2}),1-2(q_{2}^{2}+q_{3}^{2})\right)\end{bmatrix}}}" />
-
-
-A very good article to read about [quaternions](https://danceswithcode.net/engineeringnotes/quaternions/quaternions.html)
-
-## Rotating a Vector by a Unit Quaternion
-
-## Quaternion Representing the Rotation From One Vector to Another
-
-
-Refs: [1](https://stackoverflow.com/questions/1171849/finding-quaternion-representing-the-rotation-from-one-vector-to-another)
-
-## Quaternions and  Axis-Angle Representation 
-Quaternions can encode axis-angle representation in four numbers, and can be used to apply the corresponding rotation to a position vector <img src="https://latex.codecogs.com/svg.image?(x,y,z)" alt="https://latex.codecogs.com/svg.image?(x,y,z)" />, representing a point relative to the origin in <img src="https://latex.codecogs.com/svg.image?\mathbb{R}^3" alt="https://latex.codecogs.com/svg.image?\mathbb{R}^3"/>.
-
-
-Euclidean vectors such as <img src="https://latex.codecogs.com/svg.image?(2,3,4)" alt="https://latex.codecogs.com/svg.image?(2,3,4)" /> or <img src="https://latex.codecogs.com/svg.image?(a_x,a_y,a_z)" alt="https://latex.codecogs.com/svg.image?(a_x,a_y,a_z)" /> can be rewritten as <img src="https://latex.codecogs.com/svg.image?2i+3j+4k" alt="https://latex.codecogs.com/svg.image?2i+3j+4k" /> or  <img src="https://latex.codecogs.com/svg.image?(a_xi,a_yj,a_zk)"  alt="https://latex.codecogs.com/svg.image?(a_xi,a_yj,a_zk)" /> , where i, j, k are unit vectors representing the three Cartesian axes (traditionally x, y, z), and also obey the multiplication rules of the fundamental quaternion units.
-
-
-Therefore, a rotation of angle <img src="https://latex.codecogs.com/svg.image?\theta" alt="https://latex.codecogs.com/svg.image?\theta" />  around the axis defined by the unit vector <img src="https://latex.codecogs.com/svg.image?{\vec%20{u}}=(u_{x},u_{y},u_{z})=u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}" alt="https://latex.codecogs.com/svg.image?{\vec {u}}=(u_{x},u_{y},u_{z})=u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k}" />
-
-
-can be represented by a quaternion using an extension of Euler's formula:
-
-<img src="https://latex.codecogs.com/svg.image?\mathbf%20{q}%20=e^{{\frac%20{\theta%20}{2}}{(u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}%20)}}=\cos%20{\frac%20{\theta%20}{2}}+(u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}%20)\sin%20{\frac%20{\theta%20}{2}}" alt="https://latex.codecogs.com/svg.image?\mathbf {q} =e^{{\frac {\theta }{2}}{(u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k} )}}=\cos {\frac {\theta }{2}}+(u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k} )\sin {\frac {\theta }{2}}" />
-
-
-
-The desired rotation can be applied to an ordinary vector 
-
-<img src="https://latex.codecogs.com/svg.image?\mathbf%20{p}%20=(p_{x},p_{y},p_{z})=p_{x}\mathbf%20{i}%20+p_{y}\mathbf%20{j}%20+p_{z}\mathbf%20{k}" alt="https://latex.codecogs.com/svg.image?\mathbf {p} =(p_{x},p_{y},p_{z})=p_{x}\mathbf {i} +p_{y}\mathbf {j} +p_{z}\mathbf {k}" />  in 3-dimensional space, considered as a quaternion with a real coordinate equal to zero, by the followings:
-
-
-
-
-<img src="https://latex.codecogs.com/svg.image?\mathbf%20{p%27}%20=\mathbf%20{q}%20\mathbf%20{p}%20\mathbf%20{q}%20^{-1}" alt="https://latex.codecogs.com/svg.image?\mathbf {p'} =\mathbf {q} \mathbf {p} \mathbf {q} ^{-1}" />
-
-
-In this instance, q is a unit quaternion and
-
-<img src="https://latex.codecogs.com/svg.image?\mathbf%20{q}%20^{-1}=e^{-{\frac%20{\theta%20}{2}}{(u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}%20)}}=\cos%20{\frac%20{\theta%20}{2}}-(u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}%20)\sin%20{\frac%20{\theta%20}{2}}" alt="https://latex.codecogs.com/svg.image?\mathbf {q} ^{-1}=e^{-{\frac {\theta }{2}}{(u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k} )}}=\cos {\frac {\theta }{2}}-(u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k} )\sin {\frac {\theta }{2}}." />
-
-Example: rotate the point vector (1,0,0) around y axis (0,1,0)  90 degrees.
-
-```cpp
-// P  = [0, p1, p2, p3]  <-- point vector
-// alpha = angle to rotate
-//[x, y, z] = axis to rotate around (unit vector)
-// R = [cos(alpha/2), sin(alpha/2)*x, sin(alpha/2)*y, sin(alpha/2)*z] <-- rotation
-// R' = [w, -x, -y, -z]
-// P' = RPR'
-// P' = H(H(R, P), R')
-
-Eigen::Vector3d p(1, 0, 0);
-
-Quaternion P;
-P.w = 0;
-P.x = p(0);
-P.y = p(1);
-P.z = p(2);
-
-// rotation of 90 degrees about the y-axis
-double alpha = M_PI / 2;
-Quaternion R;
-Eigen::Vector3d r(0, 1, 0);
-r = r.normalized();
-
-
-R.w = cos(alpha / 2);
-R.x = sin(alpha / 2) * r(0);
-R.y = sin(alpha / 2) * r(1);
-R.z = sin(alpha / 2) * r(2);
-
-std::cout << R.w << "," << R.x << "," << R.y << "," << R.z << std::endl;
-
-Quaternion R_prime = quaternionInversion(R);
-Quaternion P_prime = quaternionMultiplication(quaternionMultiplication(R, P), R_prime);
-
-/*rotation of 90 degrees about the y-axis for the point (1, 0, 0). The result
-is (0, 0, -1). (Note that the first element of P' will always be 0 and can
-therefore be discarded.)
-*/
-
-```
-
-Refs: [1](https://math.stackexchange.com/questions/40164/how-do-you-rotate-a-vector-by-a-unit-quaternion)  
-
-## The advantages of Quaternions 
-
-- Avoiding gimbal lock, a problem with systems such as Euler angles.
-- Faster and more compact than matrices.
-- Nonsingular representation (compared with Euler angles for example).
-
-
-
-Refs: [1](https://www.youtube.com/watch?v=d4EgbgTm0Bg),[2](https://www.youtube.com/watch?v=zjMuIxRvygQ), [3](https://quaternions.online/), [4](https://www.youtube.com/watch?v=zc8b2Jo7mno), [5](https://www.youtube.com/watch?v=syQnn_xuB8U),
-[6](https://www.youtube.com/watch?v=4mXL751ko0w), [7](https://www.reedbeta.com/blog/why-quaternions-double-cover/)
-
-
-# Axis-angle Representation
+# 3. Axis-angle Representation
 
 Axis-angle representation of a rotation in a three-dimensional Euclidean space by two quantities: 
 1. A unit vector <img src="https://latex.codecogs.com/svg.image?\bold{e}" title="https://latex.codecogs.com/svg.image?\bold{e}" /> indicating the direction of an axis of rotation, 
@@ -592,6 +429,266 @@ and if <img src="https://latex.codecogs.com/svg.image?\rVert&space;S_\omega&spac
 <br/>
 
 <img src="https://latex.codecogs.com/svg.image?e^{[S]\theta}&space;=\begin{bmatrix}e^{[S_\omega]\theta}&space;&&space;(I\theta&plus;&space;(1-cos\theta)[S_\omega]&space;&plus;(\theta-sin\theta)[S_\omega]^2)S_v&space;\\0&space;&&space;&space;&space;1\end{bmatrix}" title="https://latex.codecogs.com/svg.image?e^{[S]\theta} =\begin{bmatrix}e^{[S_\omega]\theta} & (I\theta+ (1-cos\theta)[S_\omega] +(\theta-sin\theta)[S_\omega]^2)S_v \\0 & 1\end{bmatrix}" />
+
+
+# 4. Quaternions
+
+quaternion number system extends the complex numbers which introduced by William Rowan Hamilton. Hamilton defined a quaternion as the <b>quotient</b> of two vectors (two lines in a three-dimensional space). Quaternions are generally represented in the form:
+
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;a&plus;b\&space;\mathbf&space;{i}&space;&plus;c\&space;\mathbf&space;{j}&space;&plus;d\&space;\mathbf&space;{k}&space;}" title="https://latex.codecogs.com/svg.image?{\displaystyle a+b\ \mathbf {i} +c\ \mathbf {j} +d\ \mathbf {k} }" />
+
+where a, b, c, and d are real numbers; and i, j, and k are the basic quaternions ( symbols that can be interpreted as unit-vectors pointing along the three spatial axes).
+
+
+a quaternion <img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;q=a&plus;b\,\mathbf&space;{i}&space;&plus;c\,\mathbf&space;{j}&space;&plus;d\,\mathbf&space;{k}&space;}" title="https://latex.codecogs.com/svg.image?{\displaystyle q=a+b\,\mathbf {i} +c\,\mathbf {j} +d\,\mathbf {k} }" />, as consisting of a scalar part and a vector part. 
+The quaternion <img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;b\,\mathbf&space;{i}&space;&plus;c\,\mathbf&space;{j}&space;&plus;d\,\mathbf&space;{k}&space;}" title="https://latex.codecogs.com/svg.image?{\displaystyle b\,\mathbf {i} +c\,\mathbf {j} +d\,\mathbf {k} }" />  is called the vector part (sometimes imaginary part) of q, and <img src="https://latex.codecogs.com/svg.image?a" title="https://latex.codecogs.com/svg.image?a" /> is the scalar part (sometimes real part) of q.
+
+## 4.1. Basis
+The set of quaternions is made a 4-dimensional vector space over the real numbers, with <img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;\left\{1,\mathbf&space;{i}&space;,\mathbf&space;{j}&space;,\mathbf&space;{k}&space;\right\}}" title="https://latex.codecogs.com/svg.image?{\displaystyle \left\{1,\mathbf {i} ,\mathbf {j} ,\mathbf {k} \right\}}" /> as a basis, by the componentwise addition
+
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;{\begin{aligned}\mathbf&space;{j\,k}&space;&=\mathbf&space;{i}&space;\,,\quad&space;&\mathbf&space;{k\,j}&space;&=-\mathbf&space;{i}&space;\,,\\\mathbf&space;{k\,i}&space;&=\mathbf&space;{j}&space;\,,\quad&space;&\mathbf&space;{i\,k}&space;&=-\mathbf&space;{j}&space;\,,\\\mathbf&space;{i\,j\,k}&space;&=-1\,,\quad&space;&\mathbf&space;{k}&space;^{2}&=-1\,\\\end{aligned}}}" title="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{aligned}\mathbf {j\,k} &=\mathbf {i} \,,\quad &\mathbf {k\,j} &=-\mathbf {i} \,,\\\mathbf {k\,i} &=\mathbf {j} \,,\quad &\mathbf {i\,k} &=-\mathbf {j} \,,\\\mathbf {i\,j\,k} &=-1\,,\quad &\mathbf {k} ^{2}&=-1\,\\\end{aligned}}}" />
+
+
+
+vector definition of a quaternion:
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bq%7D%5Ctriangleq%20%5Cbegin%7Bbmatrix%7Dq_w%20%5C%5C%20%5Cmathbf%7Bq%7D_v%5Cend%7Bbmatrix%7D%20%3D%20%5Cbegin%7Bbmatrix%7Dq_w%20%5C%5C%20q_x%20%5C%5C%20q_y%20%5C%5C%20q_z%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?\mathbf{q}\triangleq 
+\begin{bmatrix}q_w \\ \mathbf{q}_v\end{bmatrix} =
+\begin{bmatrix}q_w \\ q_x \\ q_y \\ q_z\end{bmatrix}" />
+
+
+
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;\mathbf&space;{i}&space;^{2}=\mathbf&space;{j}&space;^{2}=\mathbf&space;{k}&space;^{2}=\mathbf&space;{i\,j\,k}&space;=-1}" title="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {i} ^{2}=\mathbf {j} ^{2}=\mathbf {k} ^{2}=\mathbf {i\,j\,k} =-1}" />
+
+
+## 4.2. Inverse of Quaternions
+
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;(a&plus;b\,\mathbf&space;{i}&space;&plus;c\,\mathbf&space;{j}&space;&plus;d\,\mathbf&space;{k}&space;)^{-1}={\frac&space;{1}{a^{2}&plus;b^{2}&plus;c^{2}&plus;d^{2}}}\,(a-b\,\mathbf&space;{i}&space;-c\,\mathbf&space;{j}&space;-d\,\mathbf&space;{k}&space;).}" title="https://latex.codecogs.com/svg.image?{\displaystyle (a+b\,\mathbf {i} +c\,\mathbf {j} +d\,\mathbf {k} )^{-1}={\frac {1}{a^{2}+b^{2}+c^{2}+d^{2}}}\,(a-b\,\mathbf {i} -c\,\mathbf {j} -d\,\mathbf {k} ).}" />
+
+
+
+
+
+
+
+
+## 4.3. Quaternions Multiplication (Hamilton product)
+
+For two elements <img src="https://latex.codecogs.com/svg.image?a_1&space;&plus;&space;b_1i&space;&plus;c_1j&plus;d_1k" title="https://latex.codecogs.com/svg.image?a_1 + b_1i +c_1j+d_1k" /> and <img src="https://latex.codecogs.com/svg.image?a_2&space;&plus;&space;b_2i&space;&plus;c_2j&plus;d_2k" title="https://latex.codecogs.com/svg.image?a_2 + b_2i +c_2j+d_2k" />, their product, called the Hamilton product and is determined by distributive law:
+
+<br/>
+<br/>
+<img src="https://latex.codecogs.com/svg.image?(a_1&space;&plus;&space;b_1i&space;&plus;c_1j&plus;d_1k)(a_2&space;&plus;&space;b_2i&space;&plus;c_2j&plus;d_2k)" title="https://latex.codecogs.com/svg.image?(a_1 + b_1i +c_1j+d_1k)(a_2 + b_2i +c_2j+d_2k)" />
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?=&space;{\begin{alignedat}{}&a_{1}a_{2}&&&plus;a_{1}b_{2}\mathbf&space;{i}&space;&&&plus;a_{1}c_{2}\mathbf&space;{j}&space;&&&plus;a_{1}d_{2}\mathbf&space;{k}&space;\\{}&plus;{}&b_{1}a_{2}\mathbf&space;{i}&space;&&&plus;b_{1}b_{2}\mathbf&space;{i}&space;^{2}&&&plus;b_{1}c_{2}\mathbf&space;{ij}&space;&&&plus;b_{1}d_{2}\mathbf&space;{ik}&space;\\{}&plus;{}&c_{1}a_{2}\mathbf&space;{j}&space;&&&plus;c_{1}b_{2}\mathbf&space;{ji}&space;&&&plus;c_{1}c_{2}\mathbf&space;{j}&space;^{2}&&&plus;c_{1}d_{2}\mathbf&space;{jk}&space;\\{}&plus;{}&d_{1}a_{2}\mathbf&space;{k}&space;&&&plus;d_{1}b_{2}\mathbf&space;{ki}&space;&&&plus;d_{1}c_{2}\mathbf&space;{kj}&space;&&&plus;d_{1}d_{2}\mathbf&space;{k}&space;^{2}\end{alignedat}}" title="https://latex.codecogs.com/svg.image?= {\begin{alignedat}{}&a_{1}a_{2}&&+a_{1}b_{2}\mathbf {i} &&+a_{1}c_{2}\mathbf {j} &&+a_{1}d_{2}\mathbf {k} \\{}+{}&b_{1}a_{2}\mathbf {i} &&+b_{1}b_{2}\mathbf {i} ^{2}&&+b_{1}c_{2}\mathbf {ij} &&+b_{1}d_{2}\mathbf {ik} \\{}+{}&c_{1}a_{2}\mathbf {j} &&+c_{1}b_{2}\mathbf {ji} &&+c_{1}c_{2}\mathbf {j} ^{2}&&+c_{1}d_{2}\mathbf {jk} \\{}+{}&d_{1}a_{2}\mathbf {k} &&+d_{1}b_{2}\mathbf {ki} &&+d_{1}c_{2}\mathbf {kj} &&+d_{1}d_{2}\mathbf {k} ^{2}\end{alignedat}}" />
+
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.image?={\displaystyle&space;{\begin{alignedat}{}&a_{1}a_{2}&&-b_{1}b_{2}&&-c_{1}c_{2}&&-d_{1}d_{2}\\{}&plus;{}(&a_{1}b_{2}&&&plus;b_{1}a_{2}&&&plus;c_{1}d_{2}&&-d_{1}c_{2})\mathbf&space;{i}&space;\\{}&plus;{}(&a_{1}c_{2}&&-b_{1}d_{2}&&&plus;c_{1}a_{2}&&&plus;d_{1}b_{2})\mathbf&space;{j}&space;\\{}&plus;{}(&a_{1}d_{2}&&&plus;b_{1}c_{2}&&-c_{1}b_{2}&&&plus;d_{1}a_{2})\mathbf&space;{k}&space;\end{alignedat}}}" title="https://latex.codecogs.com/svg.image?={\displaystyle {\begin{alignedat}{}&a_{1}a_{2}&&-b_{1}b_{2}&&-c_{1}c_{2}&&-d_{1}d_{2}\\{}+{}(&a_{1}b_{2}&&+b_{1}a_{2}&&+c_{1}d_{2}&&-d_{1}c_{2})\mathbf {i} \\{}+{}(&a_{1}c_{2}&&-b_{1}d_{2}&&+c_{1}a_{2}&&+d_{1}b_{2})\mathbf {j} \\{}+{}(&a_{1}d_{2}&&+b_{1}c_{2}&&-c_{1}b_{2}&&+d_{1}a_{2})\mathbf {k} \end{alignedat}}}" />
+
+
+
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bpq%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20p_w%20q_w%20-%20p_x%20q_x%20-%20p_y%20q_y%20-%20p_z%20q_z%20%5C%5C%20p_w%20q_x%20&plus;%20p_x%20q_w%20&plus;%20p_y%20q_z%20-%20p_z%20q_y%20%5C%5C%20p_w%20q_y%20-%20p_x%20q_z%20&plus;%20p_y%20q_w%20&plus;%20p_z%20q_x%20%5C%5C%20p_w%20q_z%20&plus;%20p_x%20q_y%20-%20p_y%20q_x%20&plus;%20p_z%20q_w%20%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?\mathbf{pq} =
+\begin{bmatrix}
+    p_w q_w - p_x q_x - p_y q_y - p_z q_z \\
+    p_w q_x + p_x q_w + p_y q_z - p_z q_y \\
+    p_w q_y - p_x q_z + p_y q_w + p_z q_x \\
+    p_w q_z + p_x q_y - p_y q_x + p_z q_w
+\end{bmatrix}" />
+
+
+
+## 4.4. Quaternion as Orientation
+
+Any orientation in a three-dimensional euclidean space of a frame <img src="https://latex.codecogs.com/svg.latex?B" alt="https://latex.codecogs.com/svg.latex?B" />  with respect to a frame <img src="https://latex.codecogs.com/svg.latex?S" alt="https://latex.codecogs.com/svg.latex?S" />  can be represented by a unit quaternion (a.k.a. versor), <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bq%7D%5Cin%5Cmathbb%7BH%7D%5E4" alt="https://latex.codecogs.com/svg.latex?\mathbf{q}\in\mathbb{H}^4" /> , in Hamiltonian space defined as:
+
+
+<img src="https://latex.codecogs.com/svg.latex?%5ES_B%5Cmathbf%7Bq%7D%20%3D%20%5Cbegin%7Bbmatrix%7Dq_w%5C%5Cq_x%5C%5Cq_y%5C%5Cq_z%5Cend%7Bbmatrix%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%5Ccos%5Cfrac%7B%5Calpha%7D%7B2%7D%5C%5Ce_x%5Csin%5Cfrac%7B%5Calpha%7D%7B2%7D%5C%5Ce_y%5Csin%5Cfrac%7B%5Calpha%7D%7B2%7D%5C%5Ce_z%5Csin%5Cfrac%7B%5Calpha%7D%7B2%7D%20%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?^S_B\mathbf{q} = \begin{bmatrix}q_w\\q_x\\q_y\\q_z\end{bmatrix} =
+\begin{bmatrix}
+\cos\frac{\alpha}{2}\\e_x\sin\frac{\alpha}{2}\\e_y\sin\frac{\alpha}{2}\\e_z\sin\frac{\alpha}{2}
+\end{bmatrix}" />
+
+
+
+
+where <img src="https://latex.codecogs.com/svg.latex?\alpha" alt="https://latex.codecogs.com/svg.latex?\alpha" />  is the rotation angle and e  is the unit vector representing the rotation axis.
+
+
+
+The orientation of frame <img src="https://latex.codecogs.com/svg.latex?S" alt="https://latex.codecogs.com/svg.latex?S" />
+ relative to frame <img src="https://latex.codecogs.com/svg.latex?B" alt="https://latex.codecogs.com/svg.latex?B" /> is  the conjugate quaternion:
+
+<img src="https://latex.codecogs.com/svg.latex?%5ES_B%5Cmathbf%7Bq%7D%5E*%20%3D%20%5C%2C%5EB_S%5Cmathbf%7Bq%7D%20%3D%20%5Cbegin%7Bbmatrix%7Dq_w%5C%5C-q_x%5C%5C-q_y%5C%5C-q_z%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?^S_B\mathbf{q}^* = \,^B_S\mathbf{q} = \begin{bmatrix}q_w\\-q_x\\-q_y\\-q_z\end{bmatrix}" />
+
+
+sequence of rotations follows the subscript cancellation rule:
+
+
+<img src="https://latex.codecogs.com/svg.latex?%5EC_A%5Cmathbf%7Bq%7D%20%3D%20%5C%2C%5EC_B%5Cmathbf%7Bq%7D%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D" alt="https://latex.codecogs.com/svg.latex?^C_A\mathbf{q} = \,^C_B\mathbf{q} \, ^B_A\mathbf{q}" />
+
+
+## 4.5 Changing Frame of Reference with Unit Quaternion
+If you have a vector that has been expressed in frame A:
+<br/>
+<img src="https://latex.codecogs.com/svg.latex?%5EA%5Cmathbf%7Bv%7D_q%3D%5Cbegin%7Bbmatrix%7Dv_x%20%5C%5C%20v_y%20%5C%5C%20v_z%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?^A\mathbf{v}_q=\begin{bmatrix}v_x \\ v_y \\ v_z\end{bmatrix}" />
+
+<br/>
+And you want to express it in frame B, First express it as : 
+<br/>
+<img src="https://latex.codecogs.com/svg.latex?%5EA%5Cmathbf%7Bv%7D_q%3D%5Cbegin%7Bbmatrix%7D0%5C%5Cv_x%20%5C%5C%20v_y%20%5C%5C%20v_z%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?^A\mathbf{v}_q=\begin{bmatrix}0\\v_x \\ v_y \\ v_z\end{bmatrix}" />
+
+
+
+<img src="https://latex.codecogs.com/svg.latex?%5EB%5Cmathbf%7Bv%7D_q%20%3D%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D%20%5C%2C%20%5EA%5Cmathbf%7Bv%7D_q%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D%5E*
+" alt="https://latex.codecogs.com/svg.latex?^B\mathbf{v}_q = \, ^B_A\mathbf{q} \, ^A\mathbf{v}_q \, ^B_A\mathbf{q}^*" />
+
+
+The inverse rotation:
+
+
+<img src="https://latex.codecogs.com/svg.latex?%5EA%5Cmathbf%7Bv%7D_q%20%3D%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D%5E*%20%5C%2C%20%5EB%5Cmathbf%7Bv%7D_q%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D%20%3D%20%5C%2C%20%5EA_B%5Cmathbf%7Bq%7D%20%5C%2C%20%5EB%5Cmathbf%7Bv%7D_q%20%5C%2C%20%5EA_B%5Cmathbf%7Bq%7D%5E*"  alt="https://latex.codecogs.com/svg.latex?^A\mathbf{v}_q = \, ^B_A\mathbf{q}^* \, ^B\mathbf{v}_q \, ^B_A\mathbf{q} = \, ^A_B\mathbf{q} \, ^B\mathbf{v}_q \, ^A_B\mathbf{q}^*" />
+
+
+
+These rotations can also be expressed Direction Cosine Matrix:
+
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7BR%7D%28%5EB_A%5Cmathbf%7Bq%7D%29%20%3D%20%5Cbegin%7Bbmatrix%7D%20q_w%5E2&plus;q_x%5E2-q_y%5E2-q_z%5E2%20%26%202%28q_xq_y%20-%20q_wq_z%29%20%26%202%28q_xq_z%20&plus;%20q_wq_y%29%20%5C%5C%202%28q_xq_y%20&plus;%20q_wq_z%29%20%26%20q_w%5E2-q_x%5E2&plus;q_y%5E2-q_z%5E2%20%26%202%28q_yq_z%20-%20q_wq_x%29%20%5C%5C%202%28q_xq_z%20-%20q_wq_y%29%20%26%202%28q_wq_x%20&plus;%20q_yq_z%29%20%26%20q_w%5E2-q_x%5E2-q_y%5E2&plus;q_z%5E2%20%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?\mathbf{R}(^B_A\mathbf{q}) =
+\begin{bmatrix} q_w^2+q_x^2-q_y^2-q_z^2 & 2(q_xq_y - q_wq_z) & 2(q_xq_z + q_wq_y) \\ 2(q_xq_y + q_wq_z) & q_w^2-q_x^2+q_y^2-q_z^2 & 2(q_yq_z - q_wq_x) \\ 2(q_xq_z - q_wq_y) & 2(q_wq_x + q_yq_z) & q_w^2-q_x^2-q_y^2+q_z^2 \end{bmatrix}" />
+
+
+
+
+## 4.6. Conversion between quaternions and Euler angles
+
+
+ A unit quaternion can be described as:
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;\mathbf&space;{q}&space;={\begin{bmatrix}q_{0}&q_{1}&q_{2}&q_{3}\end{bmatrix}}^{T}={\begin{bmatrix}q_{w}&q_{x}&q_{y}&q_{z}\end{bmatrix}}^{T}}" title="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {q} ={\begin{bmatrix}q_{0}&q_{1}&q_{2}&q_{3}\end{bmatrix}}^{T}={\begin{bmatrix}q_{w}&q_{x}&q_{y}&q_{z}\end{bmatrix}}^{T}}" />
+
+where 
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;|\mathbf&space;{q}&space;|^{2}=q_{0}^{2}&plus;q_{1}^{2}&plus;q_{2}^{2}&plus;q_{3}^{2}=q_{w}^{2}&plus;q_{x}^{2}&plus;q_{y}^{2}&plus;q_{z}^{2}=1}" title="https://latex.codecogs.com/svg.image?{\displaystyle |\mathbf {q} |^{2}=q_{0}^{2}+q_{1}^{2}+q_{2}^{2}+q_{3}^{2}=q_{w}^{2}+q_{x}^{2}+q_{y}^{2}+q_{z}^{2}=1}" />
+
+
+To get the rotation matrix:
+
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;R={\begin{bmatrix}1-2(q_{2}^{2}&plus;q_{3}^{2})&2(q_{1}q_{2}-q_{0}q_{3})&2(q_{0}q_{2}&plus;q_{1}q_{3})\\2(q_{1}q_{2}&plus;q_{0}q_{3})&1-2(q_{1}^{2}&plus;q_{3}^{2})&2(q_{2}q_{3}-q_{0}q_{1})\\2(q_{1}q_{3}-q_{0}q_{2})&2(q_{0}q_{1}&plus;q_{2}q_{3})&1-2(q_{1}^{2}&plus;q_{2}^{2})\end{bmatrix}}}" title="https://latex.codecogs.com/svg.image?{\displaystyle R={\begin{bmatrix}1-2(q_{2}^{2}+q_{3}^{2})&2(q_{1}q_{2}-q_{0}q_{3})&2(q_{0}q_{2}+q_{1}q_{3})\\2(q_{1}q_{2}+q_{0}q_{3})&1-2(q_{1}^{2}+q_{3}^{2})&2(q_{2}q_{3}-q_{0}q_{1})\\2(q_{1}q_{3}-q_{0}q_{2})&2(q_{0}q_{1}+q_{2}q_{3})&1-2(q_{1}^{2}+q_{2}^{2})\end{bmatrix}}}" />
+
+To get the roll pitch, yaw:
+
+<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;{\begin{bmatrix}\phi&space;\\\theta&space;\\\psi&space;\end{bmatrix}}={\begin{bmatrix}{\mbox{atan2}}\left(2(q_{0}q_{1}&plus;q_{2}q_{3}),1-2(q_{1}^{2}&plus;q_{2}^{2})\right)\\-\pi&space;/2&plus;2\,{\mbox{atan2}}\left({\sqrt&space;{1&plus;2(q_{0}q_{2}-q_{1}q_{3})}},{\sqrt&space;{1-2(q_{0}q_{2}-q_{1}q_{3})}}\right)\\{\mbox{atan2}}\left(2(q_{0}q_{3}&plus;q_{1}q_{2}),1-2(q_{2}^{2}&plus;q_{3}^{2})\right)\end{bmatrix}}}" title="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}\phi \\\theta \\\psi \end{bmatrix}}={\begin{bmatrix}{\mbox{atan2}}\left(2(q_{0}q_{1}+q_{2}q_{3}),1-2(q_{1}^{2}+q_{2}^{2})\right)\\-\pi /2+2\,{\mbox{atan2}}\left({\sqrt {1+2(q_{0}q_{2}-q_{1}q_{3})}},{\sqrt {1-2(q_{0}q_{2}-q_{1}q_{3})}}\right)\\{\mbox{atan2}}\left(2(q_{0}q_{3}+q_{1}q_{2}),1-2(q_{2}^{2}+q_{3}^{2})\right)\end{bmatrix}}}" />
+
+
+A very good article to read about [quaternions](https://danceswithcode.net/engineeringnotes/quaternions/quaternions.html)
+
+
+
+## 4.7. Quaternion Representing the Rotation From One Vector to Another
+
+
+Refs: [1](https://stackoverflow.com/questions/1171849/finding-quaternion-representing-the-rotation-from-one-vector-to-another)
+
+## 4.8. Quaternions and  Axis-Angle Representation 
+Quaternions can encode axis-angle representation in four numbers, and can be used to apply the corresponding rotation to a position vector <img src="https://latex.codecogs.com/svg.image?(x,y,z)" alt="https://latex.codecogs.com/svg.image?(x,y,z)" />, representing a point relative to the origin in <img src="https://latex.codecogs.com/svg.image?\mathbb{R}^3" alt="https://latex.codecogs.com/svg.image?\mathbb{R}^3"/>.
+
+
+Euclidean vectors such as <img src="https://latex.codecogs.com/svg.image?(2,3,4)" alt="https://latex.codecogs.com/svg.image?(2,3,4)" /> or <img src="https://latex.codecogs.com/svg.image?(a_x,a_y,a_z)" alt="https://latex.codecogs.com/svg.image?(a_x,a_y,a_z)" /> can be rewritten as <img src="https://latex.codecogs.com/svg.image?2i+3j+4k" alt="https://latex.codecogs.com/svg.image?2i+3j+4k" /> or  <img src="https://latex.codecogs.com/svg.image?(a_xi,a_yj,a_zk)"  alt="https://latex.codecogs.com/svg.image?(a_xi,a_yj,a_zk)" /> , where i, j, k are unit vectors representing the three Cartesian axes (traditionally x, y, z), and also obey the multiplication rules of the fundamental quaternion units.
+
+
+Therefore, a rotation of angle <img src="https://latex.codecogs.com/svg.image?\theta" alt="https://latex.codecogs.com/svg.image?\theta" />  around the axis defined by the unit vector <img src="https://latex.codecogs.com/svg.image?{\vec%20{u}}=(u_{x},u_{y},u_{z})=u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}" alt="https://latex.codecogs.com/svg.image?{\vec {u}}=(u_{x},u_{y},u_{z})=u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k}" />
+
+
+can be represented by a quaternion using an extension of Euler's formula:
+
+<img src="https://latex.codecogs.com/svg.image?\mathbf%20{q}%20=e^{{\frac%20{\theta%20}{2}}{(u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}%20)}}=\cos%20{\frac%20{\theta%20}{2}}+(u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}%20)\sin%20{\frac%20{\theta%20}{2}}" alt="https://latex.codecogs.com/svg.image?\mathbf {q} =e^{{\frac {\theta }{2}}{(u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k} )}}=\cos {\frac {\theta }{2}}+(u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k} )\sin {\frac {\theta }{2}}" />
+
+
+
+The desired rotation can be applied to an ordinary vector 
+
+<img src="https://latex.codecogs.com/svg.image?\mathbf%20{p}%20=(p_{x},p_{y},p_{z})=p_{x}\mathbf%20{i}%20+p_{y}\mathbf%20{j}%20+p_{z}\mathbf%20{k}" alt="https://latex.codecogs.com/svg.image?\mathbf {p} =(p_{x},p_{y},p_{z})=p_{x}\mathbf {i} +p_{y}\mathbf {j} +p_{z}\mathbf {k}" />  in 3-dimensional space, considered as a quaternion with a real coordinate equal to zero, by the followings:
+
+
+
+
+<img src="https://latex.codecogs.com/svg.image?\mathbf%20{p%27}%20=\mathbf%20{q}%20\mathbf%20{p}%20\mathbf%20{q}%20^{-1}" alt="https://latex.codecogs.com/svg.image?\mathbf {p'} =\mathbf {q} \mathbf {p} \mathbf {q} ^{-1}" />
+
+
+In this instance, q is a unit quaternion and
+
+<img src="https://latex.codecogs.com/svg.image?\mathbf%20{q}%20^{-1}=e^{-{\frac%20{\theta%20}{2}}{(u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}%20)}}=\cos%20{\frac%20{\theta%20}{2}}-(u_{x}\mathbf%20{i}%20+u_{y}\mathbf%20{j}%20+u_{z}\mathbf%20{k}%20)\sin%20{\frac%20{\theta%20}{2}}" alt="https://latex.codecogs.com/svg.image?\mathbf {q} ^{-1}=e^{-{\frac {\theta }{2}}{(u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k} )}}=\cos {\frac {\theta }{2}}-(u_{x}\mathbf {i} +u_{y}\mathbf {j} +u_{z}\mathbf {k} )\sin {\frac {\theta }{2}}." />
+
+Example: rotate the point vector (1,0,0) around y axis (0,1,0)  90 degrees.
+
+```cpp
+// P  = [0, p1, p2, p3]  <-- point vector
+// alpha = angle to rotate
+//[x, y, z] = axis to rotate around (unit vector)
+// R = [cos(alpha/2), sin(alpha/2)*x, sin(alpha/2)*y, sin(alpha/2)*z] <-- rotation
+// R' = [w, -x, -y, -z]
+// P' = RPR'
+// P' = H(H(R, P), R')
+
+Eigen::Vector3d p(1, 0, 0);
+
+Quaternion P;
+P.w = 0;
+P.x = p(0);
+P.y = p(1);
+P.z = p(2);
+
+// rotation of 90 degrees about the y-axis
+double alpha = M_PI / 2;
+Quaternion R;
+Eigen::Vector3d r(0, 1, 0);
+r = r.normalized();
+
+
+R.w = cos(alpha / 2);
+R.x = sin(alpha / 2) * r(0);
+R.y = sin(alpha / 2) * r(1);
+R.z = sin(alpha / 2) * r(2);
+
+std::cout << R.w << "," << R.x << "," << R.y << "," << R.z << std::endl;
+
+Quaternion R_prime = quaternionInversion(R);
+Quaternion P_prime = quaternionMultiplication(quaternionMultiplication(R, P), R_prime);
+
+/*rotation of 90 degrees about the y-axis for the point (1, 0, 0). The result
+is (0, 0, -1). (Note that the first element of P' will always be 0 and can
+therefore be discarded.)
+*/
+
+```
+
+Refs: [1](https://math.stackexchange.com/questions/40164/how-do-you-rotate-a-vector-by-a-unit-quaternion)  
+
+## The advantages of Quaternions 
+
+- Avoiding gimbal lock, a problem with systems such as Euler angles.
+- Faster and more compact than matrices.
+- Nonsingular representation (compared with Euler angles for example).
+
+
+
+Refs: [1](https://www.youtube.com/watch?v=d4EgbgTm0Bg),[2](https://www.youtube.com/watch?v=zjMuIxRvygQ), [3](https://quaternions.online/), [4](https://www.youtube.com/watch?v=zc8b2Jo7mno), [5](https://www.youtube.com/watch?v=syQnn_xuB8U),
+[6](https://www.youtube.com/watch?v=4mXL751ko0w), [7](https://www.reedbeta.com/blog/why-quaternions-double-cover/)
+
+
 
 # Lie algebra Groups
 
