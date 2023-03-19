@@ -1,85 +1,89 @@
 - [Chapter 5 Dense Linear Problems And Decompositions](#chapter-5-dense-linear-problems-and-decompositions)
-- [Vector space](#vector-space)
-  * [Examples of Vector Spaces](#examples-of-vector-spaces)
-  * [Vector Products](#vector-products)
-    + [Dot Procuct](#dot-procuct)
-    + [The Hadamard product (Schur product)](#the-hadamard-product--schur-product-)
-    + [Kronecker product](#kronecker-product)
-- [Introduction to Linear Equation](#introduction-to-linear-equation)
-  * [Intuition behind Matrix Multiplication:](#intuition-behind-matrix-multiplication-)
-  * [Solution set](#solution-set)
-  * [Underdetermined System](#underdetermined-system)
-  * [Overdetermined System](#overdetermined-system)
-  * [Determined](#determined)
-  * [Homogeneous vs Non-homogeneous](#homogeneous-vs-non-homogeneous)
-    + [Using the SVD](#using-the-svd)
-- [Solving Linear Equation](#solving-linear-equation)
-    + [Using the SVD](#using-the-svd-1)
-    + [Complete Orthogonal Decomposition](#complete-orthogonal-decomposition)
-    + [Using the QR](#using-the-qr)
-    + [Using Cholesky Decomposition](#using-cholesky-decomposition)
-  * [Gaussian Elimination (row reduction)](#gaussian-elimination--row-reduction-)
-    + [Forward Elimination](#forward-elimination)
-    + [Forward and Back Substitution](#forward-and-back-substitution)
-    + [Partial Pivoting and Full Pivoting](#partial-pivoting-and-full-pivoting)
-  * [Numerical stability in Gaussian Elimination](#numerical-stability-in-gaussian-elimination)
-  * [Example of The Gaussian Elimination Algorithm](#example-of-the-gaussian-elimination-algorithm)
-- [Row echelon form](#row-echelon-form)
-- [Reduced row echelon form](#reduced-row-echelon-form)
-  * [Example](#example)
-  * [Pivot Column](#pivot-column)
-- [Trapezoidal Matrix](#trapezoidal-matrix)
-- [Matrices Decompositions](#matrices-decompositions)
-  * [QR Decomposition](#qr-decomposition)
-    + [Square Matrix QR Decomposition](#square-matrix-qr-decomposition)
-    + [Rectangular Matrix QR Decomposition](#rectangular-matrix-qr-decomposition)
-  * [Computing the QR Decomposition](#computing-the-qr-decomposition)
-  * [Gram Schmidt Orthogonalization](#gram-schmidt-orthogonalization)
-  * [Householder Transformations](#householder-transformations)
-  * [QL, RQ and LQ Decompositions](#ql--rq-and-lq-decompositions)
-  * [Cholesky Decomposition LL*](#cholesky-decomposition-ll-)
-    + [Hermitian Matrix](#hermitian-matrix)
-    + [Positive (Semidefinite) Definite Matrix:](#positive--semidefinite--definite-matrix-)
-  * [LDL Decomposition](#ldl-decomposition)
-  * [Lower Upper (LU) Decomposition](#lower-upper--lu--decomposition)
-  * [Lower Diagonal Upper (LDU) decomposition](#lower-diagonal-upper--ldu--decomposition)
-  * [SVD Decomposition](#svd-decomposition)
-  * [SVD and Null Space](#svd-and-null-space)
-  * [Eigen Value and Eigen Vector](#eigen-value-and-eigen-vector)
-  * [Calculation of Eigen Value and Eigen Vector](#calculation-of-eigen-value-and-eigen-vector)
-  * [Example of Calculating Eigen Value and Eigen Vector](#example-of-calculating-eigen-value-and-eigen-vector)
-- [Linear Map](#linear-map)
-- [Span](#span)
-- [Subspace](#subspace)
-- [Row Spaces and Column Spaces](#row-spaces-and-column-spaces)
-- [Range of a Matrix](#range-of-a-matrix)
-  * [Example of Row Spaces](#example-of-row-spaces)
-- [Basis](#basis)
-  * [Example of Computing Basis for Column Space](#example-of-computing-basis-for-column-space)
-  * [Example of Computing Basis for Row Space](#example-of-computing-basis-for-row-space)
-  * [Changes of basis vectors](#changes-of-basis-vectors)
-  * [Covariance and Contravariance of Vectors](#covariance-and-contravariance-of-vectors)
-  * [Creating a Basis Set](#creating-a-basis-set)
-  * [Change of Basis](#change-of-basis)
-  * [Vector Fields](#vector-fields)
-  * [Coordinate System](#coordinate-system)
-    + [Cartesian, Polar, Curvilinear coordinates ,Cylindrical and Spherical Coordinates](#cartesian--polar--curvilinear-coordinates--cylindrical-and-spherical-coordinates)
-  * [Coordinate transformations](#coordinate-transformations)
-  * [Affine & Curvilinear Transformations](#affine---curvilinear-transformations)
-- [Rank of Matrix](#rank-of-matrix)
-  * [Conclusion on Computing Rank](#conclusion-on-computing-rank)
-- [Dimension of the Column Space](#dimension-of-the-column-space)
-- [Null Space (Kernel)](#null-space--kernel-)
-  * [Example of Calculating Null Space](#example-of-calculating-null-space)
-- [Nullity](#nullity)
-- [Rank-nullity Theorem](#rank-nullity-theorem)
-- [The Determinant of The Matrix](#the-determinant-of-the-matrix)
-- [Finding The Inverse of The Matrix](#finding-the-inverse-of-the-matrix)
-- [The Fundamental Theorem of Linear Algebra](#the-fundamental-theorem-of-linear-algebra)
-- [Permutation Matrix](#permutation-matrix)
-- [Augmented Matrix](#augmented-matrix)
+- [1. Vector Space](#1-vector-space)
+  * [1.1. Examples of Vector Spaces](#11-examples-of-vector-spaces)
+  * [1.2. Vector Products](#12-vector-products)
+    + [1.2.1 Dot Product](#121-dot-product)
+    + [1.2.2 The Hadamard product (Schur product)](#122-the-hadamard-product--schur-product-)
+    + [1.2.3 Kronecker product](#123-kronecker-product)
+- [2. Linear Equation](#2-linear-equation)
+  * [2.1. Intuition behind Matrix Multiplication:](#21-intuition-behind-matrix-multiplication-)
+  * [2.2. Solution set](#22-solution-set)
+  * [2.3. Underdetermined System](#23-underdetermined-system)
+  * [2.4. Overdetermined System](#24-overdetermined-system)
+  * [2.5. Determined](#25-determined)
+  * [2.6. Homogeneous vs Non-homogeneous](#26-homogeneous-vs-non-homogeneous)
+- [3. Solving Linear Equation](#3-solving-linear-equation)
+  * [3.1. Using the SVD](#31-using-the-svd)
+  * [3.2. Complete Orthogonal Decomposition](#32-complete-orthogonal-decomposition)
+  * [3.3. Using the QR](#33-using-the-qr)
+  * [3.4.  Using Cholesky Decomposition](#34--using-cholesky-decomposition)
+  * [3.5. Gaussian Elimination (row reduction)](#35-gaussian-elimination--row-reduction-)
+    + [3.5.1. Forward Elimination](#351-forward-elimination)
+    + [3.5.2. Forward and Back Substitution](#352-forward-and-back-substitution)
+    + [3.5.3. Partial Pivoting and Full Pivoting](#353-partial-pivoting-and-full-pivoting)
+    + [3.5.4. Numerical stability in Gaussian Elimination](#354-numerical-stability-in-gaussian-elimination)
+    + [3.5.5. Example of The Gaussian Elimination Algorithm](#355-example-of-the-gaussian-elimination-algorithm)
+    + [3.5.6.  Row Echelon Form](#356--row-echelon-form)
+    + [3.5.7.  Reduced Row Echelon Form](#357--reduced-row-echelon-form)
+    + [3.5.8.  Example of Row Echelon](#358--example-of-row-echelon)
+    + [3.5.9. Echelon Pivot Column](#359-echelon-pivot-column)
+- [4. Matrices Decompositions](#4-matrices-decompositions)
+  * [4.1. QR Decomposition](#41-qr-decomposition)
+    + [4.1.1. Square Matrix QR Decomposition](#411-square-matrix-qr-decomposition)
+    + [4.1.2.  Rectangular Matrix QR Decomposition](#412--rectangular-matrix-qr-decomposition)
+  * [4.2. Computing the QR Decomposition](#42-computing-the-qr-decomposition)
+  * [4.3. Gram Schmidt Orthogonalization](#43-gram-schmidt-orthogonalization)
+  * [4.4. Householder Transformations](#44-householder-transformations)
+  * [4.5. QL, RQ and LQ Decompositions](#45-ql--rq-and-lq-decompositions)
+  * [4.6. Cholesky Decomposition LL*](#46-cholesky-decomposition-ll-)
+  * [4.7. Hermitian Matrix](#47-hermitian-matrix)
+  * [4.8. Positive (Semidefinite) Definite Matrix:](#48-positive--semidefinite--definite-matrix-)
+  * [4.9. LDL Decomposition](#49-ldl-decomposition)
+  * [4.10. Lower Upper (LU) Decomposition](#410-lower-upper--lu--decomposition)
+  * [4.11. Lower Diagonal Upper (LDU) decomposition](#411-lower-diagonal-upper--ldu--decomposition)
+  * [4.12. Eigen Value and Eigen Vector](#412-eigen-value-and-eigen-vector)
+  * [4.13. Calculation of Eigen Value and Eigen Vector](#413-calculation-of-eigen-value-and-eigen-vector)
+    + [4.13.1  Example of Calculating Eigen Value and Eigen Vector](#4131--example-of-calculating-eigen-value-and-eigen-vector)
+  * [4.14. Eigendecomposition of Matrix](#414-eigendecomposition-of-matrix)
+  * [4.15. Singular Value Decomposition](#415-singular-value-decomposition)
+    + [4.15.1 Applications of the SVD](#4151-applications-of-the-svd)
+      - [4.15.1.1 Pseudoinverse](#41511-pseudoinverse)
+      - [4.15.1.2 Solving homogeneous linear equations](#41512-solving-homogeneous-linear-equations)
+      - [4.15.1.3  Range, null space and rank](#41513--range--null-space-and-rank)
+      - [4.15.1.4 Nearest orthogonal matrix](#41514-nearest-orthogonal-matrix)
+- [5. Linear Map](#5-linear-map)
+- [6. Span](#6-span)
+- [7. Subspace](#7-subspace)
+- [7.1. Row Spaces and Column Spaces](#71-row-spaces-and-column-spaces)
+- [8. Range of a Matrix](#8-range-of-a-matrix)
+  * [8.1. Example of Row Spaces](#81-example-of-row-spaces)
+- [9. Basis](#9-basis)
+  * [9.1. Example of Computing Basis for Column Space](#91-example-of-computing-basis-for-column-space)
+  * [9.2. Example of Computing Basis for Row Space](#92-example-of-computing-basis-for-row-space)
+  * [9.3. Changes of basis vectors](#93-changes-of-basis-vectors)
+  * [9.4. Covariance and Contravariance of Vectors](#94-covariance-and-contravariance-of-vectors)
+  * [9.5. Creating a Basis Set](#95-creating-a-basis-set)
+  * [9.6. Change of Basis](#96-change-of-basis)
+  * [9.7. Vector Fields](#97-vector-fields)
+  * [9.8. Coordinate System](#98-coordinate-system)
+    + [9.8.1. Cartesian, Polar, Curvilinear coordinates ,Cylindrical and Spherical Coordinates](#981-cartesian--polar--curvilinear-coordinates--cylindrical-and-spherical-coordinates)
+  * [9.9. Coordinate transformations](#99-coordinate-transformations)
+  * [9.10. Affine & Curvilinear Transformations](#910-affine---curvilinear-transformations)
+- [10. Rank of Matrix](#10-rank-of-matrix)
+  * [10.1. Conclusion on Computing Rank](#101-conclusion-on-computing-rank)
+- [11. Dimension of the Column Space](#11-dimension-of-the-column-space)
+- [12. Null Space (Kernel)](#12-null-space--kernel-)
+  * [12.1. Example of Calculating Null Space](#121-example-of-calculating-null-space)
+- [13. Nullity](#13-nullity)
+- [14. Rank-nullity Theorem](#14-rank-nullity-theorem)
+- [15. The Determinant of The Matrix](#15-the-determinant-of-the-matrix)
+- [16. Finding The Inverse of The Matrix](#16-finding-the-inverse-of-the-matrix)
+- [17. The Fundamental Theorem of Linear Algebra](#17-the-fundamental-theorem-of-linear-algebra)
+- [18. Permutation Matrix](#18-permutation-matrix)
+- [19. Augmented Matrix](#19-augmented-matrix)
 
-# Vector Space
+
+# 1. Vector Space
 
 A vector space is a set <img src="https://latex.codecogs.com/svg.image?V" /> vectors together with two binary operations (vector addition and scalar multiplication) that satisfy the **eight axioms** listed below. In this context, the , and the .
 
@@ -107,7 +111,7 @@ A vector space is a set <img src="https://latex.codecogs.com/svg.image?V" /> vec
 
 
 
-## Examples of Vector Spaces
+## 1.1. Examples of Vector Spaces
 
 1. Trivial or zero vector space
 The simplest example of a vector space is the trivial one: <img src="https://latex.codecogs.com/svg.image?\{0\}" />, which contains only the zero vector (third axiom in the Vector space)
@@ -115,10 +119,10 @@ The simplest example of a vector space is the trivial one: <img src="https://lat
 2. Coordinate space
 
 
-## Vector Products
-### Dot Procuct
+## 1.2. Vector Products
+### 1.2.1 Dot Product
 
-### The Hadamard product (Schur product)
+### 1.2.2 The Hadamard product (Schur product)
 we use <img  src="https://latex.codecogs.com/svg.latex?s%20%5Codot%20t" alt="https://latex.codecogs.com/svg.latex?s \odot t" /> to denote the element wise product of the two vectors.
 
 <img  src="https://latex.codecogs.com/svg.latex?%28s%20%5Codot%20t%29_j%20%3D%20s_j%20t_j" alt="https://latex.codecogs.com/svg.latex?https://latex.codecogs.com/svg.latex?%28s%20%5Codot%20t%29_j%20%3D%20s_j%20t_j" />
@@ -131,7 +135,7 @@ we use <img  src="https://latex.codecogs.com/svg.latex?s%20%5Codot%20t" alt="htt
 
 
 
-### Kronecker product
+### 1.2.3 Kronecker product
 If <img  src="https://latex.codecogs.com/svg.latex?A" alt="https://latex.codecogs.com/svg.latex?A" /> is an <img  src="https://latex.codecogs.com/svg.latex?m%20%5Ctimes%20n" alt="https://latex.codecogs.com/svg.latex?m \times n" /> matrix and <img  src="https://latex.codecogs.com/svg.latex?B" alt="https://latex.codecogs.com/svg.latex?B" /> is a <img  src="https://latex.codecogs.com/svg.latex?p%20%5Ctimes%20q" alt="https://latex.codecogs.com/svg.latex?p \times q" /> matrix, then the Kronecker product <img  src="https://latex.codecogs.com/svg.latex?A%20%5Cbigotimes%20B" alt="https://latex.codecogs.com/svg.latex?A \bigotimes B " /> is the <img  src="https://latex.codecogs.com/svg.latex?pm%20%5Ctimes%20qn" alt="https://latex.codecogs.com/svg.latex?pm \times qn" /> block matrix:
 
 <img  src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%7B%5Cbegin%7Bbmatrix%7D1%262%5C%5C3%264%5C%5C%5Cend%7Bbmatrix%7D%7D%5Cotimes%20%7B%5Cbegin%7Bbmatrix%7D0%265%5C%5C6%267%5C%5C%5Cend%7Bbmatrix%7D%7D%3D%7B%5Cbegin%7Bbmatrix%7D1%7B%5Cbegin%7Bbmatrix%7D0%265%5C%5C6%267%5C%5C%5Cend%7Bbmatrix%7D%7D%262%7B%5Cbegin%7Bbmatrix%7D0%265%5C%5C6%267%5C%5C%5Cend%7Bbmatrix%7D%7D%5C%5C3%7B%5Cbegin%7Bbmatrix%7D0%265%5C%5C6%267%5C%5C%5Cend%7Bbmatrix%7D%7D%264%7B%5Cbegin%7Bbmatrix%7D0%265%5C%5C6%267%5C%5C%5Cend%7Bbmatrix%7D%7D%5C%5C%5Cend%7Bbmatrix%7D%7D%3D%7B%5Cbegin%7Bbmatrix%7D1%5Ctimes%200%261%5Ctimes%205%262%5Ctimes%200%262%5Ctimes%205%5C%5C1%5Ctimes%206%261%5Ctimes%207%262%5Ctimes%206%262%5Ctimes%207%5C%5C3%5Ctimes%200%263%5Ctimes%205%264%5Ctimes%200%264%5Ctimes%205%5C%5C3%5Ctimes%206%263%5Ctimes%207%264%5Ctimes%206%264%5Ctimes%207%5C%5C%5Cend%7Bbmatrix%7D%7D%3D%7B%5Cbegin%7Bbmatrix%7D0%265%260%2610%5C%5C6%267%2612%2614%5C%5C0%2615%260%2620%5C%5C18%2621%2624%2628%5Cend%7Bbmatrix%7D%7D.%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{bmatrix}1&2\\3&4\\\end{bmatrix}}\otimes {\begin{bmatrix}0&5\\6&7\\\end{bmatrix}}={\begin{bmatrix}1{\begin{bmatrix}0&5\\6&7\\\end{bmatrix}}&2{\begin{bmatrix}0&5\\6&7\\\end{bmatrix}}\\3{\begin{bmatrix}0&5\\6&7\\\end{bmatrix}}&4{\begin{bmatrix}0&5\\6&7\\\end{bmatrix}}\\\end{bmatrix}}={\begin{bmatrix}1\times 0&1\times 5&2\times 0&2\times 5\\1\times 6&1\times 7&2\times 6&2\times 7\\3\times 0&3\times 5&4\times 0&4\times 5\\3\times 6&3\times 7&4\times 6&4\times 7\\\end{bmatrix}}={\begin{bmatrix}0&5&0&10\\6&7&12&14\\0&15&0&20\\18&21&24&28\end{bmatrix}}.}" />
@@ -141,7 +145,7 @@ If <img  src="https://latex.codecogs.com/svg.latex?A" alt="https://latex.codecog
 
 
 
-# Introduction to Linear Equation
+# 2. Linear Equation
 
 In many applications we have a system of equations
 
@@ -181,7 +185,7 @@ Or:
 <br>
 <br>
 
-## Intuition behind Matrix Multiplication:
+## 2.1. Intuition behind Matrix Multiplication:
 We can interpret matrix multiplication as the linear combination of columns:
 
 <img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}a%20&%20%20b\\c%20&%20%20d\\\end{bmatrix}\begin{bmatrix}x%20\\y\end{bmatrix}=x\begin{bmatrix}a%20\\c\end{bmatrix}+y\begin{bmatrix}%20b\\d\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix} a &  b\\c &  d\\\end{bmatrix}\begin{bmatrix} x \\y\end{bmatrix}=x\begin{bmatrix}a \\c\end{bmatrix}+y\begin{bmatrix} b\\d\end{bmatrix}" />
@@ -204,7 +208,7 @@ and will transform <img src="https://latex.codecogs.com/svg.image?\hat{j}" alt="
 
 
 
-## Solution set 
+## 2.2. Solution set 
 
 A linear system may behave in any one of three possible ways:
 
@@ -215,30 +219,28 @@ A linear system may behave in any one of three possible ways:
 
 The answer of a linear system is determined by the relationship between the number of equations and the number of unknowns.
 
-## Underdetermined System
+## 2.3. Underdetermined System
 a system with fewer equations than unknowns has infinitely many solutions, but it may have no solution. Such a system is known as an underdetermined system.
 
-## Overdetermined System
+## 2.4. Overdetermined System
 A system with more equations than unknowns is called as an overdetermined system.
 
-## Determined
+## 2.5. Determined
 A system with the same number of equations and unknowns.
 
 
 
 Depending on what your matrices looks like, you can choose between various decompositions, and depending on whether you favor speed or accuracy.
 
-## Homogeneous vs Non-homogeneous 
+## 2.6. Homogeneous vs Non-homogeneous 
 A system of linear equations is homogeneous if all of the constant terms are zero.
 
-
-### Using the SVD
 <img src="https://latex.codecogs.com/svg.latex?{\displaystyle%20{\begin{aligned}a_{11}x_{1}+a_{12}x_{2}+\cdots%20+a_{1n}x_{n}&=0\\a_{21}x_{1}+a_{22}x_{2}+\cdots%20+a_{2n}x_{n}&=0\\&\%20\%20\vdots%20\\a_{m1}x_{1}+a_{m2}x_{2}+\cdots%20+a_{mn}x_{n}&=0\end{aligned}}}" alt="https://latex.codecogs.com/svg.latex?{\displaystyle {\begin{aligned}a_{11}x_{1}+a_{12}x_{2}+\cdots +a_{1n}x_{n}&=0\\a_{21}x_{1}+a_{22}x_{2}+\cdots +a_{2n}x_{n}&=0\\&\ \ \vdots \\a_{m1}x_{1}+a_{m2}x_{2}+\cdots +a_{mn}x_{n}&=0\end{aligned}}}" /> 
 
 
-# Solving Linear Equation
+# 3. Solving Linear Equation
 
-### Using the SVD
+## 3.1. Using the SVD
 
 If need to solve the least squares problem,(but are not interested in the SVD), a **faster** alternative method is **CompleteOrthogonalDecomposition**. 
 
@@ -256,7 +258,7 @@ std::cout << "The least-squares solution is:\n"
 ```
 
 
-### Complete Orthogonal Decomposition
+## 3.2. Complete Orthogonal Decomposition
 
 
 This class performs a rank-revealing complete orthogonal decomposition of a matrix `A` into matrices `P, Q, T`, and `Z` such that
@@ -270,7 +272,7 @@ This class performs a rank-revealing complete orthogonal decomposition of a matr
 
 
 
-### Using the QR
+## 3.3. Using the QR
 The `solve()` method in QR decomposition classes also computes the least squares solution. There are three QR decomposition classes: 
 1. `HouseholderQR` (no pivoting, **fast** but **unstable** if your matrix is not rull rank), 
 2. `ColPivHouseholderQR` (column pivoting, thus a bit **slower** but **more stable**) 
@@ -283,7 +285,7 @@ cout << "The solution using the QR decomposition is:\n"
      << A.colPivHouseholderQr().solve(b) << endl;
 ```
 
-###  Using Cholesky Decomposition
+## 3.4.  Using Cholesky Decomposition
 
 solution of <img src="https://latex.codecogs.com/svg.image?Ax=b" alt="https://latex.codecogs.com/svg.image?Ax=b" /> is equivalent to solving the normal equation <img src="https://latex.codecogs.com/svg.image?A^TAx=A^Tb" alt="https://latex.codecogs.com/svg.image?A^TAx=A^Tb"  />
 
@@ -299,7 +301,7 @@ std::cout << "The solution using normal equations is:\n" << (A.transpose() * A).
 
 Refs: [1](https://eigen.tuxfamily.org/dox-devel/group__LeastSquares.html)
 
-## Gaussian Elimination (row reduction)
+## 3.5. Gaussian Elimination (row reduction)
 Gaussian Elimination (row reduction) can be used to solve the systems of linear equations. 
 It consists of a sequence of elementary row operations to modify the matrix until the lower left-hand corner of the matrix is filled with zeros and turn into row echelon form . 
 
@@ -316,8 +318,8 @@ This method can also be used to compute
 - The determinant of a square matrix.
 - Inverse of an invertible matrix.
 
-### Forward Elimination
-### Forward and Back Substitution
+### 3.5.1. Forward Elimination
+### 3.5.2. Forward and Back Substitution
 
 A matrix equation in the form <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20L\mathbf%20{x}%20=\mathbf%20{b}%20}" alt="https://latex.codecogs.com/svg.image?{\displaystyle L\mathbf {x} =\mathbf {b} }" /> or <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20U\mathbf%20{x}%20=\mathbf%20{b}%20}" alt="https://latex.codecogs.com/svg.image?{\displaystyle U\mathbf {x} =\mathbf {b} }" /> is very easy to solve.
 
@@ -331,13 +333,13 @@ In an upper triangular matrix, one works backwards, first computing
 
 
 
-### Partial Pivoting and Full Pivoting
+### 3.5.3. Partial Pivoting and Full Pivoting
 - Partial pivoting is about changing the rows of the matrix, effectively changing the order of the equations, for the case when  the pivot is zero and and also for the case when the pivot is a very small number so might lose accuracy due to the round off error.
  
 - Full pivoting means both row and column interchanges, for instance we find the biggest element in the matrix and we swap rows and columns untill it becomes the most left-top element for pivoting. This is usually doen for more numerical stability. 
 
 Refs: [1](https://www.youtube.com/watch?v=S5dL9xOj0lU&list=PLkZjai-2Jcxn35XnijUtqqEg0Wi5Sn8ab&index=25)
-## Numerical stability in Gaussian Elimination
+### 3.5.4. Numerical stability in Gaussian Elimination
 In Gaussian elimination it is generally desirable to choose a pivot element with large absolute value. For instance in the following matrix:
 
 <img src="https://latex.codecogs.com/svg.image?\left[{\begin{array}{cc|c}0.00300&59.14&59.17\\5.291&-6.130&46.78\\\end{array}}\right]"
@@ -351,7 +353,7 @@ In this case we should interchange the two rows so that <img src="https://latex.
 <img src="https://latex.codecogs.com/svg.image?\left[{\begin{array}{cc|c}5.291&-6.130&46.78\\0.00300&59.14&59.17\\\end{array}}\right]." alt="\left[{\begin{array}{cc|c}5.291&-6.130&46.78\\0.00300&59.14&59.17\\\end{array}}\right]." />
 
 
-## Example of The Gaussian Elimination Algorithm
+### 3.5.5. Example of The Gaussian Elimination Algorithm
 
 Suppose the following system of linear equations:
 
@@ -420,7 +422,7 @@ Augmented matrix:
 <br/>
 <br/>
 
-# Row echelon form
+###  3.5.6.  Row Echelon Form
 
 A matrix is in echelon form after a Gaussian elimination process and:
 
@@ -447,7 +449,7 @@ The matrix:
 is triangular, but not echelon because the leading entry 4 is not to the right of the leading entry 2.
 For non-singular square matrices, "row echelon" and "upper triangular" are equivalent.
 
-# Reduced row echelon form
+###  3.5.7.  Reduced Row Echelon Form
 A matrix is reduced row echelon form if it is in row echelon form and:
 - The leading entry in each nonzero row is a 1 (called a leading 1).
 - Each column containing a leading 1 has zeros in all its other entries.
@@ -461,7 +463,7 @@ This matrix is in reduced row echelon form, which shows that the left part of th
 echelon form is not **unique**, but every matrix has a unique **reduced row echelon form**.
 
 
-## Example
+###  3.5.8.  Example of Row Echelon
 <img  src="images/ref0.svg" alt="\begin{bmatrix}
 1 & 4 & 2 & 3\\ 
 2 & 8 & 2 & 5\\ 
@@ -469,21 +471,16 @@ echelon form is not **unique**, but every matrix has a unique **reduced row eche
 \end{bmatrix}" />
 
 
-## Pivot Column
+### 3.5.9. Echelon Pivot Column
 If a matrix is in row-echelon form, then the first nonzero entry of each row is called a pivot, and the columns in which pivots appear are called pivot columns.
 
 
-# Trapezoidal Matrix  
-A non-square  matrix with zeros above (below) the diagonal is called a lower (upper) trapezoidal matrix.
 
-
-
-
-# Matrices Decompositions
+# 4. Matrices Decompositions
 Depending on what your matrices looks like, you can choose between various decompositions, and depending on whether you favor speed or accuracy.
 
-##  QR Decomposition
-###  Square Matrix QR Decomposition
+##  4.1. QR Decomposition
+### 4.1.1. Square Matrix QR Decomposition
 If <img src="https://latex.codecogs.com/svg.latex?A" />  is a real square matrix, then it may be decomposed as:
 
 <img src="https://latex.codecogs.com/svg.latex?A=QR" /> 
@@ -502,7 +499,7 @@ Furthermore, if <img src="https://latex.codecogs.com/svg.latex?A" /> is invertib
 For complex square matrices, <img src="https://latex.codecogs.com/svg.latex?Q" />  is a unitary matrix, meaning 
 <img src="https://latex.codecogs.com/svg.latex?Q^{*}=Q^{-1}" />
 
-### Rectangular Matrix QR Decomposition
+### 4.1.2.  Rectangular Matrix QR Decomposition
 If <img src="https://latex.codecogs.com/svg.latex?A_{m\times%20n}" alt="https://latex.codecogs.com/svg.latex?A_{m\times n}" /> where <img src="https://latex.codecogs.com/svg.latex?%20m%20\geq%20%20n" alt="https://latex.codecogs.com/svg.latex? m \geq  n" /> we can factor it into <img src="https://latex.codecogs.com/svg.latex?m\times%20m" alt="https://latex.codecogs.com/svg.latex?m\times m" /> unitary matrix <img src="https://latex.codecogs.com/svg.latex?Q" /> and  an <img src="https://latex.codecogs.com/svg.latex?m\times%20n" alt="https://latex.codecogs.com/svg.latex?m\times n" /> upper triangular matrix <img src="https://latex.codecogs.com/svg.latex?R" />. Since after <img src="https://latex.codecogs.com/svg.latex?\left%20(m-n%20\right%20)_{th}" alt="https://latex.codecogs.com/svg.latex?\left (m-n \right )_{th}" /> row, in <img src="https://latex.codecogs.com/svg.latex?R" /> all elements are entirely zeroes, we can rewrite our equation in the following form:
 
 <img src="https://latex.codecogs.com/svg.latex?{\displaystyle%20A_{m\times%20n}=Q%20_{m\times%20m}%20%20R_{m\times%20n}%20=Q{\begin{bmatrix}R_{1}\\0\end{bmatrix}}={\begin{bmatrix}Q_{1}&Q_{2}\end{bmatrix}}{\begin{bmatrix}R_{1}\\0\end{bmatrix}}=Q_{1}R_{1},}" alt="https://latex.codecogs.com/svg.latex?{\displaystyle A_{m\times n}=Q _{m\times m}  R_{m\times n} =Q{\begin{bmatrix}R_{1}\\0\end{bmatrix}}={\begin{bmatrix}Q_{1}&Q_{2}\end{bmatrix}}{\begin{bmatrix}R_{1}\\0\end{bmatrix}}=Q_{1}R_{1},}" />
@@ -513,8 +510,8 @@ where
 
 
 
-## Computing the QR Decomposition
-## Gram Schmidt Orthogonalization 
+## 4.2. Computing the QR Decomposition
+## 4.3. Gram Schmidt Orthogonalization 
 Gram–Schmidt process is a method for orthonormalizing a set of vectors. In this process you make every column perpendicular to it's previous columns. Lets first define the **projection operator** by
 
 <img src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\mathrm%20{proj}%20_{\mathbf%20{u}%20}(\mathbf%20{v}%20)={\frac%20{\langle%20\mathbf%20{u}%20,\mathbf%20{v}%20\rangle%20}{\langle%20\mathbf%20{u}%20,\mathbf%20{u}%20\rangle%20}}{\mathbf%20{u}%20}}" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \mathrm {proj} _{\mathbf {u} }(\mathbf {v} )={\frac {\langle \mathbf {u} ,\mathbf {v} \rangle }{\langle \mathbf {u} ,\mathbf {u} \rangle }}{\mathbf {u} }}" />
@@ -710,20 +707,20 @@ This can be written in matrix form:
 
 
 
-## Householder Transformations
+## 4.4. Householder Transformations
 
 
 Refs: [1](https://www.youtube.com/watch?v=pOiOH3yESPM)
 
-## QL, RQ and LQ Decompositions
+## 4.5. QL, RQ and LQ Decompositions
 We can define <img src="https://latex.codecogs.com/svg.latex?QL" />, <img src="https://latex.codecogs.com/svg.latex?RQ" />, and <img src="https://latex.codecogs.com/svg.latex?LQ" /> decompositions, with <img src="https://latex.codecogs.com/svg.latex?L" /> being a lower triangular matrix.
 
-## Cholesky Decomposition LL*
+## 4.6. Cholesky Decomposition LL*
 
 Cholesky decomposition is a decomposition of a Hermitian, positive-definite matrix into the product of a lower triangular matrix and its conjugate transpose
 
 
-### Hermitian Matrix
+## 4.7. Hermitian Matrix
 Hermitian Matrix means a matrix that its transpose is its conjugate:
 
 
@@ -733,7 +730,7 @@ Hermitian Matrix means a matrix that its transpose is its conjugate:
 
 
 
-### Positive (Semidefinite) Definite Matrix:
+## 4.8. Positive (Semidefinite) Definite Matrix:
 Matrix <img src="https://latex.codecogs.com/svg.image?M_{n\times%20n}" alt="https://latex.codecogs.com/svg.image?M_{n\times n}"  /> is said to be positive definite if for every the nonzero real column vector <img src="https://latex.codecogs.com/svg.image?z_{n\times%201}" alt="https://latex.codecogs.com/svg.image?z_{n\times 1}" /> the scalar 
 <img src="https://latex.codecogs.com/svg.image?z^T%20M%20z" alt="https://latex.codecogs.com/svg.image?z^TMz" />
 is positive.
@@ -767,7 +764,7 @@ Cholesky decomposition of a **Hermitian positive-definite** matrix A is:
 - <img src="https://latex.codecogs.com/svg.image?L^*" alt="https://latex.codecogs.com/svg.image?L^*" /> is the conjugate transpose of  <img src="https://latex.codecogs.com/svg.image?L" alt="https://latex.codecogs.com/svg.image?L" /> 
 
 
-## LDL Decomposition
+## 4.9. LDL Decomposition
 A closely related variant of the classical Cholesky decomposition is the LDL decomposition:
 
 <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20\mathbf%20{A}%20=\mathbf%20{LDL}%20^{*}}" alt="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {A} =\mathbf {LDL} ^{*}}" />
@@ -798,7 +795,7 @@ Example:
 
 Refs: [1](https://www.youtube.com/watch?v=2uKoKKLgZ4c)
 
-## Lower Upper (LU) Decomposition
+## 4.10. Lower Upper (LU) Decomposition
 
 Lower-upper (LU) decomposition factors a matrix as the product of a lower triangular matrix and an upper triangular matrix
 LU decomposition can be viewed as the matrix form of Gaussian elimination.
@@ -808,7 +805,7 @@ In the lower triangular matrix all elements above the diagonal are zero, in the 
 <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20{\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell%20_{11}&0&0\\\ell%20_{21}&\ell%20_{22}&0\\\ell%20_{31}&\ell%20_{32}&\ell%20_{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" alt="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}}={\begin{bmatrix}\ell _{11}&0&0\\\ell _{21}&\ell _{22}&0\\\ell _{31}&\ell _{32}&\ell _{33}\end{bmatrix}}{\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}}.}" />
 
 
-## Lower Diagonal Upper (LDU) decomposition
+## 4.11. Lower Diagonal Upper (LDU) decomposition
 A Lower-diagonal-upper (LDU) decomposition is a decomposition of the form
 
 <img src="https://latex.codecogs.com/svg.image?{\displaystyle%20A=LDU}" alt="https://latex.codecogs.com/svg.image?{\displaystyle%20A=LDU}" />
@@ -816,12 +813,7 @@ A Lower-diagonal-upper (LDU) decomposition is a decomposition of the form
 where <img src="https://latex.codecogs.com/svg.image?D" alt="https://latex.codecogs.com/svg.image?D" /> is a diagonal matrix, and <img src="https://latex.codecogs.com/svg.image?L" alt="https://latex.codecogs.com/svg.image?L" />  and <img src="https://latex.codecogs.com/svg.image?U" alt="https://latex.codecogs.com/svg.image?U" />  are unitriangular matrices, meaning that all the entries on the diagonals of <img src="https://latex.codecogs.com/svg.image?L" alt="https://latex.codecogs.com/svg.image?L" />  and <img src="https://latex.codecogs.com/svg.image?U" alt="https://latex.codecogs.com/svg.image?U" />  are one.
 
 
-## SVD Decomposition
-
-## SVD and Null Space
-
-Refs: [1](https://math.stackexchange.com/questions/1771013/how-is-the-null-space-related-to-singular-value-decomposition)
-## Eigen Value and Eigen Vector
+## 4.12. Eigen Value and Eigen Vector
 
 
 An eigenvalue and eigenvector are a scalar value and a non-zero vector that, when a linear transformation is applied to it, changes only by a scalar factor. 
@@ -829,7 +821,7 @@ More formally, if <img src="https://latex.codecogs.com/svg.image?T" alt="https:/
 
 <img src="https://latex.codecogs.com/svg.image?T(v)%20=%20\lambda%20v"  alt="https://latex.codecogs.com/svg.image?T(v)=\lambda v" />
 
-## Calculation of Eigen Value and Eigen Vector
+## 4.13. Calculation of Eigen Value and Eigen Vector
 
 where <img src="https://latex.codecogs.com/svg.image?\lambda" alt="https://latex.codecogs.com/svg.image?\lambda" /> is a scalar (the eigenvalue) and <img src="https://latex.codecogs.com/svg.image?v" alt="https://latex.codecogs.com/svg.image?v" /> is the eigenvector. 
 
@@ -844,7 +836,7 @@ where <img src="https://latex.codecogs.com/svg.image?\lambda" alt="https://latex
 <img src="https://latex.codecogs.com/svg.image?det(A-\lambda%20I)=0" alt="https://latex.codecogs.com/svg.image?det(A-\lambda I)=0" />
 
 
-## Example of Calculating Eigen Value and Eigen Vector
+### 4.13.1  Example of Calculating Eigen Value and Eigen Vector
 
 <img src="https://latex.codecogs.com/svg.image?A=\begin{bmatrix}2%20&%200%20&%200%20\\0%20&%204%20&%205%20\\0%20&%204%20&%203%20\\\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?A=\begin{bmatrix} 2 & 0 & 0 \\ 0 & 4 & 5 \\ 0 & 4 & 3 \\ \end{bmatrix}"  />
 
@@ -867,8 +859,132 @@ Eigenvalues are −1, 2 and 8.
 
 <img src="" alt=""  />
 
+## 4.14. Eigendecomposition of Matrix
 
-# Linear Map
+## 4.15. Singular Value Decomposition
+Singular value decomposition (SVD) is a factorization of a real or (complex matrix) which generalizes the eigendecomposition of a square matrix. 
+
+<img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7BM_%7Bm%5Ctimes%20n%7D%7D%20%3D%5Cmathbf%20%7BU_%7Bn%5Ctimes%20n%7D%20%5CSigma_%7Bm%5Ctimes%20n%7D%20V%5E%7B*%7D_%7Bm%5Ctimes%20m%7D%7D%20%5C%20%2C%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \ \mathbf {M_{m\times n}} =\mathbf {U_{n\times n} \Sigma_{m\times n} V^{*}_{m\times m}} \ ,}" />
+
+1. <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%20%7BU_%7Bn%5Ctimes%20n%7D%7D" alt="https://latex.codecogs.com/svg.latex?\mathbf {U_{n\times n}}"  /> is complex unitary matrix
+
+
+2. <img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7B%5CSigma_%7Bm%5Ctimes%20n%7D%20%7D%20%5C%20%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \ \mathbf {\Sigma_{m\times n} } \ } "  /> rectangular diagonal matrix with non-negative real numbers on the diagonal.  
+3.  The diagonal entries <img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%5C%20%5Csigma%20_%7Bi%7D%3D%5CSigma%20_%7Bii%7D%5C%20%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \ \sigma _{i}=\Sigma _{ii}\ }"  /> of  <img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7B%5CSigma%20%7D%20%5C%20%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \ \mathbf {\Sigma } \ }"  /> are **uniquely** determined by `M` and are known as the singular values of M. 
+
+4. <img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7BV%5E%7B*%7D%7D%20%5C%20%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \ \mathbf {V^{*}} \ }"  />  is the conjugate transpose of `V`. Such decomposition always exists for any complex matrix. 
+
+5. If `M`is real, then `U` and `V` can be guaranteed to be real orthogonal matrices.
+
+
+6. The columns of `U` <img src="https://latex.codecogs.com/svg.latex?u_1%2C%20...%2C%20u_m" alt="https://latex.codecogs.com/svg.latex?u_1, ..., u_m"  /> and the columns of `V` <img src="https://latex.codecogs.com/svg.latex?v_1%2C%20...%2C%20v_m" alt="https://latex.codecogs.com/svg.latex?v_1, ..., v_m"  /> are form two sets of orthonormal bases and the singular value decomposition can be written as:
+
+<br/>
+ <img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7BM%7D%20%3D%5Csum%20_%7Bi%3D1%7D%5E%7Br%7D%5Csigma%20_%7Bi%7D%5Cmathbf%20%7Bu%7D%20_%7Bi%7D%5Cmathbf%20%7Bv%7D%20_%7Bi%7D%5E%7B*%7D%5C%20%2C%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \ \mathbf {M} =\sum _{i=1}^{r}\sigma _{i}\mathbf {u} _{i}\mathbf {v} _{i}^{*}\ ,}"  /> 
+
+<br/> 
+ 
+<img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%5C%20r%5Cleq%20%5Cmin%5C%7Bm%2Cn%5C%7D%5C%20%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \ r\leq \min\{m,n\}\ } "  /> 
+
+
+7. The SVD is **not** unique.
+
+
+<img src="images/Singular-Value-Decomposition.svg" alt=""  />
+
+
+
+###  4.15.1 Applications of the SVD
+#### 4.15.1.1 Pseudoinverse
+
+
+<img src="https://latex.codecogs.com/svg.latex?%5C%5C%20%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7BM%7D%20%3D%5Cmathbf%20%7BU%5CSigma%20V%5E%7B*%7D%7D%20%5C%20%2C%7D%20%5C%5C%20%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7BM%5E%7B%5Cdagger%7D%20%7D%20%3D%5Cmathbf%20%7BV%5CSigma%5E%7B%5Cdagger%7D%20U%5E%7B*%7D%7D%20%5C%20%2C%7D
+" alt="https://latex.codecogs.com/svg.latex?\\
+{\displaystyle \ \mathbf {M} =\mathbf {U\Sigma V^{*}} \ ,}
+\\
+{\displaystyle \ \mathbf {M^{\dagger} } =\mathbf {V\Sigma^{\dagger} U^{*}} \ ,}"  />
+
+
+
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%20%7BM%5E%7B%5Cdagger%7D%7D" alt="https://latex.codecogs.com/svg.latex?\mathbf {M^{\dagger}} "  /> is formed by replacing every non-zero diagonal entry by its reciprocal <img src="https://latex.codecogs.com/svg.latex?%5Cfrac%7B1%7D%7B%5Csigma_i%7D" alt="https://latex.codecogs.com/svg.latex?\frac{1}{\sigma_i}"  />  and transposing the resulting matrix. 
+
+
+<br/>
+
+<img src="https://latex.codecogs.com/svg.latex?U%5CSigma%20V%5ET%20x%20%3D%20b%20%5Cimplies%5C%5C%20%5CSigma%20%28V%5ET%20x%20%29%20%3D%20U%5ET%20b%20%5Cimplies%5C%5C%20V%5ET%20x%20%3D%20%5CSigma%5E&plus;%20U%5ET%20b%20%5Cimplies%5C%5C%20x%20%3D%20%28V%20%5CSigma%20%5E&plus;%20U%5ET%29b" alt="https://latex.codecogs.com/svg.latex?U\Sigma V^T x = b \implies\\
+\Sigma (V^T x ) = U^T b \implies\\
+V^T x = \Sigma^+ U^T b \implies\\
+x = (V \Sigma ^+ U^T)b" />
+
+#### 4.15.1.2 Solving homogeneous linear equations
+
+<img src="https://latex.codecogs.com/svg.latex?%5C%5C%20Ah%3D0%20%5C%5C%20A%20%3D%20UDV%5ET" alt="https://latex.codecogs.com/svg.latex?\\
+Ah=0
+\\
+A = UDV^T"  />
+
+
+<img src="https://latex.codecogs.com/svg.latex?%5C%5C%20V_%7Bm%5Ctimes%20m%7D%3D%5Cbegin%7Bbmatrix%7D%20v_1%20%26%20v_2%20%26%20...%20%26%20v_i%20%26%20..%20%26v_m%5C%5C%20%5Cend%7Bbmatrix%7D%20%5C%5C%20V%5ETV%3D%7B%5Cdisplaystyle%20I_%7Bm%7D%3D%7B%5Cbegin%7Bbmatrix%7D1%260%260%26%5Ccdots%20%260%5C%5C0%261%260%26%5Ccdots%20%260%5C%5C0%260%261%26%5Ccdots%20%260%5C%5C%5Cvdots%20%26%5Cvdots%20%26%5Cvdots%20%26%5Cddots%20%26%5Cvdots%20%5C%5C0%260%260%26%5Ccdots%20%261%5Cend%7Bbmatrix%7D%7D_%7Bm%5Ctimes%20m%7D%7D%20%5C%5C%20V%5ETv_i%3De_i%3D%5Cbegin%7Bbmatrix%7D%200%5C%5C%20%5Cvdots%20%5C%5C%201%5C%5C%20%5Cvdots%20%5C%5C%20%5C%5C%200%20%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?\\
+V_{m\times m}=\begin{bmatrix}
+v_1 & v_2 & ... & v_i & .. &v_m\\ 
+\end{bmatrix}
+\\
+V^TV={\displaystyle  I_{m}={\begin{bmatrix}1&0&0&\cdots &0\\0&1&0&\cdots &0\\0&0&1&\cdots &0\\\vdots &\vdots &\vdots &\ddots &\vdots \\0&0&0&\cdots &1\end{bmatrix}}_{m\times m}}
+\\
+V^Tv_i=e_i=\begin{bmatrix}
+0\\ 
+\vdots \\ 
+1\\ 
+\vdots \\ 
+\\ 
+0
+\end{bmatrix}" />
+
+
+for any matrix:
+
+<br/>
+
+<img src="https://latex.codecogs.com/svg.latex?Be_i%3Db_i" alt="https://latex.codecogs.com/svg.latex?Be_i=b_i" />
+
+<br/>
+<br/>
+
+therefore:
+
+<br/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.latex?Av_i%3DU%20D%20V%5ET%20v_i%20%3D%20U%20D%20e_i%20%3D%20U%20%28%5Csigma_i%20e_i%29%3D%5Csigma_i%20u_i." alt="https://latex.codecogs.com/svg.latex?Av_i=U D V^T v_i = U D e_i = U (\sigma_i e_i)=\sigma_i u_i." />
+
+
+
+
+Refs: [1](https://math.stackexchange.com/questions/1768181/svd-and-homogeneous-equation)
+
+
+####  4.15.1.3  Range, null space and rank
+
+<img  src="https://latex.codecogs.com/svg.latex?A%20v_i%3D%20%5Csigma_i%20u_i" alt="https://latex.codecogs.com/svg.latex?A v_i= \sigma_i u_i" />
+
+The last columns do serve as a basis for the null space:
+
+
+<img src="https://latex.codecogs.com/svg.latex?%5C%7Bv_i%7Ci%3Erank%5C%7D" alt="https://latex.codecogs.com/svg.latex?\{v_i|i>rank\}" />
+
+
+
+Refs: [1](https://math.stackexchange.com/questions/1771013/how-is-the-null-space-related-to-singular-value-decomposition)
+
+####  4.15.1.4 Nearest orthogonal matrix
+
+
+<img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%5Cmathbf%20%7BO%7D%20%3D%7B%5Cunderset%20%7B%5COmega%20%7D%7B%5Coperatorname%20%7Bargmin%7D%20%7D%7D%5C%7C%5Cmathbf%20%7BA%7D%20%7B%5Cboldsymbol%20%7B%5COmega%20%7D%7D-%5Cmathbf%20%7BB%7D%20%5C%7C_%7BF%7D%5Cquad%20%7B%5Ctext%7Bsubject%20to%7D%7D%5Cquad%20%7B%5Cboldsymbol%20%7B%5COmega%20%7D%7D%5E%7B%5Ctextsf%20%7BT%7D%7D%7B%5Cboldsymbol%20%7B%5COmega%20%7D%7D%3D%5Cmathbf%20%7BI%7D%20%2C%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \mathbf {O} ={\underset {\Omega }{\operatorname {argmin} }}\|\mathbf {A} {\boldsymbol {\Omega }}-\mathbf {B} \|_{F}\quad {\text{subject to}}\quad {\boldsymbol {\Omega }}^{\textsf {T}}{\boldsymbol {\Omega }}=\mathbf {I} ,}" />
+
+
+
+# 5. Linear Map
 Let  <img  src="https://latex.codecogs.com/svg.latex?V"  alt="https://latex.codecogs.com/svg.latex?V" /> and  <img  src="https://latex.codecogs.com/svg.latex?W"  alt="https://latex.codecogs.com/svg.latex?W" /> be vector spaces over the same field  <img  src="https://latex.codecogs.com/svg.latex?K"  alt="https://latex.codecogs.com/svg.latex?K" />. A function <img  src="https://latex.codecogs.com/svg.latex?f:V\to%20W"  alt="https://latex.codecogs.com/svg.latex?f:V\to W" />  is said to be a linear map if for any two vectors
  <img  src="https://latex.codecogs.com/svg.latex?{\textstyle%20\mathbf%20{u}%20,\mathbf%20{v}%20\in%20V}"  alt="https://latex.codecogs.com/svg.latex?{\textstyle \mathbf {u} ,\mathbf {v} \in V}" />  and any scalar 
   <img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20c\in%20K}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle c\in K}" />  the following two conditions are satisfied:
@@ -885,7 +1001,7 @@ Let  <img  src="https://latex.codecogs.com/svg.latex?V"  alt="https://latex.code
 
 
 
-# Span
+# 6. Span
 
 The linear span of a set <img  src="https://latex.codecogs.com/svg.latex?S"  alt="https://latex.codecogs.com/svg.latex?S" /> of 
 vectors for a vector space is as the set of all finite linear combinations of the vectors in <img  src="https://latex.codecogs.com/svg.latex?S"  alt="https://latex.codecogs.com/svg.latex?S" /> 
@@ -906,7 +1022,7 @@ is:
 The set {(1, 0, 0), (0, 1, 0), (1, 1, 0)} is **not** a spanning set of 
 <img src="https://latex.codecogs.com/svg.image?\mathbb%20{R}%20^{3}" alt="https://latex.codecogs.com/svg.image?\mathbb {R} ^{3}" />, since its span is the space of all vectors in <img src="https://latex.codecogs.com/svg.image?\mathbb%20{R}%20^{3}" alt="https://latex.codecogs.com/svg.image?\mathbb {R} ^{3}" />  whose last component is zero.
 
-# Subspace
+# 7. Subspace
 
 A vector subspace is a subset of a vector space that satisfies certain properties, such that:
 1. The set includes the zero vector.
@@ -923,11 +1039,11 @@ Examples of subspace:
 
 
 
-# Row Spaces and Column Spaces
+# 7.1. Row Spaces and Column Spaces
 
 The column space of a matrix <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> is the span (set of all possible linear combinations) of its column vectors.
 
-# Range of a Matrix
+# 8. Range of a Matrix
 The range of a matrix, also known as the column space of a matrix, is the span of the columns of the matrix. In other words, it is the set of all possible linear combinations of the columns of the matrix.
 
 ```cpp
@@ -947,7 +1063,7 @@ CompleteOrthogonalDecomposition(const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dy
 
 Refs: [1](https://math.stackexchange.com/questions/2037602/what-is-range-of-a-matrix)
 
-## Example of Row Spaces
+## 8.1. Example of Row Spaces
 
 <img src="https://latex.codecogs.com/svg.image?M={\begin{bmatrix}2&4&1&3&2\\-1&-2&1&0&5\\1&6&2&2&2\\3&6&2&5&1\end{bmatrix}}" alt="https://latex.codecogs.com/svg.image?M={\begin{bmatrix}2&4&1&3&2\\-1&-2&1&0&5\\1&6&2&2&2\\3&6&2&5&1\end{bmatrix}}"/>
 
@@ -965,7 +1081,7 @@ Consequently, the row space of <img src="https://latex.codecogs.com/svg.image?M"
 
 <br/>
 
-# Basis
+# 9. Basis
 
 
 In linear algebra, a basis is a set of linearly independent vectors that can be used to span a vector (sub)space.  The dimension of a vector space is the number of vectors in a basis for the space.
@@ -973,7 +1089,7 @@ To find the column basis in matrix you have to find the pivot column as they are
 
 Number of basis for a space is the dimension of that space. The dimension of the column space is the rank of the matrix.
 
-## Example of Computing Basis for Column Space
+## 9.1. Example of Computing Basis for Column Space
 
 We write the matrix in the row echelon form, and then pick the pivot columns. For example, the matrix A given by
 
@@ -993,7 +1109,7 @@ There are two non-zero rows in the final matrix and therefore the rank of matrix
 
 
 
-## Example of Computing Basis for Row Space
+##  9.2. Example of Computing Basis for Row Space
 Let say we have the following matrix:
 
 <img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}-2%20&&%202%20%20&&%20%206%20&&%20%200\\0%20&&%206%20&&%207%20&&%205\\1%20&&%205%20&&%204%20&&%205\\\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix} -2 && 2  &&  6 &&  0\\ 0 && 6 && 7 && 5\\ 1 && 5 && 4 && 5\\ \end{bmatrix}" />
@@ -1007,7 +1123,7 @@ Now we pick the non-zero rows, so the basis for row space of our matrix is:
 
 <img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}-2%20\\%202\\4%20\\0\end{bmatrix},\begin{bmatrix}0%20\\6%20\\7%20\\5\end{bmatrix}" alt="https://latex.codecogs.com/svg.image?\begin{bmatrix} -2 \\  2\\ 4 \\ 0\end{bmatrix},\begin{bmatrix} 0 \\ 6 \\ 7 \\ 5 \end{bmatrix} ">
 
-## Changes of basis vectors
+##  9.3. Changes of basis vectors
 Let say our first basis vector set is:
 
 
@@ -1031,7 +1147,7 @@ or matrix multiplication where the columns of the matrix are second basis vector
 <img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%202%26%20-1%5C%5C%201%26%201%20%5Cend%7Bbmatrix%7D%20%5Ctimes%20%5Cbegin%7Bbmatrix%7D%20-1%5C%5C%202%5Cend%7Bbmatrix%7D%20%3D%5Cbegin%7Bbmatrix%7D%20-4%5C%5C%201%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?\begin{bmatrix}  2& -1\\  1& 1 \end{bmatrix} \times \begin{bmatrix} -1\\ 2\end{bmatrix} =\begin{bmatrix} -4\\ 1\end{bmatrix} " />
 
 
-## Covariance and Contravariance of Vectors
+##  9.4. Covariance and Contravariance of Vectors
 
 
 Two ways to describe a vector in basis vectors:
@@ -1069,24 +1185,24 @@ If we use the second approach to represent our vector, the associated dot produc
 
 Ref: [1](https://mathinsight.org/taylors_theorem_multivariable_introduction), [2](http://www.math.toronto.edu/courses/mat237y1/20199/notes/Chapter2/S2.6.html), [3](https://www.youtube.com/watch?v=vvE5w3iOtGs), [4](http://jccc-mpg.wikidot.com/vector-projection), [5](https://www.youtube.com/watch?v=P2LTAUO1TdA&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&index=13)
 
-## Creating a Basis Set
-## Change of Basis
-## Vector Fields
+## 9.5. Creating a Basis Set
+## 9.6. Change of Basis
+## 9.7. Vector Fields
 Ref: [1](https://tutorial.math.lamar.edu/classes/calciii/VectorFields.aspx)
 
-## Coordinate System
-### Cartesian, Polar, Curvilinear coordinates ,Cylindrical and Spherical Coordinates
+## 9.8. Coordinate System
+### 9.8.1. Cartesian, Polar, Curvilinear coordinates ,Cylindrical and Spherical Coordinates
 
 Ref: [1](https://www.skillsyouneed.com/num/polar-cylindrical-spherical-coordinates.html)
 
-## Coordinate transformations
+## 9.9. Coordinate transformations
 Refs [1](https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations)
 
-## Affine & Curvilinear Transformations
+## 9.10. Affine & Curvilinear Transformations
 
 
 
-# Rank of Matrix
+# 10. Rank of Matrix
 
 Let <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> be an m-by-n matrix. Then
 
@@ -1096,17 +1212,17 @@ Let <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codec
 
 - <img src="https://latex.codecogs.com/svg.image?rank(A)%20=%20dim(rowsp(A))%20=%20dim(colsp(A))"  alt="https://latex.codecogs.com/svg.image?rank(A) = dim(rowsp(A)) = dim(colsp(A))" />
 
-## Conclusion on Computing Rank
+## 10.1. Conclusion on Computing Rank
 In practice, due to floating point error on computers,  Gaussian elimination (LU decomposition) can be unreliable, therefore rank-revealing decomposition such as RRQR factorization (rank-revealing QR which is QR decomposition with pivoting) should be used. The singular value decomposition (SVD) can be used, but it is not an efficient method to do so.
 
 
 
-# Dimension of the Column Space
+# 11. Dimension of the Column Space
 
 The dimension of the column space or row space is called the rank of the matrix, and is the maximum number of linearly independent columns
 
 
-# Null Space (Kernel)
+# 12. Null Space (Kernel)
 
 
 If <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> is a matrix, the null-space (The kernel of <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> ) is, the set of all vectors <img  src="https://latex.codecogs.com/svg.latex?v"  alt="https://latex.codecogs.com/svg.latex?v" /> such that <img  src="https://latex.codecogs.com/svg.latex?A.v=0"  alt="https://latex.codecogs.com/svg.latex?A.v=0" />. It's good to think of the matrix as a linear transformation; if you let <img  src="https://latex.codecogs.com/svg.latex?h(v)=A.v"  alt="https://latex.codecogs.com/svg.latex?h(v)=A.v" />
@@ -1116,8 +1232,12 @@ Note that the null-space is equivalently the set of solutions to the homogeneous
 
 Writing  <img  src="https://latex.codecogs.com/svg.latex?h(v)%20=%20A%20\cdot%20v"  alt="https://latex.codecogs.com/svg.latex?h(v) = A \cdot v" /> , then the null-space is the set of all vectors that are sent to the zero (lose their identity) as <img  src="https://latex.codecogs.com/svg.latex?h"  alt="https://latex.codecogs.com/svg.latex?h" /> is applied to them.
 
-## Example of Calculating Null Space
-### Example 1
+## 12.1. Example of Calculating Null Space
+
+Example 1:
+
+<br/>
+
 Lets say we have the following matrix:
 
 <img src="https://latex.codecogs.com/svg.image?A=\begin{bmatrix}1%20&%201%20&%202%20&%201%20\\3%20&%201%20&%20%204&%20%204\\4%20&%20-4%20&%200%20&%20%208\\\end{bmatrix}%20\in%20\mathbb{R}^4" alt="https://latex.codecogs.com/svg.image?A=\begin{bmatrix} 1 & 1 & 2 & 1 \\3 & 1 &  4&  4\\ 4 & -4 & 0 &  8\\ \end{bmatrix} \in \mathbb{R}^4">
@@ -1179,11 +1299,14 @@ std::cout << "The null space: \n" << Null_space << "\n" ;
 // Check that it is the null-space:
 std::cout << "A * Null_space = \n" << A * Null_space  << '\n';
 ```
-### Example 2
+
+<br/>
+Example 2
+<br/>
 
 Refs: [1](http://immersivemath.com/ila/ch08_rank/ch08.html#sec_rank_null_space)
 
-# Nullity
+# 13. Nullity
 The dimension of the kernel of A is called the **nullity** of A
 
 
@@ -1202,7 +1325,7 @@ This means to find the kernel of A is we need to solve the above homogeneous equ
 
 Refs: [1](https://math.unm.edu/~loring/links/linear_s06/nullity.pdf)
 
-# Rank-nullity Theorem
+# 14. Rank-nullity Theorem
 
 Let <img  src="https://latex.codecogs.com/svg.latex?T\colon%20V\to%20W"  alt="https://latex.codecogs.com/svg.latex?T\colon V\to W" />  be a linear transformation. Then
 
@@ -1213,29 +1336,29 @@ Nullity is the complement to the rank of a matrix.
 
 
 
-# The Determinant of The Matrix
+# 15. The Determinant of The Matrix
 Then the determinant of A is the product of the elements of the diagonal of B:
 
 <img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\det(A)={\frac%20{\prod%20\operatorname%20{diag}%20(B)}{d}}.}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \det(A)={\frac {\prod \operatorname {diag} (B)}{d}}.}" />
 
-# Finding The Inverse of The Matrix
+# 16. Finding The Inverse of The Matrix
 First, add the n × n identity matrix is augmented to the right of A such that we get the following
 
 <img  src="https://latex.codecogs.com/svg.latex?[A%20|%20I]_{n\times%202n}"  alt="https://latex.codecogs.com/svg.latex?[A | I]_{n\times 2n}" /> Now during the elementary row operations, apply the same operations on the identity matrix on the right hand side. At the end teh matrix n the right hand side is the inverse of A.
 
 
-# The Fundamental Theorem of Linear Algebra
+# 17. The Fundamental Theorem of Linear Algebra
 
 
 
-# Permutation Matrix
+# 18. Permutation Matrix
 
 A permutation matrix is a square binary matrix that has exactly one entry of `1` in each row and each column and `0`s elsewhere.
 
 <img src="https://latex.codecogs.com/svg.image?{\begin{bmatrix}1&0&0&0&0\\0&0&0&1&0\\0&1&0&0&0\\0&0&0&0&1\\0&0&1&0&0\end{bmatrix}}." 
 alt="{\begin{bmatrix}1&0&0&0&0\\0&0&0&1&0\\0&1&0&0&0\\0&0&0&0&1\\0&0&1&0&0\end{bmatrix}}" />
 
-# Augmented Matrix
+# 19. Augmented Matrix
 
 
 [<< Previous ](4_Advanced_Eigen_Operations.md)  [Home](README.md)  [ Next >>](6_Sparse_Matrices.md)

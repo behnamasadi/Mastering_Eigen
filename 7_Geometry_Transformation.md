@@ -218,7 +218,7 @@ Visit the [link](https://compsci290-s2016.github.io/CoursePage/Materials/EulerAn
 
 Refs: [1](https://math.stackexchange.com/questions/105264/3d-rotation-matrix-uniqueness/105380#105380)
 
-# 2. Local tangent plane coordinates
+# 2. Global References and Local Tangent Plane Coordinates
 
 
 There are several axes conventions in practice for choosing the mobile and fixed axes and these conventions determine the signs of the angles.
@@ -245,6 +245,23 @@ In case of air and sea vehicles like submarines, ships, airplanes etc., which us
 
 
 
+
+<img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Barray%7D%7Brcl%7D%20%5Cmathbf%7Bg%7D%20%26%3D%26%20%5Cleft%5C%7B%20%5Cbegin%7Barray%7D%7Bll%7D%20%5Cbegin%7Bbmatrix%7D0%20%26%200%20%26%20-1%5Cend%7Bbmatrix%7D%5ET%20%26%20%5Cmathrm%7Bif%7D%5C%3B%20%5Cmathrm%7BNED%7D%20%5C%5C%20%5Cbegin%7Bbmatrix%7D0%20%26%200%20%26%201%5Cend%7Bbmatrix%7D%5ET%20%26%20%5Cmathrm%7Bif%7D%5C%3B%20%5Cmathrm%7BENU%7D%20%5Cend%7Barray%7D%20%5Cright.%5C%5C%20%26%26%20%5C%5C%20%5Cmathbf%7Br%7D%20%26%3D%26%20%5Cleft%5C%7B%20%5Cbegin%7Barray%7D%7Bll%7D%20%5Cfrac%7B1%7D%7B%5Csqrt%7B%5Ccos%5E2%5Ctheta&plus;%5Csin%5E2%5Ctheta%7D%7D%5Cbegin%7Bbmatrix%7D%5Ccos%5Ctheta%20%26%200%20%26%20%5Csin%5Ctheta%5Cend%7Bbmatrix%7D%5ET%20%26%20%5Cmathrm%7Bif%7D%5C%3B%20%5Cmathrm%7BNED%7D%20%5C%5C%20%5Cfrac%7B1%7D%7B%5Csqrt%7B%5Ccos%5E2%5Ctheta&plus;%5Csin%5E2%5Ctheta%7D%7D%5Cbegin%7Bbmatrix%7D0%20%26%20%5Ccos%5Ctheta%20%26%20-%5Csin%5Ctheta%5Cend%7Bbmatrix%7D%5ET%20%26%20%5Cmathrm%7Bif%7D%5C%3B%20%5Cmathrm%7BENU%7D%20%5Cend%7Barray%7D%20%5Cright.%20%5Cend%7Barray%7D" alt="https://latex.codecogs.com/svg.latex?\begin{array}{rcl}
+\mathbf{g} &=&
+\left\{
+\begin{array}{ll}
+    \begin{bmatrix}0 & 0 & -1\end{bmatrix}^T & \mathrm{if}\; \mathrm{NED} \\
+    \begin{bmatrix}0 & 0 & 1\end{bmatrix}^T & \mathrm{if}\; \mathrm{ENU}
+\end{array}
+\right.\\ && \\
+\mathbf{r} &=&
+\left\{
+\begin{array}{ll}
+    \frac{1}{\sqrt{\cos^2\theta+\sin^2\theta}}\begin{bmatrix}\cos\theta & 0 & \sin\theta\end{bmatrix}^T & \mathrm{if}\; \mathrm{NED} \\
+    \frac{1}{\sqrt{\cos^2\theta+\sin^2\theta}}\begin{bmatrix}0 & \cos\theta & -\sin\theta\end{bmatrix}^T & \mathrm{if}\; \mathrm{ENU}
+\end{array}
+\right.
+\end{array}" />
 
 
 
