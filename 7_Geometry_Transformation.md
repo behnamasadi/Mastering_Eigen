@@ -314,7 +314,7 @@ where <img src="https://latex.codecogs.com/svg.image?\mathbf{K}" title="https://
 
 
 ## Exponential Coordinates For Rotation
-Any orientation can be achieved from initial orientation by rotating about some unit axis <img src="https://latex.codecogs.com/svg.image?&space;\hat{\omega_s}&space;" title="https://latex.codecogs.com/svg.image? \hat{\omega_s} " /> (angular velocity)  by a particular angle <img src="https://latex.codecogs.com/svg.image?\theta" title="https://latex.codecogs.com/svg.image?\theta" />. If we multiply these two we will get <img src="https://latex.codecogs.com/svg.image?\hat{\omega}&space;\theta" title="https://latex.codecogs.com/svg.image?\hat{\omega} \theta" /> which is a three parameter representation of parameter. We call theses theree parameter **Exponential Coordinates** representing orientation of one frame relative to other.
+Any orientation can be achieved from initial orientation by rotating about some unit axis <img src="https://latex.codecogs.com/svg.image?&space;\hat{\omega_s}&space;" title="https://latex.codecogs.com/svg.image? \hat{\omega_s} " /> (angular velocity)  by a particular angle <img src="https://latex.codecogs.com/svg.image?\theta" title="https://latex.codecogs.com/svg.image?\theta" />. If we multiply these two we will get <img src="https://latex.codecogs.com/svg.image?\hat{\omega}&space;\theta" title="https://latex.codecogs.com/svg.image?\hat{\omega} \theta" /> which is a three parameter representation of parameter. We call these three parameters **Exponential Coordinates** representing the orientation of one frame relative to another.
 
 <br/>
 <br/>
@@ -322,7 +322,7 @@ Any orientation can be achieved from initial orientation by rotating about some 
 
 <br/>
 <br/>
-The answer to this vector differential equation is matrix exponential which can be expresses with series expansion.
+The answer to this vector differential equation is matrix exponential which can be expressed with series expansion.
  
  
 <br/>
@@ -390,7 +390,7 @@ and if <img src="https://latex.codecogs.com/svg.image?x\in&space;\mathbb{R}^n" t
 <br/>
 
 
-when the matrix skew symmetric the expansion has closed form solution:
+when the matrix skew-symmetric the expansion has closed form solution:
 
 
 <br/>
@@ -483,6 +483,8 @@ vector definition of a quaternion:
 <img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;\mathbf&space;{i}&space;^{2}=\mathbf&space;{j}&space;^{2}=\mathbf&space;{k}&space;^{2}=\mathbf&space;{i\,j\,k}&space;=-1}" title="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {i} ^{2}=\mathbf {j} ^{2}=\mathbf {k} ^{2}=\mathbf {i\,j\,k} =-1}" />
 
 
+## Quaternion Conventions: Hamilton and JPL
+Refs: [1](https://fzheng.me/2017/11/12/quaternion_conventions_en/)
 ## 4.2. Inverse of Quaternions
 
 <br/>
@@ -550,7 +552,7 @@ The orientation of frame <img src="https://latex.codecogs.com/svg.latex?S" alt="
 <img src="https://latex.codecogs.com/svg.latex?%5ES_B%5Cmathbf%7Bq%7D%5E*%20%3D%20%5C%2C%5EB_S%5Cmathbf%7Bq%7D%20%3D%20%5Cbegin%7Bbmatrix%7Dq_w%5C%5C-q_x%5C%5C-q_y%5C%5C-q_z%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?^S_B\mathbf{q}^* = \,^B_S\mathbf{q} = \begin{bmatrix}q_w\\-q_x\\-q_y\\-q_z\end{bmatrix}" />
 
 
-sequence of rotations follows the subscript cancellation rule:
+the sequence of rotations follows the subscript cancellation rule:
 
 
 <img src="https://latex.codecogs.com/svg.latex?%5EC_A%5Cmathbf%7Bq%7D%20%3D%20%5C%2C%5EC_B%5Cmathbf%7Bq%7D%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D" alt="https://latex.codecogs.com/svg.latex?^C_A\mathbf{q} = \,^C_B\mathbf{q} \, ^B_A\mathbf{q}" />
@@ -562,7 +564,7 @@ If you have a vector that has been expressed in frame A:
 <img src="https://latex.codecogs.com/svg.latex?%5EA%5Cmathbf%7Bv%7D_q%3D%5Cbegin%7Bbmatrix%7Dv_x%20%5C%5C%20v_y%20%5C%5C%20v_z%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?^A\mathbf{v}_q=\begin{bmatrix}v_x \\ v_y \\ v_z\end{bmatrix}" />
 
 <br/>
-And you want to express it in frame B, First express it as : 
+If you want to express it in frame B, First express it as : 
 <br/>
 <img src="https://latex.codecogs.com/svg.latex?%5EA%5Cmathbf%7Bv%7D_q%3D%5Cbegin%7Bbmatrix%7D0%5C%5Cv_x%20%5C%5C%20v_y%20%5C%5C%20v_z%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?^A\mathbf{v}_q=\begin{bmatrix}0\\v_x \\ v_y \\ v_z\end{bmatrix}" />
 
@@ -620,7 +622,7 @@ A very good article to read about [quaternions](https://danceswithcode.net/engin
 Refs: [1](https://stackoverflow.com/questions/1171849/finding-quaternion-representing-the-rotation-from-one-vector-to-another)
 
 ## 4.8. Quaternions and  Axis-Angle Representation 
-Quaternions can encode axis-angle representation in four numbers, and can be used to apply the corresponding rotation to a position vector <img src="https://latex.codecogs.com/svg.image?(x,y,z)" alt="https://latex.codecogs.com/svg.image?(x,y,z)" />, representing a point relative to the origin in <img src="https://latex.codecogs.com/svg.image?\mathbb{R}^3" alt="https://latex.codecogs.com/svg.image?\mathbb{R}^3"/>.
+Quaternions can encode axis-angle representation in four numbers and can be used to apply the corresponding rotation to a position vector <img src="https://latex.codecogs.com/svg.image?(x,y,z)" alt="https://latex.codecogs.com/svg.image?(x,y,z)" />, representing a point relative to the origin in <img src="https://latex.codecogs.com/svg.image?\mathbb{R}^3" alt="https://latex.codecogs.com/svg.image?\mathbb{R}^3"/>.
 
 
 Euclidean vectors such as <img src="https://latex.codecogs.com/svg.image?(2,3,4)" alt="https://latex.codecogs.com/svg.image?(2,3,4)" /> or <img src="https://latex.codecogs.com/svg.image?(a_x,a_y,a_z)" alt="https://latex.codecogs.com/svg.image?(a_x,a_y,a_z)" /> can be rewritten as <img src="https://latex.codecogs.com/svg.image?2i+3j+4k" alt="https://latex.codecogs.com/svg.image?2i+3j+4k" /> or  <img src="https://latex.codecogs.com/svg.image?(a_xi,a_yj,a_zk)"  alt="https://latex.codecogs.com/svg.image?(a_xi,a_yj,a_zk)" /> , where i, j, k are unit vectors representing the three Cartesian axes (traditionally x, y, z), and also obey the multiplication rules of the fundamental quaternion units.
