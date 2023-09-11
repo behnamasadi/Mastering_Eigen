@@ -8,10 +8,10 @@ The Euler angles are three angles to describe the orientation of a rigid body wi
 
 
 
-The rotations may about the axes `XYZ` of the original coordinate system, which is assumed to remain motionless (extrinsic), or rotations about the axes of the rotating coordinate system `XYZ` (intrinsic), solidary with the moving body, which changes its orientation with respect to the extrinsic frame after each elemental rotation.
+The rotations may be about the axes `XYZ` of the original coordinate system, which is assumed to remain motionless (extrinsic), or rotations about the axes of the rotating coordinate system `XYZ` (intrinsic), solidary with the moving body, which changes its orientation with respect to the extrinsic frame after each elemental rotation.
 
 
-## 1.2. Roll, Pitch and Yaw
+## 1.2. Roll, Pitch, and Yaw
 
 Euler angles are typically denoted as:
 - <img src="https://latex.codecogs.com/svg.image?&space;\gamma&space;\text{&space;or&space;}&space;\phi,&space;" title="https://latex.codecogs.com/svg.image? \gamma \text{ or } \phi, " /> represents a rotation around the x axis.
@@ -141,6 +141,7 @@ Note that this method assumes <img src="https://latex.codecogs.com/svg.image?r_{
 <img src="https://latex.codecogs.com/svg.image?{\begin{aligned}\alpha&space;&=\arctan&space;\left({\frac&space;{r_{21}}{r_{11}}}\right)\\\beta&space;&=\arctan&space;\left({\frac&space;{-r_{31}}{\sqrt&space;{1-r_{31}^{2}}}}\right)\\\gamma&space;&=\arctan&space;\left({\frac&space;{r_{32}}{r_{33}}}\right)\end{aligned}}" title="https://latex.codecogs.com/svg.image?{\begin{aligned}\alpha &=\arctan \left({\frac {r_{21}}{r_{11}}}\right)\\\beta &=\arctan \left({\frac {-r_{31}}{\sqrt {1-r_{31}^{2}}}}\right)\\\gamma &=\arctan \left({\frac {r_{32}}{r_{33}}}\right)\end{aligned}}" />
 <br/>
 <br/>
+
 ## 1.8. Equivalent Proper Euler Angles
 
 <br/>
@@ -570,8 +571,7 @@ If you want to express it in frame B, First express it as :
 
 
 
-<img src="https://latex.codecogs.com/svg.latex?%5EB%5Cmathbf%7Bv%7D_q%20%3D%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D%20%5C%2C%20%5EA%5Cmathbf%7Bv%7D_q%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D%5E*
-" alt="https://latex.codecogs.com/svg.latex?^B\mathbf{v}_q = \, ^B_A\mathbf{q} \, ^A\mathbf{v}_q \, ^B_A\mathbf{q}^*" />
+<img src="https://latex.codecogs.com/svg.latex?%5EB%5Cmathbf%7Bv%7D_q%20%3D%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D%20%5C%2C%20%5EA%5Cmathbf%7Bv%7D_q%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D%5E*" alt="https://latex.codecogs.com/svg.latex?^B\mathbf{v}_q = \, ^B_A\mathbf{q} \, ^A\mathbf{v}_q \, ^B_A\mathbf{q}^*" />
 
 
 The inverse rotation:
