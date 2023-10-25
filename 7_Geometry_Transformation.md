@@ -215,6 +215,61 @@ This means that there are infinitely many sets of (roll,yaw) angles for a given 
 Visit the [link](https://compsci290-s2016.github.io/CoursePage/Materials/EulerAnglesViz/) for interactive Gimbal visualization.
 
 
+
+
+Absolutely, let's illustrate the gimbal lock issue using a numerical example and then explain how the problem manifests in the Euler angle representation but not with quaternions.
+
+### Numerical Example:
+
+Consider a 3D object that we wish to rotate using the roll-pitch-yaw sequence (often used in aerospace). For the sake of simplicity, let's work with degrees:
+
+1. **Initial orientation**: No rotation applied. Euler angles are (roll, pitch, yaw) = (0°, 0°, 0°).
+   
+2. **Rotation**: We apply a pitch of +90°. Now, our Euler angles are (0°, 90°, 0°).
+
+At this point, the object's 'nose' is pointing straight up. Here's the problem:
+
+If we now try to apply a roll of, say, +45°, the actual effect in 3D space will be identical to applying a yaw of +45°. We cannot distinguish between roll and yaw anymore; they have become degenerate. This is gimbal lock. 
+
+### Numerical Values:
+
+**Euler Angles**:
+After the +90° pitch, our Euler angles become:
+Roll: 0° (or +45° if we attempt a roll after pitching)
+Pitch: 90°
+Yaw: 0° (or +45° if we attempt a yaw after pitching)
+
+This is problematic because after the pitch of +90°, the roll and yaw rotations are indistinguishable in effect.
+
+**Quaternion Representation**:
+The rotation for a +90° pitch around the Y-axis can be represented as:
+\[ q = \cos\left(\frac{\theta}{2}\right) + \sin\left(\frac{\theta}{2}\right)\mathbf{j} \]
+\[ q = \cos(45°) + \sin(45°)\mathbf{j} \]
+\[ q = 0.707 + 0.707\mathbf{j} \]
+
+Now, if we wanted to apply a roll of +45° after this pitch using quaternions, we would multiply the above quaternion by the quaternion representation of a +45° roll around the X-axis, resulting in a distinct and unique quaternion value that smoothly combines both rotations without ambiguity.
+
+### Why Euler Angles Have This Problem:
+
+The core of the gimbal lock problem with Euler angles lies in the sequential nature of the rotations. When the pitch angle is ±90°, the axes for roll and yaw become aligned. Hence, rotating around one of these axes is indistinguishable from rotating around the other. This overlap or "lock" is what causes the loss of a degree of freedom.
+
+### Why Quaternions Don't Have This Problem:
+
+Quaternions represent rotations as a single, unified operation rather than a sequence. This means there's no inherent order or sequence to worry about. A quaternion rotation of +90° pitch followed by a +45° roll will result in a unique orientation distinct from any other combination of rotations. 
+
+Furthermore, quaternions interpolate smoothly between orientations using "slerp" (spherical linear interpolation), ensuring a consistent and continuous rotation without the jumps or singularities associated with Euler angles.
+
+In summary, the non-sequential nature of quaternions, combined with their ability to uniquely represent every possible orientation in 3D space, makes them immune to the gimbal lock problem that plagues Euler angles.
+
+
+
+<img src="images/quaternions.online.png" width="100%"  height="100%" alt="quaternions.online.png"  />
+
+
+Click here for [interactive](https://quaternions.online/) demo
+
+
+
 ## 1.10. Uniqueness of 3D Rotation Matrix
 
 Refs: [1](https://math.stackexchange.com/questions/105264/3d-rotation-matrix-uniqueness/105380#105380)
@@ -484,8 +539,6 @@ vector definition of a quaternion:
 <img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;\mathbf&space;{i}&space;^{2}=\mathbf&space;{j}&space;^{2}=\mathbf&space;{k}&space;^{2}=\mathbf&space;{i\,j\,k}&space;=-1}" title="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {i} ^{2}=\mathbf {j} ^{2}=\mathbf {k} ^{2}=\mathbf {i\,j\,k} =-1}" />
 
 
-## Quaternion Conventions: Hamilton and JPL
-Refs: [1](https://fzheng.me/2017/11/12/quaternion_conventions_en/)
 ## 4.2. Inverse of Quaternions
 
 <br/>
@@ -562,15 +615,16 @@ the sequence of rotations follows the subscript cancellation rule:
 ## 4.5 Changing Frame of Reference with Unit Quaternion
 If you have a vector that has been expressed in frame A:
 <br/>
-<img src="https://latex.codecogs.com/svg.latex?%5EA%5Cmathbf%7Bv%7D_q%3D%5Cbegin%7Bbmatrix%7Dv_x%20%5C%5C%20v_y%20%5C%5C%20v_z%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?^A\mathbf{v}_q=\begin{bmatrix}v_x \\ v_y \\ v_z\end{bmatrix}" />
+<img src="https://latex.codecogs.com/svg.latex?%5EA%5Cmathbf%7Bv%7D%3D%5Cbegin%7Bbmatrix%7Dv_x%20%5C%5C%20v_y%20%5C%5C%20v_z%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?^A\mathbf{v}=\begin{bmatrix}v_x \\ v_y \\ v_z\end{bmatrix}" />
 
 <br/>
 If you want to express it in frame B, First express it as : 
+
 <br/>
 <img src="https://latex.codecogs.com/svg.latex?%5EA%5Cmathbf%7Bv%7D_q%3D%5Cbegin%7Bbmatrix%7D0%5C%5Cv_x%20%5C%5C%20v_y%20%5C%5C%20v_z%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?^A\mathbf{v}_q=\begin{bmatrix}0\\v_x \\ v_y \\ v_z\end{bmatrix}" />
 
 
-
+<br/>
 <img src="https://latex.codecogs.com/svg.latex?%5EB%5Cmathbf%7Bv%7D_q%20%3D%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D%20%5C%2C%20%5EA%5Cmathbf%7Bv%7D_q%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D%5E*" alt="https://latex.codecogs.com/svg.latex?^B\mathbf{v}_q = \, ^B_A\mathbf{q} \, ^A\mathbf{v}_q \, ^B_A\mathbf{q}^*" />
 
 
@@ -593,7 +647,8 @@ These rotations can also be expressed Direction Cosine Matrix:
 ## 4.6. Conversion between quaternions and Euler angles
 
 
- A unit quaternion can be described as:
+
+A unit quaternion can be described as:
 
 <img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;\mathbf&space;{q}&space;={\begin{bmatrix}q_{0}&q_{1}&q_{2}&q_{3}\end{bmatrix}}^{T}={\begin{bmatrix}q_{w}&q_{x}&q_{y}&q_{z}\end{bmatrix}}^{T}}" title="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {q} ={\begin{bmatrix}q_{0}&q_{1}&q_{2}&q_{3}\end{bmatrix}}^{T}={\begin{bmatrix}q_{w}&q_{x}&q_{y}&q_{z}\end{bmatrix}}^{T}}" />
 
@@ -612,8 +667,14 @@ To get the roll pitch, yaw:
 <img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;{\begin{bmatrix}\phi&space;\\\theta&space;\\\psi&space;\end{bmatrix}}={\begin{bmatrix}{\mbox{atan2}}\left(2(q_{0}q_{1}&plus;q_{2}q_{3}),1-2(q_{1}^{2}&plus;q_{2}^{2})\right)\\-\pi&space;/2&plus;2\,{\mbox{atan2}}\left({\sqrt&space;{1&plus;2(q_{0}q_{2}-q_{1}q_{3})}},{\sqrt&space;{1-2(q_{0}q_{2}-q_{1}q_{3})}}\right)\\{\mbox{atan2}}\left(2(q_{0}q_{3}&plus;q_{1}q_{2}),1-2(q_{2}^{2}&plus;q_{3}^{2})\right)\end{bmatrix}}}" title="https://latex.codecogs.com/svg.image?{\displaystyle {\begin{bmatrix}\phi \\\theta \\\psi \end{bmatrix}}={\begin{bmatrix}{\mbox{atan2}}\left(2(q_{0}q_{1}+q_{2}q_{3}),1-2(q_{1}^{2}+q_{2}^{2})\right)\\-\pi /2+2\,{\mbox{atan2}}\left({\sqrt {1+2(q_{0}q_{2}-q_{1}q_{3})}},{\sqrt {1-2(q_{0}q_{2}-q_{1}q_{3})}}\right)\\{\mbox{atan2}}\left(2(q_{0}q_{3}+q_{1}q_{2}),1-2(q_{2}^{2}+q_{3}^{2})\right)\end{bmatrix}}}" />
 
 
+
 A very good article to read about [quaternions](https://danceswithcode.net/engineeringnotes/quaternions/quaternions.html)
 
+
+### Quaternion Conventions: Hamilton and JPL
+
+
+Refs: [1](https://fzheng.me/2017/11/12/quaternion_conventions_en/)
 
 
 ## 4.7. Quaternion Representing the Rotation From One Vector to Another
@@ -695,6 +756,293 @@ therefore be discarded.)
 ```
 
 Refs: [1](https://math.stackexchange.com/questions/40164/how-do-you-rotate-a-vector-by-a-unit-quaternion)  
+
+
+Sure, let's demonstrate the rotation of a vector using both the quaternion and the axis-angle methods, using the same angle \( \theta \) and a unit axis vector \( \mathbf{u} \).
+
+Consider:
+- Vector \( \mathbf{v} = [a_x, b_y, c_z] \)
+- Rotation axis \( \mathbf{u} = [u_x, u_y, u_z] \) (assuming \( \mathbf{u} \) is a unit vector)
+- Rotation angle \( \theta \)
+
+## 1. Rotating using Quaternion:
+
+First, convert the axis-angle representation to a quaternion:
+\[ q = \cos\left(\frac{\theta}{2}\right) + \sin\left(\frac{\theta}{2}\right)(u_x\mathbf{i} + u_y\mathbf{j} + u_z\mathbf{k}) \]
+
+Now, to rotate the vector:
+\[ \mathbf{v'} = q \times \mathbf{v} \times q^* \]
+Where:
+\[ \mathbf{v} = 0 + a_x\mathbf{i} + b_y\mathbf{j} + c_z\mathbf{k} \]
+And \( q^* \) is the conjugate of \( q \).
+
+## 2. Rotating using Axis-Angle:
+
+\[ \mathbf{v'} = \mathbf{v} \cos(\theta) + (\mathbf{u} \times \mathbf{v}) \sin(\theta) + \mathbf{u} (\mathbf{u} \cdot \mathbf{v}) (1 - \cos(\theta)) \]
+
+---
+
+**Example**:
+
+Let's rotate the vector \( \mathbf{v} = [1, 0, 0] \) by \( \theta = \frac{\pi}{2} \) (90 degrees) around the unit axis \( \mathbf{u} = [0, 0, 1] \):
+
+Using the Quaternion method:
+1. Convert to quaternion: \( q = \cos(45^\circ) + 0\mathbf{i} + 0\mathbf{j} + \sin(45^\circ)\mathbf{k} \)
+2. Rotate: \( \mathbf{v'} = q \times [0, 1, 0, 0] \times q^* \)
+   Result: \( \mathbf{v'} = [0, 1, 0] \)
+
+Using the Axis-Angle method:
+1. Calculate: \( \mathbf{v'} = [1, 0, 0] \cos(90^\circ) + [0, 1, 0] \sin(90^\circ) + [0, 0, 1] ([0, 0, 1] \cdot [1, 0, 0]) (1 - \cos(90^\circ)) \)
+   Result: \( \mathbf{v'} = [0, 1, 0] \)
+
+In both methods, the result is \( \mathbf{v'} = [0, 1, 0] \), which is a 90-degree rotation of the original vector around the z-axis.
+
+## Rotating a vector using a quaternion
+
+
+<img src="" alt="" />
+
+
+
+
+how to rotate a vector <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D" alt="\mathbf{v}" /> by a quaternion <img src="https://latex.codecogs.com/svg.latex?q" alt="q" />:
+
+1. **Represent the Vector as a Quaternion**:
+If your vector is <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D%20%3D%20%5Bv_x%2C%20v_y%2C%20v_z%5D" alt="\mathbf{v} = [v_x, v_y, v_z]" />, represent it as a quaternion:
+<img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D%20%3D%200%20&plus;%20v_x%5Cmathbf%7Bi%7D%20&plus;%20v_y%5Cmathbf%7Bj%7D%20&plus;%20v_z%5Cmathbf%7Bk%7D" alt="\mathbf{v} = 0 + v_x\mathbf{i} + v_y\mathbf{j} + v_z\mathbf{k} " />
+
+2. **Quaternion Rotation**:
+To rotate the vector by quaternion \( q \), use the following formula:
+\[ \mathbf{v}_{\text{rot}} = q \times \mathbf{v} \times q^* \]
+where \( q^* \) is the conjugate of \( q \).
+
+3. **Extract the Rotated Vector**:
+After the multiplication, your rotated vector is the imaginary part of the resulting quaternion.
+
+**Example**:
+Let's say you have a vector \( \mathbf{v} = [1, 0, 0] \) and you want to rotate it by 90 degrees around the z-axis. The corresponding quaternion for this rotation is:
+\[ q = \cos(\theta/2) + \sin(\theta/2) \times \mathbf{axis} = \cos(45^\circ) + \sin(45^\circ)k = \sqrt{2}/2 + \sqrt{2}/2k \]
+
+To rotate the vector:
+
+1. Represent the vector as a quaternion: \( \mathbf{v} = 0 + 1\mathbf{i} + 0\mathbf{j} + 0\mathbf{k} \)
+2. Multiply: 
+\[ \mathbf{v}_{\text{rot}} = q \times \mathbf{v} \times q^* \]
+3. The imaginary part of \( \mathbf{v}_{\text{rot}} \) is your rotated vector.
+
+Using the above method, the vector [1, 0, 0] would be rotated to approximately [0, 1, 0] (assuming unit quaternions).
+
+It's worth noting that using quaternions to represent and perform rotations can help avoid issues like gimbal lock, which can occur with Euler angles. Quaternions provide a compact and efficient way to represent 3D orientations and perform rotations.
+
+## Transform a full representation of position (orientation and translation ) with quaternions
+
+
+When you have a full representation of position using both orientation (rotation) and translation, and you want to transform it using quaternions, you'll need to consider both the rotational and translational components.
+
+Let's denote:
+
+- The source frame as:
+  - Orientation (rotation) quaternion: \( q_s \)
+  - Translation vector: \( t_s \)
+
+- The transformation frame as:
+  - Orientation (rotation) quaternion: \( q_t \)
+  - Translation vector: \( t_t \)
+
+To transform the source frame by the transformation frame:
+
+1. Rotate the orientation of the source frame using the orientation of the transformation frame.
+2. Rotate the translation of the source frame by the orientation of the transformation frame, then add the translation of the transformation frame.
+
+
+
+
+a source frame represented by the orientation \( q_s \) and translation \( t_s \) using a transformation frame with orientation \( q_t \) and translation \( t_t \), here's the mathematical breakdown:
+
+1. **Compound the Rotations**:
+   The resulting orientation \( q_{combined} \) of the transformed source frame is found by quaternion multiplication:
+   \[ q_{combined} = q_t \times q_s \]
+
+2. **Rotate the Source Translation and Add Transformation Translation**:
+   
+   First, convert the translation vector \( t_s \) of the source frame into a quaternion \( t_{s\_quat} \) with a zero scalar part:
+   \[ t_{s\_quat} = 0 + t_{s_x}\mathbf{i} + t_{s_y}\mathbf{j} + t_{s_z}\mathbf{k} \]
+   
+   Then, rotate this quaternion using the orientation \( q_t \) of the transformation frame:
+   \[ t_{s\_rotated\_quat} = q_t \times t_{s\_quat} \times q_t^* \]
+   where \( q_t^* \) is the conjugate of \( q_t \).
+
+   The rotated translation vector \( t_{s\_rotated} \) is then the imaginary part (vector part) of \( t_{s\_rotated\_quat} \).
+
+   Finally, add the translation vector \( t_t \) of the transformation frame to get the combined translation:
+   \[ t_{combined} = t_{s\_rotated} + t_t \]
+
+So, the final transformed source frame in the new reference frame is represented by orientation \( q_{combined} \) and translation \( t_{combined} \).
+
+
+
+Here's a Python code example using the `numpy` and `numpy-quaternion` libraries:
+
+```python
+import numpy as np
+import quaternion
+
+# Define quaternions and translations
+# For the sake of the example, let's assume the following:
+# A rotation of 45 degrees around the z-axis for both frames
+# And a translation of (1,0,0) for both frames
+
+angle = np.pi / 4
+axis = np.array([0, 0, 1])
+
+q_s = quaternion.from_rotation_vector(angle * axis)
+t_s = np.array([1, 0, 0])
+
+q_t = quaternion.from_rotation_vector(angle * axis)
+t_t = np.array([1, 0, 0])
+
+# 1. Compound the rotations
+q_combined = q_t * q_s
+
+# 2. Rotate the source translation and then translate
+# Convert translation to quaternion
+t_s_quat = np.quaternion(0, t_s[0], t_s[1], t_s[2])
+
+# Rotate translation
+t_s_rotated_quat = q_t * t_s_quat * q_t.inverse()
+
+# Extract the vector part and add the transformation translation
+t_combined = np.array([t_s_rotated_quat.x, t_s_rotated_quat.y, t_s_rotated_quat.z]) + t_t
+
+print(f"Combined Orientation (Quaternion): {q_combined}")
+print(f"Combined Translation: {t_combined}")
+```
+
+Remember to install the necessary libraries before running the code:
+
+```bash
+pip install numpy
+pip install numpy-quaternion
+```
+
+This approach allows you to transform one frame by another using quaternions for the rotational part and vectors for the translational part. The procedure is very common in robotics, computer graphics, and other fields that deal with 3D transformations.
+
+
+
+## Inverse of Full Pose (position and orientation ) expressed in Quaternions
+
+If you have the pose of frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> expressed in the world frame as <img src="https://latex.codecogs.com/svg.latex?%5Bx%2C%20y%2C%20z%2C%20q1%2C%20q2%2C%20q3%2C%20q4%5D" alt="[x, y, z, q1, q2, q3, q4]" /> where <img src="https://latex.codecogs.com/svg.latex?%5Bx%2C%20y%2C%20z%5D" alt="[x, y, z]" /> is the position and <img src="https://latex.codecogs.com/svg.latex?%5Bq1%2C%20q2%2C%20q3%2C%20q4%5D" alt="[q1, q2, q3, q4]" /> is the quaternion representing the orientation, then you want to find the pose of the world frame with respect to frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />.
+
+Given:
+- Position of frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> in world frame: <img src="https://latex.codecogs.com/svg.latex?%5Bx%2C%20y%2C%20z%5D" alt="[x, y, z]" />
+- Orientation of frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> in world frame (as quaternion): <img src="https://latex.codecogs.com/svg.latex?%5Bq1%2C%20q2%2C%20q3%2C%20q4%5D" alt="[q1, q2, q3, q4]" />
+
+To compute the pose of the world in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />, we'll need to find the inverse transformation.
+
+1. **Inverse Position**:
+   The position of the world origin in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> coordinates is given by the negation of the original position:
+   <img src="https://latex.codecogs.com/svg.latex?%5Bx%27%2C%20y%27%2C%20z%27%5D%20%3D%20%5B-x%2C%20-y%2C%20-z%5D" alt="[x', y', z'] = [-x, -y, -z]" />
+
+
+2. **Inverse Orientation**:
+   The orientation of the world frame with respect to frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> can be obtained by taking the conjugate of the given quaternion. The conjugate of a quaternion <img src="https://latex.codecogs.com/svg.latex?%5Bq1%2C%20q2%2C%20q3%2C%20q4%5D" alt="[q1, q2, q3, q4]" /> is given by:
+   <img src="https://latex.codecogs.com/svg.latex?%5Bq1%27%2C%20q2%27%2C%20q3%27%2C%20q4%27%5D%20%3D%20%5Bq1%2C%20-q2%2C%20-q3%2C%20-q4%5D" alt="[q1', q2', q3', q4'] = [q1, -q2, -q3, -q4]" />
+
+However, simply inverting the translation is not enough. The correct pose of the world in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> would require us to rotate the negated translation vector using the inverse orientation.
+
+To do this, you'll express the negated position vector as a quaternion with zero scalar part: <img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Bpos%7D%7D%20%3D%20%5B0%2C%20-x%2C%20-y%2C%20-z%5D" alt=" q_{\text{pos}} = [0, -x, -y, -z] " />.
+
+Then, you'll multiply this by the inverse orientation quaternion:
+<img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Bresult%7D%7D%20%3D%20q_%7B%5Ctext%7Binv%7D%7D%20%5Ctimes%20q_%7B%5Ctext%7Bpos%7D%7D%20%5Ctimes%20q" alt=" q_{\text{result}} = q_{\text{inv}} \times q_{\text{pos}} \times q " />
+where <img src="https://latex.codecogs.com/svg.latex?q" alt="q" /> is the original orientation quaternion, and <img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Binv%7D%7D" alt="q_{\text{inv}} " /> is its conjugate.
+
+The resulting quaternion <img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Bresult%7D%7D" alt="q_{\text{result}}" /> will have its vector part (last three components) as the desired transformed position of the world in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />. The scalar part of <img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Bresult%7D%7D" alt="q_{\text{result}}" /> should be 0.
+
+Finally:
+- The position of the world in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> is the vector part of <img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Bresult%7D%7D" alt="q_{\text{result}}" />.
+- The orientation of the world in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> is the conjugate of the given orientation: <img src="https://latex.codecogs.com/svg.latex?%5Bq1%27%2C%20q2%27%2C%20q3%27%2C%20q4%27%5D" alt="[q1', q2', q3', q4']" />.
+
+## Example of relative pose of two camera and IMU
+if the given transformations are the positions of the IMU expressed in the camera frames, then we need to slightly modify our approach.
+
+Given:
+- \( q_{C0-IMU} \): Quaternion of IMU with respect to Camera0
+- \( q_{C1-IMU} \): Quaternion of IMU with respect to Camera1
+- \( t_{C0-IMU} \): Translation of IMU with respect to Camera0
+- \( t_{C1-IMU} \): Translation of IMU with respect to Camera1
+
+We want to find:
+- \( q_{C0-C1} \): Quaternion of Camera1 with respect to Camera0
+- \( t_{C0-C1} \): Translation of Camera1 with respect to Camera0
+
+The formulae are:
+\[ q_{C0-C1} = q_{C0-IMU} \otimes q_{C1-IMU}^{-1} \]
+\[ t_{C0-C1} = q_{C0-IMU} \otimes (t_{C1-IMU} - t_{C0-IMU}) \otimes q_{C0-IMU}^{-1} \]
+
+Let's implement this in Python:
+
+```python
+import numpy as np
+from pyquaternion import Quaternion
+
+def relative_pose(q_C0_IMU, t_C0_IMU, q_C1_IMU, t_C1_IMU):
+    # Calculate relative quaternion
+    q_C0_C1 = q_C0_IMU * q_C1_IMU.inverse
+
+    # Calculate relative translation
+    t_diff = np.array(t_C1_IMU) - np.array(t_C0_IMU)
+    t_C0_C1 = q_C0_IMU.rotate(t_diff)
+
+    return q_C0_C1, t_C0_C1.tolist()
+
+# Define quaternions and translations for IMU w.r.t Camera0 and Camera1
+q_C0_IMU = Quaternion(w=0.6328142, x=0.3155095, y=-0.3155095, z=0.6328142)
+t_C0_IMU = [0.234508, 0.028785, 0.039920]
+
+q_C1_IMU = Quaternion(w=0.3155095, x=-0.6328142, y=-0.6328142, z=-0.3155095)
+t_C1_IMU = [0.234508, 0.028785, -0.012908]
+
+q_C0_C1, t_C0_C1 = relative_pose(q_C0_IMU, t_C0_IMU, q_C1_IMU, t_C1_IMU)
+print("Quaternion of Camera1 w.r.t Camera0:", q_C0_C1)
+print("Translation of Camera1 w.r.t Camera0:", t_C0_C1)
+```
+
+This Python code should give you the pose of Camera1 with respect to Camera0.
+
+
+
+
+## Expressing Relative Pose using Quaternions  (subscript cancellation)
+
+If Pose <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />  express in Frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" />  and pose of <img src="https://latex.codecogs.com/svg.latex?B" alt="B" /> expressed in <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />  using quaternions,  equation for finding the pose <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> expressed in <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />  using quaternions
+
+
+
+
+
+1. **Rotations**:
+Let's define the following quaternions for the rotations:
+- <img src="https://latex.codecogs.com/svg.latex?Q%5E%7BA%7D_%7BB%7D" alt="Q^{A}_{B}" /> is the quaternion representing the rotation of frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" /> with respect to frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> (<img src="https://latex.codecogs.com/svg.latex?B" alt="B" />'s rotation expressed in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />).
+- <img src="https://latex.codecogs.com/svg.latex?Q%5E%7BB%7D_%7BC%7D" alt="Q^{B}_{C}" /> is the quaternion representing the rotation of frame <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> with respect to frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" /> (<img src="https://latex.codecogs.com/svg.latex?C" alt="C" />'s rotation expressed in frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" />).
+
+The combined rotation of frame <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> with respect to frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />, <img src="https://latex.codecogs.com/svg.latex?Q%5E%7BA%7D_%7BC%7D" alt="Q^{A}_{C}" /> , is given by:
+<img src="https://latex.codecogs.com/svg.latex?Q%5E%7BA%7D_%7BC%7D%20%3D%20Q%5E%7BA%7D_%7BB%7D%20%5Cotimes%20Q%5E%7BB%7D_%7BC%7D" alt="Q^{A}_{C} = Q^{A}_{B} \otimes Q^{B}_{C} " />
+
+
+
+2. **Translations (positions)**:
+If you have the following positions:
+- <img src="https://latex.codecogs.com/svg.latex?P%5E%7BA%7D_%7BB%7D" alt="P^{A}_{B}" /> is the position of point <img src="https://latex.codecogs.com/svg.latex?B" alt="B" /> (or frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" />'s origin) expressed in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />.
+- <img src="https://latex.codecogs.com/svg.latex?P%5E%7BB%7D_%7BC%7D" alt="P^{B}_{C}" /> is the position of point <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> (or frame <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />'s origin) expressed in frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" />.
+
+The position of point <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> (or frame <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />'s origin) expressed in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />, <img src="https://latex.codecogs.com/svg.latex?P%5E%7BA%7D_%7BC%7D" alt="P^{A}_{C}" />, when considering rotations, is:
+<img src="https://latex.codecogs.com/svg.latex?P%5E%7BA%7D_%7BC%7D%20%3D%20P%5E%7BA%7D_%7BB%7D%20&plus;%20Q%5E%7BA%7D_%7BB%7D%20%5Cotimes%20P%5E%7BB%7D_%7BC%7D%20%5Cotimes%20%28Q%5E%7BA%7D_%7BB%7D%29%5E%7B-1%7D" alt=" P^{A}_{C} = P^{A}_{B} + Q^{A}_{B} \otimes P^{B}_{C} \otimes (Q^{A}_{B})^{-1} " />
+
+
+Where <img src="https://latex.codecogs.com/svg.latex?%28Q%5E%7BA%7D_%7BB%7D%29%5E%7B-1%7D" alt="(Q^{A}_{B})^{-1}" /> denotes the conjugate (or inverse) of the quaternion <img src="https://latex.codecogs.com/svg.latex?%5C%28%20Q%5E%7BA%7D_%7BB%7D%20%5C%29" alt="\( Q^{A}_{B} \)" />.
+
+## Quaternions Interpolation slerp
+
 
 ## The advantages of Quaternions 
 
