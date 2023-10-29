@@ -234,18 +234,28 @@ If we now try to apply a roll of, say, +45°, the actual effect in 3D space will
 ### Numerical Values:
 
 **Euler Angles**:
-After the +90° pitch, our Euler angles become:
-Roll: 0° (or +45° if we attempt a roll after pitching)
-Pitch: 90°
-Yaw: 0° (or +45° if we attempt a yaw after pitching)
+After the `+90°` pitch, our Euler angles become:
+Roll: `0°` (or `+45°` if we attempt a roll after pitching)
+Pitch: `90°`
+Yaw: `0°` (or `+45°` if we attempt a yaw after pitching)
 
 This is problematic because after the pitch of +90°, the roll and yaw rotations are indistinguishable in effect.
 
+
+
+
+
+
+
+
 **Quaternion Representation**:
 The rotation for a +90° pitch around the Y-axis can be represented as:
-\[ q = \cos\left(\frac{\theta}{2}\right) + \sin\left(\frac{\theta}{2}\right)\mathbf{j} \]
-\[ q = \cos(45°) + \sin(45°)\mathbf{j} \]
-\[ q = 0.707 + 0.707\mathbf{j} \]
+ <img src="https://latex.codecogs.com/svg.latex?q%20%3D%20%5Ccos%5Cleft%28%5Cfrac%7B%5Ctheta%7D%7B2%7D%5Cright%29%20&plus;%20%5Csin%5Cleft%28%5Cfrac%7B%5Ctheta%7D%7B2%7D%5Cright%29%5Cmathbf%7Bj%7D" alt="q = \cos\left(\frac{\theta}{2}\right) + \sin\left(\frac{\theta}{2}\right)\mathbf{j}" />  
+= <img src="https://latex.codecogs.com/svg.latex?q%20%3D%20%5Ccos%2845%29%20&plus;%20%5Csin%2845%29%5Cmathbf%7Bj%7D" alt="q = \cos(45) + \sin(45)\mathbf{j}" />  
+
+= <img src="https://latex.codecogs.com/svg.latex?q%20%3D%200.707%20&plus;%200.707%5Cmathbf%7Bj%7D" alt="q = 0.707 + 0.707\mathbf{j}" />  
+ 
+
 
 Now, if we wanted to apply a roll of +45° after this pitch using quaternions, we would multiply the above quaternion by the quaternion representation of a +45° roll around the X-axis, resulting in a distinct and unique quaternion value that smoothly combines both rotations without ambiguity.
 
@@ -757,53 +767,69 @@ therefore be discarded.)
 
 Refs: [1](https://math.stackexchange.com/questions/40164/how-do-you-rotate-a-vector-by-a-unit-quaternion)  
 
-
-Sure, let's demonstrate the rotation of a vector using both the quaternion and the axis-angle methods, using the same angle \( \theta \) and a unit axis vector \( \mathbf{u} \).
+Sure, let's demonstrate the rotation of a vector using both the quaternion and the axis-angle methods, using the same angle <img src="https://latex.codecogs.com/svg.latex?%5Ctheta" alt="\theta" /> and a unit axis vector <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bu%7D" alt="\mathbf{u}" /> .
 
 Consider:
-- Vector \( \mathbf{v} = [a_x, b_y, c_z] \)
-- Rotation axis \( \mathbf{u} = [u_x, u_y, u_z] \) (assuming \( \mathbf{u} \) is a unit vector)
-- Rotation angle \( \theta \)
+- Vector <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D%20%3D%20%5Ba_x%2C%20b_y%2C%20c_z%5D" alt="\mathbf{v} = [a_x, b_y, c_z]" />
+- Rotation axis <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bu%7D%20%3D%20%5Bu_x%2C%20u_y%2C%20u_z%5D" alt="\mathbf{u} = [u_x, u_y, u_z]" /> (assuming <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bu%7D" alt="\mathbf{u}" /> is a unit vector)
+- Rotation angle <img src="https://latex.codecogs.com/svg.latex?%5Ctheta" alt="\theta" />
 
 ## 1. Rotating using Quaternion:
 
 First, convert the axis-angle representation to a quaternion:
-\[ q = \cos\left(\frac{\theta}{2}\right) + \sin\left(\frac{\theta}{2}\right)(u_x\mathbf{i} + u_y\mathbf{j} + u_z\mathbf{k}) \]
+
+<img src="https://latex.codecogs.com/svg.latex?q%20%3D%20%5Ccos%5Cleft%28%5Cfrac%7B%5Ctheta%7D%7B2%7D%5Cright%29%20&plus;%20%5Csin%5Cleft%28%5Cfrac%7B%5Ctheta%7D%7B2%7D%5Cright%29%28u_x%5Cmathbf%7Bi%7D%20&plus;%20u_y%5Cmathbf%7Bj%7D%20&plus;%20u_z%5Cmathbf%7Bk%7D%29" alt="q = \cos\left(\frac{\theta}{2}\right) + \sin\left(\frac{\theta}{2}\right)(u_x\mathbf{i} + u_y\mathbf{j} + u_z\mathbf{k}) " />
+
 
 Now, to rotate the vector:
-\[ \mathbf{v'} = q \times \mathbf{v} \times q^* \]
+<img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%27%7D%20%3D%20q%20%5Ctimes%20%5Cmathbf%7Bv%7D%20%5Ctimes%20q%5E*" alt="\mathbf{v'} = q \times \mathbf{v} \times q^*" />
 Where:
-\[ \mathbf{v} = 0 + a_x\mathbf{i} + b_y\mathbf{j} + c_z\mathbf{k} \]
-And \( q^* \) is the conjugate of \( q \).
+<img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D%20%3D%200%20&plus;%20a_x%5Cmathbf%7Bi%7D%20&plus;%20b_y%5Cmathbf%7Bj%7D%20&plus;%20c_z%5Cmathbf%7Bk%7D" alt="\mathbf{v} = 0 + a_x\mathbf{i} + b_y\mathbf{j} + c_z\mathbf{k}" />
+
+
+And <img src="https://latex.codecogs.com/svg.latex?q%5E*" alt="q^*" /> is the conjugate of <img src="https://latex.codecogs.com/svg.latex?q" alt="q" />.
 
 ## 2. Rotating using Axis-Angle:
 
-\[ \mathbf{v'} = \mathbf{v} \cos(\theta) + (\mathbf{u} \times \mathbf{v}) \sin(\theta) + \mathbf{u} (\mathbf{u} \cdot \mathbf{v}) (1 - \cos(\theta)) \]
+<img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%27%7D%20%3D%20%5Cmathbf%7Bv%7D%20%5Ccos%28%5Ctheta%29%20&plus;%20%28%5Cmathbf%7Bu%7D%20%5Ctimes%20%5Cmathbf%7Bv%7D%29%20%5Csin%28%5Ctheta%29%20&plus;%20%5Cmathbf%7Bu%7D%20%28%5Cmathbf%7Bu%7D%20%5Ccdot%20%5Cmathbf%7Bv%7D%29%20%281%20-%20%5Ccos%28%5Ctheta%29%29" alt="\mathbf{v'} = \mathbf{v} \cos(\theta) + (\mathbf{u} \times \mathbf{v}) \sin(\theta) + \mathbf{u} (\mathbf{u} \cdot \mathbf{v}) (1 - \cos(\theta))" />
+
+
 
 ---
 
 **Example**:
-
-Let's rotate the vector \( \mathbf{v} = [1, 0, 0] \) by \( \theta = \frac{\pi}{2} \) (90 degrees) around the unit axis \( \mathbf{u} = [0, 0, 1] \):
-
-Using the Quaternion method:
-1. Convert to quaternion: \( q = \cos(45^\circ) + 0\mathbf{i} + 0\mathbf{j} + \sin(45^\circ)\mathbf{k} \)
-2. Rotate: \( \mathbf{v'} = q \times [0, 1, 0, 0] \times q^* \)
-   Result: \( \mathbf{v'} = [0, 1, 0] \)
-
-Using the Axis-Angle method:
-1. Calculate: \( \mathbf{v'} = [1, 0, 0] \cos(90^\circ) + [0, 1, 0] \sin(90^\circ) + [0, 0, 1] ([0, 0, 1] \cdot [1, 0, 0]) (1 - \cos(90^\circ)) \)
-   Result: \( \mathbf{v'} = [0, 1, 0] \)
-
-In both methods, the result is \( \mathbf{v'} = [0, 1, 0] \), which is a 90-degree rotation of the original vector around the z-axis.
-
-## Rotating a vector using a quaternion
 
 
 <img src="" alt="" />
 
 
 
+
+
+
+
+
+
+
+Let's rotate the vector <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D%20%3D%20%5B1%2C%200%2C%200%5D" alt="\mathbf{v} = [1, 0, 0]" /> by <img src="https://latex.codecogs.com/svg.latex?%5Ctheta%20%3D%20%5Cfrac%7B%5Cpi%7D%7B2%7D" alt="\theta = \frac{\pi}{2}" /> (90 degrees) around the unit axis <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bu%7D%20%3D%20%5B0%2C%200%2C%201%5D" alt="\mathbf{u} = [0, 0, 1]" />:
+
+Using the Quaternion method:
+1. Convert to quaternion: <img src="https://latex.codecogs.com/svg.latex?q%20%3D%20%5Ccos%2845%5E%5Ccirc%29%20&plus;%200%5Cmathbf%7Bi%7D%20&plus;%200%5Cmathbf%7Bj%7D%20&plus;%20%5Csin%2845%5E%5Ccirc%29%5Cmathbf%7Bk%7D" alt="q = \cos(45^\circ) + 0\mathbf{i} + 0\mathbf{j} + \sin(45^\circ)\mathbf{k}" />
+2. Rotate: <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%27%7D%20%3D%20q%20%5Ctimes%20%5B0%2C%201%2C%200%2C%200%5D%20%5Ctimes%20q%5E*" alt="\mathbf{v'} = q \times [0, 1, 0, 0] \times q^*" />
+   Result: 
+   
+   
+
+
+
+Using the Axis-Angle method:
+1. Calculate: <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%27%7D%20%3D%20%5B1%2C%200%2C%200%5D%20%5Ccos%2890%5E%5Ccirc%29%20&plus;%20%5B0%2C%201%2C%200%5D%20%5Csin%2890%5E%5Ccirc%29%20&plus;%20%5B0%2C%200%2C%201%5D%20%28%5B0%2C%200%2C%201%5D%20%5Ccdot%20%5B1%2C%200%2C%200%5D%29%20%281%20-%20%5Ccos%2890%5E%5Ccirc%29%29" alt="\mathbf{v'} = [1, 0, 0] \cos(90^\circ) + [0, 1, 0] \sin(90^\circ) + [0, 0, 1] ([0, 0, 1] \cdot [1, 0, 0]) (1 - \cos(90^\circ))" />   
+
+Result: <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%27%7D%20%3D%20%5B0%2C%201%2C%200%5D" alt="\mathbf{v'} = [0, 1, 0]" />
+
+In both methods, the result is <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%27%7D%20%3D%20%5B0%2C%201%2C%200%5D" alt="\mathbf{v'} = [0, 1, 0]" />, which is a 90-degree rotation of the original vector around the z-axis.
+
+## Rotating a vector using a quaternion
 
 how to rotate a vector <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D" alt="\mathbf{v}" /> by a quaternion <img src="https://latex.codecogs.com/svg.latex?q" alt="q" />:
 
@@ -812,25 +838,27 @@ If your vector is <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7
 <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D%20%3D%200%20&plus;%20v_x%5Cmathbf%7Bi%7D%20&plus;%20v_y%5Cmathbf%7Bj%7D%20&plus;%20v_z%5Cmathbf%7Bk%7D" alt="\mathbf{v} = 0 + v_x\mathbf{i} + v_y\mathbf{j} + v_z\mathbf{k} " />
 
 2. **Quaternion Rotation**:
-To rotate the vector by quaternion \( q \), use the following formula:
-\[ \mathbf{v}_{\text{rot}} = q \times \mathbf{v} \times q^* \]
-where \( q^* \) is the conjugate of \( q \).
+To rotate the vector by quaternion <img src="https://latex.codecogs.com/svg.latex?q" alt="https://latex.codecogs.com/svg.latex?q" />, use the following formula:
+<img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D_%7B%5Ctext%7Brot%7D%7D%20%3D%20q%20%5Ctimes%20%5Cmathbf%7Bv%7D%20%5Ctimes%20q%5E*" alt="\mathbf{v}_{\text{rot}} = q \times \mathbf{v} \times q^*" />
+where <img src="https://latex.codecogs.com/svg.latex?q%5E*" alt="q^*" /> is the conjugate of <img src="https://latex.codecogs.com/svg.latex?q" alt="https://latex.codecogs.com/svg.latex?q" />.
 
 3. **Extract the Rotated Vector**:
 After the multiplication, your rotated vector is the imaginary part of the resulting quaternion.
 
 **Example**:
-Let's say you have a vector \( \mathbf{v} = [1, 0, 0] \) and you want to rotate it by 90 degrees around the z-axis. The corresponding quaternion for this rotation is:
-\[ q = \cos(\theta/2) + \sin(\theta/2) \times \mathbf{axis} = \cos(45^\circ) + \sin(45^\circ)k = \sqrt{2}/2 + \sqrt{2}/2k \]
+Let's say you have a vector <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D%20%3D%20%5B1%2C%200%2C%200%5D" alt="\mathbf{v} = [1, 0, 0]" /> and you want to rotate it by 90 degrees around the z-axis. The corresponding quaternion for this rotation is:
+<img src="https://latex.codecogs.com/svg.latex?q%20%3D%20%5Ccos%28%5Ctheta/2%29%20&plus;%20%5Csin%28%5Ctheta/2%29%20%5Ctimes%20%5Cmathbf%7Baxis%7D%20%3D%20%5Ccos%2845%5E%5Ccirc%29%20&plus;%20%5Csin%2845%5E%5Ccirc%29k%20%3D%20%5Csqrt%7B2%7D/2%20&plus;%20%5Csqrt%7B2%7D/2k" alt="q = \cos(\theta/2) + \sin(\theta/2) \times \mathbf{axis} = \cos(45^\circ) + \sin(45^\circ)k = \sqrt{2}/2 + \sqrt{2}/2k" />
+
 
 To rotate the vector:
 
-1. Represent the vector as a quaternion: \( \mathbf{v} = 0 + 1\mathbf{i} + 0\mathbf{j} + 0\mathbf{k} \)
+1. Represent the vector as a quaternion:  <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D%20%3D%200%20&plus;%201%5Cmathbf%7Bi%7D%20&plus;%200%5Cmathbf%7Bj%7D%20&plus;%200%5Cmathbf%7Bk%7D" alt="\mathbf{v} = 0 + 1\mathbf{i} + 0\mathbf{j} + 0\mathbf{k}" />  
 2. Multiply: 
-\[ \mathbf{v}_{\text{rot}} = q \times \mathbf{v} \times q^* \]
-3. The imaginary part of \( \mathbf{v}_{\text{rot}} \) is your rotated vector.
+<img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D_%7B%5Ctext%7Brot%7D%7D%20%3D%20q%20%5Ctimes%20%5Cmathbf%7Bv%7D%20%5Ctimes%20q%5E*" alt="\mathbf{v}_{\text{rot}} = q \times \mathbf{v} \times q^*" />
 
-Using the above method, the vector [1, 0, 0] would be rotated to approximately [0, 1, 0] (assuming unit quaternions).
+3. The imaginary part of <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D_%7B%5Ctext%7Brot%7D%7D" alt="\mathbf{v}_{\text{rot}}" /> is your rotated vector.
+
+Using the above method, the vector `[1, 0, 0]` would be rotated to approximately `[0, 1, 0]` (assuming unit quaternions).
 
 It's worth noting that using quaternions to represent and perform rotations can help avoid issues like gimbal lock, which can occur with Euler angles. Quaternions provide a compact and efficient way to represent 3D orientations and perform rotations.
 
@@ -842,12 +870,12 @@ When you have a full representation of position using both orientation (rotation
 Let's denote:
 
 - The source frame as:
-  - Orientation (rotation) quaternion: \( q_s \)
-  - Translation vector: \( t_s \)
+  - Orientation (rotation) quaternion: <img src="https://latex.codecogs.com/svg.latex?q_s" alt="q_s" />
+  - Translation vector: <img src="https://latex.codecogs.com/svg.latex?t_s" alt="t_s" />
 
 - The transformation frame as:
-  - Orientation (rotation) quaternion: \( q_t \)
-  - Translation vector: \( t_t \)
+  - Orientation (rotation) quaternion: <img src="https://latex.codecogs.com/svg.latex?q_t" alt="q_t" />
+  - Translation vector: <img src="https://latex.codecogs.com/svg.latex?t_t" alt="t_t" />
 
 To transform the source frame by the transformation frame:
 
@@ -855,29 +883,28 @@ To transform the source frame by the transformation frame:
 2. Rotate the translation of the source frame by the orientation of the transformation frame, then add the translation of the transformation frame.
 
 
-
-
-a source frame represented by the orientation \( q_s \) and translation \( t_s \) using a transformation frame with orientation \( q_t \) and translation \( t_t \), here's the mathematical breakdown:
+a source frame represented by the orientation <img src="https://latex.codecogs.com/svg.latex?q_s" alt="q_s" /> and translation <img src="https://latex.codecogs.com/svg.latex?t_s" alt="t_s" /> using a transformation frame 
+with orientation <img src="https://latex.codecogs.com/svg.latex?q_t" alt="q_t" /> and translation  <img src="https://latex.codecogs.com/svg.latex?t_t" alt="t_t" />, here's the mathematical breakdown:
 
 1. **Compound the Rotations**:
-   The resulting orientation \( q_{combined} \) of the transformed source frame is found by quaternion multiplication:
-   \[ q_{combined} = q_t \times q_s \]
+   The resulting orientation <img src="https://latex.codecogs.com/svg.latex?q_%7Bcombined%7D" alt="q_{combined}" /> of the transformed source frame is found by quaternion multiplication:
+   <img src="https://latex.codecogs.com/svg.latex?q_%7Bcombined%7D%20%3D%20q_t%20%5Ctimes%20q_s" alt="q_{combined} = q_t \times q_s" />
 
 2. **Rotate the Source Translation and Add Transformation Translation**:
    
-   First, convert the translation vector \( t_s \) of the source frame into a quaternion \( t_{s\_quat} \) with a zero scalar part:
-   \[ t_{s\_quat} = 0 + t_{s_x}\mathbf{i} + t_{s_y}\mathbf{j} + t_{s_z}\mathbf{k} \]
+   First, convert the translation vector <img src="https://latex.codecogs.com/svg.latex?t_s" alt="t_s" /> of the source frame into a quaternion <img src="https://latex.codecogs.com/svg.latex?t_%7Bs%5C_quat%7D" alt="t_{s\_quat}" /> with a zero scalar part:
+<img src="https://latex.codecogs.com/svg.latex?t_%7Bs%5C_quat%7D%20%3D%200%20&plus;%20t_%7Bs_x%7D%5Cmathbf%7Bi%7D%20&plus;%20t_%7Bs_y%7D%5Cmathbf%7Bj%7D%20&plus;%20t_%7Bs_z%7D%5Cmathbf%7Bk%7D" alt="t_{s\_quat} = 0 + t_{s_x}\mathbf{i} + t_{s_y}\mathbf{j} + t_{s_z}\mathbf{k}" />
    
-   Then, rotate this quaternion using the orientation \( q_t \) of the transformation frame:
-   \[ t_{s\_rotated\_quat} = q_t \times t_{s\_quat} \times q_t^* \]
-   where \( q_t^* \) is the conjugate of \( q_t \).
+   Then, rotate this quaternion using the orientation <img src="https://latex.codecogs.com/svg.latex?q_t" alt="q_t" /> of the transformation frame:
+   <img src="https://latex.codecogs.com/svg.latex?t_%7Bs%5C_rotated%5C_quat%7D%20%3D%20q_t%20%5Ctimes%20t_%7Bs%5C_quat%7D%20%5Ctimes%20q_t%5E*" alt="t_{s\_rotated\_quat} = q_t \times t_{s\_quat} \times q_t^*" />
+   where <img src="https://latex.codecogs.com/svg.latex?q_t%5E*" alt="q_t^*" /> is the conjugate of <img src="https://latex.codecogs.com/svg.latex?q_t" alt="q_t" />.
 
-   The rotated translation vector \( t_{s\_rotated} \) is then the imaginary part (vector part) of \( t_{s\_rotated\_quat} \).
+   The rotated translation vector <img src="https://latex.codecogs.com/svg.latex?t_%7Bs%5C_rotated%7D" alt="t_{s\_rotated}" /> is then the imaginary part (vector part) of <img src="https://latex.codecogs.com/svg.latex?t_%7Bs%5C_rotated%5C_quat%7D" alt="t_{s\_rotated\_quat}" />.
 
-   Finally, add the translation vector \( t_t \) of the transformation frame to get the combined translation:
-   \[ t_{combined} = t_{s\_rotated} + t_t \]
+   Finally, add the translation vector <img src="https://latex.codecogs.com/svg.latex?t_t" alt="t_t" /> of the transformation frame to get the combined translation:
+   <img src="https://latex.codecogs.com/svg.latex?t_%7Bcombined%7D%20%3D%20t_%7Bs%5C_rotated%7D%20&plus;%20t_t" alt="t_{combined} = t_{s\_rotated} + t_t" />
 
-So, the final transformed source frame in the new reference frame is represented by orientation \( q_{combined} \) and translation \( t_{combined} \).
+So, the final transformed source frame in the new reference frame is represented by orientation <img src="https://latex.codecogs.com/svg.latex?q_%7Bcombined%7D" alt="q_{combined}" /> and translation  <img src="https://latex.codecogs.com/svg.latex?t_%7Bcombined%7D" alt="t_{combined}" />.
 
 
 
@@ -918,16 +945,6 @@ print(f"Combined Orientation (Quaternion): {q_combined}")
 print(f"Combined Translation: {t_combined}")
 ```
 
-Remember to install the necessary libraries before running the code:
-
-```bash
-pip install numpy
-pip install numpy-quaternion
-```
-
-This approach allows you to transform one frame by another using quaternions for the rotational part and vectors for the translational part. The procedure is very common in robotics, computer graphics, and other fields that deal with 3D transformations.
-
-
 
 ## Inverse of Full Pose (position and orientation ) expressed in Quaternions
 
@@ -966,18 +983,18 @@ Finally:
 if the given transformations are the positions of the IMU expressed in the camera frames, then we need to slightly modify our approach.
 
 Given:
-- \( q_{C0-IMU} \): Quaternion of IMU with respect to Camera0
-- \( q_{C1-IMU} \): Quaternion of IMU with respect to Camera1
-- \( t_{C0-IMU} \): Translation of IMU with respect to Camera0
-- \( t_{C1-IMU} \): Translation of IMU with respect to Camera1
+- <img src="https://latex.codecogs.com/svg.latex?q_%7BC0-IMU%7D" alt="q_{C0-IMU}" />: Quaternion of `IMU `with respect to `Camera0`
+- <img src="https://latex.codecogs.com/svg.latex?q_%7BC1-IMU%7D" alt="q_{C1-IMU}" />: Quaternion of `IMU` with respect to `Camera1`
+- <img src="https://latex.codecogs.com/svg.latex?t_%7BC0-IMU%7D" alt="t_{C0-IMU}" />: Translation of `IMU` with respect to `Camera0`
+- <img src="https://latex.codecogs.com/svg.latex?t_%7BC1-IMU%7D" alt="t_{C1-IMU}" />: Translation of `IMU` with respect to `Camera1`
 
 We want to find:
-- \( q_{C0-C1} \): Quaternion of Camera1 with respect to Camera0
-- \( t_{C0-C1} \): Translation of Camera1 with respect to Camera0
+- <img src="https://latex.codecogs.com/svg.latex?q_%7BC0-C1" alt="q_{C0-C1}" />: Quaternion of `Camera1` with respect to `Camera0`
+- <img src="https://latex.codecogs.com/svg.latex?t_%7BC0-C1" alt="t_{C0-C1}" />: Translation of `Camera1` with respect to `Camera0`
 
 The formulae are:
-\[ q_{C0-C1} = q_{C0-IMU} \otimes q_{C1-IMU}^{-1} \]
-\[ t_{C0-C1} = q_{C0-IMU} \otimes (t_{C1-IMU} - t_{C0-IMU}) \otimes q_{C0-IMU}^{-1} \]
+- <img src="https://latex.codecogs.com/svg.latex?q_%7BC0-C1%7D%20%3D%20q_%7BC0-IMU%7D%20%5Cotimes%20q_%7BC1-IMU%7D%5E%7B-1%7D" alt="q_{C0-C1} = q_{C0-IMU} \otimes q_{C1-IMU}^{-1}" />
+- <img src="https://latex.codecogs.com/svg.latex?t_%7BC0-C1%7D%20%3D%20q_%7BC0-IMU%7D%20%5Cotimes%20%28t_%7BC1-IMU%7D%20-%20t_%7BC0-IMU%7D%29%20%5Cotimes%20q_%7BC0-IMU%7D%5E%7B-1%7D" alt="t_{C0-C1} = q_{C0-IMU} \otimes (t_{C1-IMU} - t_{C0-IMU}) \otimes q_{C0-IMU}^{-1}" />
 
 Let's implement this in Python:
 
