@@ -767,12 +767,79 @@ therefore be discarded.)
 
 Refs: [1](https://math.stackexchange.com/questions/40164/how-do-you-rotate-a-vector-by-a-unit-quaternion)  
 
-Sure, let's demonstrate the rotation of a vector using both the quaternion and the axis-angle methods, using the same angle <img src="https://latex.codecogs.com/svg.latex?%5Ctheta" alt="\theta" /> and a unit axis vector <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bu%7D" alt="\mathbf{u}" /> .
+let's demonstrate the rotation of a vector using both the quaternion and the axis-angle methods, using the same angle <img src="https://latex.codecogs.com/svg.latex?%5Ctheta" alt="\theta" /> and a unit axis vector <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bu%7D" alt="\mathbf{u}" /> .
 
 Consider:
 - Vector <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D%20%3D%20%5Ba_x%2C%20b_y%2C%20c_z%5D" alt="\mathbf{v} = [a_x, b_y, c_z]" />
 - Rotation axis <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bu%7D%20%3D%20%5Bu_x%2C%20u_y%2C%20u_z%5D" alt="\mathbf{u} = [u_x, u_y, u_z]" /> (assuming <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bu%7D" alt="\mathbf{u}" /> is a unit vector)
 - Rotation angle <img src="https://latex.codecogs.com/svg.latex?%5Ctheta" alt="\theta" />
+
+
+
+##  Fully Represent a Frame With Quaternions
+
+To represent a position in 3D space use a combination of a quaternion for orientation and a vector for the position.
+
+- For the position, you can use a `Vector3d`, which is a vector of three doubles.
+- For the orientation, use a `Quaterniond`, which is a quaternion that uses double precision.
+
+** Define Position and Orientation **
+```cpp
+Eigen::Vector3d position(1.0, 2.0, 3.0); // Example position (x, y, z)
+Eigen::Quaterniond orientation; // Quaternion for orientation
+```
+
+**Initialize the Quaternion**:
+- You can initialize the quaternion in several ways, such as from an axis-angle representation, from a rotation matrix, or directly setting its components.
+
+```cpp
+// Example: initializing the quaternion from an axis and an angle
+Eigen::Vector3d axis(0, 1, 0); // Rotation around the y-axis
+double angle = M_PI / 4; // Rotate 45 degrees
+orientation = Eigen::AngleAxisd(angle, axis.normalized());
+```
+
+**Using the Position and Orientation**:
+- Once you have the position and the quaternion, you can use them to transform points, calculate rotations, etc.
+
+```cpp
+// Example: rotating a point using the quaternion
+Eigen::Vector3d point(1, 0, 0);
+Eigen::Vector3d rotatedPoint = orientation * point;
+```
+
+**Combining Position and Orientation**:
+- If you want to create a transformation matrix that includes both the position and orientation, you can do so using an affine transformation.
+
+```cpp
+Eigen::Affine3d transform = Eigen::Translation3d(position) * orientation;
+```
+
+## Multiplication of Frames Expressed with Quaternions
+Here's a complete example putting it all together:
+
+```cpp
+
+double x1 = 1.0, y1 = 0.0, z1 = 0.0;
+double q_w1 = 1.0, q_x1 = 0.0, q_y1 = 0.0, q_z1 = 0.0;
+double x2 = 1.0, y2 = 0.0, z2 = 0.0;
+double q_w2 = 1.0, q_x2 = 0.0, q_y2 = 0.0, q_z2 = 0.0;
+
+Eigen::Affine3d pose1 = Eigen::Translation3d(x1, y1, z1) * Eigen::Quaterniond(q_w1, q_x1, q_y1, q_z1);
+Eigen::Affine3d pose2 = Eigen::Translation3d(x2, y2, z2) * Eigen::Quaterniond(q_w2, q_x2, q_y2, q_z2);
+
+Eigen::Affine3d result = pose1 * pose2;
+
+Eigen::Vector3d res_translation = result.translation();
+Eigen::Quaterniond res_quaternion(result.rotation());
+
+std::cout << "Resulting Pose Translation: " << res_translation.transpose() << std::endl;
+std::cout << "Resulting Pose Quaternion: " 
+      << res_quaternion.w() << " " 
+      << res_quaternion.x() << " " 
+      << res_quaternion.y() << " " 
+      << res_quaternion.z() << std::endl;
+```
 
 ## 1. Rotating using Quaternion:
 
