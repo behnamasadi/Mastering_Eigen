@@ -898,8 +898,7 @@ Singular value decomposition (SVD) is a factorization of a real or (complex matr
 #### 4.15.1.1 Pseudoinverse
 
 
-<img src="https://latex.codecogs.com/svg.latex?%5C%5C%20%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7BM%7D%20%3D%5Cmathbf%20%7BU%5CSigma%20V%5E%7B*%7D%7D%20%5C%20%2C%7D%20%5C%5C%20%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7BM%5E%7B%5Cdagger%7D%20%7D%20%3D%5Cmathbf%20%7BV%5CSigma%5E%7B%5Cdagger%7D%20U%5E%7B*%7D%7D%20%5C%20%2C%7D
-" alt="https://latex.codecogs.com/svg.latex?\\
+<img src="https://latex.codecogs.com/svg.latex?%5C%5C%20%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7BM%7D%20%3D%5Cmathbf%20%7BU%5CSigma%20V%5E%7B*%7D%7D%20%5C%20%2C%7D%20%5C%5C%20%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7BM%5E%7B%5Cdagger%7D%20%7D%20%3D%5Cmathbf%20%7BV%5CSigma%5E%7B%5Cdagger%7D%20U%5E%7B*%7D%7D%20%5C%20%2C%7D" alt="https://latex.codecogs.com/svg.latex?\\
 {\displaystyle \ \mathbf {M} =\mathbf {U\Sigma V^{*}} \ ,}
 \\
 {\displaystyle \ \mathbf {M^{\dagger} } =\mathbf {V\Sigma^{\dagger} U^{*}} \ ,}"  />
@@ -1186,7 +1185,50 @@ If we use the second approach to represent our vector, the associated dot produc
 Ref: [1](https://mathinsight.org/taylors_theorem_multivariable_introduction), [2](http://www.math.toronto.edu/courses/mat237y1/20199/notes/Chapter2/S2.6.html), [3](https://www.youtube.com/watch?v=vvE5w3iOtGs), [4](http://jccc-mpg.wikidot.com/vector-projection), [5](https://www.youtube.com/watch?v=P2LTAUO1TdA&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&index=13)
 
 ## 9.5. Creating a Basis Set
+
+
+
+
+
+
+
+
+
 ## 9.6. Change of Basis
+
+The concept of a change of basis in linear algebra involves transitioning from one set of basis vectors to another, effectively redefining how vectors in a space are represented. This is crucial in many areas of mathematics and physics, as it allows for the representation of vectors and linear transformations in the most convenient basis for a given problem.
+
+### The Equation for Change of Basis
+
+Given a vector space <img src="https://latex.codecogs.com/svg.latex?V" alt="V" /> and two bases for this space, say <img src="https://latex.codecogs.com/svg.latex?B%20%3D%20%5C%7Bb_1%2C%20b_2%2C%20...%2C%20b_n%5C%7D" alt="B = \{b_1, b_2, ..., b_n\}" /> and <img src="https://latex.codecogs.com/svg.latex?C%20%3D%20%5C%7Bc_1%2C%20c_2%2C%20...%2C%20c_n%5C%7D" alt="C = \{c_1, c_2, ..., c_n\}" />, a vector <img src="https://latex.codecogs.com/svg.latex?v" alt="v" /> in <img src="https://latex.codecogs.com/svg.latex?V" alt="V" /> can be represented in terms of both bases. If <img src="https://latex.codecogs.com/svg.latex?P" alt="P" /> is the change of basis matrix from <img src="https://latex.codecogs.com/svg.latex?B" alt="B" /> to <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />, then the coordinates of <img src="https://latex.codecogs.com/svg.latex?v" alt="v" /> in the basis <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> can be found by multiplying <img src="https://latex.codecogs.com/svg.latex?P" alt="P" /> with the coordinates of <img src="https://latex.codecogs.com/svg.latex?v" alt="v" /> in the basis <img src="https://latex.codecogs.com/svg.latex?B" alt="B" />. Mathematically, this is expressed as:
+
+<img src="https://latex.codecogs.com/svg.latex?%5Bv%5D_C%20%3D%20P%20%5Bv%5D_B" alt="[v]_C = P [v]_B" />
+
+Where:
+- <img src="https://latex.codecogs.com/svg.latex?%5Bv%5D_B" alt="[v]_B" /> is the representation (coordinates) of <img src="https://latex.codecogs.com/svg.latex?v" alt="v" /> in basis <img src="https://latex.codecogs.com/svg.latex?B" alt="B" />,
+- <img src="https://latex.codecogs.com/svg.latex?%5Bv%5D_C" alt="[v]_C" /> is the representation (coordinates) of <img src="https://latex.codecogs.com/svg.latex?v" alt="v" /> in basis <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />,
+- <img src="https://latex.codecogs.com/svg.latex?P" alt="P" /> is the matrix whose columns are the coordinates of the basis vectors of <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> expressed in the basis <img src="https://latex.codecogs.com/svg.latex?B" alt="B" />.
+
+### Example of Change of Basis
+
+Let's consider a simple 2D example where we change the basis from the standard basis <img src="https://latex.codecogs.com/svg.latex?B%20%3D%20%5C%7B%5Chat%7Bi%7D%2C%20%5Chat%7Bj%7D%5C%7D" alt="B = \{\hat{i}, \hat{j}\}" /> to a new basis <img src="https://latex.codecogs.com/svg.latex?C%20%3D%20%5C%7Bc_1%2C%20c_2%5C%7D" alt="C = \{c_1, c_2\}" />, where <img src="https://latex.codecogs.com/svg.latex?c_1%20%3D%20%281%2C%201%29" alt="c_1 = (1, 1)" /> and <img src="https://latex.codecogs.com/svg.latex?c_2%20%3D%20%281%2C%20-1%29" alt="c_2 = (1, -1)" />.
+
+**Objective**: Find the coordinates of a vector <img src="https://latex.codecogs.com/svg.latex?v%20%3D%20%283%2C%202%29" alt="v = (3, 2)" /> in the new basis <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />.
+
+1. **Express the new basis vectors in terms of the standard basis**:
+   - <img src="https://latex.codecogs.com/svg.latex?c_1%20%3D%20%281%2C%201%29" alt="c_1 = (1, 1)" /> corresponds to <img src="https://latex.codecogs.com/svg.latex?1%5Chat%7Bi%7D%20%2B%201%5Chat%7Bj%7D" alt="1\hat{i} + 1\hat{j}" />,
+   - <img src="https://latex.codecogs.com/svg.latex?c_2%20%3D%20%281%2C%20-1%29" alt="c_2 = (1, -1)" /> corresponds to <img src="https://latex.codecogs.com/svg.latex?1%5Chat%7Bi%7D%20-%201%5Chat%7Bj%7D" alt="1\hat{i} - 1\hat{j}" />.
+
+2. **Construct the change of basis matrix <img src="https://latex.codecogs.com/svg.latex?P" alt="P" />**:
+   - <img src="https://latex.codecogs.com/svg.latex?P%20%3D%20%5Cbegin%7Bpmatrix%7D%201%20%26%201%20%5C%5C%201%20%26%20-1%20%5Cend%7Bpmatrix%7D" alt="P = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}" />, where the columns are <img src="https://latex.codecogs.com/svg.latex?c_1" alt="c_1" /> and <img src="https://latex.codecogs.com/svg.latex?c_2" alt="c_2" /> expressed in the standard basis.
+
+3. **Calculate the coordinates of <img src="https://latex.codecogs.com/svg.latex?v" alt="v" /> in the new basis <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />** by solving <img src="https://latex.codecogs.com/svg.latex?%5Bv%5D_C%20%3D%20P%5E%7B-1%7D%20%5Bv%5D_B" alt="[v]_C = P^{-1} [v]_B" />, where <img src="https://latex.codecogs.com/svg.latex?P%5E%7B-1%7D" alt="P^{-1}" /> is the inverse of the change of basis matrix <img src="https://latex.codecogs.com/svg.latex?P" alt="P" />, and <img src="https://latex.codecogs.com/svg.latex?%5Bv%5D_B%20%3D%20%283%2C%202%29" alt="[v]_B = (3, 2)" /> is the representation of <img src="https://latex.codecogs.com/svg.latex?v" alt="v" /> in the standard basis.
+
+Let's calculate the coordinates of <img src="https://latex.codecogs.com/svg.latex?v" alt="v" /> in the new basis <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />.
+
+The coordinates of the vector <img src="https://latex.codecogs.com/svg.latex?v%20%3D%20%283%2C%202%29" alt="v = (3, 2)" /> in the new basis <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />, where <img src="https://latex.codecogs.com/svg.latex?c_1%20%3D%20%281%2C%201%29" alt="c_1 = (1, 1)" /> and <img src="https://latex.codecogs.com/svg.latex?c_2%20%3D%20%281%2C%20-1%29" alt="c_2 = (1, -1)" />, are <img src="https://latex.codecogs.com/svg.latex?%282.5%2C%200.5%29" alt="(2.5, 0.5)" />. This means that in the basis <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />, the vector <img src="https://latex.codecogs.com/svg.latex?v" alt="v" /> can be represented as <img src="https://latex.codecogs.com/svg.latex?2.5c_1%20%2B%200.5c_2" alt="2.5c_1 + 0.5c_2" />.
+
+
 ## 9.7. Vector Fields
 Ref: [1](https://tutorial.math.lamar.edu/classes/calciii/VectorFields.aspx)
 
@@ -1340,6 +1382,54 @@ Nullity is the complement to the rank of a matrix.
 Then the determinant of A is the product of the elements of the diagonal of B:
 
 <img  src="https://latex.codecogs.com/svg.latex?{\displaystyle%20\det(A)={\frac%20{\prod%20\operatorname%20{diag}%20(B)}{d}}.}"  alt="https://latex.codecogs.com/svg.latex?{\displaystyle \det(A)={\frac {\prod \operatorname {diag} (B)}{d}}.}" />
+
+# 15.1 Interpretation of matrix determinant
+
+The determinant of a matrix has several important interpretations and implications, especially in the context of linear algebra and its applications across various fields such as mathematics, physics, and engineering. Here are the key interpretations:
+
+1. **Geometric Interpretation**:
+   - The determinant of a matrix represents the scaling factor of the transformation defined by the matrix. In two dimensions, it tells you how much the area of a shape will change after it's transformed by the matrix. In three dimensions, it tells you how much the volume of a solid will change.
+   - When the determinant is **zero**, it means that the transformation squashes the shape into a lower-dimensional space, effectively reducing its volume (or area in 2D) to zero. This implies that the matrix is singular, meaning it does not have an inverse, and the vectors that the matrix is transforming are linearly dependent.
+   - A **large determinant** (whether positive or negative) indicates that the shape is scaled up by a large factor in terms of area or volume. A positive determinant means the orientation is preserved (e.g., right-handed to right-handed coordinate system), while a negative determinant indicates a change in orientation (e.g., right-handed to left-handed coordinate system).
+
+2. **Algebraic Interpretation**:
+   - The determinant provides a criterion for the invertibility of a matrix. A non-zero determinant means the matrix is invertible (non-singular), while a zero determinant means it is not invertible (singular).
+   - The value of the determinant can also be seen in the context of solving systems of linear equations. A zero determinant implies that the system of equations does not have a unique solution, either having no solution or infinitely many solutions.
+
+Let's go through some numerical examples to illustrate these points:
+
+### Example 1: Zero Determinant
+Consider the matrix
+
+
+<img  src="https://latex.codecogs.com/svg.latex?A%20%3D%20%5Cbegin%7Bpmatrix%7D%201%20%26%202%20%5C%5C%202%20%26%204%20%5Cend%7Bpmatrix%7D"  alt=" A = \begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}" />
+
+
+
+
+
+This matrix represents a linear transformation that maps 2D vectors in a way that makes them linearly dependent. The determinant of \(A\) would be \(0\), indicating that it collapses the plane into a line or point, depending on the vectors it's transforming.
+
+### Example 2: Non-Zero Determinant
+Consider the matrix
+
+<img  src="https://latex.codecogs.com/svg.latex?B%20%3D%20%5Cbegin%7Bpmatrix%7D%203%20%26%200%20%5C%5C%200%20%26%202%20%5Cend%7Bpmatrix%7D"  alt=" B = \begin{pmatrix} 3 & 0 \\ 0 & 2 \end{pmatrix} " />
+
+
+
+The determinant of <img  src="https://latex.codecogs.com/svg.latex?B"  alt="B" /> would be \(6\), indicating that this transformation scales areas by a factor of <img  src="https://latex.codecogs.com/svg.latex?6"  alt="6" />. It is invertible, and the transformation preserves the orientation of shapes.
+
+Let's calculate these determinants to illustrate the points made.
+
+As calculated:
+
+- The determinant of matrix <img  src="https://latex.codecogs.com/svg.latex?A"  alt="A" /> is <img  src="https://latex.codecogs.com/svg.latex?0"  alt="0" />, which confirms our interpretation that it cannot invert the transformation it represents. This means the matrix maps all input vectors into a lower-dimensional space (in this case, a line or a point), indicating that the vectors are linearly dependent.
+
+- The determinant of matrix <img  src="https://latex.codecogs.com/svg.latex?B"  alt="B" /> is <img  src="https://latex.codecogs.com/svg.latex?6"  alt="6" />, indicating that the transformation it represents scales areas by a factor of <img  src="https://latex.codecogs.com/svg.latex?6"  alt="6" />. This matrix is invertible, and the transformation it represents preserves the orientation of shapes.
+
+Refs: [1](https://www.youtube.com/watch?v=Ip3X9LOh2dk)
+
+
 
 # 16. Finding The Inverse of The Matrix
 First, add the n × n identity matrix is augmented to the right of A such that we get the following
