@@ -864,9 +864,9 @@ Eigenvalues are −1, 2 and 8.
 ## 4.15. Singular Value Decomposition
 Singular value decomposition (SVD) is a factorization of a real or (complex matrix) which generalizes the eigendecomposition of a square matrix. 
 
-<img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7BM_%7Bm%5Ctimes%20n%7D%7D%20%3D%5Cmathbf%20%7BU_%7Bn%5Ctimes%20n%7D%20%5CSigma_%7Bm%5Ctimes%20n%7D%20V%5E%7B*%7D_%7Bm%5Ctimes%20m%7D%7D%20%5C%20%2C%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \ \mathbf {M_{m\times n}} =\mathbf {U_{n\times n} \Sigma_{m\times n} V^{*}_{m\times m}} \ ,}" />
+<img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7BM_%7Bm%5Ctimes%20n%7D%7D%20%3D%5Cmathbf%20%7BU_%7Bm%5Ctimes%20m%7D%20%5CSigma_%7Bm%5Ctimes%20n%7D%20V%5E%7B*%7D_%7Bn%5Ctimes%20n%7D%7D%20%5C%20%2C%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \ \mathbf {M_{m\times n}} =\mathbf {U_{m\times m} \Sigma_{m\times n} V^{*}_{n\times n}} \ ,}" />
 
-1. <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%20%7BU_%7Bn%5Ctimes%20n%7D%7D" alt="https://latex.codecogs.com/svg.latex?\mathbf {U_{n\times n}}"  /> is complex unitary matrix
+1. <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%20%7BU_%7Bm%5Ctimes%20m%7D%7D" alt="https://latex.codecogs.com/svg.latex?\mathbf {U_{m\times m}}"  /> is complex unitary matrix
 
 
 2. <img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7B%5CSigma_%7Bm%5Ctimes%20n%7D%20%7D%20%5C%20%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \ \mathbf {\Sigma_{m\times n} } \ } "  /> rectangular diagonal matrix with non-negative real numbers on the diagonal.  
@@ -877,7 +877,7 @@ Singular value decomposition (SVD) is a factorization of a real or (complex matr
 5. If `M`is real, then `U` and `V` can be guaranteed to be real orthogonal matrices.
 
 
-6. The columns of `U` <img src="https://latex.codecogs.com/svg.latex?u_1%2C%20...%2C%20u_m" alt="https://latex.codecogs.com/svg.latex?u_1, ..., u_m"  /> and the columns of `V` <img src="https://latex.codecogs.com/svg.latex?v_1%2C%20...%2C%20v_m" alt="https://latex.codecogs.com/svg.latex?v_1, ..., v_m"  /> are form two sets of orthonormal bases and the singular value decomposition can be written as:
+6. The columns of `U` <img src="https://latex.codecogs.com/svg.latex?u_1%2C%20...%2C%20u_n" alt="https://latex.codecogs.com/svg.latex?u_1, ..., u_n"  /> and the columns of `V` <img src="https://latex.codecogs.com/svg.latex?v_1%2C%20...%2C%20v_n" alt="https://latex.codecogs.com/svg.latex?v_1, ..., v_n"  /> are form two sets of orthonormal bases and the singular value decomposition can be written as:
 
 <br/>
  <img src="https://latex.codecogs.com/svg.latex?%7B%5Cdisplaystyle%20%5C%20%5Cmathbf%20%7BM%7D%20%3D%5Csum%20_%7Bi%3D1%7D%5E%7Br%7D%5Csigma%20_%7Bi%7D%5Cmathbf%20%7Bu%7D%20_%7Bi%7D%5Cmathbf%20%7Bv%7D%20_%7Bi%7D%5E%7B*%7D%5C%20%2C%7D" alt="https://latex.codecogs.com/svg.latex?{\displaystyle \ \mathbf {M} =\sum _{i=1}^{r}\sigma _{i}\mathbf {u} _{i}\mathbf {v} _{i}^{*}\ ,}"  /> 
@@ -890,7 +890,7 @@ Singular value decomposition (SVD) is a factorization of a real or (complex matr
 7. The SVD is **not** unique.
 
 
-<img src="images/Singular-Value-Decomposition.svg" alt=""  />
+<img src="images/Singular-Value-Decomposition.svg" alt="" width="75%" height="75%" />
 
 
 
@@ -1267,12 +1267,21 @@ The dimension of the column space or row space is called the rank of the matrix,
 # 12. Null Space (Kernel)
 
 
-If <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> is a matrix, the null-space (The kernel of <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> ) is, the set of all vectors <img  src="https://latex.codecogs.com/svg.latex?v"  alt="https://latex.codecogs.com/svg.latex?v" /> such that <img  src="https://latex.codecogs.com/svg.latex?A.v=0"  alt="https://latex.codecogs.com/svg.latex?A.v=0" />. It's good to think of the matrix as a linear transformation; if you let <img  src="https://latex.codecogs.com/svg.latex?h(v)=A.v"  alt="https://latex.codecogs.com/svg.latex?h(v)=A.v" />
+If <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> is a matrix, the null-space (The kernel of <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" /> ) consists of all the linear combinations of vectors that get mapped to the zero vector when multiplied by <img  src="https://latex.codecogs.com/svg.latex?A"  alt="https://latex.codecogs.com/svg.latex?A" />, in other words it is, the set of all vectors <img  src="https://latex.codecogs.com/svg.latex?v"  alt="https://latex.codecogs.com/svg.latex?v" /> such that <img  src="https://latex.codecogs.com/svg.latex?A.v=0"  alt="https://latex.codecogs.com/svg.latex?A.v=0" />. It's good to think of the matrix as a linear transformation; if you let <img  src="https://latex.codecogs.com/svg.latex?h(v)=A.v"  alt="https://latex.codecogs.com/svg.latex?h(v)=A.v" />
 , then the null-space is again the set of all vectors that are sent to the zero vector by <img  src="https://latex.codecogs.com/svg.latex?h"  alt="https://latex.codecogs.com/svg.latex?h" />. Think of this as the set of vectors that lose their identity as h is applied to them.
 Note that the null-space is equivalently the set of solutions to the homogeneous equation <img  src="https://latex.codecogs.com/svg.latex?A.v=0"  alt="https://latex.codecogs.com/svg.latex?A.v=0" />
 
 
 Writing  <img  src="https://latex.codecogs.com/svg.latex?h(v)%20=%20A%20\cdot%20v"  alt="https://latex.codecogs.com/svg.latex?h(v) = A \cdot v" /> , then the null-space is the set of all vectors that are sent to the zero (lose their identity) as <img  src="https://latex.codecogs.com/svg.latex?h"  alt="https://latex.codecogs.com/svg.latex?h" /> is applied to them.
+
+
+## Most Common Way to Find the Null Space
+1. Row Reduction (Gaussian Elimination)
+2. Singular Value Decomposition (SVD)
+3. Eigenvalue Decomposition: For square matrices, the null space is closely related to the eigenvectors corresponding to the eigenvalue of zero. <img  src="https://latex.codecogs.com/svg.latex?A%20%3D%20U%5CSigma%20V%5E*"  alt="A = U\Sigma V^*" />. The columns of <img  src="https://latex.codecogs.com/svg.latex?V"  alt="V" />  corresponding to zero singular values in <img  src="https://latex.codecogs.com/svg.latex?\Sigma"  alt="\Sigma" />  form an orthonormal basis for the null space of <img  src="https://latex.codecogs.com/svg.latex?A"  alt="A" />
+
+
+4. QR Decomposition
 
 ## 12.1. Example of Calculating Null Space
 
