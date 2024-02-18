@@ -156,8 +156,34 @@ Note that this method assumes <img src="https://latex.codecogs.com/svg.image?r_{
 
 
 
+## 1.9. Oder of Rotation and Translation in Transformation
 
-# 1.9. Gimbal Lock 
+to apply a transformation, first we apply the rotation around the axis of the frame the we pre-multiplied and then we translate again on the axis of the frame that we pre-multiplied
+
+<img src="https://latex.codecogs.com/svg.image?p=[0,&space;2&space;,0]^T\\\hat{\omega}&space;=&space;\hat{z}\\\theta=90\\T=Translate(p)Rot(\hat{\omega},\theta)&space;" title="https://latex.codecogs.com/svg.image?p=[0, 2 ,0]^T\\\hat{\omega} = \hat{z}\\\theta=90\\T=Translate(p)Rot(\hat{\omega},\theta) " />
+
+<br/>
+<br/>
+
+
+<img src="https://latex.codecogs.com/svg.image?\acute{T}=TT_{sb}" title="https://latex.codecogs.com/svg.image?\acute{T}=TT_{sb}" />
+
+<br/>
+<br/>
+
+<img width="300" height="200" src="images/transformtion_1.jpg" />
+<br/>
+<br/>
+<img  width="300" height="200" src="images/transformtion_2.jpg" />
+<br/>
+<br/>
+<img  width="300" height="200" src="images/transformtion_3.jpg" />
+<br/>
+<br/>
+
+
+
+# 1.10. Gimbal Lock 
 The angles <img src="https://latex.codecogs.com/svg.image?\alpha,&space;\beta,&space;\text{&space;and&space;}&space;\gamma" title="https://latex.codecogs.com/svg.image?\alpha, \beta, \text{ and } \gamma" /> are uniquely determined except for the singular case. If <img src="https://latex.codecogs.com/svg.image?cos(\beta)=0&space;\text{&space;or&space;}&space;\beta=\pm&space;\pi/2" title="https://latex.codecogs.com/svg.image?cos(\beta)=0 \text{ or } \beta=\pm \pi/2" />
 
 1. <img src="https://latex.codecogs.com/svg.image?\beta=\pi/2" title="https://latex.codecogs.com/svg.image?\beta=\pi/2" />
@@ -181,20 +207,6 @@ This will result in:
 <video width="640" height="480" controls>
   <source src="vidoes/gimbal_locl_beta_pi_2.mp4" type="video/mp4">
 </video>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -549,6 +561,15 @@ vector definition of a quaternion:
 <img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;\mathbf&space;{i}&space;^{2}=\mathbf&space;{j}&space;^{2}=\mathbf&space;{k}&space;^{2}=\mathbf&space;{i\,j\,k}&space;=-1}" title="https://latex.codecogs.com/svg.image?{\displaystyle \mathbf {i} ^{2}=\mathbf {j} ^{2}=\mathbf {k} ^{2}=\mathbf {i\,j\,k} =-1}" />
 
 
+<br/>
+<br/>
+
+### 4.1.1. Quaternion Conventions: Hamilton and JPL
+
+
+Refs: [1](https://fzheng.me/2017/11/12/quaternion_conventions_en/)
+
+
 ## 4.2. Inverse of Quaternions
 
 <br/>
@@ -557,13 +578,10 @@ vector definition of a quaternion:
 <img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;(a&plus;b\,\mathbf&space;{i}&space;&plus;c\,\mathbf&space;{j}&space;&plus;d\,\mathbf&space;{k}&space;)^{-1}={\frac&space;{1}{a^{2}&plus;b^{2}&plus;c^{2}&plus;d^{2}}}\,(a-b\,\mathbf&space;{i}&space;-c\,\mathbf&space;{j}&space;-d\,\mathbf&space;{k}&space;).}" title="https://latex.codecogs.com/svg.image?{\displaystyle (a+b\,\mathbf {i} +c\,\mathbf {j} +d\,\mathbf {k} )^{-1}={\frac {1}{a^{2}+b^{2}+c^{2}+d^{2}}}\,(a-b\,\mathbf {i} -c\,\mathbf {j} -d\,\mathbf {k} ).}" />
 
 
-
-
-
-
-
-
 ## 4.3. Quaternions Multiplication (Hamilton product)
+
+<br/>
+
 
 For two elements <img src="https://latex.codecogs.com/svg.image?a_1&space;&plus;&space;b_1i&space;&plus;c_1j&plus;d_1k" title="https://latex.codecogs.com/svg.image?a_1 + b_1i +c_1j+d_1k" /> and <img src="https://latex.codecogs.com/svg.image?a_2&space;&plus;&space;b_2i&space;&plus;c_2j&plus;d_2k" title="https://latex.codecogs.com/svg.image?a_2 + b_2i +c_2j+d_2k" />, their product, called the Hamilton product and is determined by distributive law:
 
@@ -592,6 +610,8 @@ For two elements <img src="https://latex.codecogs.com/svg.image?a_1&space;&plus;
 \end{bmatrix}" />
 
 
+<br/>
+<br/>
 
 ## 4.4. Quaternion as Orientation
 
@@ -620,6 +640,8 @@ the sequence of rotations follows the subscript cancellation rule:
 
 
 <img src="https://latex.codecogs.com/svg.latex?%5EC_A%5Cmathbf%7Bq%7D%20%3D%20%5C%2C%5EC_B%5Cmathbf%7Bq%7D%20%5C%2C%20%5EB_A%5Cmathbf%7Bq%7D" alt="https://latex.codecogs.com/svg.latex?^C_A\mathbf{q} = \,^C_B\mathbf{q} \, ^B_A\mathbf{q}" />
+<br/>
+<br/>
 
 
 ## 4.5 Changing Frame of Reference with Unit Quaternion
@@ -651,10 +673,83 @@ These rotations can also be expressed Direction Cosine Matrix:
 <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7BR%7D%28%5EB_A%5Cmathbf%7Bq%7D%29%20%3D%20%5Cbegin%7Bbmatrix%7D%20q_w%5E2&plus;q_x%5E2-q_y%5E2-q_z%5E2%20%26%202%28q_xq_y%20-%20q_wq_z%29%20%26%202%28q_xq_z%20&plus;%20q_wq_y%29%20%5C%5C%202%28q_xq_y%20&plus;%20q_wq_z%29%20%26%20q_w%5E2-q_x%5E2&plus;q_y%5E2-q_z%5E2%20%26%202%28q_yq_z%20-%20q_wq_x%29%20%5C%5C%202%28q_xq_z%20-%20q_wq_y%29%20%26%202%28q_wq_x%20&plus;%20q_yq_z%29%20%26%20q_w%5E2-q_x%5E2-q_y%5E2&plus;q_z%5E2%20%5Cend%7Bbmatrix%7D" alt="https://latex.codecogs.com/svg.latex?\mathbf{R}(^B_A\mathbf{q}) =
 \begin{bmatrix} q_w^2+q_x^2-q_y^2-q_z^2 & 2(q_xq_y - q_wq_z) & 2(q_xq_z + q_wq_y) \\ 2(q_xq_y + q_wq_z) & q_w^2-q_x^2+q_y^2-q_z^2 & 2(q_yq_z - q_wq_x) \\ 2(q_xq_z - q_wq_y) & 2(q_wq_x + q_yq_z) & q_w^2-q_x^2-q_y^2+q_z^2 \end{bmatrix}" />
 
+<br/>
+<br/>
+
+
+## 4.6 Quaternions Inverse Pose
+
+If you have the pose of frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> expressed in the world frame as <img src="https://latex.codecogs.com/svg.latex?%5Bx%2C%20y%2C%20z%2C%20q1%2C%20q2%2C%20q3%2C%20q4%5D" alt="[x, y, z, q1, q2, q3, q4]" /> where <img src="https://latex.codecogs.com/svg.latex?%5Bx%2C%20y%2C%20z%5D" alt="[x, y, z]" /> is the position and <img src="https://latex.codecogs.com/svg.latex?%5Bq1%2C%20q2%2C%20q3%2C%20q4%5D" alt="[q1, q2, q3, q4]" /> is the quaternion representing the orientation, then you want to find the pose of the world frame with respect to frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />.
+
+Given:
+- Position of frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> in world frame: <img src="https://latex.codecogs.com/svg.latex?%5Bx%2C%20y%2C%20z%5D" alt="[x, y, z]" />
+- Orientation of frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> in world frame (as quaternion): <img src="https://latex.codecogs.com/svg.latex?%5Bq1%2C%20q2%2C%20q3%2C%20q4%5D" alt="[q1, q2, q3, q4]" />
+
+To compute the pose of the world in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />, we'll need to find the inverse transformation.
+
+1. **Inverse Position**:
+   The position of the world origin in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> coordinates is given by the negation of the original position:
+   <img src="https://latex.codecogs.com/svg.latex?%5Bx%27%2C%20y%27%2C%20z%27%5D%20%3D%20%5B-x%2C%20-y%2C%20-z%5D" alt="[x', y', z'] = [-x, -y, -z]" />
+
+
+2. **Inverse Orientation**:
+   The orientation of the world frame with respect to frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> can be obtained by taking the conjugate of the given quaternion. The conjugate of a quaternion <img src="https://latex.codecogs.com/svg.latex?%5Bq1%2C%20q2%2C%20q3%2C%20q4%5D" alt="[q1, q2, q3, q4]" /> is given by:
+   <img src="https://latex.codecogs.com/svg.latex?%5Bq1%27%2C%20q2%27%2C%20q3%27%2C%20q4%27%5D%20%3D%20%5Bq1%2C%20-q2%2C%20-q3%2C%20-q4%5D" alt="[q1', q2', q3', q4'] = [q1, -q2, -q3, -q4]" />
+
+However, simply inverting the translation is not enough. The correct pose of the world in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> would require us to rotate the negated translation vector using the inverse orientation.
+
+To do this, you'll express the negated position vector as a quaternion with zero scalar part: <img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Bpos%7D%7D%20%3D%20%5B0%2C%20-x%2C%20-y%2C%20-z%5D" alt=" q_{\text{pos}} = [0, -x, -y, -z] " />.
+
+Then, you'll multiply this by the inverse orientation quaternion:
+<img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Bresult%7D%7D%20%3D%20q_%7B%5Ctext%7Binv%7D%7D%20%5Ctimes%20q_%7B%5Ctext%7Bpos%7D%7D%20%5Ctimes%20q" alt=" q_{\text{result}} = q_{\text{inv}} \times q_{\text{pos}} \times q " />
+where <img src="https://latex.codecogs.com/svg.latex?q" alt="q" /> is the original orientation quaternion, and <img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Binv%7D%7D" alt="q_{\text{inv}} " /> is its conjugate.
+
+The resulting quaternion <img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Bresult%7D%7D" alt="q_{\text{result}}" /> will have its vector part (last three components) as the desired transformed position of the world in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />. The scalar part of <img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Bresult%7D%7D" alt="q_{\text{result}}" /> should be 0.
+
+Finally:
+- The position of the world in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> is the vector part of <img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Bresult%7D%7D" alt="q_{\text{result}}" />.
+- The orientation of the world in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> is the conjugate of the given orientation: <img src="https://latex.codecogs.com/svg.latex?%5Bq1%27%2C%20q2%27%2C%20q3%27%2C%20q4%27%5D" alt="[q1', q2', q3', q4']" />.
 
 
 
-## 4.6. Conversion between quaternions and Euler angles
+<br/>
+<br/>
+
+## 4.7 Quaternions Relative Pose
+
+If Pose <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />  express in Frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" />  and pose of <img src="https://latex.codecogs.com/svg.latex?B" alt="B" /> expressed in <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />  using quaternions,  equation for finding the pose <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> expressed in <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />  using quaternions
+
+
+
+
+
+1. **Rotations**:
+Let's define the following quaternions for the rotations:
+- <img src="https://latex.codecogs.com/svg.latex?Q%5E%7BA%7D_%7BB%7D" alt="Q^{A}_{B}" /> is the quaternion representing the rotation of frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" /> with respect to frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> (<img src="https://latex.codecogs.com/svg.latex?B" alt="B" />'s rotation expressed in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />).
+- <img src="https://latex.codecogs.com/svg.latex?Q%5E%7BB%7D_%7BC%7D" alt="Q^{B}_{C}" /> is the quaternion representing the rotation of frame <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> with respect to frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" /> (<img src="https://latex.codecogs.com/svg.latex?C" alt="C" />'s rotation expressed in frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" />).
+
+The combined rotation of frame <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> with respect to frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />, <img src="https://latex.codecogs.com/svg.latex?Q%5E%7BA%7D_%7BC%7D" alt="Q^{A}_{C}" /> , is given by:
+<img src="https://latex.codecogs.com/svg.latex?Q%5E%7BA%7D_%7BC%7D%20%3D%20Q%5E%7BA%7D_%7BB%7D%20%5Cotimes%20Q%5E%7BB%7D_%7BC%7D" alt="Q^{A}_{C} = Q^{A}_{B} \otimes Q^{B}_{C} " />
+
+
+
+2. **Translations (positions)**:
+If you have the positions:
+- <img src="https://latex.codecogs.com/svg.latex?P%5E%7BA%7D_%7BB%7D" alt="P^{A}_{B}" /> is the position of point <img src="https://latex.codecogs.com/svg.latex?B" alt="B" /> (or frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" />'s origin) expressed in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />.
+- <img src="https://latex.codecogs.com/svg.latex?P%5E%7BB%7D_%7BC%7D" alt="P^{B}_{C}" /> is the position of point <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> (or frame <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />'s origin) expressed in frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" />.
+
+The position of point <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> (or frame <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />'s origin) expressed in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />, <img src="https://latex.codecogs.com/svg.latex?P%5E%7BA%7D_%7BC%7D" alt="P^{A}_{C}" />, when considering rotations, is:
+<img src="https://latex.codecogs.com/svg.latex?P%5E%7BA%7D_%7BC%7D%20%3D%20P%5E%7BA%7D_%7BB%7D%20&plus;%20Q%5E%7BA%7D_%7BB%7D%20%5Cotimes%20P%5E%7BB%7D_%7BC%7D%20%5Cotimes%20%28Q%5E%7BA%7D_%7BB%7D%29%5E%7B-1%7D" alt=" P^{A}_{C} = P^{A}_{B} + Q^{A}_{B} \otimes P^{B}_{C} \otimes (Q^{A}_{B})^{-1} " />
+
+
+Where <img src="https://latex.codecogs.com/svg.latex?%28Q%5E%7BA%7D_%7BB%7D%29%5E%7B-1%7D" alt="(Q^{A}_{B})^{-1}" /> denotes the conjugate (or inverse) of the quaternion <img src="https://latex.codecogs.com/svg.latex?%5C%28%20Q%5E%7BA%7D_%7BB%7D%20%5C%29" alt="\( Q^{A}_{B} \)" />.
+
+
+<br/>
+<br/>
+
+
+## 4.8. Conversion between quaternions and Euler angles
 
 
 
@@ -681,18 +776,21 @@ To get the roll pitch, yaw:
 A very good article to read about [quaternions](https://danceswithcode.net/engineeringnotes/quaternions/quaternions.html)
 
 
-### Quaternion Conventions: Hamilton and JPL
+<br/>
+<br/>
 
 
-Refs: [1](https://fzheng.me/2017/11/12/quaternion_conventions_en/)
 
-
-## 4.7. Quaternion Representing the Rotation From One Vector to Another
+## 4.9. Quaternion Representing the Rotation From One Vector to Another
 
 
 Refs: [1](https://stackoverflow.com/questions/1171849/finding-quaternion-representing-the-rotation-from-one-vector-to-another)
 
-## 4.8. Quaternions and  Axis-Angle Representation 
+
+<br/>
+<br/>
+
+## 4.10. Quaternions and  Axis-Angle Representation 
 Quaternions can encode axis-angle representation in four numbers and can be used to apply the corresponding rotation to a position vector <img src="https://latex.codecogs.com/svg.image?(x,y,z)" alt="https://latex.codecogs.com/svg.image?(x,y,z)" />, representing a point relative to the origin in <img src="https://latex.codecogs.com/svg.image?\mathbb{R}^3" alt="https://latex.codecogs.com/svg.image?\mathbb{R}^3"/>.
 
 
@@ -776,7 +874,7 @@ Consider:
 
 
 
-##  Fully Represent a Frame With Quaternions
+##  4.11. Fully Represent a Frame With Quaternions
 
 To represent a position in 3D space use a combination of a quaternion for orientation and a vector for the position.
 
@@ -815,7 +913,7 @@ Eigen::Vector3d rotatedPoint = orientation * point;
 Eigen::Affine3d transform = Eigen::Translation3d(position) * orientation;
 ```
 
-## Multiplication of Frames Expressed with Quaternions
+## 4.12. Multiplication of Frames Expressed with Quaternions
 Here's a complete example putting it all together:
 
 ```cpp
@@ -841,7 +939,7 @@ std::cout << "Resulting Pose Quaternion: "
       << res_quaternion.z() << std::endl;
 ```
 
-## 1. Rotating using Quaternion:
+**Rotating using Quaternion:**
 
 First, convert the axis-angle representation to a quaternion:
 
@@ -856,27 +954,15 @@ Where:
 
 And <img src="https://latex.codecogs.com/svg.latex?q%5E*" alt="q^*" /> is the conjugate of <img src="https://latex.codecogs.com/svg.latex?q" alt="q" />.
 
-## 2. Rotating using Axis-Angle:
+**Rotating using Axis-Angle:**
 
 <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%27%7D%20%3D%20%5Cmathbf%7Bv%7D%20%5Ccos%28%5Ctheta%29%20&plus;%20%28%5Cmathbf%7Bu%7D%20%5Ctimes%20%5Cmathbf%7Bv%7D%29%20%5Csin%28%5Ctheta%29%20&plus;%20%5Cmathbf%7Bu%7D%20%28%5Cmathbf%7Bu%7D%20%5Ccdot%20%5Cmathbf%7Bv%7D%29%20%281%20-%20%5Ccos%28%5Ctheta%29%29" alt="\mathbf{v'} = \mathbf{v} \cos(\theta) + (\mathbf{u} \times \mathbf{v}) \sin(\theta) + \mathbf{u} (\mathbf{u} \cdot \mathbf{v}) (1 - \cos(\theta))" />
 
 
 
----
+
 
 **Example**:
-
-
-<img src="" alt="" />
-
-
-
-
-
-
-
-
-
 
 Let's rotate the vector <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D%20%3D%20%5B1%2C%200%2C%200%5D" alt="\mathbf{v} = [1, 0, 0]" /> by <img src="https://latex.codecogs.com/svg.latex?%5Ctheta%20%3D%20%5Cfrac%7B%5Cpi%7D%7B2%7D" alt="\theta = \frac{\pi}{2}" /> (90 degrees) around the unit axis <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bu%7D%20%3D%20%5B0%2C%200%2C%201%5D" alt="\mathbf{u} = [0, 0, 1]" />:
 
@@ -896,7 +982,7 @@ Result: <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%27%7D%20%3D
 
 In both methods, the result is <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%27%7D%20%3D%20%5B0%2C%201%2C%200%5D" alt="\mathbf{v'} = [0, 1, 0]" />, which is a 90-degree rotation of the original vector around the z-axis.
 
-## Rotating a vector using a quaternion
+### 4.12.1. Rotating a vector using a quaternion
 
 how to rotate a vector <img src="https://latex.codecogs.com/svg.latex?%5Cmathbf%7Bv%7D" alt="\mathbf{v}" /> by a quaternion <img src="https://latex.codecogs.com/svg.latex?q" alt="q" />:
 
@@ -929,7 +1015,7 @@ Using the above method, the vector `[1, 0, 0]` would be rotated to approximately
 
 It's worth noting that using quaternions to represent and perform rotations can help avoid issues like gimbal lock, which can occur with Euler angles. Quaternions provide a compact and efficient way to represent 3D orientations and perform rotations.
 
-## Transform a full representation of position (orientation and translation ) with quaternions
+### 4.12.2. Transform a full representation of position (orientation and translation ) with quaternions
 
 
 When you have a full representation of position using both orientation (rotation) and translation, and you want to transform it using quaternions, you'll need to consider both the rotational and translational components.
@@ -1013,7 +1099,7 @@ print(f"Combined Translation: {t_combined}")
 ```
 
 
-## Inverse of Full Pose (position and orientation ) expressed in Quaternions
+### 4.12.3. Inverse of Full Pose (position and orientation ) expressed in Quaternions
 
 If you have the pose of frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> expressed in the world frame as <img src="https://latex.codecogs.com/svg.latex?%5Bx%2C%20y%2C%20z%2C%20q1%2C%20q2%2C%20q3%2C%20q4%5D" alt="[x, y, z, q1, q2, q3, q4]" /> where <img src="https://latex.codecogs.com/svg.latex?%5Bx%2C%20y%2C%20z%5D" alt="[x, y, z]" /> is the position and <img src="https://latex.codecogs.com/svg.latex?%5Bq1%2C%20q2%2C%20q3%2C%20q4%5D" alt="[q1, q2, q3, q4]" /> is the quaternion representing the orientation, then you want to find the pose of the world frame with respect to frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />.
 
@@ -1046,7 +1132,7 @@ Finally:
 - The position of the world in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> is the vector part of <img src="https://latex.codecogs.com/svg.latex?q_%7B%5Ctext%7Bresult%7D%7D" alt="q_{\text{result}}" />.
 - The orientation of the world in frame <img src="https://latex.codecogs.com/svg.latex?A" alt="A" /> is the conjugate of the given orientation: <img src="https://latex.codecogs.com/svg.latex?%5Bq1%27%2C%20q2%27%2C%20q3%27%2C%20q4%27%5D" alt="[q1', q2', q3', q4']" />.
 
-## Example of relative pose of two camera and IMU
+### 4.12.4. Example of relative pose of two camera and IMU
 if the given transformations are the positions of the IMU expressed in the camera frames, then we need to slightly modify our approach.
 
 Given:
@@ -1096,7 +1182,7 @@ This Python code should give you the pose of Camera1 with respect to Camera0.
 
 
 
-## Expressing Relative Pose using Quaternions  (subscript cancellation)
+### 4.12.5. Expressing Relative Pose using Quaternions  (subscript cancellation)
 
 If Pose <img src="https://latex.codecogs.com/svg.latex?C" alt="C" />  express in Frame <img src="https://latex.codecogs.com/svg.latex?B" alt="B" />  and pose of <img src="https://latex.codecogs.com/svg.latex?B" alt="B" /> expressed in <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />  using quaternions,  equation for finding the pose <img src="https://latex.codecogs.com/svg.latex?C" alt="C" /> expressed in <img src="https://latex.codecogs.com/svg.latex?A" alt="A" />  using quaternions
 
@@ -1125,200 +1211,14 @@ The position of point <img src="https://latex.codecogs.com/svg.latex?C" alt="C" 
 
 Where <img src="https://latex.codecogs.com/svg.latex?%28Q%5E%7BA%7D_%7BB%7D%29%5E%7B-1%7D" alt="(Q^{A}_{B})^{-1}" /> denotes the conjugate (or inverse) of the quaternion <img src="https://latex.codecogs.com/svg.latex?%5C%28%20Q%5E%7BA%7D_%7BB%7D%20%5C%29" alt="\( Q^{A}_{B} \)" />.
 
-## Quaternions Interpolation slerp
+## 4.13. Quaternions Interpolation Slerp
 
 
-## The advantages of Quaternions 
 
-- Avoiding gimbal lock, a problem with systems such as Euler angles.
-- Faster and more compact than matrices.
-- Nonsingular representation (compared with Euler angles for example).
 
 
-
-Refs: [1](https://www.youtube.com/watch?v=d4EgbgTm0Bg),[2](https://www.youtube.com/watch?v=zjMuIxRvygQ), [3](https://quaternions.online/), [4](https://www.youtube.com/watch?v=zc8b2Jo7mno), [5](https://www.youtube.com/watch?v=syQnn_xuB8U),
-[6](https://www.youtube.com/watch?v=4mXL751ko0w), [7](https://www.reedbeta.com/blog/why-quaternions-double-cover/)
-
-
-
-# Lie algebra Groups
-
-1. <img src="https://latex.codecogs.com/svg.image?SO(3)" title="https://latex.codecogs.com/svg.image?SO(3)" />: special orthogonal group <img src="https://latex.codecogs.com/svg.image?SO(3)" title="https://latex.codecogs.com/svg.image?SO(3)" /> is the 
-set of all <img src="https://latex.codecogs.com/svg.image?3\times3" title="https://latex.codecogs.com/svg.image?3\times3" /> real matrices R satisfying:
- - <img src="https://latex.codecogs.com/svg.image?R^TR=I" title="https://latex.codecogs.com/svg.image?R^TR=I" />
- - <img src="https://latex.codecogs.com/svg.image?det&space;R=1" title="https://latex.codecogs.com/svg.image?det R=1" />
-
-
-2. <img src="https://latex.codecogs.com/svg.image?so(3)" title="https://latex.codecogs.com/svg.image?so(3)" />: the set of all 3x3 skew-symmetric real matrices is called <img src="https://latex.codecogs.com/svg.image?so(3)" title="https://latex.codecogs.com/svg.image?so(3)" />
-
-
-<img src="https://latex.codecogs.com/svg.image?{\displaystyle&space;[\mathbf&space;{x}&space;]{=}{\begin{bmatrix}\,\,0&\!-x_{3}&\,\,\,x_{2}\\\,\,\,x_{3}&0&\!-x_{1}\\\!-x_{2}&\,\,x_{1}&\,\,0\end{bmatrix}}}" title="https://latex.codecogs.com/svg.image?{\displaystyle [\mathbf {x} ]{=}{\begin{bmatrix}\,\,0&\!-x_{3}&\,\,\,x_{2}\\\,\,\,x_{3}&0&\!-x_{1}\\\!-x_{2}&\,\,x_{1}&\,\,0\end{bmatrix}}}" />
-
-because:
-
-<img src="https://latex.codecogs.com/svg.image?[x]=-[x]^T" title="https://latex.codecogs.com/svg.image?[x]=-[x]^T" />
-
-3. <img src="https://latex.codecogs.com/svg.image?SE(3)" title="https://latex.codecogs.com/svg.image?SE(3)" />: the special Euclidean groups <img src="https://latex.codecogs.com/svg.image?SE(3)" title="https://latex.codecogs.com/svg.image?SE(3)" />
-is the set of all <img src="https://latex.codecogs.com/svg.image?4&space;\times&space;4" title="https://latex.codecogs.com/svg.image?4 \times 4" /> real matrices of <img src="https://latex.codecogs.com/svg.image?T&space;" title="https://latex.codecogs.com/svg.image?T " /> f the form:
-
-- <img src="https://latex.codecogs.com/svg.image?T=\begin{bmatrix}&space;R&&space;p&space;\\&space;0&&space;1&space;\\\end{bmatrix}&space;" title="https://latex.codecogs.com/svg.image?T=\begin{bmatrix} R& p \\ 0& 1 \\\end{bmatrix} " />
-
-
-
-
-- <img src="https://latex.codecogs.com/svg.image?R\in&space;SO(3),&space;p\in&space;R^3" title="https://latex.codecogs.com/svg.image?R\in SO(3), p\in R^3" />
-
-
-- <img src="https://latex.codecogs.com/svg.image?T^{-1=}\begin{bmatrix}&space;R^T&&space;-pR^T&space;\\&space;0&&space;1&space;\\\end{bmatrix}" title="https://latex.codecogs.com/svg.image?T^{-1=}\begin{bmatrix} R^T& -pR^T \\ 0& 1 \\\end{bmatrix}" />
-
-to apply a transformation, first we apply the rotation around the axis of the frame the we pre-multiplied and then we translate again on the axis of the frame that we pre-multiplied
-
-<img src="https://latex.codecogs.com/svg.image?p=[0,&space;2&space;,0]^T\\\hat{\omega}&space;=&space;\hat{z}\\\theta=90\\T=Translate(p)Rot(\hat{\omega},\theta)&space;" title="https://latex.codecogs.com/svg.image?p=[0, 2 ,0]^T\\\hat{\omega} = \hat{z}\\\theta=90\\T=Translate(p)Rot(\hat{\omega},\theta) " />
-
-<br/>
-<br/>
-
-
-<img src="https://latex.codecogs.com/svg.image?\acute{T}=TT_{sb}" title="https://latex.codecogs.com/svg.image?\acute{T}=TT_{sb}" />
-
-<br/>
-<br/>
-
-<img width="300" height="200" src="images/transformtion_1.jpg" />
-<br/>
-<br/>
-<img  width="300" height="200" src="images/transformtion_2.jpg" />
-<br/>
-<br/>
-<img  width="300" height="200" src="images/transformtion_3.jpg" />
-<br/>
-<br/>
-
-
-
-<img src="https://latex.codecogs.com/svg.image?&space;\hat{\omega_s}&space;" title="https://latex.codecogs.com/svg.image? \hat{\omega_s} " /> is a unit vector, if we rotate a frame around it at the rate of <img src="https://latex.codecogs.com/svg.image?\dot{\theta}&space;" title="https://latex.codecogs.com/svg.image?\dot{\theta} " />, the angular velocity is <img src="https://latex.codecogs.com/svg.image?\omega_s" title="https://latex.codecogs.com/svg.image?\omega_s" /> expresses in frame <img src="https://latex.codecogs.com/svg.image?s" title="https://latex.codecogs.com/svg.image?s" />
-
-<br/>
-<br/>
-
-
-<img src="https://latex.codecogs.com/svg.image?\dot{R_{sb}}&space;=[\omega_s]R_{sb}" title="https://latex.codecogs.com/svg.image?\dot{R_{sb}} =[\omega_s]R_{sb}" />
-<br/>
-<br/>
-<img src="images/angulare_velocity_2.jpg" width="350" height="200" />
-<br/>
-<br/>
-
-Full configuration <img src="https://latex.codecogs.com/svg.image?T" title="https://latex.codecogs.com/svg.image?T" />
-
-
-
-4. <img src="https://latex.codecogs.com/svg.image?se(3)" title="https://latex.codecogs.com/svg.image?se(3)" />: the set of all <img src="https://latex.codecogs.com/svg.image?4&space;\times&space;4" title="https://latex.codecogs.com/svg.image?4 \times 4" /> real matrices with a <img src="https://latex.codecogs.com/svg.image?3&space;\times&space;3" title="https://latex.codecogs.com/svg.image?3 \times 3" /> <img src="https://latex.codecogs.com/svg.image?so(3)" title="https://latex.codecogs.com/svg.image?so(3)" /> matrix at top left and four zeros in the bottom row is classed <img src="https://latex.codecogs.com/svg.image?se(3)" title="https://latex.codecogs.com/svg.image?se(3)" />
-
-
-<br/>
-<br/>
-
-<img src="https://latex.codecogs.com/svg.image?\dot{T_{sb}}T_{sb}^{-1}=\begin{bmatrix}&space;[\omega_s]&space;&&space;v_s&space;\\&space;0&&space;&space;0\\\end{bmatrix}&space;=[\nu_s]\in&space;se(3)" title="https://latex.codecogs.com/svg.image?\dot{T_{sb}}T_{sb}^{-1}=\begin{bmatrix} [\omega_s] & v_s \\ 0& 0\\\end{bmatrix} =[\nu_s]\in se(3)" />
-
-
-
-
-# Angular Velocity
-
-
-
-
-
-
-
-<img src="https://latex.codecogs.com/svg.image?\omega=\frac{\theta}{t}" title="https://latex.codecogs.com/svg.image?\omega=\frac{\theta}{t}" />
-
-# Linear Velocity 
-
-
-<img src="https://latex.codecogs.com/svg.image?v=\frac{s}{t}=\frac{r\theta}{t}&space;&space;&space;=r\omega" title="https://latex.codecogs.com/svg.image?v=\frac{s}{t}=\frac{r\theta}{t} =r\omega" />
-
-<br/>
-<br/>
-
-<img src="images/linear_velocity.png" />
-
-# Screw
-screw is axis
-
-<img src="https://latex.codecogs.com/svg.image?s=\begin{bmatrix}s_{\omega}&space;\\s_{v}\end{bmatrix}=\begin{bmatrix}\text{angulare&space;velocity&space;when&space;}\dot{\theta}=1&space;&space;\\\text{linear&space;velocity&space;of&space;the&space;origin&space;when&space;}\dot{\theta}=1&space;\end{bmatrix}&space;" title="https://latex.codecogs.com/svg.image?s=\begin{bmatrix}s_{\omega} \\s_{v}\end{bmatrix}=\begin{bmatrix}\text{angulare velocity when }\dot{\theta}=1 \\\text{linear velocity of the origin when }\dot{\theta}=1 \end{bmatrix} " />
-
-The linear velocity of origins is combination of two terms:
-- <img src="https://latex.codecogs.com/svg.image?h\hat{s}" title="https://latex.codecogs.com/svg.image?h\hat{s}" /> which coming from linear move
-
-- <img src="https://latex.codecogs.com/svg.image?-\hat{s}\times&space;q" title="https://latex.codecogs.com/svg.image?-\hat{s}\times q" />
-
-<video width="640" height="480" controls>
-  <source src="vidoes/rotation_translation.mp4" type="video/mp4">
-</video>
-
-
-<img src="images/screw_1.jpg" width="400" height="200"/>
-
-<br/>
-<br/>
-
-
-
-
-# Twist
-twist is full representation of linear and angular velocity:
-
-<img src="https://latex.codecogs.com/svg.image?\nu=\begin{bmatrix}\omega&space;\\&space;v\end{bmatrix}_{6\times1}=s\dot\theta" title="https://latex.codecogs.com/svg.image?\nu=\begin{bmatrix}\omega \\ v\end{bmatrix}_{6\times1}=s\dot\theta" />
-
-
-<br/>
-<br/>
-
-The <img src="https://latex.codecogs.com/svg.image?6\times&space;6" title="https://latex.codecogs.com/svg.image?6\times 6" /> adjoint representation of a transformation matrix 
-
-
-<img src="https://latex.codecogs.com/svg.image?T=\begin{bmatrix}R&space;&&space;p&space;\\0&space;&&space;1&space;\\\end{bmatrix}" title="https://latex.codecogs.com/svg.image?T=\begin{bmatrix}R & p \\0 & 1 \\\end{bmatrix}" /> is <img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}Ad_T\end{bmatrix}=\begin{bmatrix}R&space;&&space;0&space;\\&space;[p]R&space;&&space;R&space;\\\end{bmatrix}\in&space;\mathbb{R}^{6\times6}" title="https://latex.codecogs.com/svg.image?\begin{bmatrix}Ad_T\end{bmatrix}=\begin{bmatrix}R & 0 \\ [p]R & R \\\end{bmatrix}\in \mathbb{R}^{6\times6}" />
-
-which enable us the subscribe cancaltion 
-
-<img src="https://latex.codecogs.com/svg.image?\nu_a=[Ad_T_{ab}]\nu_{b}" title="https://latex.codecogs.com/svg.image?\nu_a=[Ad_T_{ab}]\nu_{b}" />
-for chaining the frame of reference
-
-<br/>
-<br/>
-
-
-
-
-For angular velocity we had:
-<br/>
-<br/>
-<img src="https://latex.codecogs.com/svg.image?\dot{R_{sb}}&space;=[\omega_s]R_{sb}" title="https://latex.codecogs.com/svg.image?\dot{R_{sb}} =[\omega_s]R_{sb}" />
-
-
-
-
-<img src="https://latex.codecogs.com/svg.image?\dot{R_{sb}}R_{sb}^{-1}&space;=[\omega_s]\in&space;so(3)" title="https://latex.codecogs.com/svg.image?\dot{R_{sb}}R_{sb}^{-1} =[\omega_s]\in so(3)" />
-<br/>
-<br/>
-similarly for twist we have:
-
-
-<br/>
-<br/>
-
-<img src="https://latex.codecogs.com/svg.image?\dot{T_{sb}}T_{sb}^{-1}=\begin{bmatrix}&space;[\omega_s]&space;&&space;v_s&space;\\&space;0&&space;&space;0\\\end{bmatrix}&space;=[\nu_s]\in&space;se(3)" title="https://latex.codecogs.com/svg.image?\dot{T_{sb}}T_{sb}^{-1}=\begin{bmatrix} [\omega_s] & v_s \\ 0& 0\\\end{bmatrix} =[\nu_s]\in se(3)" />
-
-
-# Conversion between different representations
+# 5. Conversion between different representations
 
 Full list of conversion [here](http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm) 
-
-
-
-
-
 
 [<< Previous ](6_Sparse_Matrices.md)  [Home](README.md)   [Next >>](8_Differentiation.md)
